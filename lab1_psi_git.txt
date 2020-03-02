@@ -13,6 +13,3 @@
 12. git merge ime_grane   //spaja tekucu i neku drugu granu
 13. git pull ime_grane (origin)  //preuzmi sa servera sve
 14. git push   //posalji na server sve moje komitovane fajlove
-
-
-Tim Lider se malo igra na labu xD
