@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Martina Markovic,Marija Lalic -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+            <link rel='stylesheet' href='stil.css'>
+
+		
+<script>
+$(document).ready(function(){
+
+    $("#kategorije_meni").hide(); //na pocetku
+	$("#moderator_meni").hide(); //na pocetku
+
+  $("a[id='trening_link']").click(function(){ //klikom na trening 
+    $("#osnovni_meni").hide();
+	
+    $("#kategorije_meni").fadeToggle("slow");	
+  });  
+  
+  
+ $("a[id='moderator_link']").click(function(){ //klikom na trening 
+    $("#osnovni_meni").hide();
+    $("#moderator_meni").fadeToggle("slow");	
+  });  
+  
+  
+  
+  
+  
+ $("a[id='nazad']").click(function(){ // vrati osnovni_meni
+	 $("#kategorije_meni").hide();
+	 $("#moderator_meni").hide();
+
+   $("#osnovni_meni").show();
+  });
+  
+ 
+});
+
+
+
+
+</script>
+
+</head>
+<body>
+
+<div class="container">
+     <div class='row'>
+                <div class='col-sm-3'>
+                    <p id='par1'>Ulogovan moderator</p>
+                   
+                    <br>
+                    <br>
+                    <br>
+                    <img src='slike/logo.png' width='125%' >
+                </div>
+                <div class='col-sm-5 text-center ' id='osnovni_meni'>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    
+                    <a href='#' class ='linkovi' id='trening_link'>TRENING</a>
+                    <br>
+                    
+                    <a href='takmicenje.html' class='linkovi'>TAKMICENJE</a>
+                    <br>
+                    <a href='istorijaRezultata.html' class='linkovi'>REZULTATI</a>
+                    <br>
+                    <a href='rang.html' class='linkovi'>RANG LISTA</a>
+                    <br>
+					 <a href='#' class='linkovi' id = "moderator_link">MODERATOR</a>
+                    <br>
+                    <a href='index.html' class='linkovi'>ODJAVA</a>
+                    <br>
+                </div>
+				 <div class='col-sm-5 text-center ' id='kategorije_meni'>
+				    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <a href='takmicenje.html' class='linkovi' id="biologija">BIOLOGIJA</a>
+                    <br>
+                    <a href='takmicenje.html ' class='linkovi' id="istorija">ISTORIJA</a>
+                    <br>
+                    <a href='takmicenje.html' class='linkovi' id="geografija">GEOGRAFIJA</a>
+                    <br>
+                    <a href='takmicenje.html' class='linkovi' id="matematika">PRIRODNE NAUKE</a>
+                    <br>
+                    <a href='takmicenje.html' class='linkovi' id="muzika">MUZIKA</a>
+                    <br>
+					<a href='takmicenje.html' class='linkovi' id="umetnost">UMETNOST</a>
+				    <br>
+					
+					  <a href='takmicenje.html' class='linkovi' id="sport">SPORT</a>
+                    <br>
+					
+					  <a href='takmicenje.html' class='linkovi' id="filmovi">FILMOVI</a>
+                    <br>
+					  <a href='takmicenje.html' class='linkovi' id="serije">SERIJE</a>
+                    <br>
+					<a href='#' class='linkovi' id="nazad">Nazad </a>
+
+                </div>
+				
+				 <div class='col-sm-5 text-center ' id='moderator_meni'>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    
+                    <a href='#' class='linkovi' id="dodaj_pitanje_link">Dodaj pitanje </a>
+                    <br>
+                   
+				    <a href='#' class='linkovi' id="ukloni_pitanje_link">Ukloni pitanje </a>
+                    <br>
+                    
+					<a href='#' class='linkovi' id="nazad">Nazad </a>
+
+                </div>
+				
+				
+                <div class='col-sm-4' style = "color: white;">
+                    <br>
+					<br>
+					<br>
+					<br>
+					
+					<br>
+                    <h2><i>Steknite znanje na zabavan nacin</i></h2>
+                    <p id='p1' >
+                        Sva pitanja i zadaci koji se postavljaju u kvizu preuzeti su iz zvanične literature, 
+                        tako da je verodostojnost tačnih odgovora na najvišem nivou.
+                    </p>
+                    <p>
+                        Ukoliko ste registrovani korisnik, imate mogucnost da unapredite svoje znanje u delu <b>trening</b> , pre nego sto se oprobate u
+                        takmicenju. Ako ste samo gost, da biste vezbali, potrebno je da se registrujete.
+                        <br>
+                    </p>
+                    <br>
+                    <br>
+                   
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Modal za dodavanje pitanja -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal sadrzaj-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4><span class="glyphicon glyphicon-lock"></span> Dodaj pitanje</h4>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form">
+            <div class="form-group">
+              <label for="kategorije_select"><span class="glyphicon glyphicon-th-list"></span> Izaberite kategoriju:</label>
+                  <select class="form-control" id="kategorije_select">
+                  <option>Biologija</option>
+                  <option>Istorija</option>
+				  <option>Geografija</option>
+                  <option>Matematika</option>
+                  <option>Muzika</option>
+				  <option>Umetnost</option>
+                  </select>
+            </div>
+			
+	 
+		  <div class="form-group">
+              <label for="pitanje"><span class="glyphicon glyphicon-pencil"></span> Pitanje:</label>
+             <textarea class = "form-control" id='pitanje' style="min-width: 100%"  placeholder="Unesite pitanje" ></textarea>
+            </div>
+	
+    <div class="form-group has-success has-feedback">
+      <label for="tacan_odg">Tacan odgovor:</label>
+      <input type="text" class="form-control" id="tacan_odg">
+      <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+    </div>
+   
+    <div class="form-group has-error has-feedback">
+      <label for="pogresan_odg1">Netacan odgovor 1:</label>
+      <input type="text" class="form-control" id="pogresan_odg1">
+      <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+	
+	  <div class="form-group has-error has-feedback">
+      <label for="pogresan_odg2">Netacan odgovor 2:</label>
+      <input type="text" class="form-control" id="pogresan_odg2">
+      <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+	
+	  <div class="form-group has-error has-feedback">
+      <label for="pogresan_odg3">Netacan odgovor 3:</label>
+      <input type="text" class="form-control" id="pogresan_odg3">
+      <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+            
+              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-ok"></span> Dodaj</button>
+          </form>
+        </div>
+		
+        <div class="modal-footer"> <!--footer-->
+          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Otkazi</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+  
+  
+  
+    <!-- Modal za uklanjanje pitanja -->
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal sadrzaj-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4><span class="glyphicon glyphicon-lock"></span> Ukloni pitanje</h4>
+        </div>
+		
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form">
+            <div class="form-group">
+              <label for="kategorije_select"><span class="glyphicon glyphicon-th-list"></span> Izaberite kategoriju:</label>
+                  <select class="form-control" id="kategorije_select">
+                  <option>Biologija</option>
+                  <option>Istorija</option>
+				  <option>Geografija</option>
+                  <option>Matematika</option>
+                  <option>Muzika</option>
+				  <option>Umetnost</option>
+                  </select>
+            </div>
+			
+	 
+		  <div class="form-group">
+              <label for="pitanje"><span class="glyphicon glyphicon-trash"></span> Izaberite pitanja koja zelite ukloniti:</label>
+          </div>
+	
+    <!-- napraviti neki hidden div pa kad se izabere kategorija iz baze pitanja za 
+	neku kategorija selektovati sva pitanja i prikazati ih u ovom divu - div je tad visible
+	pored svakog pitanja staviti checkbox, tako da moze vise njih odjednom da se uklanja
+	-->
+            
+              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-ok"></span> Ukloni</button>
+          </form>
+        </div>
+		
+        <div class="modal-footer"> <!--footer-->
+          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Otkazi</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+  
+  
+
+  
+
+  
+</div> <!--end_container-->
+ 
+<script>
+$(document).ready(function(){
+  $("#dodaj_pitanje_link").click(function(){
+    $("#myModal").modal();
+  });
+});
+
+$(document).ready(function(){
+  $("#ukloni_pitanje_link").click(function(){
+    $("#myModal2").modal();
+  });
+});
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+@import "https://fonts.googleapis.com/css?family=Trade+Winds&display=swap";
+
+
+/*  Ana Blazic, Ana Saponjic*/
+body { 
+  background-image: url('slike/kosmos.jpg');
+  z-index: -1;
+    background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+h2{
+    text-align: center;
+    
+}
+body{
+    background-color:white;
+}
+#dugme{
+    margin-left: 380px;
+}
+a{
+    font-size: 15px;
+	color: white;
+	font-family: 'Trade Winds', cursive;
+
+}
+
+a:hover{
+    font-size: large;
+	color: white;
+
+}
+a:active{
+	color:white;
+}
+.nasa{
+    margin-left: 100px;
+}
+.linkovi{
+    font-size: 40px;
+	
+
+}
+a.linkovi:hover{
+    font-size:49px ;
+	-webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+ #par1{
+    padding: 0cm;
+ }
+
+
+
+ .modal-header, h4, .close {
+    background-color: #5cb85c;
+    color:white !important;
+    text-align: center;
+    font-size: 30px;
+  }
+  .modal-footer {
+    background-color: #f9f9f9;
+  }
+  
+  .logofront{
+	  z-index: 10;
+  }
+  
+  .bijelip{
+	  color: white;
+  }
+
+
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #b000e6, 0 0 40px #483080, 0 0 50px #824dff, 0 0 60px #e60073, 0 0 70px #824dff;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #c74dff, 0 0 40px #c74dff, 0 0 50px #c74dff, 0 0 60px #ff4da6, 0 0 70px #c74dff, 0 0 150px #483080;
+  }
+}
