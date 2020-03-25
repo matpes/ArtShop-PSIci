@@ -1,1 +1,2 @@
 Napomene
+1. Treba mergovati logove
