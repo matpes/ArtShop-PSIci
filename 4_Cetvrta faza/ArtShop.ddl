@@ -1,0 +1,221 @@
+
+CREATE TABLE Admin
+(
+	IDKor                INTEGER NOT NULL
+);
+
+ALTER TABLE Admin
+ADD CONSTRAINT XPKAdmin PRIMARY KEY (IDKor);
+
+CREATE TABLE ima_temu
+(
+	IDSli                INTEGER NOT NULL,
+	IDTem                INTEGER NOT NULL
+);
+
+ALTER TABLE ima_temu
+ADD CONSTRAINT XPKima_temu PRIMARY KEY (IDSli,IDTem);
+
+CREATE TABLE Komentar
+(
+	IDKom                INTEGER NOT NULL,
+	IDKor                INTEGER NOT NULL,
+	IDSli                INTEGER NOT NULL,
+	Tekst                LONG VARCHAR NOT NULL,
+	Vreme                TIMESTAMP NOT NULL
+);
+
+ALTER TABLE Komentar
+ADD CONSTRAINT XPKKomentar PRIMARY KEY (IDKom);
+
+CREATE TABLE Korisnik
+(
+	password             VARCHAR(20) NOT NULL,
+	mail                 CHAR(45) NOT NULL,
+	IDKor                INTEGER NOT NULL,
+	profilna_slika       BLOB NOT NULL,
+	brPrijava            INTEGER NOT NULL,
+	brUspesnihPrijava    INTEGER NOT NULL,
+	username             CHAR(18) NOT NULL
+);
+
+ALTER TABLE Korisnik
+ADD CONSTRAINT XPKKorisnik PRIMARY KEY (IDKor);
+
+CREATE TABLE Korpa
+(
+	IDKor                INTEGER NOT NULL,
+	IDSli                INTEGER NOT NULL
+);
+
+ALTER TABLE Korpa
+ADD CONSTRAINT XPKKorpa PRIMARY KEY (IDSli);
+
+CREATE TABLE Kupac
+(
+	IDKor                INTEGER NOT NULL
+);
+
+ALTER TABLE Kupac
+ADD CONSTRAINT XPKKupac PRIMARY KEY (IDKor);
+
+CREATE TABLE Podaci
+(
+	IDKor                INTEGER NOT NULL,
+	Ime                  CHAR(18) NOT NULL,
+	Prezime              CHAR(18) NOT NULL,
+	Adresa               CHAR(18) NOT NULL,
+	Grad                 CHAR(18) NULL,
+	Broj_ulice           INTEGER NOT NULL,
+	Broj_telefona        CHAR(13) NOT NULL,
+	ZIP_code             INTEGER NOT NULL,
+	MetodNaplate         CHAR(18) NOT NULL
+);
+
+ALTER TABLE Podaci
+ADD CONSTRAINT XPKPodaci PRIMARY KEY (IDKor);
+
+CREATE TABLE Prati
+(
+	IDSli                INTEGER NOT NULL,
+	IDKup                INTEGER NOT NULL
+);
+
+ALTER TABLE Prati
+ADD CONSTRAINT XPKPrati PRIMARY KEY (IDSli,IDKup);
+
+CREATE TABLE Prijavio
+(
+	IDKor                INTEGER NOT NULL,
+	IDKom                INTEGER NOT NULL
+);
+
+ALTER TABLE Prijavio
+ADD CONSTRAINT XPKPrijavio PRIMARY KEY (IDKor,IDKom);
+
+CREATE TABLE Slika
+(
+	IDKor                INTEGER NOT NULL,
+	Naziv                CHAR(45) NOT NULL,
+	IDSli                INTEGER NOT NULL,
+	Cena                 DECIMAL(10,2) NOT NULL,
+	img                  BLOB NOT NULL,
+	Opis                 LONG VARCHAR NOT NULL,
+	IDSti                INTEGER NOT NULL,
+	AukcijaFlag          TINYINT NOT NULL,
+	DanIstekaAukcije     TIMESTAMP NULL
+);
+
+ALTER TABLE Slika
+ADD CONSTRAINT XPKSlika PRIMARY KEY (IDSli);
+
+CREATE TABLE Slikar
+(
+	IDKor                INTEGER NOT NULL,
+	SumaOcena            DECIMAL(3,2) NOT NULL,
+	BrojOCenjenihSlika   CHAR(18) NULL
+);
+
+ALTER TABLE Slikar
+ADD CONSTRAINT XPKSlikar PRIMARY KEY (IDKor);
+
+CREATE TABLE Stil
+(
+	IDSti                INTEGER NOT NULL,
+	Naziv                CHAR(18) NOT NULL
+);
+
+ALTER TABLE Stil
+ADD CONSTRAINT XPKStil PRIMARY KEY (IDSti);
+
+CREATE TABLE Tema
+(
+	IDTem                INTEGER NOT NULL,
+	Tema                 varchar(18) NOT NULL
+);
+
+ALTER TABLE Tema
+ADD CONSTRAINT XPKTema PRIMARY KEY (IDTem);
+
+CREATE TABLE Ucestvuje_Na_Aukciji
+(
+	IDKor                INTEGER NOT NULL,
+	IDSli                INTEGER NOT NULL,
+	Cena                 INTEGER NOT NULL
+);
+
+ALTER TABLE Ucestvuje_Na_Aukciji
+ADD CONSTRAINT XPKUcestvuje_Na_Aukciji PRIMARY KEY (IDKor,IDSli);
+
+CREATE TABLE ZaOcenu
+(
+	IDKor                INTEGER NOT NULL,
+	IDSli                INTEGER NOT NULL,
+	Ocena                INTEGER NOT NULL
+);
+
+ALTER TABLE ZaOcenu
+ADD CONSTRAINT XPKZaOcenu PRIMARY KEY (IDSli);
+
+ALTER TABLE Admin
+ADD CONSTRAINT R_1 FOREIGN KEY (IDKor) REFERENCES Korisnik (IDKor)
+		ON DELETE CASCADE;
+
+ALTER TABLE ima_temu
+ADD CONSTRAINT R_8 FOREIGN KEY (IDSli) REFERENCES Slika (IDSli);
+
+ALTER TABLE ima_temu
+ADD CONSTRAINT R_9 FOREIGN KEY (IDTem) REFERENCES Tema (IDTem);
+
+ALTER TABLE Komentar
+ADD CONSTRAINT R_20 FOREIGN KEY (IDKor) REFERENCES Korisnik (IDKor);
+
+ALTER TABLE Komentar
+ADD CONSTRAINT R_21 FOREIGN KEY (IDSli) REFERENCES Slika (IDSli);
+
+ALTER TABLE Korpa
+ADD CONSTRAINT R_12 FOREIGN KEY (IDKor) REFERENCES Kupac (IDKor);
+
+ALTER TABLE Korpa
+ADD CONSTRAINT R_13 FOREIGN KEY (IDSli) REFERENCES Slika (IDSli);
+
+ALTER TABLE Kupac
+ADD CONSTRAINT R_6 FOREIGN KEY (IDKor) REFERENCES Korisnik (IDKor)
+		ON DELETE CASCADE;
+
+ALTER TABLE Podaci
+ADD CONSTRAINT R_14 FOREIGN KEY (IDKor) REFERENCES Kupac (IDKor);
+
+ALTER TABLE Prati
+ADD CONSTRAINT R_24 FOREIGN KEY (IDSli) REFERENCES Slikar (IDKor);
+
+ALTER TABLE Prati
+ADD CONSTRAINT R_25 FOREIGN KEY (IDKup) REFERENCES Kupac (IDKor);
+
+ALTER TABLE Prijavio
+ADD CONSTRAINT R_22 FOREIGN KEY (IDKor) REFERENCES Korisnik (IDKor);
+
+ALTER TABLE Prijavio
+ADD CONSTRAINT R_23 FOREIGN KEY (IDKom) REFERENCES Komentar (IDKom);
+
+ALTER TABLE Slika
+ADD CONSTRAINT R_7 FOREIGN KEY (IDKor) REFERENCES Slikar (IDKor);
+
+ALTER TABLE Slika
+ADD CONSTRAINT R_17 FOREIGN KEY (IDSti) REFERENCES Stil (IDSti);
+
+ALTER TABLE Slikar
+ADD CONSTRAINT R_5 FOREIGN KEY (IDKor) REFERENCES Korisnik (IDKor)
+		ON DELETE CASCADE;
+
+ALTER TABLE Ucestvuje_Na_Aukciji
+ADD CONSTRAINT R_18 FOREIGN KEY (IDKor) REFERENCES Kupac (IDKor);
+
+ALTER TABLE Ucestvuje_Na_Aukciji
+ADD CONSTRAINT R_19 FOREIGN KEY (IDSli) REFERENCES Slika (IDSli);
+
+ALTER TABLE ZaOcenu
+ADD CONSTRAINT R_15 FOREIGN KEY (IDKor) REFERENCES Kupac (IDKor);
+
+ALTER TABLE ZaOcenu
+ADD CONSTRAINT R_16 FOREIGN KEY (IDSli) REFERENCES Slika (IDSli);
