@@ -1,0 +1,22 @@
+Downolad: https://staruml.informer.com/2.0/
+Modules: http://staruml.sourceforge.net/v1/modules.php
+
+Defaultna putanja do StarUML: C:\Program Files (x86)\StarUML
+
+Када распакујете све фајлове треба да их ставите у директоријуме:
+StarUML\modules\statuml-WAEClass
+StarUML\modules\statuml-WAESequence 
+
+Затим их је потребно укључити у StarUML опцијом Model > Profiles > Include (укључити та
+два WAE профила у тренутни модел). (Meni su defaultno bili ukljuceni)
+Након тога, на дијаграмима одаберите одређену веб
+страницу, на пример: index.html и измените стереотип те класе у „client page stereotype
+(WAE)“ (<<client page>>, mada se i on meni pojavljuje sam od sebe), а затим десним кликом на ту веб страну и Format > Stereotype Display > Iconic.
+У component view, елементима можете да промените стереотипове у одговарајуће WAE,
+само уместо PHP скрипта користити ASP.
+
+
+Za Storm PHP:
+
+https://www.jetbrains.com/phpstorm/ - Stranica za download
+https://www.jetbrains.com/phpstorm/buy/#discounts?billing=yearly - Stranica za kupovinu (Odabrati for Students and teachers)

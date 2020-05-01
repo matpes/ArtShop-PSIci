@@ -1,0 +1,57 @@
+=========================================================
+Redni brojevi novih SSU-ova
+=========================================================
+Matija	- 7, 8, 9, 10, 11, 15
+Vladna	- 12, 13, 14, 20, 21, 22, 23
+Ana	- 16, 17, 18, 19, 24
+Sanja	- 1, 2, 3, 4, 5, 6, 25
+
+=========================================================
+
+=========================================================
+
+
+Sanja:
+- Registracija na sistem
+- Prijava korisnika na sistem
+- Azuriranje infomracija o korisniku
+- Resetovanje korisnika
+- Promena lozinke
+- Odjava
+- Gasenje naloga
+
+
+Matija: 
+- Dodavanje slike u korpu
+- Izbacivanje slike iz korpe
+- Kupovina slike iz korpe
+- Konkurisanje na javnu aukciju
+- Konkurisanje na tajnu aukciju
+- Ocenjivanje slikara
+
+Vladana:
+- Pretraga slika po slikaru
+- Pretraga slika po stilu slikanja
+- Pretraga slika na osnovu tematike
+- Objavljivanje nove slike
+- Izmena postojece slike
+- Uklanjanje postojece slike
+- Prijavljivanje na slikara
+
+Ana:
+- Postavljanje komentara na slike
+- Uklanjanje komentara na slike
+- Prijava kommentara na slikama
+- Uklanjanje prijavljenog sadrzaja
+- Blokiranje naloga
+
+
+
+
+
+
+
+
+
+
+
