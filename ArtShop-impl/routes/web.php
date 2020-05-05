@@ -1,7 +1,7 @@
  <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Picture;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,10 +12,22 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
+
 Route::get('/', function () {
     return view('welcome');
-});*/
+});
+
+
+Route::get('/insertPics', function(){
+    Picture::insertujSlike();
+});
+
+
+Route::get('/putanja', function (){
+
+    Picture::displayAll();
+
+});
 
 /*
  Route::get('/contact', function (){
@@ -44,7 +56,7 @@ Route::get('/', function () {
 
     return  "this url is ". $url;
 
- }));*/
+ }));
 
 
  //Route::get('/post/{id}', 'PostController@index');
@@ -55,5 +67,5 @@ Route::get('/', function () {
 
  Route::get('/contact', 'PostController@contact');
 
- Route::get('/post/{id}', 'PostController@post_some');
+ Route::get('/post/{id}', 'PostController@post_some');*/
 
