@@ -14,6 +14,7 @@ class CreateKupacsSlikarsTable extends Migration
     public function up()
     {
         Schema::create('kupac_slikar', function (Blueprint $table) {
+            $table->id();
             $table->integer('kupac_id');
             $table->integer('slikar_id');
             $table->timestamps();

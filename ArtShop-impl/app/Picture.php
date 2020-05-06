@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Date;
 
 class Picture extends Model
 {
@@ -37,6 +38,13 @@ class Picture extends Model
         foreach ($pictures as $picture){
             echo "<img alt='slika' src=".$picture->path."><br>";
         }
+    }
+
+    public static function pocetna()
+    {
+        $picture = new Picture(['korisnik_id'=>'2', 'stil_id'=>1, 'path'=>'/images/logo.png', 'naziv'=>'Logo', 'opis'=>'logo sajta',
+                'ocena'=>11, 'aukcijaFlag' => false, 'danIstekaAukcije' => '2020-05-10 18:00:00']);
+        $picture->save();
     }
 
 }

@@ -15,6 +15,7 @@ class CreatePicturesTemasTable extends Migration
     public function up()
     {
         Schema::create('picture_tema', function (Blueprint $table) {
+            $table->id();
             $table->integer('picture_id');
             $table->integer('tema_id');
             $table->timestamps();

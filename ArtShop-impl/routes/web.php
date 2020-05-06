@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Picture;
+use \App\Http\Controllers\spKupac;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +13,7 @@ use App\Picture;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,6 +31,11 @@ Route::get('/putanja', function (){
 
 });
 
+
+Route::get('/forma', 'spKupac@formaZaPodatke');
+
+
+Route::get('/insertIntoTable', 'spKupac@pocetnaBaza');
 /*
  Route::get('/contact', function (){
      return "Hi I am contact";

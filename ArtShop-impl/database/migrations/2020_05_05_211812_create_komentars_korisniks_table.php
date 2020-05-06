@@ -15,6 +15,7 @@ class CreateKomentarsKorisniksTable extends Migration
     public function up()
     {
         Schema::create('komentar_korisnik', function (Blueprint $table) {
+            $table->id();
             $table->integer('korisnik_id');
             $table->integer('komentar_id');
             $table->timestamps();
