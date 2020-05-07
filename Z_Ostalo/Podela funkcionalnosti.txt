@@ -15,7 +15,7 @@ Sanja:
 - Registracija na sistem
 - Prijava korisnika na sistem
 - Azuriranje infomracija o korisniku
-- Resetovanje korisnika
+- Resetovanje lozinke
 - Promena lozinke
 - Odjava
 - Gasenje naloga
