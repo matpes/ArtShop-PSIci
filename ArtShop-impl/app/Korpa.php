@@ -14,7 +14,11 @@ class Korpa extends Model
 
     public static function pocetna()
     {
-        $kupovina = new Korpa(['picture_id'=>1, 'korisnik_id'=>1]);
+        $kupovina = new Korpa(['picture_id'=>2, 'korisnik_id'=>1]);
+        $kupovina->save();
+        $kupovina = new Korpa(['picture_id'=>3, 'korisnik_id'=>1]);
+        $kupovina->save();
+        $kupovina = new Korpa(['picture_id'=>4, 'korisnik_id'=>1]);
         $kupovina->save();
     }
 
@@ -23,9 +27,12 @@ class Korpa extends Model
         $korpa = Korpa::all()->where('korisnik_id', 1);
         //echo $korpa;
 
+        $slika =[];
         foreach ($korpa as $item){
-            $slika = Picture::find($item->picture_id);
+            $currSlika = Picture::find($item->picture_id);
+            $currPAth = $currSlika->path;
+            array_push($slika, $currPAth);
         }
-        return $slika->path;
+        return $slika;
     }
 }

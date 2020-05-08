@@ -36,6 +36,9 @@ Route::get('/forma', 'spKupac@formaZaPodatke');
 
 
 Route::get('/insertIntoTable', 'spKupac@pocetnaBaza');
+
+
+Route::resource('/kupac_forma', 'spKupac');
 /*
  Route::get('/contact', function (){
      return "Hi I am contact";

@@ -12,4 +12,5 @@ class Podaci extends Model
         'korisnik_id', 'ime', 'prezime', 'adresa', 'grad', 'brUlice', 'brTelefona', 'ZIPCode', 'metodNaplate'
     ];
 
+
 }
