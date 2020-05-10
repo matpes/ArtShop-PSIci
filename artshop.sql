@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3308
--- Generation Time: May 08, 2020 at 05:52 PM
--- Server version: 8.0.18
--- PHP Version: 7.3.12
+-- Host: 127.0.0.1
+-- Generation Time: May 11, 2020 at 01:13 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -28,13 +27,26 @@ SET time_zone = "+00:00";
 -- Table structure for table `admins`
 --
 
-DROP TABLE IF EXISTS `admins`;
-CREATE TABLE IF NOT EXISTS `admins` (
+CREATE TABLE `admins` (
   `korisnik_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`korisnik_id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -42,16 +54,14 @@ CREATE TABLE IF NOT EXISTS `admins` (
 -- Table structure for table `komentars`
 --
 
-DROP TABLE IF EXISTS `komentars`;
-CREATE TABLE IF NOT EXISTS `komentars` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `komentars` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `korisnik_id` int(11) NOT NULL,
   `picture_id` int(11) NOT NULL,
   `tekst` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `Vreme` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -60,14 +70,12 @@ CREATE TABLE IF NOT EXISTS `komentars` (
 -- Table structure for table `komentar_korisnik`
 --
 
-DROP TABLE IF EXISTS `komentar_korisnik`;
-CREATE TABLE IF NOT EXISTS `komentar_korisnik` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `komentar_korisnik` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `korisnik_id` int(11) NOT NULL,
   `komentar_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -76,9 +84,8 @@ CREATE TABLE IF NOT EXISTS `komentar_korisnik` (
 -- Table structure for table `korisniks`
 --
 
-DROP TABLE IF EXISTS `korisniks`;
-CREATE TABLE IF NOT EXISTS `korisniks` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `korisniks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mail` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -86,12 +93,8 @@ CREATE TABLE IF NOT EXISTS `korisniks` (
   `brPrijava` int(11) NOT NULL,
   `brUspesnihPrijava` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `korisniks_username_unique` (`username`),
-  UNIQUE KEY `korisniks_password_unique` (`password`),
-  UNIQUE KEY `korisniks_mail_unique` (`mail`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `korisniks`
@@ -107,13 +110,11 @@ INSERT INTO `korisniks` (`id`, `username`, `password`, `mail`, `profilna_slika`,
 -- Table structure for table `korpas`
 --
 
-DROP TABLE IF EXISTS `korpas`;
-CREATE TABLE IF NOT EXISTS `korpas` (
+CREATE TABLE `korpas` (
   `picture_id` int(11) NOT NULL,
   `korisnik_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`picture_id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -131,12 +132,10 @@ INSERT INTO `korpas` (`picture_id`, `korisnik_id`, `created_at`, `updated_at`) V
 -- Table structure for table `kupacs`
 --
 
-DROP TABLE IF EXISTS `kupacs`;
-CREATE TABLE IF NOT EXISTS `kupacs` (
+CREATE TABLE `kupacs` (
   `korisnik_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`korisnik_id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -152,8 +151,7 @@ INSERT INTO `kupacs` (`korisnik_id`, `created_at`, `updated_at`) VALUES
 -- Table structure for table `kupac_picture`
 --
 
-DROP TABLE IF EXISTS `kupac_picture`;
-CREATE TABLE IF NOT EXISTS `kupac_picture` (
+CREATE TABLE `kupac_picture` (
   `picture_id` int(11) NOT NULL,
   `korisnik_id` int(11) NOT NULL,
   `cena` double NOT NULL,
@@ -167,14 +165,12 @@ CREATE TABLE IF NOT EXISTS `kupac_picture` (
 -- Table structure for table `kupac_slikar`
 --
 
-DROP TABLE IF EXISTS `kupac_slikar`;
-CREATE TABLE IF NOT EXISTS `kupac_slikar` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `kupac_slikar` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `kupac_id` int(11) NOT NULL,
   `slikar_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -183,13 +179,11 @@ CREATE TABLE IF NOT EXISTS `kupac_slikar` (
 -- Table structure for table `migrations`
 --
 
-DROP TABLE IF EXISTS `migrations`;
-CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `batch` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -210,7 +204,22 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (27, '2020_05_05_211350_create_stils_table', 1),
 (28, '2020_05_05_211429_create_pictures_temas_table', 1),
 (29, '2020_05_05_211756_create_kupacs_slikars_table', 1),
-(30, '2020_05_05_211812_create_komentars_korisniks_table', 1);
+(30, '2020_05_05_211812_create_komentars_korisniks_table', 1),
+(31, '2014_10_12_000000_create_users_table', 2),
+(32, '2019_08_19_000000_create_failed_jobs_table', 2),
+(33, '2014_10_12_100000_create_password_resets_table', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -218,9 +227,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Table structure for table `pictures`
 --
 
-DROP TABLE IF EXISTS `pictures`;
-CREATE TABLE IF NOT EXISTS `pictures` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pictures` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `korisnik_id` int(11) NOT NULL,
   `stil_id` int(11) NOT NULL,
   `path` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -230,9 +238,8 @@ CREATE TABLE IF NOT EXISTS `pictures` (
   `aukcijaFlag` int(11) NOT NULL,
   `danIstekaAukcije` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `pictures`
@@ -249,14 +256,12 @@ INSERT INTO `pictures` (`id`, `korisnik_id`, `stil_id`, `path`, `naziv`, `ocena`
 -- Table structure for table `picture_tema`
 --
 
-DROP TABLE IF EXISTS `picture_tema`;
-CREATE TABLE IF NOT EXISTS `picture_tema` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `picture_tema` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `picture_id` int(11) NOT NULL,
   `tema_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -265,8 +270,7 @@ CREATE TABLE IF NOT EXISTS `picture_tema` (
 -- Table structure for table `podacis`
 --
 
-DROP TABLE IF EXISTS `podacis`;
-CREATE TABLE IF NOT EXISTS `podacis` (
+CREATE TABLE `podacis` (
   `korisnik_id` int(11) NOT NULL,
   `ime` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `prezime` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -277,8 +281,7 @@ CREATE TABLE IF NOT EXISTS `podacis` (
   `ZIPCode` int(11) NOT NULL,
   `metodNaplate` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`korisnik_id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -294,14 +297,12 @@ INSERT INTO `podacis` (`korisnik_id`, `ime`, `prezime`, `adresa`, `grad`, `brUli
 -- Table structure for table `slikars`
 --
 
-DROP TABLE IF EXISTS `slikars`;
-CREATE TABLE IF NOT EXISTS `slikars` (
+CREATE TABLE `slikars` (
   `korisnik_id` int(11) NOT NULL,
   `sumaOcena` int(11) NOT NULL,
   `brOcenjenihSlika` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`korisnik_id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -317,14 +318,11 @@ INSERT INTO `slikars` (`korisnik_id`, `sumaOcena`, `brOcenjenihSlika`, `created_
 -- Table structure for table `stils`
 --
 
-DROP TABLE IF EXISTS `stils`;
-CREATE TABLE IF NOT EXISTS `stils` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `stils` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `naziv` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `stils_naziv_unique` (`naziv`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -333,15 +331,29 @@ CREATE TABLE IF NOT EXISTS `stils` (
 -- Table structure for table `temas`
 --
 
-DROP TABLE IF EXISTS `temas`;
-CREATE TABLE IF NOT EXISTS `temas` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `temas` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `tema` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `temas_tema_unique` (`tema`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -349,15 +361,201 @@ CREATE TABLE IF NOT EXISTS `temas` (
 -- Table structure for table `za_ocenus`
 --
 
-DROP TABLE IF EXISTS `za_ocenus`;
-CREATE TABLE IF NOT EXISTS `za_ocenus` (
+CREATE TABLE `za_ocenus` (
   `picture_id` int(11) NOT NULL,
   `korisnik_id` int(11) NOT NULL,
   `ocena` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`picture_id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`korisnik_id`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `komentars`
+--
+ALTER TABLE `komentars`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `komentar_korisnik`
+--
+ALTER TABLE `komentar_korisnik`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `korisniks`
+--
+ALTER TABLE `korisniks`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `korisniks_username_unique` (`username`),
+  ADD UNIQUE KEY `korisniks_password_unique` (`password`),
+  ADD UNIQUE KEY `korisniks_mail_unique` (`mail`);
+
+--
+-- Indexes for table `korpas`
+--
+ALTER TABLE `korpas`
+  ADD PRIMARY KEY (`picture_id`);
+
+--
+-- Indexes for table `kupacs`
+--
+ALTER TABLE `kupacs`
+  ADD PRIMARY KEY (`korisnik_id`);
+
+--
+-- Indexes for table `kupac_slikar`
+--
+ALTER TABLE `kupac_slikar`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `pictures`
+--
+ALTER TABLE `pictures`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `picture_tema`
+--
+ALTER TABLE `picture_tema`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `podacis`
+--
+ALTER TABLE `podacis`
+  ADD PRIMARY KEY (`korisnik_id`);
+
+--
+-- Indexes for table `slikars`
+--
+ALTER TABLE `slikars`
+  ADD PRIMARY KEY (`korisnik_id`);
+
+--
+-- Indexes for table `stils`
+--
+ALTER TABLE `stils`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `stils_naziv_unique` (`naziv`);
+
+--
+-- Indexes for table `temas`
+--
+ALTER TABLE `temas`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `temas_tema_unique` (`tema`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Indexes for table `za_ocenus`
+--
+ALTER TABLE `za_ocenus`
+  ADD PRIMARY KEY (`picture_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `komentars`
+--
+ALTER TABLE `komentars`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `komentar_korisnik`
+--
+ALTER TABLE `komentar_korisnik`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `korisniks`
+--
+ALTER TABLE `korisniks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `kupac_slikar`
+--
+ALTER TABLE `kupac_slikar`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `pictures`
+--
+ALTER TABLE `pictures`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `picture_tema`
+--
+ALTER TABLE `picture_tema`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `stils`
+--
+ALTER TABLE `stils`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `temas`
+--
+ALTER TABLE `temas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
