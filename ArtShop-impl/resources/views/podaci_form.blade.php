@@ -1,5 +1,10 @@
 @extends('.welcome')
 
+@section('head')
+
+    <link rel="stylesheet" href="/css/Matija.css">
+    <script src="/js/Matija.js"></script>
+@endsection
 
 @section('content')
 
@@ -74,101 +79,115 @@
                             </td>
                             <td>
                                 <label for="cena" class="form_label_text">
-                                    14 000.0$
+                                    {{$cena}}$
                                 </label>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
+
+                    <!--                    FORMAAAAAAA-->
+                    <!--                    FORMAAAAAAA-->
+                    <!--                    FORMAAAAAAA-->
+                    <!--                    FORMAAAAAAA-->
+
+
             <div class="col-xs-12 col-sm-6 paddingTopAndBot text-center">
                 <form action="kupac_forma" method="post" class="form-group">
                     <table class="table table-borderless">
                         <tr>
-                            <td class="text-right">
+                            <td class="text-right noDownPadding">
                                 <label for="ime" class="form_label_text">
                                     Ime:
                                 </label>
                             </td>
-                            <td>
+                            <td class="noDownPadding">
                                 <input type="text" name="ime" id="ime" class="form-control form_input_text">
+                                <label class="warning_text" id="imeNapomena" ></label>
                                 {{csrf_field()}}
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-right">
+                            <td class="text-right noTDPadding">
                                 <label for="prezime" class="form_label_text">
                                     Prezime:
                                 </label>
                             </td>
-                            <td>
+                            <td class="noTDPadding">
                                 <input type="text" name="prezime" id="prezime" class="form-control form_input_text">
-                                {{csrf_field()}}
+                                <label class="warning_text" id="prezimeNapomena" ></label>
+
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-right">
-                                <label for="adresa" class="form_label_text">
-                                    Ulica:
-                                </label>
-                            </td>
-                            <td>
-                                <input type="text" name="adresa" id="adresa" class="form-control form_input_text">
-                                {{csrf_field()}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-right">
+                            <td class="text-right noTDPadding">
                                 <label for="grad" class="form_label_text">
                                     Grad:
                                 </label>
                             </td>
-                            <td>
+                            <td class="noTDPadding">
                                 <input type="text" name="grad" id="grad" class="form-control form_input_text">
-                                {{csrf_field()}}
+                                <label class="warning_text" id="gradNapomena" ></label>
+
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-right">
+                            <td class="text-right noTDPadding">
+                                <label for="adresa" class="form_label_text">
+                                    Ulica:
+                                </label>
+                            </td>
+                            <td  class="noTDPadding">
+                                <input type="text" name="adresa" id="adresa" class="form-control form_input_text">
+                                <label class="warning_text" id="adresaNapomena" ></label>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-right noTDPadding">
                                 <label for="brUlice" class="form_label_text">
                                     Broj ulice:
                                 </label>
                             </td>
-                            <td>
+                            <td class="noTDPadding">
                                 <input type="text" name="brUlice" id="brUlice" class="form-control form_input_text"
                                        maxlength="4">
-                                {{csrf_field()}}
+                                <label class="warning_text" id="brUliceNapomena" ></label>
+
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-right">
+                            <td class="text-right noTDPadding">
                                 <label for="zip" class="form_label_text">
-                                    ZIP code:
+                                    Poštanski broj:
                                 </label>
                             </td>
-                            <td>
+                            <td class="noTDPadding">
                                 <input type="text" name="ZIPCode" id="zip" class="form-control form_input_text" size="5">
-                                {{csrf_field()}}
+                                <label class="warning_text" id="zipNapomena" ></label>
+
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-right">
+                            <td class="text-right noTDPadding">
                                 <label for="brTelefona" class="form_label_text">
                                     Broj telefona:
                                 </label>
                             </td>
-                            <td>
+                            <td class="noTDPadding">
                                 <input type="text" name="brTelefona" id="brTelefona" class="form-control form_input_text">
-                                {{csrf_field()}}
+                                <label class="warning_text" id="telefonNapomena" ></label>
+
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-right">
+                            <td class="text-right noUpPadding">
                                 <label for="metodNaplate" class="form_label_text">
                                     Metod naplate:
                                 </label>
                             </td>
-                            <td>
+                            <td class="noUpPadding">
                                 <select name="metodNaplate" id="metodNaplate" class="form-control form_input_text">
                                     <option value="placanje po preuzimanju">POU (plaćanje pouzećem)</option>
                                 </select>
@@ -177,17 +196,61 @@
                         <tr>
                             <td>
                                 <input type="hidden" name="korisnik_id" value="1">
-                                <button type="submit" name="potvrdi" class="btn-success form-control form_gray_button">
+                                <button type="button" name="potvrdi" class="btn-success form-control form_gray_button" onclick="proveri()">
                                     Potvrdi
                                 </button>
                             </td>
                             <td>
-                                <button type="button" class="btn-success form-control form_gray_button">
+                                <button type="button" class="btn-success form-control form_gray_button" onclick="prikazi('odustani')">
                                     Odustani
                                 </button>
                             </td>
                         </tr>
                     </table>
+                    <div id="potvrdi" class="modalWindow text-center">
+                        <div>
+                            <h2>Upozorenje</h2>
+                            <h5>Da li sigurno zelite da potvrdite kupovinu svih slika</h5>
+                            <br><br><br>
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <input type="submit" value="Potvrdi" name="potvrdi" class="btn-dark gray_button_100">
+                                            {{csrf_field()}}
+                                        </td>
+                                        <td>
+
+                                            <input type="button" value="Odustani" class="btn-dark gray_button_100"
+                                                   onclick="sakrij('potvrdi')">
+
+                                        </td>
+                                    </tr>
+                                </table>
+                        </div>
+                    </div>
+
+
+                    <div id="odustani" class="modalWindow text-center">
+                        <div>
+                            <h2>Upozorenje</h2>
+                            <h5>Da li sigurno zelite da odustanete od kupovine svih slika</h5>
+                            <br><br><br>
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <input type="submit" value="Potvrdi" name="potvrdi" class="btn-dark gray_button_100">
+                                            {{csrf_field()}}
+                                        </td>
+                                        <td>
+
+                                            <input type="button" value="Odustani" class="btn-dark gray_button_100"
+                                                   onclick="sakrij('odustani')">
+
+                                        </td>
+                                    </tr>
+                                </table>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

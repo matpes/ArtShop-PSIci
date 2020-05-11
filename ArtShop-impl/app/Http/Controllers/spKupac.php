@@ -8,6 +8,7 @@ use App\Kupac;
 use App\Picture;
 use App\Podaci;
 use App\Slikar;
+use App\ZaOcenu;
 use Illuminate\Http\Request;
 
 class spKupac extends Controller
@@ -23,11 +24,12 @@ class spKupac extends Controller
     {
         //
 
-        $slikeUKorpi = Korpa::dohvatiSlike();
+        $cena = 0;
+        $slikeUKorpi = Korpa::dohvatiSlike($cena);
         /*foreach ($slikeUKorpi as $slika){
             echo $slika. "<br>";
         };*/
-        $pogled = view('.podaci_form')->with('slike', $slikeUKorpi);
+        $pogled = view('.podaci_form')->with('slike', $slikeUKorpi)->with('cena', $cena);
         return $pogled;
 
 
@@ -53,10 +55,30 @@ class spKupac extends Controller
     public function store(Request $request)
     {
 
-        $request->korisnik_id=1;
+
         //return $request->all();
-        Podaci::create($request->all());
-        return redirect('/kupac_forma');
+        $podaci = Podaci::firstOrNew(['korisnik_id'=>$request->korisnik_id]);
+        //Podaci::create($request->all());
+        $podaci->ime = $request->ime;
+        $podaci->prezime = $request->prezime;
+        $podaci->adresa = $request->adresa;
+        $podaci->grad = $request->grad;
+        $podaci->brUlice = $request->brUlice;
+        $podaci->brTelefona = $request->brTelefona;
+        $podaci->ZIPCode = $request->ZIPCode;
+        $podaci->metodNaplate = $request->metodNaplate;
+        $podaci->save();
+        //PREBACIVANJE U TABELU ZA OCENE
+        $slike = Korpa::all()->where('korisnik_id', 1);
+        foreach ($slike as $slika){
+            $zaOcenu = new ZaOcenu;
+            $zaOcenu->picture_id = $slika->picture_id;
+            $zaOcenu->korisnik_id = $slika->korisnik_id;
+            $zaOcenu->ocena = 0;
+            $zaOcenu->save();
+            $slika->delete();
+        }
+        return redirect('/korpa');
     }
 
     /**

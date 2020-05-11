@@ -1,0 +1,207 @@
+.image_cart {
+    border: greenyellow solid 15px;
+    width: 100%;
+}
+
+.korpa_kratak_opis {
+    color: greenyellow;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.marginTop {
+    margin-top: 15px;
+}
+
+.cenaPadding {
+    padding: 5px;
+}
+
+
+
+.modalWindow {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    opacity: 1;
+    /*transition: opacity 400ms linear;*/
+    /*pointer-events: none;*/
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.modalWindow:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modalWindow > div {
+    width: 70%;
+    height: 70%;
+    position: relative;
+    margin: 10% auto;
+    padding: 20px 20px 13px 20px;
+    background: #b3fc60;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 42px;
+    color: #333333;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #242424;
+}
+
+.gray_button_100{
+    color: greenyellow;
+    margin: 12px 30px;
+    padding: 0 10px;
+    display: inline;
+    height: calc(1.5em + .75rem + 2px);
+    border-radius: 3rem;
+    font-weight: 700;
+}
+
+.gray_button_100:hover{
+    color: #7cfc00;
+}
+
+
+.emptyCart{
+    background-color: #b3fc60;
+    font-size: 70px;
+    text-align: center;
+    position: relative;
+    top: 30%;
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.disabledButton{
+    background-color: darkgrey;
+    color: #b3fc60;
+    cursor: default;
+}
+
+.warning_text{
+    color: red;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+
+.noDownPadding{
+    padding-bottom: 8px !important;
+}
+
+.noTDPadding{
+    padding-bottom: 8px !important;
+    padding-top: 8px !important;
+}
+.noUpPadding{
+    padding-top: 8px !important;
+}
+
+.zavrsiButton{
+    font-size: 35px;
+    position: absolute;
+    right: 0;
+}
+
+.nazivSlike{
+    color: greenyellow;
+    font-size: 60px;
+    font-weight: 700;
+    background-color: #333333;
+    border-radius: 3rem;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+
+.detaljiSlike{
+    color: greenyellow;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.opisSlike{
+    color: #333333;
+    font-weight: 700;
+    font-size: 60px;
+}
+
+.cenaLable{
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 3rem;
+    font-size: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.pozicijaDugmadiSlika{
+    position: absolute;
+    top: 50%;
+    left: 10%;
+}
+
+.dugmiciSlika{
+    min-width: 100%;
+    border-radius: 3rem;
+    color: greenyellow;
+    font-size: 40px;
+    margin: 15px;
+}
+
+.dugmiciSlika:hover{
+    color: lawngreen;
+}
+
+.cenaText{
+    color: #333;
+    font-size: 70px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 800;
+    height: auto;
+}
+
+.cenaInputText{
+    color: #333;
+    font-size: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 800;
+    height: auto;
+    width: 40%;
+}
+
+.kuplenoDugmic{
+    min-width: 100%;
+    border-radius: 3rem;
+    color: darkgreen;
+    font-size: 40px;
+    margin: 15px;
+    background-color: #5a5a5a;
+}

@@ -19,6 +19,7 @@
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    @yield('head')
 </head>
 <body class="body">
 
@@ -29,22 +30,25 @@
             <div class="row-fluid">
                 <div class="col-sm-12">
 
-                    <form action="#">
-                        <div class="form-group noMargin">
-                            <input type="text" name="" id="" class="form-control header_input_text"
+                    <div class="form-group noMargin">
+
+                        <form action="#">
+                            <input type="text" name="" id="1" class="form-control header_input_text"
                                    placeholder="Slikar">
-                            <input type="text" name="" id="" class="form-control header_input_text"
+                            <input type="text" name="" id="2" class="form-control header_input_text"
                                    placeholder="Tematika">
-                            <select name="" id="" class="form-control header_input_text">
+                            <select name="" id="3" class="form-control header_input_text">
                                 <option value="stil">Stil</option>
                                 <option value="klasicizam">Klasicizam</option>
                                 <option value="kubizam">Kubizam</option>
                                 <option value="barok">Barok</option>
                             </select>
                             <button type="submit" class="btn-dark gray_button"> Pretraži</button>
-                        </div>
+                            @yield('header_form')
+                        </form>
+                    </div>
 
-                    </form>
+
                 </div>
             </div>
             <hr>
@@ -52,7 +56,7 @@
 
         <div class="spaceFromHeader">
 
-        @yield('content')
+            @yield('content')
 
         </div>
 

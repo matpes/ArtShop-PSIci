@@ -10,4 +10,5 @@ class Stil extends Model
     protected $fillable=[
         'id', 'naziv'
     ];
+
 }

@@ -1,5 +1,13 @@
 @extends('.layouts.app')
 
+@section('header_form')
+
+    <a href="/korpa">
+        <img src="/images/design/cart.png" alt="" class="img-fluid float-right">
+    </a>
+@endsection
+
+
 @section('content')
 
     A <br>

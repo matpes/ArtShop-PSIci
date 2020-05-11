@@ -1,6 +1,7 @@
  <?php
 
-use Illuminate\Support\Facades\Route;
+ use App\ZaOcenu;
+ use Illuminate\Support\Facades\Route;
 use App\Picture;
 use \App\Http\Controllers\spKupac;
 /*
@@ -21,7 +22,7 @@ Route::get('/', function () {
 
 
 Route::get('/insertPics', function(){
-    Picture::insertujSlike();
+    Picture::pocetna();
 });
 
 
@@ -39,6 +40,13 @@ Route::get('/insertIntoTable', 'spKupac@pocetnaBaza');
 
 
 Route::resource('/kupac_forma', 'spKupac');
+
+Route::resource('/korpa', 'spKorpa');
+
+Route::resource('/zaOcenu', 'spZaOcenu');
+
+Route::resource('picture', 'spPicture');
+
 /*
  Route::get('/contact', function (){
      return "Hi I am contact";
@@ -79,3 +87,9 @@ Route::resource('/kupac_forma', 'spKupac');
 
  Route::get('/post/{id}', 'PostController@post_some');*/
 
+
+ Route::get('proba', function (){
+
+
+     dd(ZaOcenu::zaOcenu(1));
+ });
