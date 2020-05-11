@@ -1,0 +1,131 @@
+*{
+    font-family: "Bradley Hand ITC", serif;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+.myHeader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    background-color: rgb(162, 233, 53);
+    height: auto;
+}
+
+.spaceFromHeader{
+    margin-top: 100px;
+}
+
+.myHeader::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+
+
+section{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background: darkgray linear-gradient(0deg, #616161 20%, greenyellow 100%) no-repeat fixed;
+    background-size: cover;
+    overflow-y: auto;
+}
+
+hr{
+    border: 1px solid darkgray;
+    margin: 0;
+    padding: 0;
+}
+
+.header_input_text{
+    margin: 12px 30px;
+    padding: 0 10px;
+    display: inline;
+    width: 15%;
+    height: calc(1.5em + .75rem + 2px);
+    border-radius: 3rem;
+    border: 1px solid darkgray;
+
+}
+
+
+.noPadding{
+    padding: 0 !important;
+}
+
+
+.noMargin{
+    margin: 0;
+}
+
+.gray_button{
+    color: greenyellow;
+    margin: 12px 30px;
+    padding: 0 10px;
+    display: inline;
+    width: 10%;
+    height: calc(1.5em + .75rem + 2px);
+    border-radius: 3rem;
+    font-weight: 700;
+}
+
+.gray_button:hover{
+    color: #7cfc00;
+}
+
+.form_gray_button{
+    height: calc(1.5em + .75rem + 2px);
+    border-radius: 3rem;
+    font-weight: 700;
+    color: rgb(64, 64, 64);
+    background-color: greenyellow;
+}
+
+.form_gray_button:hover{
+    color: #000000;
+    background-color: #6a971c;
+}
+
+.form_gray_button:focus{
+    color: #000000;
+    background-color: #6a971c;
+}
+
+.form_input_text{
+    display: inline;
+    height: calc(1.5em + .75rem + 2px);
+    border-radius: 3rem;
+    border: 1px solid darkgray;
+}
+
+.form_label_text{
+    font-size: 30px;
+    font-weight: 900;
+    padding: 0;
+    text-align:right;
+    color: greenyellow;
+}
+
+.padding_form_picture{
+    padding: 40px 0px 40px 40px;
+}
+
+footer{
+    position: absolute;
+    right: 5px;
+    bottom: 15px;
+}
+
+.dark_background{
+    background-color: rgb(64, 64, 64);
+}
+
+.keep_it_low{
+    position: absolute;
+    bottom: -1%;
+}
