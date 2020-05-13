@@ -49,11 +49,9 @@
                                     Tema:
                                 </td>
                                 <td class="detaljiSlike">
-{{--                                    @foreach($teme as $tema)--}}
-
-{{--                                        {{$tema->tema}}--}}
-{{--                                    @endforeach--}}
-                                    OVDE IDE TEMA
+                                    @foreach($teme as $tema)
+                                        {{'#'.$tema->tema}}
+                                    @endforeach
                                 </td>
                             </tr>
                         </table>

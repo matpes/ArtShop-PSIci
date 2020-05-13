@@ -4,7 +4,7 @@
 @section('cenaIDugmici')
 
     <div class="opisSlike pozicijaDugmadiSlika">
-        <form action="" method="post" class="form-group">
+        <form action="{{$picture->id}}/edit" method="get" class="form-group">
 
             <label for="mojaCena" class="cenaText">Moja cena:</label>
             <input type="text" name="mojaCena" id="mojaCena" class="form-control form_input_text cenaInputText">

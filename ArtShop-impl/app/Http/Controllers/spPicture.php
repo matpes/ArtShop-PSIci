@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Korpa;
+use App\Kupac;
+use App\Mail\newOffer;
 use App\Picture;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Mailer;
+use Illuminate\Support\Facades\Mail;
+use PhpParser\Node\Stmt\Foreach_;
+use Symfony\Component\Console\Input\Input;
 
 class spPicture extends Controller
 {
@@ -33,7 +39,7 @@ class spPicture extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -46,23 +52,22 @@ class spPicture extends Controller
     /**
      * Prikazivanje slike sa zadatim ID-jem
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
         $picture = Picture::withTrashed()->find($id);
-
+        $teme = $picture->teme();
         $slikar = Picture::dohvatiAutora($picture);
         $stil = Picture::dohvatiStil($picture);
-        $teme = ['jedna', 'druga'];
         $endTime = $picture->danIstekaAukcije;
         $bought = false;
-        if($picture->deleted_at != null){
+        if ($picture->deleted_at != null) {
             $bought = true;
         }
-        switch ($picture->aukcijaFlag){
+        switch ($picture->aukcijaFlag) {
             case 0:
                 return view('.pictureSimple', compact('picture', 'slikar', 'stil', 'teme', 'endTime', 'bought'));
                 break;
@@ -78,25 +83,59 @@ class spPicture extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $korpa = new Korpa;
-        $korpa->korisnik_id = 1;
-        $korpa->picture_id = $id;
-        $korpa->save();
-        Picture::find($id)->delete();
-        return redirect('picture/'.$id);
+
+        $korid = 4;
+        $picture = Picture::find($id);
+        //dd($picture->getUcesnika($korid));
+
+        switch ($picture->aukcijaFlag) {
+            case 0:
+                $korpa = new Korpa;
+                $korpa->korisnik_id = $korid;
+                $korpa->picture_id = $id;
+                $korpa->save();
+                Picture::find($id)->delete();
+                break;
+            case 1:
+            case 2:
+            default:
+                $mojaCena = $_GET['mojaCena'];
+                $ucesnik = $picture->getUcesnika($korid);
+                $picture->cena = $mojaCena;
+                $picture->save();
+                $omg = $ucesnik->get();
+                echo count($omg);
+                if (count($omg) == 0) {
+                    $ucesnik->attach($korid, ['cena' => $mojaCena]);
+                } else {
+                    foreach ($ucesnik as $uc) {
+                        $ucesnik->updateExistingPivot($korid, ['cena' => $mojaCena]);
+                    }
+                }
+                $korisnici = $picture->getSveUcesnike();
+                foreach ($korisnici as $korisnik) {
+                    if ($korisnik->id != $korid) {
+                        Mail::to($korisnik->mail)->send(new newOffer($picture));
+                    }
+                }
+                //spMail::newOffer($picture, $korid);
+                break;
+        }
+
+        return redirect('picture/' . $id);
 
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -108,7 +147,7 @@ class spPicture extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

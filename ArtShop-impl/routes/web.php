@@ -20,6 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/mail/{slika}/{korime}', 'spMail@newOffer');
 
 Route::get('/insertPics', function(){
     Picture::pocetna();

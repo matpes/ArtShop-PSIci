@@ -89,4 +89,20 @@ class Picture extends Model
         return $slikar;
     }
 
+    public function teme(){
+        return $this->belongsToMany('App\Tema')->get();
+    }
+
+    public function getUcesnika($id){
+        $ret =  $this->belongsToMany('App\Kupac','kupac_picture', 'picture_id', 'korisnik_id');
+        //dd($ret);
+        $ret = $ret->where('kupac_picture.'.'korisnik_id', $id);
+        return $ret;
+    }
+
+    public function getSveUcesnike(){
+        return $this->belongsToMany('App\Korisnik','kupac_picture', 'picture_id', 'korisnik_id')->get();
+    }
+
+
 }

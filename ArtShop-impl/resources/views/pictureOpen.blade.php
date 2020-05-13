@@ -5,7 +5,7 @@
 @section('cenaIDugmici')
 
     <div class="opisSlike pozicijaDugmadiSlika">
-        <form action="" method="post" class="form-group">
+        <form action="{{$picture->id}}/edit" method="get" class="form-group">
             <span class="cenaText">Trenutna cena:</span>
             <label for="" class="cenaLable">{{$picture->cena}}</label>
             <label for="mojaCena" class="cenaText">$</label>

@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Kupac extends Model
 {
     //
+
+    protected $primaryKey='korisnik_id';
+
     protected $fillable = [
         'korisnik_id'
     ];

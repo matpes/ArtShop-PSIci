@@ -12,9 +12,11 @@ class CreateKupacsPicturesTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('kupac_picture', function (Blueprint $table) {
+            $table->id();
             $table->integer('picture_id');
             $table->integer('korisnik_id');
             $table->double('cena');
