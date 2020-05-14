@@ -81,10 +81,10 @@ CREATE TABLE `komentar_korisnik` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `korisniks`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `korisniks` (
+CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -99,10 +99,10 @@ CREATE TABLE `korisniks` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `korisniks`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `korisniks` (`id`, `username`, `password`, `mail`, `isSlikar`, `profilna_slika`, `brPrijava`, `isAdmin`, `brUspesnihPrijava`, `created_at`, `updated_at`) VALUES
+INSERT INTO `users` (`id`, `username`, `password`, `mail`, `isSlikar`, `profilna_slika`, `brPrijava`, `isAdmin`, `brUspesnihPrijava`, `created_at`, `updated_at`) VALUES
 (1, 'kupac', '123', 'a@a.com', 0, '/images/tamara.jpg', 0, 0, 0, '2020-05-06 16:05:41', '2020-05-06 16:05:41'),
 (2, 'slikar', '1234', 'b@a.com', 0, '/images/drazend.jpg', 0, 0, 0, '2020-05-06 16:05:41', '2020-05-06 16:05:41'),
 (3, 'sasa5', '$2y$10$aIJ.A808RUA0QUFvWxYVoe8TACs1UGa0iD8L2CRJTFKVtAsZjljJS', 'sa@sa.com', 1, NULL, 0, 0, 0, '2020-05-14 14:05:33', '2020-05-14 14:05:33');
@@ -194,7 +194,7 @@ CREATE TABLE `migrations` (
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2020_05_05_182025_create_pictures_table', 1),
-(17, '2020_05_05_205731_create_korisniks_table', 1),
+(17, '2020_05_05_205731_create_users_table', 1),
 (18, '2020_05_05_205805_create_slikars_table', 1),
 (19, '2020_05_05_205817_create_kupacs_table', 1),
 (20, '2020_05_05_210748_create_komentars_table', 1),
@@ -206,12 +206,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (26, '2020_05_05_211350_create_stils_table', 1),
 (27, '2020_05_05_211429_create_pictures_temas_table', 1),
 (28, '2020_05_05_211756_create_kupacs_slikars_table', 1),
-(29, '2020_05_05_211812_create_komentars_korisniks_table', 1),
+(29, '2020_05_05_211812_create_komentars_users_table', 1),
 (31, '2020_05_05_205747_create_admins_table', 2),
 (32, '2020_05_08_193638_add_cena_kolona_to_pictures', 2),
-(33, '2014_10_12_000000_create_users_table', 3),
-(34, '2014_10_12_100000_create_password_resets_table', 4),
-(35, '2019_08_19_000000_create_failed_jobs_table', 5);
+(33, '2014_10_12_100000_create_password_resets_table', 4),
+(34, '2019_08_19_000000_create_failed_jobs_table', 5);
 
 -- --------------------------------------------------------
 
@@ -347,30 +346,6 @@ CREATE TABLE `temas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'sasa', 'sa@sa', NULL, '$2y$10$51zi7/Q7ABzCSAG0LzEYB.Yw3FtrXcrUy09FsPXgFd0OjABxxiswy', NULL, '2020-05-14 11:10:42', '2020-05-14 11:10:42');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `za_ocenus`
 --
 
@@ -411,13 +386,13 @@ ALTER TABLE `komentar_korisnik`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `korisniks`
+-- Indexes for table `users`
 --
-ALTER TABLE `korisniks`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `korisniks_username_unique` (`username`),
-  ADD UNIQUE KEY `korisniks_password_unique` (`password`),
-  ADD UNIQUE KEY `korisniks_mail_unique` (`mail`);
+  ADD UNIQUE KEY `users_username_unique` (`username`),
+  ADD UNIQUE KEY `users_password_unique` (`password`),
+  ADD UNIQUE KEY `users_mail_unique` (`mail`);
 
 --
 -- Indexes for table `korpas`
@@ -488,13 +463,6 @@ ALTER TABLE `temas`
   ADD UNIQUE KEY `temas_tema_unique` (`tema`);
 
 --
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
-
---
 -- Indexes for table `za_ocenus`
 --
 ALTER TABLE `za_ocenus`
@@ -523,9 +491,9 @@ ALTER TABLE `komentar_korisnik`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `korisniks`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `korisniks`
+ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
@@ -563,13 +531,6 @@ ALTER TABLE `stils`
 --
 ALTER TABLE `temas`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
