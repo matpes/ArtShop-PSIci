@@ -14,7 +14,7 @@ use \App\Http\Controllers\spKupac;
 |
 */
 
-
+//MATIJA
 Route::get('/', function () {
     return view('welcome');
 });
@@ -79,3 +79,12 @@ Route::resource('/kupac_forma', 'spKupac');
 
  Route::get('/post/{id}', 'PostController@post_some');*/
 
+
+ //SANJA
+
+ Route::get('login', 'LoginController@index');
+ Route::post('post-login', 'LoginController@login');
+ Route::get('registration', 'AuthController@registration');
+ Route::post('post-registration', 'AuthController@postRegistration');
+ Route::get('dashboard', 'AuthController@dashboard');
+ Route::get('logout', 'AuthController@logout');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2020 at 01:13 AM
+-- Generation Time: May 14, 2020 at 06:46 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -31,7 +31,7 @@ CREATE TABLE `admins` (
   `korisnik_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -89,9 +89,11 @@ CREATE TABLE `korisniks` (
   `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mail` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `profilna_slika` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `brPrijava` int(11) NOT NULL,
-  `brUspesnihPrijava` int(11) NOT NULL,
+  `isSlikar` tinyint(1) NOT NULL,
+  `profilna_slika` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `brPrijava` int(11) NOT NULL DEFAULT 0,
+  `isAdmin` tinyint(1) NOT NULL DEFAULT 0,
+  `brUspesnihPrijava` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -100,9 +102,10 @@ CREATE TABLE `korisniks` (
 -- Dumping data for table `korisniks`
 --
 
-INSERT INTO `korisniks` (`id`, `username`, `password`, `mail`, `profilna_slika`, `brPrijava`, `brUspesnihPrijava`, `created_at`, `updated_at`) VALUES
-(1, 'kupac', '123', 'a@a.com', '/images/tamara.jpg', 0, 0, '2020-05-06 16:05:41', '2020-05-06 16:05:41'),
-(2, 'slikar', '1234', 'b@a.com', '/images/drazend.jpg', 0, 0, '2020-05-06 16:05:41', '2020-05-06 16:05:41');
+INSERT INTO `korisniks` (`id`, `username`, `password`, `mail`, `isSlikar`, `profilna_slika`, `brPrijava`, `isAdmin`, `brUspesnihPrijava`, `created_at`, `updated_at`) VALUES
+(1, 'kupac', '123', 'a@a.com', 0, '/images/tamara.jpg', 0, 0, 0, '2020-05-06 16:05:41', '2020-05-06 16:05:41'),
+(2, 'slikar', '1234', 'b@a.com', 0, '/images/drazend.jpg', 0, 0, 0, '2020-05-06 16:05:41', '2020-05-06 16:05:41'),
+(3, 'sasa5', '$2y$10$aIJ.A808RUA0QUFvWxYVoe8TACs1UGa0iD8L2CRJTFKVtAsZjljJS', 'sa@sa.com', 1, NULL, 0, 0, 0, '2020-05-14 14:05:33', '2020-05-14 14:05:33');
 
 -- --------------------------------------------------------
 
@@ -192,22 +195,23 @@ CREATE TABLE `migrations` (
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2020_05_05_182025_create_pictures_table', 1),
 (17, '2020_05_05_205731_create_korisniks_table', 1),
-(18, '2020_05_05_205747_create_admins_table', 1),
-(19, '2020_05_05_205805_create_slikars_table', 1),
-(20, '2020_05_05_205817_create_kupacs_table', 1),
-(21, '2020_05_05_210748_create_komentars_table', 1),
-(22, '2020_05_05_211028_create_podacis_table', 1),
-(23, '2020_05_05_211229_create_kupacs_pictures_table', 1),
-(24, '2020_05_05_211310_create_za_ocenus_table', 1),
-(25, '2020_05_05_211324_create_korpas_table', 1),
-(26, '2020_05_05_211337_create_temas_table', 1),
-(27, '2020_05_05_211350_create_stils_table', 1),
-(28, '2020_05_05_211429_create_pictures_temas_table', 1),
-(29, '2020_05_05_211756_create_kupacs_slikars_table', 1),
-(30, '2020_05_05_211812_create_komentars_korisniks_table', 1),
-(31, '2014_10_12_000000_create_users_table', 2),
-(32, '2019_08_19_000000_create_failed_jobs_table', 2),
-(33, '2014_10_12_100000_create_password_resets_table', 3);
+(18, '2020_05_05_205805_create_slikars_table', 1),
+(19, '2020_05_05_205817_create_kupacs_table', 1),
+(20, '2020_05_05_210748_create_komentars_table', 1),
+(21, '2020_05_05_211028_create_podacis_table', 1),
+(22, '2020_05_05_211229_create_kupacs_pictures_table', 1),
+(23, '2020_05_05_211310_create_za_ocenus_table', 1),
+(24, '2020_05_05_211324_create_korpas_table', 1),
+(25, '2020_05_05_211337_create_temas_table', 1),
+(26, '2020_05_05_211350_create_stils_table', 1),
+(27, '2020_05_05_211429_create_pictures_temas_table', 1),
+(28, '2020_05_05_211756_create_kupacs_slikars_table', 1),
+(29, '2020_05_05_211812_create_komentars_korisniks_table', 1),
+(31, '2020_05_05_205747_create_admins_table', 2),
+(32, '2020_05_08_193638_add_cena_kolona_to_pictures', 2),
+(33, '2014_10_12_000000_create_users_table', 3),
+(34, '2014_10_12_100000_create_password_resets_table', 4),
+(35, '2019_08_19_000000_create_failed_jobs_table', 5);
 
 -- --------------------------------------------------------
 
@@ -233,22 +237,24 @@ CREATE TABLE `pictures` (
   `stil_id` int(11) NOT NULL,
   `path` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `naziv` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `autor` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ocena` int(11) NOT NULL,
   `opis` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `aukcijaFlag` int(11) NOT NULL,
   `danIstekaAukcije` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `cena` double NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `pictures`
 --
 
-INSERT INTO `pictures` (`id`, `korisnik_id`, `stil_id`, `path`, `naziv`, `ocena`, `opis`, `aukcijaFlag`, `danIstekaAukcije`, `created_at`, `updated_at`) VALUES
-(2, 2, 1, '/images/Gemma_Gene/Helium%20ballons.png', 'helium', 11, 'Baloni puni helijuma', 0, '2020-05-10', '2020-05-08 08:31:01', '2020-05-08 08:31:01'),
-(3, 2, 1, '/images/Samantha_French/Underwater%20tranquility.png', 'mirnoca', 11, 'Podzemna mirnoca', 0, '2020-05-10', '2020-05-08 08:31:01', '2020-05-08 08:31:01'),
-(4, 2, 1, '/images/Gerry_Miles/underwater-painting.-gerry-miles.jellyfish.jpg', 'Logo', 11, 'logo sajta', 0, '2020-05-10', '2020-05-08 08:31:01', '2020-05-08 08:31:01');
+INSERT INTO `pictures` (`id`, `korisnik_id`, `stil_id`, `path`, `naziv`, `autor`, `ocena`, `opis`, `aukcijaFlag`, `danIstekaAukcije`, `created_at`, `updated_at`, `cena`) VALUES
+(2, 2, 1, '/images/Gemma_Gene/Helium%20ballons.png', 'helium', '', 11, 'Baloni puni helijuma', 0, '2020-05-10', '2020-05-08 08:31:01', '2020-05-08 08:31:01', 0),
+(3, 2, 1, '/images/Samantha_French/Underwater%20tranquility.png', 'mirnoca', '', 11, 'Podzemna mirnoca', 0, '2020-05-10', '2020-05-08 08:31:01', '2020-05-08 08:31:01', 0),
+(4, 2, 1, '/images/Gerry_Miles/underwater-painting.-gerry-miles.jellyfish.jpg', 'Logo', '', 11, 'logo sajta', 0, '2020-05-10', '2020-05-08 08:31:01', '2020-05-08 08:31:01', 0);
 
 -- --------------------------------------------------------
 
@@ -346,7 +352,7 @@ CREATE TABLE `temas` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -354,6 +360,13 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'sasa', 'sa@sa', NULL, '$2y$10$51zi7/Q7ABzCSAG0LzEYB.Yw3FtrXcrUy09FsPXgFd0OjABxxiswy', NULL, '2020-05-14 11:10:42', '2020-05-14 11:10:42');
 
 -- --------------------------------------------------------
 
@@ -513,7 +526,7 @@ ALTER TABLE `komentar_korisnik`
 -- AUTO_INCREMENT for table `korisniks`
 --
 ALTER TABLE `korisniks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `kupac_slikar`
@@ -525,7 +538,7 @@ ALTER TABLE `kupac_slikar`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `pictures`
@@ -555,7 +568,7 @@ ALTER TABLE `temas`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
