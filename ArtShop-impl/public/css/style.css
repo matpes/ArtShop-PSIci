@@ -4,6 +4,11 @@
     font-weight: 700;
 }
 
+body{
+    background-color: #616161;
+    width: 100% !important;
+}
+
 
 .myHeader{
     position: fixed;
@@ -11,7 +16,8 @@
     left: 0;
     right: 0;
     z-index: 20;
-    background-color: rgb(162, 233, 53);
+    background: linear-gradient(0deg, #1c1c1c 0%, #84deb4 200%);
+
     height: auto;
 }
 
@@ -31,8 +37,7 @@ section{
     padding: 0;
     width: 100%;
     height: 100vh;
-    background: darkgray linear-gradient(0deg, #616161 20%, greenyellow 100%) no-repeat fixed;
-    background-size: cover;
+    background-color: #1c1c1c;
     overflow-y: auto;
 }
 
@@ -47,7 +52,7 @@ hr{
     padding: 0 10px;
     display: inline;
     width: 15%;
-    height: calc(1.5em + .75rem + 2px);
+    height: calc(1em + .75rem + 2px);
     border-radius: 3rem;
     border: 1px solid darkgray;
 
@@ -56,6 +61,7 @@ hr{
 
 .noPadding{
     padding: 0 !important;
+    width: 100% !important;
 }
 
 
@@ -64,51 +70,57 @@ hr{
 }
 
 .gray_button{
-    color: greenyellow;
+    color: #84deb4;
     margin: 12px 30px;
     padding: 0 10px;
     display: inline;
     width: 10%;
-    height: calc(1.5em + .75rem + 2px);
+    height: calc(1em + .75rem + 2px);
     border-radius: 3rem;
     font-weight: 700;
 }
 
 .gray_button:hover{
-    color: #7cfc00;
+    color: #84deb4;
 }
 
 .form_gray_button{
     height: calc(1.5em + .75rem + 2px);
     border-radius: 3rem;
     font-weight: 700;
-    color: rgb(64, 64, 64);
-    background-color: greenyellow;
+    color: #1c1c1c;
+    background-color: #5f8b74;
 }
 
 .form_gray_button:hover{
     color: #000000;
-    background-color: #6a971c;
+    background-color: #567867;
 }
 
 .form_gray_button:focus{
     color: #000000;
-    background-color: #6a971c;
+    background-color: #567867;
 }
 
 .form_input_text{
     display: inline;
-    height: calc(1.5em + .75rem + 2px);
+    height: calc(1.5em + .5rem);
     border-radius: 3rem;
     border: 1px solid darkgray;
 }
 
 .form_label_text{
-    font-size: 30px;
+    font-size: 26px;
     font-weight: 900;
     padding: 0;
     text-align:right;
-    color: greenyellow;
+    color: #84deb4;
+}
+
+.form_checkbox{
+    float: right;
+    margin-top: 10px;
+    transform: scale(1.5);
 }
 
 .padding_form_picture{
@@ -122,10 +134,35 @@ footer{
 }
 
 .dark_background{
-    background-color: rgb(64, 64, 64);
+    background-color: rgb(36, 36, 36);
 }
 
 .keep_it_low{
     position: absolute;
     bottom: -1%;
+}
+
+.red{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.pretraga{
+    padding: 0px;
+}
+
+.pretraga img{
+    padding-left: 15px !important;
+    padding-bottom: 15px;
+    height: 370px;
+    width: 100%;
+}
+
+.padding-top{
+    padding-top: 20px;
+}
+
+.bottom{
+    position: absolute;
+    bottom: -3%;
 }

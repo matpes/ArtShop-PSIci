@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Picture;
+use App\Tema;
+use App\Stil;
 use \App\Http\Controllers\spKupac;
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +23,7 @@ Route::get('/', function () {
 
 
 Route::get('/insertPics', function(){
-    Picture::insertujSlike();
+    \App\Picture::pocetna();
 });
 
 
@@ -32,6 +34,7 @@ Route::get('/putanja', function (){
 });
 
 
+
 Route::get('/forma', 'spKupac@formaZaPodatke');
 
 
@@ -39,6 +42,17 @@ Route::get('/insertIntoTable', 'spKupac@pocetnaBaza');
 
 
 Route::resource('/kupac_forma', 'spKupac');
+
+
+
+Route::resource('/pretraga', 'spPretraga');
+
+
+Route::resource('/slika', 'spSlika');
+
+
+
+
 /*
  Route::get('/contact', function (){
      return "Hi I am contact";

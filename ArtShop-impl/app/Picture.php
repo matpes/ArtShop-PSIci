@@ -10,7 +10,7 @@ class Picture extends Model
     //
 
     protected $fillable = [
-        'korisnik_id', 'stil_id', 'naziv', 'ocena', 'opis', 'path', 'aukcijaFlag', 'danIstekaAukcije'
+        'korisnik_id', 'autor', 'stil_id', 'naziv', 'cena', 'ocena', 'opis', 'path', 'aukcijaFlag', 'danIstekaAukcije'
     ];
 
     public static function insertujSlike(){
@@ -28,6 +28,7 @@ class Picture extends Model
 
         $picture = new Picture;
         $picture->path = 'images/Gerry%20Miles/underwater-painting.-gerry-miles.jellyfish.jpg';
+
         $picture->save();
     }
 
@@ -40,17 +41,17 @@ class Picture extends Model
         }
     }
 
-    public static function pocetna()
-    {
-        $picture = new Picture(['korisnik_id'=>'2', 'stil_id'=>1, 'path'=>'/images/Gemma_Gene/Helium%20ballons.png', 'naziv'=>'helium', 'opis'=>'Baloni puni helijuma',
-                'ocena'=>11, 'aukcijaFlag' => false, 'danIstekaAukcije' => '2020-05-10 18:00:00']);
-        $picture->save();
-        $picture = new Picture(['korisnik_id'=>'2', 'stil_id'=>1, 'path'=>'/images/Samantha_French.png', 'naziv'=>'mirnoca', 'opis'=>'Podzemna mirnoca',
-            'ocena'=>11, 'aukcijaFlag' => false, 'danIstekaAukcije' => '2020-05-10 18:00:00']);
-        $picture->save();
-        $picture = new Picture(['korisnik_id'=>'2', 'stil_id'=>1, 'path'=>'/images/Gerry_Miles/underwater-painting.-gerry-miles.jellyfish.jpg', 'naziv'=>'Logo', 'opis'=>'logo sajta',
-            'ocena'=>11, 'aukcijaFlag' => false, 'danIstekaAukcije' => '2020-05-10 18:00:00']);
-        $picture->save();
-    }
+//    public static function pocetna()
+//    {
+//        $picture = new Picture(['korisnik_id'=>'2', 'stil_id'=>1, 'path'=>'/images/Gemma_Gene/Helium%20ballons.png', 'naziv'=>'helium', 'opis'=>'Baloni puni helijuma',
+//                'ocena'=>11, 'aukcijaFlag' => false, 'danIstekaAukcije' => '2020-05-10 18:00:00']);
+//        $picture->save();
+//        $picture = new Picture(['korisnik_id'=>'2', 'stil_id'=>1, 'path'=>'/images/Samantha_French.png', 'naziv'=>'mirnoca', 'opis'=>'Podzemna mirnoca',
+//            'ocena'=>11, 'aukcijaFlag' => false, 'danIstekaAukcije' => '2020-05-10 18:00:00']);
+//        $picture->save();
+//        $picture = new Picture(['korisnik_id'=>'2', 'stil_id'=>1, 'path'=>'/images/Gerry_Miles/underwater-painting.-gerry-miles.jellyfish.jpg', 'naziv'=>'Logo', 'opis'=>'logo sajta',
+//            'ocena'=>11, 'aukcijaFlag' => false, 'danIstekaAukcije' => '2020-05-10 18:00:00']);
+//        $picture->save();
+//    }
 
 }

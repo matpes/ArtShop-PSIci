@@ -16,4 +16,5 @@ class Slikar extends Model
         $kupac = new Slikar(['korisnik_id'=>'2', 'sumaOcena'=>0, 'brOcenjenihSlika'=>0]);
         $kupac->save();
     }
+
 }

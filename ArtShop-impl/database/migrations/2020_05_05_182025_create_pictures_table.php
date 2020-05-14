@@ -16,8 +16,10 @@ class CreatePicturesTable extends Migration
         Schema::create('pictures', function (Blueprint $table) {
             $table->id();
             $table->integer('korisnik_id');
+            $table->string('autor');
             $table->integer('stil_id');
             $table->string('path');
+            $table->string('smer');
             $table->string('naziv');
             $table->integer('ocena');
             $table->string('opis');

@@ -29,19 +29,21 @@
             <div class="row-fluid">
                 <div class="col-sm-12">
 
-                    <form action="#">
+                    <form method="get" action="/pretraga">
+
                         <div class="form-group noMargin">
-                            <input type="text" name="" id="" class="form-control header_input_text"
+                            <input type="text" name="autor" id="" class="form-control header_input_text"
                                    placeholder="Slikar">
-                            <input type="text" name="" id="" class="form-control header_input_text"
+                            <input type="text" name="tema" id="" class="form-control header_input_text"
                                    placeholder="Tematika">
-                            <select name="" id="" class="form-control header_input_text">
+                            <select name="stil" id="" class="form-control header_input_text">
                                 <option value="stil">Stil</option>
                                 <option value="klasicizam">Klasicizam</option>
+                                <option value="romantizam">Romantizam</option>
                                 <option value="kubizam">Kubizam</option>
                                 <option value="barok">Barok</option>
                             </select>
-                            <button type="submit" class="btn-dark gray_button"> Pretraži</button>
+                            <button type="submit" class="btn-dark gray_button" name="submit"> Pretraži</button>
                         </div>
 
                     </form>
