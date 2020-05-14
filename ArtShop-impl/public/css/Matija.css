@@ -1,10 +1,10 @@
 .image_cart {
-    border: greenyellow solid 15px;
+    border: rgb(255, 210, 201) solid 15px;
     width: 100%;
 }
 
 .korpa_kratak_opis {
-    color: greenyellow;
+    color: rgb(255, 210, 201);;
     font-size: 25px;
     font-weight: 700;
 }
@@ -65,7 +65,7 @@
 }
 
 .gray_button_100{
-    color: greenyellow;
+    color: rgb(255, 210, 201);;
     margin: 12px 30px;
     padding: 0 10px;
     display: inline;
@@ -128,7 +128,7 @@ a:hover{
 }
 
 .nazivSlike{
-    color: greenyellow;
+    color: rgb(255, 210, 201);;
     font-size: 60px;
     font-weight: 700;
     background-color: #333333;
@@ -140,7 +140,7 @@ a:hover{
 
 
 .detaljiSlike{
-    color: greenyellow;
+    color: rgb(255, 210, 201);;
     font-weight: 700;
     font-size: 30px;
 }
@@ -169,13 +169,13 @@ a:hover{
 .dugmiciSlika{
     min-width: 100%;
     border-radius: 3rem;
-    color: greenyellow;
+    color: rgb(255, 210, 201);;
     font-size: 40px;
     margin: 15px;
 }
 
 .dugmiciSlika:hover{
-    color: lawngreen;
+    color: rgb(255, 210, 201);;
 }
 
 .cenaText{

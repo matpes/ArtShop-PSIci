@@ -11,7 +11,7 @@
     left: 0;
     right: 0;
     z-index: 20;
-    background-color: rgb(162, 233, 53);
+    background: linear-gradient(0deg, rgba(104, 104, 104, 0.8) 0%, rgba(255, 210, 201, 0.8) 90%);
     height: auto;
 }
 
@@ -31,13 +31,14 @@ section{
     padding: 0;
     width: 100%;
     height: 100vh;
-    background: darkgray linear-gradient(0deg, #616161 20%, greenyellow 100%) no-repeat fixed;
+    /*background: linear-gradient(0deg, rgb(139, 139, 139) 0%, #ffd2c9 90%) no-repeat fixed;*/
+    background-color: rgb(104, 104, 104);
     background-size: cover;
     overflow-y: auto;
 }
 
 hr{
-    border: 1px solid darkgray;
+    border: 1px solid #ffd2c9;
     margin: 0;
     padding: 0;
 }
@@ -64,7 +65,7 @@ hr{
 }
 
 .gray_button{
-    color: greenyellow;
+    color: rgb(255, 210, 201);
     margin: 12px 30px;
     padding: 0 10px;
     display: inline;
@@ -83,7 +84,7 @@ hr{
     border-radius: 3rem;
     font-weight: 700;
     color: rgb(64, 64, 64);
-    background-color: greenyellow;
+    background-color: rgb(255, 210, 201);;
 }
 
 .form_gray_button:hover{
@@ -108,7 +109,7 @@ hr{
     font-weight: 900;
     padding: 0;
     text-align:right;
-    color: greenyellow;
+    color: rgb(255, 210, 201);;
 }
 
 .padding_form_picture{

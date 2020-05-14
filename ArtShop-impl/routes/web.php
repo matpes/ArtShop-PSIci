@@ -17,10 +17,9 @@ use \App\Http\Controllers\spKupac;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.app');
 });
 
-Route::get('/mail/{slika}/{korime}', 'spMail@newOffer');
 
 Route::get('/insertPics', function(){
     Picture::pocetna();
