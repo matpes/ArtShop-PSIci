@@ -39,51 +39,10 @@ Route::get('/insertIntoTable', 'spKupac@pocetnaBaza');
 
 Route::resource('/kupac_forma', 'spKupac');
 
-Route::resource('/korpa', 'spKorpa');
 
 Route::resource('/zaOcenu', 'spZaOcenu');
 
 Route::resource('picture', 'spPicture');
-
-/*
- Route::get('/contact', function (){
-     return "Hi I am contact";
- });
-
- Route::get('/about', function (){
-     return "Hi, this is about";
- });
-
-
- Route::get('/post/{id}/{name}', function ($id, $name) {
-
-     return "this is post number ". $id. " ". $name;
-
-
-
-
- });
-
-
- Route::get('admin/posts/example', array( 'as' => 'admin.home' , function () {
-
-    $url = route('admin.home');
-
-
-    return  "this url is ". $url;
-
- }));
-
-
- //Route::get('/post/{id}', 'PostController@index');
-
-
- Route::resource('posts', 'PostController');
-
-
- Route::get('/contact', 'PostController@contact');
-
- Route::get('/post/{id}', 'PostController@post_some');*/
 
 
  Route::get('proba', function (){
@@ -103,6 +62,8 @@ Route::group(['middleware' => 'GuestMiddleware'], function()
     Route::post('post-register', 'Auth\RegisterController@register')->name('postRegister');
     Route::get('/password/request', 'Auth\ForgotPasswordController@index')->name('password.request');
     Route::post('/password/email', 'Auth\ForgotPasswordController@forgotPassword')->name('password.email');
+
+    Route::resource('/korpa', 'spKorpa');
 });
 
 Route::get('/profile/user_info', 'UserController@profileInfo')->name('user_info');

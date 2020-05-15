@@ -96,7 +96,7 @@ class spPicture extends Controller
         switch ($picture->aukcijaFlag) {
             case 0:
                 $korpa = new Korpa;
-                $korpa->korisnik_id = $korid;
+                $korpa->user_id = $korid;
                 $korpa->picture_id = $id;
                 $korpa->save();
                 Picture::find($id)->delete();

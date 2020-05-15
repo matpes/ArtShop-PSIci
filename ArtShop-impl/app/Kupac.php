@@ -8,14 +8,14 @@ class Kupac extends Model
 {
     //
 
-    protected $primaryKey='korisnik_id';
+    protected $primaryKey='user_id';
 
     protected $fillable = [
-        'korisnik_id'
+        'user_id'
     ];
     public static function pocetna()
     {
-        $kupac = new Kupac(['korisnik_id'=>'1']);
+        $kupac = new Kupac(['user_id'=>'1']);
         $kupac->save();
     }
 }

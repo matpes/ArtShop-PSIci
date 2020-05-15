@@ -1,4 +1,4 @@
-@extends('.welcome')
+@extends('.layouts.app')
 
 @section('head')
     <link rel="stylesheet" href="/css/Matija.css">

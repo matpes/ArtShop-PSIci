@@ -1,9 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="8661094c-c4ed-474b-9cf3-598524cde0ea" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/spKupac.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_182025_create_pictures_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_205747_create_admins_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_205805_create_slikars_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_205817_create_kupacs_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_210748_create_komentars_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_211028_create_podacis_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_211229_create_kupacs_pictures_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_211310_create_za_ocenus_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_211324_create_korpas_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_211337_create_temas_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_211350_create_stils_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_211429_create_pictures_temas_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_211756_create_kupacs_slikars_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_211812_create_komentars_korisniks_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/spMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/spMail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/spPicture.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/spPicture.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Komentar.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Komentar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Korpa.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Korpa.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Kupac.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Kupac.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Picture.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Picture.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Podaci.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Podaci.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Slikar.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Slikar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ZaOcenu.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ZaOcenu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/packages.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/packages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/korpa.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/korpa.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/logs/laravel.log" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/laravel.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/autoload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,10 +202,20 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Middleware" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\wamp64\www\Implementacija\ArtShop-PSIci\ArtShop-impl\database\migrations" />
+      <recent name="E:\wamp64\www\Implementacija\ArtShop-PSIci\ArtShop-impl\app\Http\Controllers" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\project\app\Http\Middleware" />
       <recent name="C:\xampp\htdocs\project\resources\views\profile" />
@@ -198,6 +266,7 @@
       <workItem from="1589530015162" duration="10483000" />
       <workItem from="1589541370571" duration="11449000" />
       <workItem from="1589565675970" duration="551000" />
+      <workItem from="1589580517883" duration="3493000" />
     </task>
     <servers />
   </component>
@@ -214,6 +283,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="263" y="19" key="#CLI_Interpreters" timestamp="1589451670154">
@@ -328,9 +398,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="526" y="137" width="532" height="454" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1366.728@0.0.1366.728" timestamp="1589485861029" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1589565732929">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="-1381" y="183" width="840" height="856" key="search.everywhere.popup" timestamp="1589582509976">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="-1381" y="183" width="840" height="856" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1589582509976" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1589565732929" />
   </component>
   <component name="XDebuggerManager">
