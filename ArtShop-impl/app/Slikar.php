@@ -11,6 +11,8 @@ class Slikar extends Model
         'korisnik_id', 'sumaOcena', 'brOcenjenihSlika'
     ];
 
+    protected $primaryKey ='korisnik_id';
+
     public static function pocetna()
     {
         $kupac = new Slikar(['korisnik_id'=>'2', 'sumaOcena'=>0, 'brOcenjenihSlika'=>0]);

@@ -15,6 +15,9 @@ class {{ class }} extends Controller
     public function index()
     {
         //
+
+
+
     }
 
     /**

@@ -4,7 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+@section('header_form')
+
+    <a href="/korpa">
+        <img src="/images/design/cart.png" alt="" class="img-fluid float-right">
+    </a>
+@endsection
+
+
+@section('content')
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
