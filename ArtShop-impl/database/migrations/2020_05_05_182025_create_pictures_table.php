@@ -14,17 +14,17 @@ class CreatePicturesTable extends Migration
     public function up()
     {
         Schema::create('pictures', function (Blueprint $table) {
-            $table->id();
+            $table->id()->autoIncrement();
             $table->integer('korisnik_id');
             $table->string('autor');
             $table->integer('stil_id');
             $table->string('path');
             $table->string('smer');
             $table->string('naziv');
-            $table->integer('ocena');
+            $table->integer('ocena')->nullable();
             $table->string('opis');
             $table->integer('aukcijaFlag');
-            $table->date('danIstekaAukcije');
+            $table->date('danIstekaAukcije')->nullable();
             $table->timestamps();
         });
     }
