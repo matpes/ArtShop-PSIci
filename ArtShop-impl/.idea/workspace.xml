@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8661094c-c4ed-474b-9cf3-598524cde0ea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-    </list>
+    <list default="true" id="8661094c-c4ed-474b-9cf3-598524cde0ea" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,9 +10,6 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="PhpDebugGeneral" break_at_first_line="true" listening_started="true" />
   <component name="PhpServers">
@@ -131,7 +126,6 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1bqeWIQt0QHXvMk6riSa8JCuFrL" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -168,8 +162,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="PHPUnit.phpunit.xml" />
       <item itemvalue="PHP Script.RegisterController.php" />
+      <item itemvalue="PHPUnit.phpunit.xml" />
     </list>
     <recent_temporary>
       <list>
@@ -194,9 +188,7 @@
       <workItem from="1589451807371" duration="22330000" />
       <workItem from="1589484115744" duration="10594000" />
       <workItem from="1589530015162" duration="10483000" />
-      <workItem from="1589541370571" duration="10818000" />
-      <workItem from="1589554594975" duration="35000" />
-      <workItem from="1589555960632" duration="40000" />
+      <workItem from="1589541370571" duration="11449000" />
     </task>
     <servers />
   </component>
