@@ -23,6 +23,7 @@ body{
 
 .spaceFromHeader{
     margin-top: 100px;
+    width: 98%;
 }
 
 .myHeader::after{
