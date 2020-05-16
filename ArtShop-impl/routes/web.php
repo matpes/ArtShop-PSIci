@@ -66,10 +66,6 @@ Route::resource('picture', 'spPicture');
  });
 */
 
-Route::resource('/zaOcenu', 'spZaOcenu');
-
-Route::resource('picture', 'spPicture');
-
 /*
  Route::get('proba', function (){
      dd(ZaOcenu::zaOcenu(1));
