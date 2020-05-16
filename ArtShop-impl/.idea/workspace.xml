@@ -20,30 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8661094c-c4ed-474b-9cf3-598524cde0ea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/spPicture.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/spPicture.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Picture.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Picture.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_05_05_182025_create_pictures_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_182025_create_pictures_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_05_05_205805_create_slikars_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_05_205805_create_slikars_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_05_15_224746_add_fields_for_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_15_224746_add_fields_for_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/ocene.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ocene.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pictureBase.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pictureBase.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pictureSimple.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pictureSimple.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/8pDox7VYAfYSDql4Lu35xjxLNT3PSdQXfvc41vmH" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/BomLsAXZE3D0IKIT2d77sYLcKA9MlNkqAvqu5bII" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/c2ZPzC3tlH0rbgfD3uMIVthMi0ojL3NfwQ7sTAf9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/dW1XQy61SqCPtrdUo5sxncW7BuUfOan1qL6wrHBf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/il9awrsgmH29bT8sg7FXkYTl1WdRwdHMzg9AkK2J" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/u9gbxIMC2UVZAku5wPW8bxnCHJrWqlPmqYFkUNHD" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/logs/laravel.log" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/laravel.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +227,7 @@
       <workItem from="1589565675970" duration="551000" />
       <workItem from="1589580517883" duration="3493000" />
       <workItem from="1589615222623" duration="170000" />
-      <workItem from="1589634459384" duration="13934000" />
+      <workItem from="1589634459384" duration="15213000" />
     </task>
     <servers />
   </component>
