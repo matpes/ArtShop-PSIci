@@ -16,13 +16,14 @@ class CreatePicturesTable extends Migration
         Schema::create('pictures', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->string('autor');
             $table->integer('stil_id');
             $table->string('path');
             $table->string('naziv');
             $table->double('cena');
             $table->string('opis');
             $table->integer('aukcijaFlag');
-            $table->date('danIstekaAukcije');
+            $table->date('danIstekaAukcije')->nullable();
             $table->string('smer')->default('vertikalno');
             $table->timestamps();
         });

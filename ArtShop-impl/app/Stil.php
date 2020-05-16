@@ -11,4 +11,7 @@ class Stil extends Model
         'id', 'naziv'
     ];
 
+    public function pictures(){
+        return $this->hasMany('App\Picture');
+    }
 }

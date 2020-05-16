@@ -4,6 +4,8 @@
 use App\ZaOcenu;
 use Illuminate\Support\Facades\Route;
 use App\Picture;
+use App\Tema;
+use App\Stil;
 use \App\Http\Controllers\spKupac;
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,7 @@ Route::get('/insertPics', function(){
 
 Route::resource('/korpa', 'spKorpa');
 
+
 Route::get('/forma', 'spKupac@formaZaPodatke');
 
 
@@ -39,6 +42,25 @@ Route::get('/insertIntoTable', 'spKupac@pocetnaBaza');
 
 
 Route::resource('/kupac_forma', 'spKupac');
+
+
+
+Route::resource('/pretraga', 'spPretraga');
+
+
+Route::resource('/slika', 'spSlika');
+
+
+
+
+/*
+ Route::get('/contact', function (){
+     return "Hi I am contact";
+ });
+
+ Route::get('/about', function (){
+     return "Hi, this is about";
+ });
 
 
 Route::resource('/zaOcenu', 'spZaOcenu');

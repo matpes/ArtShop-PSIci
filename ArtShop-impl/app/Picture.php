@@ -12,7 +12,7 @@ class Picture extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'stil_id', 'naziv', 'cena', 'opis', 'path', 'aukcijaFlag', 'danIstekaAukcije', 'smer'
+        'user_id', 'stil_id', 'naziv', 'autor', 'cena', 'opis', 'path', 'aukcijaFlag', 'danIstekaAukcije', 'smer'
     ];
 
     public static function insertujSlike(){
@@ -30,6 +30,7 @@ class Picture extends Model
 
         $picture = new Picture;
         $picture->path = 'images/Gerry%20Miles/underwater-painting.-gerry-miles.jellyfish.jpg';
+
         $picture->save();
     }
 
@@ -90,6 +91,10 @@ class Picture extends Model
 
     public function teme(){
         return $this->belongsToMany('App\Tema')->get();
+    }
+
+    public function temas(){
+        return $this->belongsToMany('App\Tema');
     }
 
     public function getUcesnika($id){
