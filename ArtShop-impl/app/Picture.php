@@ -41,6 +41,10 @@ class Picture extends Model
         }
     }
 
+    public function temas(){
+        return $this->belongsToMany('App\Tema');
+    }
+
 //    public static function pocetna()
 //    {
 //        $picture = new Picture(['korisnik_id'=>'2', 'stil_id'=>1, 'path'=>'/images/Gemma_Gene/Helium%20ballons.png', 'naziv'=>'helium', 'opis'=>'Baloni puni helijuma',

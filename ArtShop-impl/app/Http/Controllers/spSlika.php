@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Korisnik;
+use App\Mail\NewPicture;
 use App\Picture;
+use App\Slikar;
 use App\Stil;
+use App\Tema;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Mailer;
 
 class spSlika extends Controller
 {
@@ -18,7 +23,8 @@ class spSlika extends Controller
     {
         $error = [];
         $picture = new Picture();
-        return view('slika_form', compact('error', 'picture'));
+        $teme = "";
+        return view('slika_form', compact('error', 'picture', 'teme'));
     }
 
     /**
@@ -37,7 +43,7 @@ class spSlika extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Mailer $mailer)
     {
         $flag = 0;
         $error = [];
@@ -113,15 +119,40 @@ class spSlika extends Controller
         $picture->aukcijaFlag = $aukcija;
         $request->merge(['aukcijaFlag' => $aukcija]);
         if($flag == 1){
+            $teme = $request->get('teme');
             return view('slika_form', compact('error', 'picture'));
         }
         else{
-            $picture->korisnik_id = 6;
+            $slikar = Slikar::where('korisnik_id', 1)->get()[0];
+            $picture->korisnik_id = $slikar->korisnik_id;
+
             if(count(Picture::where('path', $picture->path)->get()) == 0){
                 $picture->save();
+
+                $slikarkor = Korisnik::find($slikar->korisnik_id);
+                $users = $slikar->subscribed;
+                foreach ($users as $user){
+                    $korisnik = Korisnik::find($user->korisnik_id);
+                    $mailer->to($korisnik->mail)->send(new NewPicture($slikarkor->username, $slikarkor->id));
+                }
+
             }
             else{
                 Picture::where('path', $picture->path)->get()[0]->update($request->all());
+            }
+
+            $picture = Picture::where('path', $picture->path)->get()[0];
+
+            $teme = explode(", ", $request->get('teme'));
+            foreach ($teme as $naziv){
+                $temas = Tema::where('tema', $naziv)->get();
+                if(count($temas) == 0){
+                    $tema = new Tema();
+                    $tema->tema = $naziv;
+                    $tema->save();
+                }
+                $tema = Tema::where('tema', $naziv)->get()[0];
+                $picture->temas()->attach($tema->id);
             }
         }
     }
@@ -148,7 +179,13 @@ class spSlika extends Controller
         $error = [];
         $picture = Picture::findOrFail($id);
         $picture->danIstekaAukcije = new DateTime($picture->danIstekaAukcije);
-        return view('slika_form', compact('error', 'picture'));
+        $t = $picture->temas;
+        $nazivi = [];
+        foreach ($t as $tema){
+            array_push($nazivi, $tema->tema);
+        }
+        $teme = implode(', ', $nazivi);
+        return view('slika_form', compact('error', 'picture', 'teme'));
     }
 
     /**

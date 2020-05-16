@@ -14,7 +14,7 @@ class CreateTemasTable extends Migration
     public function up()
     {
         Schema::create('temas', function (Blueprint $table) {
-            $table->id();
+            $table->id()->autoIncrement();
             $table->string('tema')->unique();
             $table->timestamps();
         });

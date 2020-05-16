@@ -63,6 +63,18 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-5 text-right">
+                                <label for="teme" class="form_label_text">
+                                    Teme:
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" name="teme" id="teme" class="form-control form_input_text" value="@if(isset($teme)){{$teme}} @endif" placeholder="npr. priroda, portret, ...">
+                                <small></small>
+                                {{csrf_field()}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5 text-right">
                                 <label for="opis" class="form_label_text">
                                     Opis:
                                 </label>
@@ -140,6 +152,7 @@
                                 <button type="submit" name="potvrdi" class="btn-success form-control form_gray_button">
                                     Potvrdi
                                 </button>
+                                <input type="hidden" value="{{csrf_token()}}">
                             </div>
                             <div class="col-sm-6">
                                 <button type="button" class="btn-success form-control form_gray_button">
