@@ -8,14 +8,14 @@ class Slikar extends Model
 {
     //
     protected $fillable = [
-        'korisnik_id', 'sumaOcena', 'brOcenjenihSlika'
+        'user_id', 'sumaOcena', 'brOcenjenihSlika'
     ];
 
-    protected $primaryKey ='korisnik_id';
+    protected $primaryKey ='user_id';
 
     public static function pocetna()
     {
-        $kupac = new Slikar(['korisnik_id'=>'2', 'sumaOcena'=>0, 'brOcenjenihSlika'=>0]);
+        $kupac = new Slikar(['user_id'=>'2', 'sumaOcena'=>0, 'brOcenjenihSlika'=>0]);
         $kupac->save();
     }
 

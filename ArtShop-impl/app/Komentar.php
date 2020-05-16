@@ -8,6 +8,6 @@ class Komentar extends Model
 {
     //
     protected $fillable = [
-        'korisnik_id', 'picture_id', 'tekst', 'vreme'
+        'user_id', 'picture_id', 'tekst', 'vreme'
     ];
 }

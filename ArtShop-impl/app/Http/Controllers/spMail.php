@@ -13,7 +13,7 @@ class spMail extends Controller
 
     public static function newOffer($slika, $korime){
         $picture = $slika;
-        //$korisnici = $picture->getSveUcesnike();
+        $korisnici = $picture->getSveUcesnike();
         $data = [
             'title' => 'Novosti za sliku: '. $picture->naziv,
             'content' => 'Neko je dao vecu ponudu za ovu sliku.',

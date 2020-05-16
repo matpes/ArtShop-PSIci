@@ -11,23 +11,23 @@ class Korpa extends Model
     protected $primaryKey = 'picture_id';
 
     protected $fillable = [
-        'picture_id', 'korisnik_id'
+        'picture_id', 'user_id'
     ];
 
     public static function pocetna()
     {
-        $kupovina = new Korpa(['picture_id'=>2, 'korisnik_id'=>1]);
+        $kupovina = new Korpa(['picture_id'=>2, 'user_id'=>1]);
         $kupovina->save();
-        $kupovina = new Korpa(['picture_id'=>3, 'korisnik_id'=>1]);
+        $kupovina = new Korpa(['picture_id'=>3, 'user_id'=>1]);
         $kupovina->save();
-        $kupovina = new Korpa(['picture_id'=>4, 'korisnik_id'=>1]);
+        $kupovina = new Korpa(['picture_id'=>4, 'user_id'=>1]);
         $kupovina->save();
     }
 
     public static function dohvatiSlike(&$cena)
     {
         $cena = 0;
-        $korpa = Korpa::all()->where('korisnik_id', 1);
+        $korpa = Korpa::all()->where('user_id', 1);
         //echo $korpa;
 
         $slika =[];
@@ -42,7 +42,7 @@ class Korpa extends Model
 
     public static function dohvatiSlikeUKorpi($id)
     {
-        $korpa = Korpa::all()->where('korisnik_id', $id);
+        $korpa = Korpa::all()->where('user_id', $id);
         $slike=[];
         foreach ($korpa as $item){
             $currSlika = Picture::onlyTrashed()->find($item->picture_id);

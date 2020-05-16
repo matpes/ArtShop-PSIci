@@ -9,7 +9,7 @@ class Podaci extends Model
     //
 
     protected $fillable = [
-        'korisnik_id', 'ime', 'prezime', 'adresa', 'grad', 'brUlice', 'brTelefona', 'ZIPCode', 'metodNaplate'
+        'user_id', 'ime', 'prezime', 'adresa', 'grad', 'brUlice', 'brTelefona', 'ZIPCode', 'metodNaplate'
     ];
 
 
