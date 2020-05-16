@@ -61,13 +61,13 @@ Route::resource('/slika', 'spSlika');
  Route::get('/about', function (){
      return "Hi, this is about";
  });
-
+*/
 
 Route::resource('/zaOcenu', 'spZaOcenu');
 
 Route::resource('picture', 'spPicture');
 
-
+/*
  Route::get('proba', function (){
      dd(ZaOcenu::zaOcenu(1));
  });

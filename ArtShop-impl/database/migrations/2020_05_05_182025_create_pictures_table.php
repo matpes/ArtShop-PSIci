@@ -20,7 +20,7 @@ class CreatePicturesTable extends Migration
             $table->integer('stil_id');
             $table->string('path');
             $table->string('naziv');
-            $table->double('cena');
+            $table->double('cena')->nullable();
             $table->string('opis');
             $table->integer('aukcijaFlag');
             $table->date('danIstekaAukcije')->nullable();
