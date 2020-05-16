@@ -20,7 +20,7 @@ class Slikar extends Model
     }
 
     public function subscribed(){
-        return $this->hasMany('App\Kupac');
+        return $this->belongsToMany('App\Kupac', 'kupac_slikar', 'slikar_id', 'kupac_id');
     }
 
 }

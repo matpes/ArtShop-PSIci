@@ -90,13 +90,13 @@ class UserController extends Controller
         $user = Auth::user();
 //        dd($user);
         $slikar = DB::table('slikars')
-            ->where('korisnik_id', '=', $user->id)
+            ->where('user_id', '=', $user->id)
             ->first();
         $brOcena = 0;
         if(!is_null($slikar)){
             $brOcena = DB::table('pictures')
                 ->join('za_ocenus','za_ocenus.picture_id','=','pictures.id')
-                ->where('pictures.korisnik_id','=', $slikar->korisnik_id)
+                ->where('pictures.user_id','=', $slikar->user_id)
                 ->count();
         }
 //        dd($slikar);
