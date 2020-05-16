@@ -22,7 +22,7 @@ use \App\Http\Controllers\spKupac;
 // MATIJA
 Route::get('/', function () {
     return view('layouts.app');
-});
+})->name('welcome');
 
 Auth::routes();
 
@@ -30,6 +30,7 @@ Route::get('/insertPics', function(){
     Picture::pocetna();
 });
 
+Route::resource('/korpa', 'spKorpa');
 
 Route::get('/forma', 'spKupac@formaZaPodatke');
 
@@ -63,7 +64,7 @@ Route::group(['middleware' => 'GuestMiddleware'], function()
     Route::get('/password/request', 'Auth\ForgotPasswordController@index')->name('password.request');
     Route::post('/password/email', 'Auth\ForgotPasswordController@forgotPassword')->name('password.email');
 
-    Route::resource('/korpa', 'spKorpa');
+
 });
 
 Route::get('/profile/user_info', 'UserController@profileInfo')->name('user_info');

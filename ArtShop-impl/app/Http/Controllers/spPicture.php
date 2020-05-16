@@ -8,6 +8,7 @@ use App\Mail\newOffer;
 use App\Picture;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailer;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Stmt\Foreach_;
 use Symfony\Component\Console\Input\Input;
@@ -89,7 +90,8 @@ class spPicture extends Controller
     public function edit($id)
     {
 
-        $korid = 4;
+        $korid = Auth::id();
+        //dd($korid);
         $picture = Picture::find($id);
         //dd($picture->getUcesnika($korid));
 

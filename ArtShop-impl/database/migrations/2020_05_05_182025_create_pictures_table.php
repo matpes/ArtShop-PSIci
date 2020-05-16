@@ -23,6 +23,7 @@ class CreatePicturesTable extends Migration
             $table->string('opis');
             $table->integer('aukcijaFlag');
             $table->date('danIstekaAukcije');
+            $table->string('smer')->default('vertikalno');
             $table->timestamps();
         });
     }

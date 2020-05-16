@@ -12,7 +12,7 @@ class Picture extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'stil_id', 'naziv', 'ocena', 'opis', 'path', 'aukcijaFlag', 'danIstekaAukcije'
+        'user_id', 'stil_id', 'naziv', 'cena', 'opis', 'path', 'aukcijaFlag', 'danIstekaAukcije', 'smer'
     ];
 
     public static function insertujSlike(){
@@ -44,14 +44,13 @@ class Picture extends Model
 
     public static function pocetna()
     {
-        $picture = new Picture(['user_id'=>'2', 'stil_id'=>1, 'path'=>'/images/Gemma_Gene/Helium%20ballons.png', 'naziv'=>'helium', 'opis'=>'Baloni puni helijuma',
-                'cena'=>1000, 'aukcijaFlag' => false, 'danIstekaAukcije' => '2020-05-10 18:00:00']);
+        $picture = new Picture(['user_id'=>'1', 'stil_id'=>1, 'path'=>'/images/Gemma_Gene/Helium%20ballons.png', 'naziv'=>'helium', 'opis'=>'Baloni puni helijuma', 'aukcijaFlag' => 0, 'cena'=>1000, 'danIstekaAukcije' => '2020-05-10 18:00:00']);
         $picture->save();
-        $picture = new Picture(['user_id'=>'2', 'stil_id'=>1, 'path'=>'/images/Samantha_French/Underwater%20tranquility.png', 'naziv'=>'mirnoca', 'opis'=>'Podzemna mirnoca',
-            'cena'=>11, 'aukcijaFlag' => false, 'danIstekaAukcije' => '2020-05-10 18:00:00']);
+        $picture = new Picture(['user_id'=>'1', 'stil_id'=>1, 'path'=>'/images/Samantha_French/Underwater%20tranquility.png', 'naziv'=>'mirnoca', 'opis'=>'Podzemna mirnoca',
+            'cena'=>11000, 'aukcijaFlag' => 1, 'danIstekaAukcije' => '2020-05-10 18:00:00']);
         $picture->save();
-        $picture = new Picture(['user_id'=>'2', 'stil_id'=>1, 'path'=>'/images/Gerry_Miles/underwater-painting.-gerry-miles.jellyfish.jpg', 'naziv'=>'Logo', 'opis'=>'logo sajta',
-            'cena'=>11, 'aukcijaFlag' => false, 'danIstekaAukcije' => '2020-05-10 18:00:00']);
+        $picture = new Picture(['user_id'=>'1', 'stil_id'=>1, 'path'=>'/images/Gerry_Miles/underwater-painting.-gerry-miles.jellyfish.jpg', 'naziv'=>'Logo', 'opis'=>'logo sajta',
+            'cena'=>11000, 'aukcijaFlag' => 2, 'danIstekaAukcije' => '2020-05-10 18:00:00']);
         $picture->save();
     }
 
@@ -69,7 +68,7 @@ class Picture extends Model
     public static function dohvatiAutoreSlika($slike){
         $authors = [];
         foreach ($slike as $slika){
-            $autor = Korisnik::find($slika->user_id);
+            $autor = User::find($slika->user_id);
 //            echo $autor;
 //            echo "<br>";
             array_push($authors, $autor);
@@ -85,7 +84,7 @@ class Picture extends Model
 
     public static function dohvatiAutora($slika){
 
-        $slikar = Korisnik::find($slika->user_id);
+        $slikar = User::find($slika->user_id);
         return $slikar;
     }
 
@@ -101,7 +100,7 @@ class Picture extends Model
     }
 
     public function getSveUcesnike(){
-        return $this->belongsToMany('App\Korisnik','kupac_picture', 'picture_id', 'user_id')->get();
+        return $this->belongsToMany('App\User','kupac_picture', 'picture_id', 'user_id')->get();
     }
 
 

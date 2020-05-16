@@ -15,9 +15,9 @@ class AddFieldsForUser extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('profilna_slika');
-            $table->integer('brPrijava');
-            $table->integer('brUspesnihPrijava');
+
+            //$table->string('username');
+            //$table->string('mail')->unique();
         });
     }
 
@@ -30,9 +30,8 @@ class AddFieldsForUser extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('profilna_slika');
-            $table->dropColumn('brPrijava');
-            $table->dropColumn('brUspesnihPrijava');
+//            $table->dropColumn('username');
+//            $table->dropColumn('mail')->unique();
         });
     }
 }

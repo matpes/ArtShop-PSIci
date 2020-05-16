@@ -27,7 +27,7 @@
 
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control form_input_text @error('email') is-invalid @enderror"
-                                   name="email" value="{{ old('email') }}" required autocomplete="email"
+                                   name="mail" value="{{ old('mail') }}" required autocomplete="email"
                                    placeholder="unesite e-mail">
 
                             @error('email')

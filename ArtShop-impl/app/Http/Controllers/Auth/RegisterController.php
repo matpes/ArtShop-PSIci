@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Kupac;
 use App\Providers\RouteServiceProvider;
+use App\Slikar;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -81,17 +83,20 @@ class RegisterController extends Controller
         ];
 
         $data = $request->all();
-//        dd($data);
+        //dd($data);
         $validate = Validator::make($data, $rules, $messages);
-
+        $validate->validate();
         if($validate->fails()){
-//            dd("failed");
+            //dd("failed");
             return redirect('register')
-                ->withErrors($validate)
+                ->withErrors($validate->errors())
                 ->withInput();
+        }else{
+            //dd('not failed');
         }
 
         if ($request->password != $request->password_confirm) {
+            //dd('failed_2');
             return redirect('register')
                 ->withErrors(['password_confirm' => $request->password . "Lozinka koju ste uneli se ne poklapa sa potvrdom iste" . $request->password_confirm])
                 ->withInput();
@@ -111,9 +116,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //dd($data);
         $user = new User();
         $user->username = $data['username'];
-        $user->mail = $data['email'];
+        $user->mail = $data['mail'];
         $user->password = Hash::make($data['password']);
         if($data['optradio'] == "slikar")
               $user->isSlikar = true;
@@ -128,5 +134,15 @@ class RegisterController extends Controller
             $user->picture_path = $filename;
         }*/
         $user->save();
+
+        if($data['optradio'] == "slikar") {
+            $slikar = new Slikar;
+            $slikar->user_id = $user->id;
+            $slikar->save();
+        }else {
+            $kupac = new Kupac;
+            $kupac->user_id = $user->id;
+            $kupac->save();
+        }
     }
 }

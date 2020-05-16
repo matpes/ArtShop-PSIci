@@ -44,8 +44,9 @@
                                 <option value="barok">Barok</option>
                             </select>
                             <button type="submit" class="btn-dark gray_button"> Pretraži</button>
-                        </div>
-                    </form>{{--
+
+                    </form>
+                    </div>{{--
                     @if(!is_null($user ?? ''))
                         @if($user ?? '' ?? ''->picture_path!=null)
                             <img style="width:100%" src="{{ asset('images/users/'.$user ?? '' ?? ''->picture_path) }}">

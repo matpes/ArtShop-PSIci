@@ -58,14 +58,14 @@ class ForgotPasswordController extends Controller
      */
     public function forgotPassword(Request $request)
     {
-        $user = DB::table('korisniks')->where('mail', '=',$request->email)->first();
+        $user = DB::table('users')->where('mail', '=',$request->email)->first();
         if (is_null($user)) {
             return redirect('password/request')
                 ->withErrors(['email' => "Korisnik sa unesenom email adresom ne postoji u bazi!"])
                 ->withInput();
         } else {
             $random = Str::random(8);
-            $user = Korisnik::where('username', '=', $user->username)->first();
+            $user = User::where('username', '=', $user->username)->first();
             $user->password = Hash::make($random);
             $user->update();
 
