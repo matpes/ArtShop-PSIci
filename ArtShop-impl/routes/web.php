@@ -51,6 +51,9 @@ Route::resource('/pretraga', 'spPretraga');
 Route::resource('/slika', 'spSlika');
 
 
+Route::resource('/zaOcenu', 'spZaOcenu');
+
+Route::resource('picture', 'spPicture');
 
 
 /*

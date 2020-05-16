@@ -234,7 +234,12 @@
       <workItem from="1589615666445" duration="8726000" />
       <workItem from="1589638604912" duration="392000" />
       <workItem from="1589639010835" duration="4105000" />
+<<<<<<< HEAD
       <workItem from="1589664772686" duration="4120000" />
+=======
+      <workItem from="1589664772686" duration="2487000" />
+      <workItem from="1589667523165" duration="1002000" />
+>>>>>>> 3d3af9010068893eec7da567607bb598975f479a
     </task>
     <servers />
   </component>
@@ -371,12 +376,17 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="526" y="137" width="532" height="454" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1366.728@0.0.1366.728" timestamp="1589485861029" />
+<<<<<<< HEAD
     <state x="383" y="128" width="672" height="600" key="search.everywhere.popup" timestamp="1589667597943">
       <screen x="0" y="0" width="1366" height="728" />
+=======
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1589667551345">
+      <screen x="0" y="0" width="1536" height="824" />
+>>>>>>> 3d3af9010068893eec7da567607bb598975f479a
     </state>
     <state x="383" y="128" width="672" height="600" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1589667597943" />
     <state x="-1381" y="183" width="840" height="856" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1589582509976" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1589565732929" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1589667551345" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
