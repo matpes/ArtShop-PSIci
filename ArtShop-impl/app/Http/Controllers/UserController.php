@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Route;
 
 /** UserController - kontroler za standardne funkcionalnosti koje mogu da koriste svi registrovani korisnici.
  *
@@ -73,7 +74,7 @@ class UserController extends Controller
                 ->limit(5)
                 ->get();
         }
-        return response()->view('profile.user_info', $popular);
+        return response()->view('profile.user', $popular);
     }
 
     /**
@@ -81,12 +82,13 @@ class UserController extends Controller
      * Funkcija koja vodi na formu sa informacijama o korisniku
      *
      * @param
-     * @return View
+     * @return \Illuminate\Http\RedirectResponse
      */
 
     public function profileInfo(){
+//        echo '123';
         $user = Auth::user();
-        dd($user);
+//        dd($user);
         $slikar = DB::table('slikars')
             ->where('korisnik_id', '=', $user->id)
             ->first();
@@ -97,7 +99,11 @@ class UserController extends Controller
                 ->where('pictures.korisnik_id','=', $slikar->korisnik_id)
                 ->count();
         }
-        return view('profile.user_info',['user'=>$user, 'slikar'=>$slikar, 'brOcena'=>$brOcena]);
+//        dd($slikar);
+//        dd($brOcena);
+//        return Route::view('/profile/korisnik_info','profile.user_info',
+//            compact(['user'=>$user, 'slikar'=>$slikar, 'brOcena'=>$brOcena]));
+        return response()->view('profile.user_info',['user'=>$user, 'slikar'=>$slikar, 'brOcena'=>$brOcena]);
     }
 }
 

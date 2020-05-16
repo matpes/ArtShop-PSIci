@@ -78,7 +78,7 @@ class LoginController extends Controller
             $is_admin = $user->isAdmin;
             $is_slikar = $user->isSlikar;
             if (Auth::attempt($credentials)) {
-                return redirect('profile/user_info')
+                return redirect('profileInfo')
                     ->with('success',"Uspešno ste ulogovani!");
             } else{
                 return redirect('login')

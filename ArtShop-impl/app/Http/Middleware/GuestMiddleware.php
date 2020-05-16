@@ -22,7 +22,7 @@ class GuestMiddleware
     {
         if (Auth::check())
         {
-            return redirect('home')._("Ova stranica je dostupna samo gostima, izlogujte se i probajte ponovo!");
+            return redirect('home')->with('status',"Ova stranica je dostupna samo gostima, izlogujte se i probajte ponovo!");
         }
         return $next($request);
     }

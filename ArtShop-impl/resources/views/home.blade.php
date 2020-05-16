@@ -15,6 +15,7 @@
                     @endif
 
                         <form method="POST" action="{{ route('logout') }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             @csrf
                             <button type="submit" class="btn-warning">
                                 {{ __('Izloguj se') }}

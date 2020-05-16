@@ -62,20 +62,20 @@ class RegisterController extends Controller
     {
         $rules = [
             'username' => 'unique:users|max:20',
-            'email' => 'email|unique:users|max:40',
+            'mail' => 'email|unique:users|max:40',
             'password' => 'min:6|alpha_dash',
             'password_confirm' => 'required_with:password|same:password',
         ];
         $messages = [
             'username.required'=> 'Ovo polje je obavezno',
-            'email.required'=>' Ovo polje je obavezno',
+            'mail.required'=>' Ovo polje je obavezno',
             'password.required' => 'Ovo polje je obavezno',
             'password_confirm.required_with' => 'Ovo polje je obavezno',
             'username.unique' => 'Korisničko ime već postoji',
             'username.max' => 'Korisničko ime mora da bude manje od :max karaktera',
-            'email.unique' => 'Već postoji korisnik sa datim e-mailom',
-            'email.max'=>'E-mail ne sme biti duži od :max karaktera',
-            'email.email'=>'E-mail nije pravilne forme',
+            'mail.unique' => 'Već postoji korisnik sa datim e-mailom',
+            'mail.max'=>'E-mail ne sme biti duži od :max karaktera',
+            'mail.email'=>'E-mail nije pravilne forme',
             'password.min' => 'Lozinka ne može biti manja od :min',
             'password.alpha_dash' => 'Lozinka može sadržati samo alpa_dash karaktere',
             'password_confirm.same' => 'Lozinke moraju biti iste',

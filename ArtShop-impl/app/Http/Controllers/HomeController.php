@@ -25,4 +25,16 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+
+    /**
+     * Author: Sanja Samardžija 17/0372
+     * Show the application welcome.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function welcome()
+    {
+        return view('welcome');
+    }
 }
