@@ -5,6 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
                 <form method="POST" action="{{ route('register') }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     @csrf
                     <div class="form-group row">
                         <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Korisničko ime:') }}</label>
