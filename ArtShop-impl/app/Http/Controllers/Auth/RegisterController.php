@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Kupac;
 use App\Providers\RouteServiceProvider;
+<<<<<<< Updated upstream
+=======
+use App\Kupac;
 use App\Slikar;
+>>>>>>> Stashed changes
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -62,20 +65,20 @@ class RegisterController extends Controller
     {
         $rules = [
             'username' => 'unique:users|max:20',
-            'mail' => 'email|unique:users|max:40',
+            'email' => 'email|unique:users|max:40',
             'password' => 'min:6|alpha_dash',
             'password_confirm' => 'required_with:password|same:password',
         ];
         $messages = [
             'username.required'=> 'Ovo polje je obavezno',
-            'mail.required'=>' Ovo polje je obavezno',
+            'email.required'=>' Ovo polje je obavezno',
             'password.required' => 'Ovo polje je obavezno',
             'password_confirm.required_with' => 'Ovo polje je obavezno',
             'username.unique' => 'Korisničko ime već postoji',
             'username.max' => 'Korisničko ime mora da bude manje od :max karaktera',
-            'mail.unique' => 'Već postoji korisnik sa datim e-mailom',
-            'mail.max'=>'E-mail ne sme biti duži od :max karaktera',
-            'mail.email'=>'E-mail nije pravilne forme',
+            'email.unique' => 'Već postoji korisnik sa datim e-mailom',
+            'email.max'=>'E-mail ne sme biti duži od :max karaktera',
+            'email.email'=>'E-mail nije pravilne forme',
             'password.min' => 'Lozinka ne može biti manja od :min',
             'password.alpha_dash' => 'Lozinka može sadržati samo alpa_dash karaktere',
             'password_confirm.same' => 'Lozinke moraju biti iste',
@@ -83,20 +86,18 @@ class RegisterController extends Controller
         ];
 
         $data = $request->all();
-        //dd($data);
+//        dd($data);
         $validate = Validator::make($data, $rules, $messages);
-        $validate->validate();
+
         if($validate->fails()){
-            //dd("failed");
+//            dd("failed");
             return redirect('register')
-                ->withErrors($validate->errors())
+                ->withErrors($validate)
                 ->withInput();
-        }else{
-            //dd('not failed');
         }
 
+//        dd('created');
         if ($request->password != $request->password_confirm) {
-            //dd('failed_2');
             return redirect('register')
                 ->withErrors(['password_confirm' => $request->password . "Lozinka koju ste uneli se ne poklapa sa potvrdom iste" . $request->password_confirm])
                 ->withInput();
@@ -116,15 +117,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //dd($data);
         $user = new User();
         $user->username = $data['username'];
-        $user->mail = $data['mail'];
+<<<<<<< Updated upstream
+        $user->mail = $data['email'];
+=======
+        $user->email = $data['email'];
+>>>>>>> Stashed changes
         $user->password = Hash::make($data['password']);
-        if($data['optradio'] == "slikar")
-              $user->isSlikar = true;
-        else
+        if($data['optradio'] == "slikar") {
+            $user->isSlikar = true;
+            $user->save();
+            $slikar = new Slikar(['user_id'=>$user->id, 'sumaOcena'=>0, 'brOcenjenihSlika'=>0]);
+            $slikar->save();
+        }
+        else{
             $user->isSlikar = false;
+            $user->save();
+//            dd($kupac->user_id);
+            $kupac = new Kupac();
+            $kupac->user_id = $user->id;
+            $kupac->save();
+        }
         /*
         $file = $data['picture'];
         if ($data->hasFile('picture')) {
@@ -133,16 +147,9 @@ class RegisterController extends Controller
             $file = $file->storeAs('img\users', $filename);
             $user->picture_path = $filename;
         }*/
+<<<<<<< Updated upstream
         $user->save();
-
-        if($data['optradio'] == "slikar") {
-            $slikar = new Slikar;
-            $slikar->user_id = $user->id;
-            $slikar->save();
-        }else {
-            $kupac = new Kupac;
-            $kupac->user_id = $user->id;
-            $kupac->save();
-        }
+=======
+>>>>>>> Stashed changes
     }
 }

@@ -30,7 +30,7 @@
     <execution />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="D:/ETF/PSI/Projekat/PSI_Projekat" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="PhpDebugGeneral" break_at_first_line="true" listening_started="true" />
   <component name="PhpServers">
@@ -158,7 +158,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+<<<<<<< Updated upstream
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Middleware" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/database/migrations" />
+>>>>>>> Stashed changes
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -166,7 +170,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -174,17 +178,14 @@
       <recent name="E:\wamp64\www\Implementacija\ArtShop-PSIci\ArtShop-impl\app\Http\Controllers" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\ArtShop-impl\database\migrations" />
-      <recent name="C:\xampp\htdocs\ArtShop-impl\resources\views\profile" />
       <recent name="C:\xampp\htdocs\project\app\Http\Middleware" />
       <recent name="C:\xampp\htdocs\project\resources\views\profile" />
       <recent name="C:\xampp\htdocs\project\app\Http\Controllers" />
+      <recent name="C:\xampp\htdocs\project\app" />
+      <recent name="C:\xampp\htdocs\project" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.2014_10_12_000000_create_users_table.php">
-    <configuration name="2014_10_12_000000_create_users_table.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/ArtShop-impl/database/migrations/2014_10_12_000000_create_users_table.php" useBuiltInWebServerPort="true">
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="PHPUnit.phpunit.xml">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <CommandLine>
         <PhpTestInterpreterSettings>
@@ -198,13 +199,11 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JavaScript Debug.2014_10_12_000000_create_users_table.php" />
       <item itemvalue="PHP Script.RegisterController.php" />
       <item itemvalue="PHPUnit.phpunit.xml" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.2014_10_12_000000_create_users_table.php" />
         <item itemvalue="PHP Script.RegisterController.php" />
       </list>
     </recent_temporary>
@@ -230,13 +229,13 @@
       <workItem from="1589565675970" duration="551000" />
       <workItem from="1589580517883" duration="3493000" />
       <workItem from="1589615222623" duration="170000" />
-      <workItem from="1589634459384" duration="15213000" />
+<<<<<<< Updated upstream
+=======
       <workItem from="1589615666445" duration="8726000" />
       <workItem from="1589638604912" duration="392000" />
-      <workItem from="1589639010835" duration="4105000" />
-      <workItem from="1589664772686" duration="4120000" />
-      <workItem from="1589664772686" duration="2487000" />
-      <workItem from="1589667523165" duration="1002000" />
+      <workItem from="1589639010835" duration="15938000" />
+      <workItem from="1589667618289" duration="676000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
@@ -255,11 +254,6 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <ignored-roots>
-      <path value="$PROJECT_DIR$/.." />
-    </ignored-roots>
-  </component>
   <component name="WindowStateProjectService">
     <state x="263" y="19" key="#CLI_Interpreters" timestamp="1589451670154">
       <screen x="0" y="0" width="1366" height="728" />
@@ -277,10 +271,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="623" y="156" key="#Web_Browsers/0.0.1366.728@0.0.1366.728" timestamp="1589445085664" />
-    <state x="274" y="22" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589640207601">
+    <state x="274" y="22" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589451744406">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="274" y="22" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1589640207601" />
+    <state x="274" y="22" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1589451744406" />
     <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589482960849">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -289,26 +283,31 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="367" y="0" width="645" height="728" key="#phpunit.xml/0.0.1366.728@0.0.1366.728" timestamp="1589405853163" />
-    <state x="463" y="106" key="FileChooserDialogImpl" timestamp="1589615763759">
+    <state x="463" y="106" key="FileChooserDialogImpl" timestamp="1589451659264">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="106" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1589615763759" />
+<<<<<<< Updated upstream
+    <state x="463" y="106" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1589451659264" />
     <state width="1323" height="223" key="GridCell.Tab.0.bottom" timestamp="1589451631775">
+=======
+    <state x="463" y="106" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1589615763759" />
+    <state width="905" height="179" key="GridCell.Tab.0.bottom" timestamp="1589656730639">
+>>>>>>> Stashed changes
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1589451631775" />
-    <state width="1323" height="223" key="GridCell.Tab.0.center" timestamp="1589451631774">
+    <state width="905" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1589656730639" />
+    <state width="905" height="179" key="GridCell.Tab.0.center" timestamp="1589656730639">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1589451631774" />
-    <state width="1323" height="223" key="GridCell.Tab.0.left" timestamp="1589451631774">
+    <state width="905" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1589656730639" />
+    <state width="905" height="179" key="GridCell.Tab.0.left" timestamp="1589656730638">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1589451631774" />
-    <state width="1323" height="223" key="GridCell.Tab.0.right" timestamp="1589451631775">
+    <state width="905" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1589656730638" />
+    <state width="905" height="179" key="GridCell.Tab.0.right" timestamp="1589656730639">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1589451631775" />
+    <state width="905" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1589656730639" />
     <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1589451631776">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -353,52 +352,44 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="466" y="205" key="PhpMappingAdvancedResolveDialog/0.0.1366.728@0.0.1366.728" timestamp="1589445755878" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1589615831815">
+    <state x="184" y="9" key="SettingsEditor" timestamp="1589451671122">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1589615831815" />
-    <state x="573" y="251" width="316" height="244" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1589641020729">
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1589451671122" />
+    <state x="573" y="251" width="316" height="244" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1589486118713">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="573" y="251" width="316" height="244" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1366.728@0.0.1366.728" timestamp="1589641020729" />
+    <state x="573" y="251" width="316" height="244" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1366.728@0.0.1366.728" timestamp="1589486118713" />
     <state x="263" y="19" key="com.intellij.database.dbimport.ImportDialog" timestamp="1589486087875">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="263" y="19" key="com.intellij.database.dbimport.ImportDialog/0.0.1366.728@0.0.1366.728" timestamp="1589486087875" />
-    <state x="479" y="184" width="408" height="355" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1589461175700">
+    <state x="479" y="184" width="408" height="351" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1589656667692">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="479" y="184" width="408" height="355" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.1366.728@0.0.1366.728" timestamp="1589461175700" />
+    <state x="479" y="184" width="408" height="351" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.1366.728@0.0.1366.728" timestamp="1589656667692" />
     <state x="526" y="137" width="532" height="454" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1589485861029">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="526" y="137" width="532" height="454" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1366.728@0.0.1366.728" timestamp="1589485861029" />
-    <state x="383" y="128" width="672" height="600" key="search.everywhere.popup" timestamp="1589667597943">
-      <screen x="0" y="0" width="1366" height="728" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1589667551345">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="-1381" y="183" width="840" height="856" key="search.everywhere.popup" timestamp="1589582509976">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="383" y="128" width="672" height="600" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1589667597943" />
     <state x="-1381" y="183" width="840" height="856" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1589582509976" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1589667551345" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1589565732929" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php</url>
-          <line>86</line>
+          <line>88</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/auth/register.blade.php</url>
-          <line>66</line>
+          <line>65</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php</url>
-          <line>2</line>
-          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

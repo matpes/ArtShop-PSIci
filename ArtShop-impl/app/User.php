@@ -13,7 +13,7 @@ class User extends Authenticatable
     //
     use Notifiable;
     protected $fillable = [
-        'username', 'password', 'mail', 'profilna_slika', 'brPrijava', 'brUspesnihPrijava'
+        'username', 'password', 'email', 'profilna_slika', 'brPrijava', 'brUspesnihPrijava'
     ];
     /**
     /*  Author: Sanja Samardžija 17/0372
@@ -29,12 +29,12 @@ class User extends Authenticatable
 
     public static function pocetna(){
 
-        $kupac = new User(['username'=>'kupac', 'password'=>'123', 'mail'=>'a@a.com', 'profilna_slika'=>'/images/tamara.jpg',
+        $kupac = new User(['username'=>'kupac', 'password'=>'123', 'email'=>'a@a.com', 'profilna_slika'=>'/images/tamara.jpg',
             'brPrijava' => 0, 'brUspesnihPrijava' => 0
         ]);
         $kupac->save();
 
-        $slikar = new User(['username'=>'slikar', 'password'=>'1234', 'mail'=>'b@a.com', 'profilna_slika'=>'/images/drazend.jpg',
+        $slikar = new User(['username'=>'slikar', 'password'=>'1234', 'email'=>'b@a.com', 'profilna_slika'=>'/images/drazend.jpg',
             'brPrijava' => 0, 'brUspesnihPrijava' => 0
         ]);
         $slikar->save();
