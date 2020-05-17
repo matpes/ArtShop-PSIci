@@ -19,4 +19,8 @@ class Slikar extends Model
         $kupac->save();
     }
 
+    public function subscribed(){
+        return $this->belongsToMany('App\Kupac', 'kupac_slikar', 'slikar_id', 'kupac_id');
+    }
+
 }

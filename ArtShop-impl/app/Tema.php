@@ -10,4 +10,8 @@ class Tema extends Model
     protected $fillable=[
         'id', 'tema'
     ];
+
+    public function pictures(){
+        return $this->belongsToMany('App\Picture');
+    }
 }
