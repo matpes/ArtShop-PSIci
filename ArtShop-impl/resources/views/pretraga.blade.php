@@ -15,12 +15,12 @@
                     @if($flag == 0)
                         @if($pos == 2 && count($pictures) > $key + 1 && $pictures[$key + 1]->smer == 'horizontalno')
                             <div class="col-md-6 col-sm-12 pretraga">
-                                <img src="{{$pictures[$key + 1]->path}}">
+                                <a href="/picture/{{$pictures[$key + 1]->user_id}}"><img src="{{$pictures[$key + 1]->path}}"></a>
                             </div>
                             @php($flag = 1)
                         @endif
                         <div class="col-md-3 col-sm-6 pretraga">
-                            <img src="{{$picture->path}}">
+                            <a href="/picture/{{$picture->user_id}}"><img src="{{$picture->path}}"></a>
                         </div>
                     @else
                         @php($flag = 0)
@@ -31,12 +31,12 @@
                     @if($flag == 0)
                         @if($pos == 3 && count($pictures) > $key + 1 && $pictures[$key + 1]->smer == 'vertikalno')
                             <div class="col-md-3 col-sm-6 pretraga">
-                                <img src="{{$pictures[$key + 1]->path}}">
+                                <a href="/picture/{{$pictures[$key + 1]->user_id}}"><img src="{{$pictures[$key + 1]->path}}"></a>
                             </div>
                             @php($flag = 1)
                         @endif
                         <div class="col-md-6 col-sm-12 pretraga">
-                            <img src="{{$picture->path}}">
+                            <a href="/picture/{{$picture->user_id}}"><img src="{{$picture->path}}"></a>
                         </div>
                     @else
                         @php($flag = 0)

@@ -154,6 +154,7 @@ class spSlika extends Controller
                 $tema = Tema::where('tema', $naziv)->get()[0];
                 $picture->temas()->attach($tema->id);
             }
+            return redirect('/picture/'.$picture->user_id);
         }
     }
 

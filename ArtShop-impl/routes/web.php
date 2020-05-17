@@ -4,8 +4,6 @@
 use App\ZaOcenu;
 use Illuminate\Support\Facades\Route;
 use App\Picture;
-use App\Tema;
-use App\Stil;
 use \App\Http\Controllers\spKupac;
 /*
 |--------------------------------------------------------------------------
@@ -21,18 +19,16 @@ use \App\Http\Controllers\spKupac;
  /*  !!!!!!!!!!SVAKO U SVOJOJ SEKCIJI NEKA PISE DA SE NE POGUBIMO!!!!!          */
 /*******************************************************************************/
 
-/******************************** MATIJA ****************************************/
+// MATIJA
 Route::get('/', function () {
     return view('layouts.app');
-})->name('welcome');
+});
 
 Auth::routes();
 
 Route::get('/insertPics', function(){
     Picture::pocetna();
 });
-
-Route::resource('/korpa', 'spKorpa');
 
 
 Route::get('/forma', 'spKupac@formaZaPodatke');
@@ -44,69 +40,42 @@ Route::get('/insertIntoTable', 'spKupac@pocetnaBaza');
 Route::resource('/kupac_forma', 'spKupac');
 
 
-
-Route::resource('/pretraga', 'spPretraga');
-
-
-Route::resource('/slika', 'spSlika');
-
-
-Route::resource('/zaOcenu', 'spZaOcenu');
-
-Route::resource('picture', 'spPicture');
-
-
-/*
- Route::get('/contact', function (){
-     return "Hi I am contact";
- });
-
- Route::get('/about', function (){
-     return "Hi, this is about";
- });
-
-
 Route::resource('/zaOcenu', 'spZaOcenu');
 
 Route::resource('picture', 'spPicture');
 
 
  Route::get('proba', function (){
+
+
      dd(ZaOcenu::zaOcenu(1));
  });
-/********************************** END MATIJA ********************************/
+//  END MATIJA
 
-/***************************** SANJA ***************************/
-Route::get('/home','HomeController@index')->name('home');
+//SANJA
 
-Route::get('/wellcome','HomeController@welcome')->name('welcome');
-
-/*GuestMiddleware group*/
 Route::group(['middleware' => 'GuestMiddleware'], function()
 {
-    //SANJA
+    Route::get('/welcome', 'HomeController@welcome')->name('welcome');
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/register', 'Auth\RegisterController@index')->name('register');
     Route::get('/login', 'Auth\LoginController@index')->name('login');
     Route::post('post-login', 'Auth\LoginController@login')->name('postLogin');
     Route::post('post-register', 'Auth\RegisterController@register')->name('postRegister');
     Route::get('/password/request', 'Auth\ForgotPasswordController@index')->name('password.request');
     Route::post('/password/email', 'Auth\ForgotPasswordController@forgotPassword')->name('password.email');
-    //END SANJA
 
+    //MATIJA
+    Route::resource('/korpa', 'spKorpa');
+    //END MATIJA
 });
 
+Route::get('/profileInfo', 'UserController@profileInfo')->name('user_info');
 
-Route::get('/profileInfo', ['uses' => 'UserController@profileInfo',
-    'as' => '/profileInfo', 'middleware', ['UserMiddleware']])->name('profileInfo');
-
-/*UserMiddleware group*/
 Route::group(['middleware' => 'UserMiddleware'], function()
 {
-    //SANJA
-//    Route::get('/profile/korisnik_info', 'UserController@profileInfo')->name('profile.user_info');
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
     Route::post('/password/reset', 'Auth\ResetPasswordController@resetPassword')->name('postPassword.reset');
     Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-    //END SANJA
 });
-/************************ END SANJA ************************/
+//END SANJA

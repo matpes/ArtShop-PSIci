@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: May 16, 2020 at 05:15 PM
+-- Generation Time: May 16, 2020 at 10:41 PM
 -- Server version: 8.0.18
--- PHP Version: 7.3.12
+-- PHP Version: 7.4.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `kupacs` (
 --
 
 INSERT INTO `kupacs` (`user_id`, `created_at`, `updated_at`) VALUES
-(2, '2020-05-16 15:12:06', '2020-05-16 15:12:06');
+(2, '2020-05-16 20:35:52', '2020-05-16 20:35:52');
 
 -- --------------------------------------------------------
 
@@ -168,32 +168,32 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(77, '2014_10_12_000000_create_users_table', 1),
-(78, '2014_10_12_100000_create_password_resets_table', 1),
-(79, '2019_08_19_000000_create_failed_jobs_table', 1),
-(80, '2020_05_05_182025_create_pictures_table', 1),
-(81, '2020_05_05_205747_create_admins_table', 1),
-(82, '2020_05_05_205805_create_slikars_table', 1),
-(83, '2020_05_05_205817_create_kupacs_table', 1),
-(84, '2020_05_05_210748_create_komentars_table', 1),
-(85, '2020_05_05_211028_create_podacis_table', 1),
-(86, '2020_05_05_211229_create_kupacs_pictures_table', 1),
-(87, '2020_05_05_211310_create_za_ocenus_table', 1),
-(88, '2020_05_05_211324_create_korpas_table', 1),
-(89, '2020_05_05_211337_create_temas_table', 1),
-(90, '2020_05_05_211350_create_stils_table', 1),
-(91, '2020_05_05_211429_create_pictures_temas_table', 1),
-(92, '2020_05_05_211756_create_kupacs_slikars_table', 1),
-(93, '2020_05_05_211812_create_komentars_korisniks_table', 1),
-(94, '2020_05_10_132603_add_deleted_at_column_to_pictures_tables', 1),
-(95, '2020_05_15_224746_add_fields_for_user', 1);
+(20, '2014_10_12_000000_create_users_table', 1),
+(21, '2014_10_12_100000_create_password_resets_table', 1),
+(22, '2019_08_19_000000_create_failed_jobs_table', 1),
+(23, '2020_05_05_182025_create_pictures_table', 1),
+(24, '2020_05_05_205747_create_admins_table', 1),
+(25, '2020_05_05_205805_create_slikars_table', 1),
+(26, '2020_05_05_205817_create_kupacs_table', 1),
+(27, '2020_05_05_210748_create_komentars_table', 1),
+(28, '2020_05_05_211028_create_podacis_table', 1),
+(29, '2020_05_05_211229_create_kupacs_pictures_table', 1),
+(30, '2020_05_05_211310_create_za_ocenus_table', 1),
+(31, '2020_05_05_211324_create_korpas_table', 1),
+(32, '2020_05_05_211337_create_temas_table', 1),
+(33, '2020_05_05_211350_create_stils_table', 1),
+(34, '2020_05_05_211429_create_pictures_temas_table', 1),
+(35, '2020_05_05_211756_create_kupacs_slikars_table', 1),
+(36, '2020_05_05_211812_create_komentars_korisniks_table', 1),
+(37, '2020_05_10_132603_add_deleted_at_column_to_pictures_tables', 1),
+(38, '2020_05_15_224746_add_fields_for_user', 1);
 
 -- --------------------------------------------------------
 
@@ -219,13 +219,14 @@ DROP TABLE IF EXISTS `pictures`;
 CREATE TABLE IF NOT EXISTS `pictures` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
+  `autor` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `stil_id` int(11) NOT NULL,
   `path` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `naziv` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cena` double NOT NULL,
+  `cena` double DEFAULT NULL,
   `opis` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `aukcijaFlag` int(11) NOT NULL,
-  `danIstekaAukcije` date NOT NULL,
+  `danIstekaAukcije` date DEFAULT NULL,
   `smer` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'vertikalno',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -237,10 +238,10 @@ CREATE TABLE IF NOT EXISTS `pictures` (
 -- Dumping data for table `pictures`
 --
 
-INSERT INTO `pictures` (`id`, `user_id`, `stil_id`, `path`, `naziv`, `cena`, `opis`, `aukcijaFlag`, `danIstekaAukcije`, `smer`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, '/images/Gemma_Gene/Helium%20ballons.png', 'helium', 1000, 'Baloni puni helijuma', 0, '2020-05-10', 'vertikalno', '2020-05-16 15:11:07', '2020-05-16 15:11:07', NULL),
-(2, 1, 1, '/images/Samantha_French/Underwater%20tranquility.png', 'mirnoca', 11000, 'Podzemna mirnoca', 1, '2020-05-10', 'vertikalno', '2020-05-16 15:11:07', '2020-05-16 15:11:07', NULL),
-(3, 1, 1, '/images/Gerry_Miles/underwater-painting.-gerry-miles.jellyfish.jpg', 'Logo', 11000, 'logo sajta', 2, '2020-05-10', 'vertikalno', '2020-05-16 15:11:07', '2020-05-16 15:11:07', NULL);
+INSERT INTO `pictures` (`id`, `user_id`, `autor`, `stil_id`, `path`, `naziv`, `cena`, `opis`, `aukcijaFlag`, `danIstekaAukcije`, `smer`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 'John Constable', 2, '\\images\\John_Constable\\Salisbury Cathedral from the Meadows.jpg', 'Salisbury Cathedral from the Meadows', 12000, 'Ovde je neko umro cetvrti put.', 0, NULL, 'horizontalno', '2020-05-16 20:38:57', '2020-05-16 20:38:57', NULL),
+(2, 1, 'Caspar David Friedrich', 2, '\\images\\Caspar_David_Friedrich\\falaise-romanticism.jpg', 'Kreda litica na rugenu', NULL, 'Ovde je neka priroda cini mi se.', 2, '2020-05-20', 'vertikalno', '2020-05-16 20:40:25', '2020-05-16 20:40:25', NULL),
+(3, 1, 'Caspar David Friedrich', 2, '\\images\\Caspar_David_Friedrich\\Two_Men_Contemplating_the_Moon_-_Caspar_David_Friedrich.jpg', 'Two Men Contemplating the Moon', 15000, 'Ovde su neke dve cike.', 1, '2020-05-20', 'horizontalno', '2020-05-16 20:41:17', '2020-05-16 20:41:17', NULL);
 
 -- --------------------------------------------------------
 
@@ -256,7 +257,20 @@ CREATE TABLE IF NOT EXISTS `picture_tema` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `picture_tema`
+--
+
+INSERT INTO `picture_tema` (`id`, `picture_id`, `tema_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, NULL, NULL),
+(2, 1, 2, NULL, NULL),
+(3, 2, 3, NULL, NULL),
+(4, 2, 4, NULL, NULL),
+(5, 2, 1, NULL, NULL),
+(6, 3, 5, NULL, NULL),
+(7, 3, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -301,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `slikars` (
 --
 
 INSERT INTO `slikars` (`user_id`, `sumaOcena`, `brOcenjenihSlika`, `created_at`, `updated_at`) VALUES
-(1, 0, 0, '2020-05-16 15:11:49', '2020-05-16 15:11:49');
+(1, 0, 0, '2020-05-16 20:34:20', '2020-05-16 20:34:20');
 
 -- --------------------------------------------------------
 
@@ -317,14 +331,15 @@ CREATE TABLE IF NOT EXISTS `stils` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `stils_naziv_unique` (`naziv`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `stils`
 --
 
 INSERT INTO `stils` (`id`, `naziv`, `created_at`, `updated_at`) VALUES
-(1, 'baron', '2020-05-16 17:13:09', '2020-05-16 17:13:09');
+(1, 'klasicizam', NULL, NULL),
+(2, 'romantizam', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -340,7 +355,18 @@ CREATE TABLE IF NOT EXISTS `temas` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `temas_tema_unique` (`tema`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `temas`
+--
+
+INSERT INTO `temas` (`id`, `tema`, `created_at`, `updated_at`) VALUES
+(1, 'priroda', '2020-05-16 20:38:57', '2020-05-16 20:38:57'),
+(2, 'duga', '2020-05-16 20:38:57', '2020-05-16 20:38:57'),
+(3, 'more', '2020-05-16 20:40:25', '2020-05-16 20:40:25'),
+(4, 'litica', '2020-05-16 20:40:25', '2020-05-16 20:40:25'),
+(5, 'mesec', '2020-05-16 20:41:17', '2020-05-16 20:41:17');
 
 -- --------------------------------------------------------
 
@@ -373,8 +399,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `mail`, `email_verified_at`, `password`, `profilna_slika`, `brPrijava`, `brUspesnihPrijava`, `isSlikar`, `isAdmin`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'tasha', 'tasha@gmail.com', NULL, '$2y$10$cBaPM4b2zcB/PWo6AvC.tetIMmGyrMFgRFpOKPc43xZh9SSl5.kqS', NULL, 0, 0, 1, 0, NULL, '2020-05-16 15:11:49', '2020-05-16 15:11:49'),
-(2, 'matpes', 'pesicmatija@gmail.com', NULL, '$2y$10$ZdY0mBzu2KOrJFbJ1kskOuUrlKQ.kh7Ks8ExmFgSUufawUnQWFDtW', NULL, 0, 0, 0, 0, NULL, '2020-05-16 15:12:06', '2020-05-16 15:12:06');
+(1, 'tasha', 'tasha@gmail.com', NULL, '$2y$10$19wemgF4yfIec.mdXTNW3uj/q88.npd1pGTv9Ngo24Gze.K4Om49i', NULL, 0, 0, 1, 0, NULL, '2020-05-16 20:34:20', '2020-05-16 20:34:20'),
+(2, 'matpes', 'pavicevicvladana@gmail.com', NULL, '$2y$10$VMyy2qDs.EveD3CCStpLl.b6JcDXKvHnny0DAxQbIKHb81idxaXcm', NULL, 0, 0, 0, 0, NULL, '2020-05-16 20:35:52', '2020-05-16 20:35:52');
 
 -- --------------------------------------------------------
 
