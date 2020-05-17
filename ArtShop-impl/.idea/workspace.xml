@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8661094c-c4ed-474b-9cf3-598524cde0ea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="8661094c-c4ed-474b-9cf3-598524cde0ea" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -200,9 +198,9 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="JavaScript Debug.2014_10_12_000000_create_users_table.php" />
       <item itemvalue="PHP Script.RegisterController.php" />
       <item itemvalue="PHPUnit.phpunit.xml" />
-      <item itemvalue="JavaScript Debug.2014_10_12_000000_create_users_table.php" />
     </list>
     <recent_temporary>
       <list>
@@ -236,6 +234,7 @@
       <workItem from="1589615666445" duration="8726000" />
       <workItem from="1589638604912" duration="392000" />
       <workItem from="1589639010835" duration="4105000" />
+      <workItem from="1589669372684" duration="620000" />
     </task>
     <servers />
   </component>
