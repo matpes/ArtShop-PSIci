@@ -24,8 +24,6 @@ class CreateUsersTable extends Migration
             $table->integer('brPrijava')->default(0);
             $table->boolean('isAdmin')->default(false);
             $table->integer('brUspesnihPrijava')->default(0);
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
             $table->rememberToken();
             $table->timestamps();
         });

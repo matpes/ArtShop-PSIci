@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-<<<<<<< Updated upstream
-=======
 use App\Kupac;
 use App\Slikar;
->>>>>>> Stashed changes
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -119,11 +116,7 @@ class RegisterController extends Controller
     {
         $user = new User();
         $user->username = $data['username'];
-<<<<<<< Updated upstream
-        $user->mail = $data['email'];
-=======
         $user->email = $data['email'];
->>>>>>> Stashed changes
         $user->password = Hash::make($data['password']);
         if($data['optradio'] == "slikar") {
             $user->isSlikar = true;
@@ -147,9 +140,5 @@ class RegisterController extends Controller
             $file = $file->storeAs('img\users', $filename);
             $user->picture_path = $filename;
         }*/
-<<<<<<< Updated upstream
-        $user->save();
-=======
->>>>>>> Stashed changes
     }
 }

@@ -56,6 +56,8 @@ Route::resource('picture', 'spPicture');
 
 Route::group(['middleware' => 'GuestMiddleware'], function()
 {
+    Route::get('/welcome', 'HomeController@welcome')->name('welcome');
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/register', 'Auth\RegisterController@index')->name('register');
     Route::get('/login', 'Auth\LoginController@index')->name('login');
     Route::post('post-login', 'Auth\LoginController@login')->name('postLogin');
@@ -63,16 +65,12 @@ Route::group(['middleware' => 'GuestMiddleware'], function()
     Route::get('/password/request', 'Auth\ForgotPasswordController@index')->name('password.request');
     Route::post('/password/email', 'Auth\ForgotPasswordController@forgotPassword')->name('password.email');
 
-<<<<<<< Updated upstream
-    Route::resource('/korpa', 'spKorpa');
-=======
     //MATIJA
     Route::resource('/korpa', 'spKorpa');
     //END MATIJA
->>>>>>> Stashed changes
 });
 
-Route::get('/profile/user_info', 'UserController@profileInfo')->name('user_info');
+Route::get('/profileInfo', 'UserController@profileInfo')->name('user_info');
 
 Route::group(['middleware' => 'UserMiddleware'], function()
 {
