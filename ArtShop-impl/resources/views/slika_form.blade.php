@@ -12,12 +12,14 @@
 
 
                     <div class="col-sm-5 col-xs-12 padding_form_picture">
-                        <img src="@if(isset($picture->path)){{$picture->path}} @endif" id="uploaded_image" width="100%">
+                        <img src="@if(isset($picture->path)){{$picture->path}} @else {{'\images\design\images-empty.png'}} @endif" id="uploaded_image" width="100%">
                         <div class="bottom">
-                            <input id="path" type="text" name="path" class="form-control form_input_text" style="width: 100%" value="@if(isset($picture->path)){{$picture->path}} @endif"/>
+                            <label for="path" class="load_file">
+                                Ucitaj sliku
+                            </label>
+                            @php($user = \App\User::find(Auth::id()))
+                            <input id="path" type="file" name="path" class="form-control form_input_text" style="width: 100%" value="@if(isset($picture->path)){{$picture->path}} @endif" oninput="document.getElementById('uploaded_image').setAttribute('src','\\images\\{{$user->username}}' + value.substr(value.lastIndexOf('\\')))"/>
                             <small>@if(isset($error['path'])){{$error['path']}} @endif</small>
-                            <button type="button" class="load_file" onclick="document.getElementById('uploaded_image').setAttribute('src', document.getElementById('path').value);">Ucitaj sliku</button>
-
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-7 paddingTopAndBot text-center">

@@ -11,17 +11,16 @@ class NewPicture extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $username, $id;
+    public $data;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($username, $id)
+    public function __construct($data)
     {
-        $this->username = $username;
-        $this->id = $id;
+        $this->data = $data;
     }
 
     /**
