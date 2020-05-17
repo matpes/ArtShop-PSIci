@@ -63,7 +63,13 @@ Route::group(['middleware' => 'GuestMiddleware'], function()
     Route::get('/password/request', 'Auth\ForgotPasswordController@index')->name('password.request');
     Route::post('/password/email', 'Auth\ForgotPasswordController@forgotPassword')->name('password.email');
 
+<<<<<<< Updated upstream
     Route::resource('/korpa', 'spKorpa');
+=======
+    //MATIJA
+    Route::resource('/korpa', 'spKorpa');
+    //END MATIJA
+>>>>>>> Stashed changes
 });
 
 Route::get('/profile/user_info', 'UserController@profileInfo')->name('user_info');

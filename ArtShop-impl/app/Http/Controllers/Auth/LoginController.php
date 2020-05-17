@@ -75,8 +75,6 @@ class LoginController extends Controller
             return redirect('login')
                 ->with('success',"Ne postoji korisnik sa unetim korisničkim imenom!");
         } else {
-            $is_admin = $user->isAdmin;
-            $is_slikar = $user->isSlikar;
             if (Auth::attempt($credentials)) {
                 return redirect('user_info')
                     ->with('success',"Uspešno ste ulogovani!");

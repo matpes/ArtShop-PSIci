@@ -26,7 +26,7 @@
 <body class="body">
     <div class="row">
         <div class="col-md-12 float-md-right">
-            <img   class = "img-fluid img-rounded"  alt="profilna_slika" style="width:100%"
+            <img   class = "img-fluid img-rounded offset-md-10"  alt="profilna_slika" style=""  width="75px" height="75px"
                    src=<?php if(is_null($user->picture_path)){ echo'images/avatar.png';}
                    else {$path = 'images/users/'.$user->picture_path; echo $path; } ?>>
         </div>
@@ -35,39 +35,41 @@
     <div class="container-fluid spaceFromHeader">
         <div class="row justify-content-center">
             {{-- 1. kolona--}}
-            <div class="col-md-4 mb-0">
+            <div class="col-md-6 mb-0">
                 {{--     profilna     --}}
-                <label for="profilna" class="col-md-4 col-form-label text-md-right">
+                <label for="profilna" class="col-md-3 col-form-label text-md-right">
                     {{ __('Profilna slika: ') }}</label>
-                <div class="col-md-8 offset-md-4">
-                    <img id='profilna' class = "img-fluid" src= $path style="width:100%" alt="profilna_slika">
+                <div class="col-md-8 offset-md-3 align-text-top">
+                    <img id='profilna' class = "img-fluid " style="" width="80px" height="80px" alt="profilna_slika"
+                         src= <?php if(is_null($user->picture_path)){ echo'images/avatar.png';}
+                         else {$path = 'images/users/'.$user->picture_path; echo $path; } ?>>
                 </div>
                 <br>
                 {{--     email     --}}
-                <div class="col-md-4 text-md-right">E-mail: </div>
-                <div class="col-md-8 offset-md-4">{{__($user->email)}}</div>
+                <div class="col-md-3 text-md-right">E-mail: </div>
+                <div class="col-md-8 offset-md-3">{{__($user->email)}}</div>
                 <br>
                 {{--     username     --}}
-                <div class="col-md-4 text-md-right">Korisničko ime: </div>
-                <div class="col-md-8 offset-md-4">{{__($user->username)}}</div>
+                <div class="col-md-3 text-md-right">Korisničko ime: </div>
+                <div class="col-md-8 offset-md-3">{{__($user->username)}}</div>
                 <br>
                 {{--     password     --}}
-                <div class="col-md-4 text-md-right">Lozinka: </div>
-                <div class="col-md-8 offset-md-4">
+                <div class="col-md-3 text-md-right">Lozinka: </div>
+                <div class="col-md-8 offset-md-3">
                     <button type="submit" class="btn btn-warning">
                         {{ __('Promeni lozinku') }}
                     </button>
                 </div>
                 <br>
                 {{--     tip naloga     --}}
-                <div class="col-md-4 text-md-right">Tip naloga: </div>
+                <div class="col-md-3 text-md-right">Tip naloga: </div>
                     @if(Auth::check())
                         @if($user->isSlikar)
-                        <div class="col-md-8 offset-md-4">slikar </div>
+                        <div class="col-md-8 offset-md-3">slikar </div>
                             <br>
                             {{--     prosečna ocena     --}}
-                            <div class="col-md-4 text-md-right">Prosečna ocena: </div>
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-3 text-md-right">Prosečna ocena: </div>
+                            <div class="col-md-8 offset-md-3">
                                 <?php if(is_null($slikar)){
                                         $ocena = "Nemate još nijednu ocenu/sliku";
                                     } else{
@@ -77,28 +79,28 @@
                             </div>
                             <br>
                             {{--     broj ocena     --}}
-                            <div class="col-md-4 text-md-right">Broj ocena: </div>
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-3 text-md-right">Broj ocena: </div>
+                            <div class="col-md-8 offset-md-3">
                                 <?php echo $brOcena; ?>
                             </div>
                         @elseif($user->isAdmin)
-                        <div class="col-md-8 offset-md-4"> admin </div>
+                        <div class="col-md-8 offset-md-3"> admin </div>
                         @else
-                        <div class="col-md-8 offset-md-4"> kupac </div>
+                        <div class="col-md-8 offset-md-3"> kupac </div>
                         @endif
                     @endif
                 <br>
             </div>
             {{-- 2. kolona--}}
-            <div class="col-md-4 mb-0">
+            <div class="col-md-2 mb-0">
                 <br> <br>
                 <div class="row justify-content-center">
                     <div class="col-md-12">
-                        <div class="col-md-8 offset-md-4">
-                            <a class="btn btn-link" href="{{ route('password.reset'), [csrf_token()] }}">
+                        <form method="POST" action="{{ route('password.reset', ['token'=>csrf_token()]) }}">
+                            <button type="submit" class="btn-warning">
                                 {{ __('Promeni lozinku') }}
-                            </a>
-                        </div>
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <br> <br> <br> <br>
@@ -121,11 +123,11 @@
                         @if(Auth::check())
                             @if($user->isSlikar)
                                 {{--     profil slikara     --}}
-                                <div class="col-md-8 offset-md-4">
-                                    <a class="btn btn-link" href="{{ route('profile.user') }}">
-                                        {{ __('Moj profil lozinku') }}
-                                    </a>
-                                </div>
+                                    <form method="GET" action="{{ route('profile.user', ['user'=>$user]) }}">
+                                        <button type="submit" class="btn btn-warning" >
+                                            {{ __('Moj profil lozinku') }}
+                                        </button>
+                                    </form>
                                 <br>
                                 {{--     objavi sliku     --}}
                                 {{--<div class="col-md-8 offset-md-4">
@@ -143,7 +145,9 @@
                                 {{--     povratak na početnu     --}}
                                 <div class="col-md-8 offset-md-4">
                                     <a class="btn btn-link" href="{{ route('home') }}">
-                                        {{ __('Povratak na početnu') }}
+                                        <button type="button" class="btn btn-warning" >
+                                            {{ __('Povratak na početnu') }}
+                                        </button>
                                     </a>
                                 </div>
                                 <br>
@@ -153,7 +157,9 @@
                                 {{--     povratak na početnu     --}}
                                 <div class="col-md-8 offset-md-4">
                                     <a class="btn btn-link" href="{{ route('home') }}">
-                                        {{ __('Povratak na početnu') }}
+                                        <button type="button" class="btn btn-warning" >
+                                            {{ __('Povratak na početnu') }}
+                                        </button>
                                     </a>
                                 </div>
                                 <br>
@@ -161,6 +167,7 @@
                             {{--     odjavi se     --}}
                             <div class="col-md-8 offset-md-4">
                                 <form method="POST" action="{{ route('logout') }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     @csrf
                                     <button type="submit" class="btn-warning">
                                         {{ __('Izloguj se') }}

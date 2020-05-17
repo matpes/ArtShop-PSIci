@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+<<<<<<< Updated upstream
+=======
+use App\Kupac;
+use App\Slikar;
+>>>>>>> Stashed changes
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -91,6 +96,7 @@ class RegisterController extends Controller
                 ->withInput();
         }
 
+//        dd('created');
         if ($request->password != $request->password_confirm) {
             return redirect('register')
                 ->withErrors(['password_confirm' => $request->password . "Lozinka koju ste uneli se ne poklapa sa potvrdom iste" . $request->password_confirm])
@@ -113,12 +119,26 @@ class RegisterController extends Controller
     {
         $user = new User();
         $user->username = $data['username'];
+<<<<<<< Updated upstream
         $user->mail = $data['email'];
+=======
+        $user->email = $data['email'];
+>>>>>>> Stashed changes
         $user->password = Hash::make($data['password']);
-        if($data['optradio'] == "slikar")
-              $user->isSlikar = true;
-        else
+        if($data['optradio'] == "slikar") {
+            $user->isSlikar = true;
+            $user->save();
+            $slikar = new Slikar(['user_id'=>$user->id, 'sumaOcena'=>0, 'brOcenjenihSlika'=>0]);
+            $slikar->save();
+        }
+        else{
             $user->isSlikar = false;
+            $user->save();
+//            dd($kupac->user_id);
+            $kupac = new Kupac();
+            $kupac->user_id = $user->id;
+            $kupac->save();
+        }
         /*
         $file = $data['picture'];
         if ($data->hasFile('picture')) {
@@ -127,6 +147,9 @@ class RegisterController extends Controller
             $file = $file->storeAs('img\users', $filename);
             $user->picture_path = $filename;
         }*/
+<<<<<<< Updated upstream
         $user->save();
+=======
+>>>>>>> Stashed changes
     }
 }

@@ -158,7 +158,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< Updated upstream
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Middleware" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/database/migrations" />
+>>>>>>> Stashed changes
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -225,6 +229,13 @@
       <workItem from="1589565675970" duration="551000" />
       <workItem from="1589580517883" duration="3493000" />
       <workItem from="1589615222623" duration="170000" />
+<<<<<<< Updated upstream
+=======
+      <workItem from="1589615666445" duration="8726000" />
+      <workItem from="1589638604912" duration="392000" />
+      <workItem from="1589639010835" duration="15938000" />
+      <workItem from="1589667618289" duration="676000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
@@ -275,23 +286,28 @@
     <state x="463" y="106" key="FileChooserDialogImpl" timestamp="1589451659264">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
+<<<<<<< Updated upstream
     <state x="463" y="106" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1589451659264" />
     <state width="1323" height="223" key="GridCell.Tab.0.bottom" timestamp="1589451631775">
+=======
+    <state x="463" y="106" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1589615763759" />
+    <state width="905" height="179" key="GridCell.Tab.0.bottom" timestamp="1589656730639">
+>>>>>>> Stashed changes
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1589451631775" />
-    <state width="1323" height="223" key="GridCell.Tab.0.center" timestamp="1589451631774">
+    <state width="905" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1589656730639" />
+    <state width="905" height="179" key="GridCell.Tab.0.center" timestamp="1589656730639">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1589451631774" />
-    <state width="1323" height="223" key="GridCell.Tab.0.left" timestamp="1589451631774">
+    <state width="905" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1589656730639" />
+    <state width="905" height="179" key="GridCell.Tab.0.left" timestamp="1589656730638">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1589451631774" />
-    <state width="1323" height="223" key="GridCell.Tab.0.right" timestamp="1589451631775">
+    <state width="905" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1589656730638" />
+    <state width="905" height="179" key="GridCell.Tab.0.right" timestamp="1589656730639">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1589451631775" />
+    <state width="905" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1589656730639" />
     <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1589451631776">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -348,10 +364,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="263" y="19" key="com.intellij.database.dbimport.ImportDialog/0.0.1366.728@0.0.1366.728" timestamp="1589486087875" />
-    <state x="479" y="184" width="408" height="355" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1589461175700">
+    <state x="479" y="184" width="408" height="351" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1589656667692">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="479" y="184" width="408" height="355" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.1366.728@0.0.1366.728" timestamp="1589461175700" />
+    <state x="479" y="184" width="408" height="351" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.1366.728@0.0.1366.728" timestamp="1589656667692" />
     <state x="526" y="137" width="532" height="454" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1589485861029">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -367,7 +383,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php</url>
-          <line>86</line>
+          <line>88</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
