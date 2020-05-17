@@ -14,11 +14,12 @@
                     <div class="col-sm-5 col-xs-12 padding_form_picture">
                         <img src="@if(isset($picture->path)){{$picture->path}} @else {{'\images\design\images-empty.png'}} @endif" id="uploaded_image" width="100%">
                         <div class="bottom">
-                            <label for="path" class="load_file">
+                            <label for="file_path" class="load_file">
                                 Ucitaj sliku
                             </label>
                             @php($user = \App\User::find(Auth::id()))
-                            <input id="path" type="file" name="path" class="form-control form_input_text" style="width: 100%" value="@if(isset($picture->path)){{$picture->path}} @endif" oninput="document.getElementById('uploaded_image').setAttribute('src','\\images\\{{$user->username}}' + value.substr(value.lastIndexOf('\\')))"/>
+                            <input type="hidden" id="path" name="path" value="@if(isset($picture->path)){{$picture->path}} @endif">
+                            <input id="file_path" type="file" name="file_path" class="form-control form_input_text" style="width: 100%" oninput="document.getElementById('uploaded_image').setAttribute('src','\\images\\{{$user->username}}' + value.substr(value.lastIndexOf('\\'))); document.getElementById('path').value='\\images\\{{$user->username}}' + value.substr(value.lastIndexOf('\\'));"/>
                             <small>@if(isset($error['path'])){{$error['path']}} @endif</small>
                         </div>
                     </div>
@@ -150,7 +151,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <input type="hidden" name="user_id" value="1">
+                                <input type="hidden" name="user_id" value="{{$user->id}}">
                                 <button type="submit" name="potvrdi" class="btn-success form-control form_gray_button">
                                     Potvrdi
                                 </button>

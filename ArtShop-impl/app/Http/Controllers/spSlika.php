@@ -61,8 +61,6 @@ class spSlika extends Controller
             $error['path'] = "***Morate izabrati sliku!***";
         }
         else{
-            $u = User::find(Auth::id());
-            $request->merge(['path' => '\\images\\' . $u->username . '\\' . $request->get('path')]);
             $picture->path = $request->get('path');
         }
 
@@ -147,6 +145,7 @@ class spSlika extends Controller
 
             }
             else{
+
                 Picture::where('path', $picture->path)->get()[0]->update($request->all());
             }
 
