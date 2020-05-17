@@ -62,7 +62,7 @@ class spSlika extends Controller
         }
         else{
             $u = User::find(Auth::id());
-            $request->merge(['path' => '\\images\\' . $u->username . $request->get('path')]);
+            $request->merge(['path' => '\\images\\' . $u->username . '\\' . $request->get('path')]);
             $picture->path = $request->get('path');
         }
 
