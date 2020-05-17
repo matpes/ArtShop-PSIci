@@ -19,6 +19,14 @@ use \App\Http\Controllers\spKupac;
  /*  !!!!!!!!!!SVAKO U SVOJOJ SEKCIJI NEKA PISE DA SE NE POGUBIMO!!!!!          */
 /*******************************************************************************/
 
+//VLADANA
+
+Route::resource('/slika', 'spSlika', ['middleware' => ['UserMiddleware', 'SlikarMiddleware']]);
+
+Route::resource('/pretraga', 'spPretraga');
+
+//END VLADANA
+
 // MATIJA
 Route::get('/', function () {
     return view('layouts.app');

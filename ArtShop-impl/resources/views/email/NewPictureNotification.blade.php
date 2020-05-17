@@ -9,6 +9,6 @@
 </head>
 <body>
     <h1>Nova slika slikara {{$username}}</h1>
-    <p>Slikar {{$username}} je postavio novu sliku. <a href="artshop.test/picture/{{id}}">Pogledaj prvi!</a></p>
+    <p>Slikar {{$username}} je postavio novu sliku. Pogledaj prvi na artshop.test/picture/{{$id}}!</p>
 </body>
 </html>

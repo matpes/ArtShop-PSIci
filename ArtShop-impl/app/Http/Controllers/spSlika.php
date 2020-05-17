@@ -11,6 +11,8 @@ use App\Tema;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailer;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class spSlika extends Controller
 {
@@ -25,6 +27,7 @@ class spSlika extends Controller
         $picture = new Picture();
         $teme = "";
         return view('slika_form', compact('error', 'picture', 'teme'));
+
     }
 
     /**
@@ -43,7 +46,7 @@ class spSlika extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Mailer $mailer)
+    public function store(Request $request)
     {
         $flag = 0;
         $error = [];
@@ -123,7 +126,8 @@ class spSlika extends Controller
             return view('slika_form', compact('error', 'picture'));
         }
         else{
-            $slikar = Slikar::where('user_id', 1)->get()[0];
+            $korid = Auth::id();
+            $slikar = Slikar::where('user_id', $korid)->get()[0];
             $picture->user_id = $slikar->user_id;
 
             if(count(Picture::where('path', $picture->path)->get()) == 0){
@@ -133,11 +137,15 @@ class spSlika extends Controller
                 $users = $slikar->subscribed;
                 foreach ($users as $user){
                     $korisnik = User::find($user->user_id);
-                    $mailer->to($korisnik->mail)->send(new NewPicture($slikarkor->username, $slikarkor->id));
+                    $data = ['username' => $korisnik->username, 'id' => $picture->id];
+                    Mail::send('email.NewPictureNotification', $data, function ($message) use ($korisnik) {
+                        $message->to($korisnik->email)->subject('Nova slika');
+                    });
                 }
 
             }
             else{
+
                 Picture::where('path', $picture->path)->get()[0]->update($request->all());
             }
 
@@ -154,7 +162,7 @@ class spSlika extends Controller
                 $tema = Tema::where('tema', $naziv)->get()[0];
                 $picture->temas()->attach($tema->id);
             }
-            return redirect('/picture/'.$picture->user_id);
+            return redirect('/picture/'.$picture->id);
         }
     }
 
