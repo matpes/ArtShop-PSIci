@@ -187,4 +187,3 @@
 
 
 </html>
-<?php /**PATH C:\xampp\htdocs\project\resources\views/layouts/base.blade.php ENDPATH**/ ?>

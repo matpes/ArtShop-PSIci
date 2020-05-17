@@ -70,8 +70,6 @@
         <div class="spaceFromHeader">
             @yield('footer')
         </div>
-    </div>
-
 </body>
 </html>
 

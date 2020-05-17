@@ -70,12 +70,16 @@ Route::group(['middleware' => 'GuestMiddleware'], function()
     //END MATIJA
 });
 
-Route::get('/profileInfo', 'UserController@profileInfo')->name('user_info');
 
 Route::group(['middleware' => 'UserMiddleware'], function()
 {
+    Route::get('/profileInfo', 'UserController@profileInfo')->name('userInfo');
+    Route::get('/profile/{id}', 'UserController@userProfile')->name('userProfile');
+    Route::get('/changeProfilePicture', 'UserController@indexProfilePicture')->name('profilePicture');
+    Route::post('/changeProfilePicture', 'UserController@changeProfilePicture')->name('postProfilePicture');
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
-    Route::post('/password/reset', 'Auth\ResetPasswordController@resetPassword')->name('postPassword.reset');
+    Route::post('/password/reset/{token}', 'Auth\ResetPasswordController@resetPassword')->name('postPassword.reset');
     Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('/removeAccount/{id}', 'UserController@removeAccount')->name('removeAccount');
 });
 //END SANJA

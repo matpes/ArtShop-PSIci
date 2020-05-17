@@ -39,19 +39,25 @@ class UserController extends Controller
      * @return Redirect
      */
 
-    public function remove($id)
+    public function removeAccount($id)
     {
         $user = User::where('id','=',$id);
         $user = $user->first();
         DB::beginTransaction();
         DB::table('komentars')->where('user_id', '=', $id)->delete();
         DB::table('korpas')->where('user_id', '=', $id)->delete();
+        if($user->isSlikar) {
+            DB::table('slikars')->where('user_id', '=', $id)->delete();
+       /* } elseif($user->isAdmin){
+            DB::table('admins')->where('user_id', '=', $id)->delete();*/
+        } else{
+            DB::table('kupacs')->where('user_id', '=', $id)->delete();
+        }
         DB::commit();
         Session::flush();
         Auth::logout();
         DB::table('users')->where('id', '=', $id)->delete();
         return redirect()->route('home');
-
     }
 
     /**
@@ -86,7 +92,6 @@ class UserController extends Controller
      */
 
     public function profileInfo(){
-//        echo '123';
         $user = Auth::user();
 //        dd($user);
         $slikar = DB::table('slikars')
@@ -99,10 +104,6 @@ class UserController extends Controller
                 ->where('pictures.user_id','=', $slikar->user_id)
                 ->count();
         }
-//        dd($slikar);
-//        dd($brOcena);
-//        return Route::view('/profile/korisnik_info','profile.user_info',
-//            compact(['user'=>$user, 'slikar'=>$slikar, 'brOcena'=>$brOcena]));
         return response()->view('profile.user_info',['user'=>$user, 'slikar'=>$slikar, 'brOcena'=>$brOcena]);
     }
 }
