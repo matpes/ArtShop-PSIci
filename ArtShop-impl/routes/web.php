@@ -73,9 +73,7 @@ Route::group(['middleware' => 'GuestMiddleware'], function()
     Route::get('/password/request', 'Auth\ForgotPasswordController@index')->name('password.request');
     Route::post('/password/email', 'Auth\ForgotPasswordController@forgotPassword')->name('password.email');
 
-    //MATIJA
-    Route::resource('/korpa', 'spKorpa');
-    //END MATIJA
+
 });
 
 
@@ -89,5 +87,18 @@ Route::group(['middleware' => 'UserMiddleware'], function()
     Route::post('/password/reset/{token}', 'Auth\ResetPasswordController@resetPassword')->name('postPassword.reset');
     Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('/removeAccount/{id}', 'UserController@removeAccount')->name('removeAccount');
+    //MATIJA
+    Route::resource('/korpa', 'spKorpa');
+    Route::post('subscribe', 'spKupac@subscribe');
+    //END MATIJA
 });
 //END SANJA
+
+//VLADNA
+/*
+Route::resource('/slika', 'spSlika');
+
+Route::resource('/pretraga', 'spPretraga');
+*/
+
+//END VLADANA

@@ -158,11 +158,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-<<<<<<< Updated upstream
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Middleware" />
-=======
     <property name="last_opened_file_path" value="$PROJECT_DIR$/database/migrations" />
->>>>>>> Stashed changes
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -233,9 +229,17 @@
 =======
       <workItem from="1589615666445" duration="8726000" />
       <workItem from="1589638604912" duration="392000" />
+<<<<<<< HEAD
+      <workItem from="1589639010835" duration="4105000" />
+      <workItem from="1589669372684" duration="620000" />
+      <workItem from="1589712135503" duration="389000" />
+      <workItem from="1589664772686" duration="2487000" />
+      <workItem from="1589667523165" duration="1002000" />
+=======
       <workItem from="1589639010835" duration="15938000" />
       <workItem from="1589667618289" duration="676000" />
 >>>>>>> Stashed changes
+>>>>>>> master
     </task>
     <servers />
   </component>

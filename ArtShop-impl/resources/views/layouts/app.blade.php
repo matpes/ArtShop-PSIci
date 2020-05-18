@@ -25,29 +25,30 @@
     @yield('head')
 </head>
 <body class="body">
-    <div class="container-fluid noPadding">
-        <div class="myHeader">
-            <div class="row-fluid">
-                <div class="col-sm-12">
+<div class="container-fluid noPadding">
+    <div class="myHeader">
+        <div class="row-fluid">
+            <div class="col-sm-12">
 
-                    <div class="form-group noMargin">
+                <div class="form-group noMargin">
 
-                        <form method="get" action="/pretraga">
-                            <input type="text" name="autor" id="1" class="form-control header_input_text"
-                                   placeholder="Slikar">
-                            <input type="text" name="tema" id="2" class="form-control header_input_text"
-                                   placeholder="Tematika">
-                            <select name="stil" id="3" class="form-control header_input_text">
-                                <option value="stil">Stil</option>
-                                <option value="klasicizam">Klasicizam</option>
-                                <option value="romantizam">Romantizam</option>
-                                <option value="kubizam">Kubizam</option>
-                                <option value="barok">Barok</option>
-                            </select>
-                            <button type="submit" class="btn-dark gray_button" name="submit"> Pretraži</button>
-
+                    <form method="get" action="/pretraga">
+                        <input type="text" name="autor" id="1" class="form-control header_input_text"
+                               placeholder="Slikar">
+                        <input type="text" name="tema" id="2" class="form-control header_input_text"
+                               placeholder="Tematika">
+                        <select name="stil" id="3" class="form-control header_input_text">
+                            <option value="stil">Stil</option>
+                            <option value="klasicizam">Klasicizam</option>
+                            <option value="romantizam">Romantizam</option>
+                            <option value="kubizam">Kubizam</option>
+                            <option value="barok">Barok</option>
+                        </select>
+                        <button type="submit" class="btn-dark gray_button" name="submit"> Pretraži</button>
+                        @yield('header_form')
                     </form>
-                    </div>{{--
+                </div>
+                {{--
                     @if(!is_null($user ?? ''))
                         @if($user ?? '' ?? ''->picture_path!=null)
                             <img style="width:100%" src="{{ asset('images/users/'.$user ?? '' ?? ''->picture_path) }}">
@@ -55,21 +56,20 @@
                             <img style="width:100%" src="{{ asset('images/avatar.png') }}">
                         @endif
                     @endif--}}
-                            @yield('header_form')
-                        </form>
-                    </div>
 
-
-                </div>
+                {{--                    </div>--}}
             </div>
-            <hr>
         </div>
-        <div class="spaceFromHeader">
-            @yield('content')
-        </div>
-        <div class="spaceFromHeader">
-            @yield('footer')
-        </div>
+        <hr>
+    </div>
+    <div class="spaceFromHeader">
+        @yield('content')
+    </div>
+    <div class="spaceFromHeader">
+        @yield('footer')
+    </div>
+</div>
+
 </body>
 </html>
 

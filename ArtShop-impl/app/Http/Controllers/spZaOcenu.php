@@ -7,6 +7,7 @@ use App\Picture;
 use App\Slikar;
 use App\ZaOcenu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class spZaOcenu extends Controller
 {
@@ -20,7 +21,7 @@ class spZaOcenu extends Controller
     public function index()
     {
         //
-        $slikeZaOcenu = ZaOcenu::zaOcenu(1);
+        $slikeZaOcenu = ZaOcenu::zaOcenu(Auth::id());
         $autori = Picture::dohvatiAutoreSlika($slikeZaOcenu);
         return view('.ocene', compact('autori', 'slikeZaOcenu'));
 
@@ -54,7 +55,7 @@ class spZaOcenu extends Controller
             $id = $request->$str;
             if($request->$id > 0) {
                 $slika = Picture::onlyTrashed()->find($id);
-                $slikar = Slikar::find($slika->korisnik_id);
+                $slikar = Slikar::find($slika->user_id);
                 $slikar->brOcenjenihSlika++;
                 $slikar->sumaOcena += $request->$id;
                 $slikar->save();

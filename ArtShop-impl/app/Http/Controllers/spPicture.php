@@ -59,24 +59,34 @@ class spPicture extends Controller
     public function show($id)
     {
         //
+        $korid = Auth::user();
         $picture = Picture::withTrashed()->find($id);
         $teme = $picture->teme();
         $slikar = Picture::dohvatiAutora($picture);
         $stil = Picture::dohvatiStil($picture);
         $endTime = $picture->danIstekaAukcije;
         $bought = false;
+        $subscribed = false;
         if ($picture->deleted_at != null) {
             $bought = true;
         }
+        if($korid->isSlikar==1){
+            $bought = true;
+            $subscribed = true;
+        }
+        if($korid->isSlikar==0){
+            $subscribed = $slikar->getSubscribed($korid->id);
+        }
+        //dd($subscribed);
         switch ($picture->aukcijaFlag) {
             case 0:
-                return view('.pictureSimple', compact('picture', 'slikar', 'stil', 'teme', 'endTime', 'bought'));
+                return view('.pictureSimple', compact('picture', 'slikar', 'stil', 'teme', 'endTime', 'bought', 'subscribed'));
                 break;
             case 1:
-                return view('.pictureOpen', compact('picture', 'slikar', 'stil', 'teme', 'endTime'));
+                return view('.pictureOpen', compact('picture', 'slikar', 'stil', 'teme', 'endTime', 'bought', 'subscribed'));
                 break;
             default:
-                return view('.pictureClosed', compact('picture', 'slikar', 'stil', 'teme', 'endTime'));
+                return view('.pictureClosed', compact('picture', 'slikar', 'stil', 'teme', 'endTime', 'bought', 'subscribed'));
                 break;
         }
     }
@@ -122,7 +132,7 @@ class spPicture extends Controller
                 $korisnici = $picture->getSveUcesnike();
                 foreach ($korisnici as $korisnik) {
                     if ($korisnik->id != $korid) {
-                        Mail::to($korisnik->mail)->send(new newOffer($picture));
+                        Mail::to($korisnik->email)->send(new newOffer($picture));
                     }
                 }
                 //spMail::newOffer($picture, $korid);

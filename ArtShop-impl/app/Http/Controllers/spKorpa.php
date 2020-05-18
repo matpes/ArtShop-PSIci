@@ -6,6 +6,7 @@ use App\Korpa;
 use App\Picture;
 use App\Podaci;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class spKorpa extends Controller
 {
@@ -20,7 +21,8 @@ class spKorpa extends Controller
     {
         //
 
-        $slikeUKorpi = Korpa::dohvatiSlikeUKorpi(1);
+        $korid = Auth::id();
+        $slikeUKorpi = Korpa::dohvatiSlikeUKorpi($korid);
         //dd($slikeUKorpi);
         //echo var_dump($slikeUKorpi);
         //echo "==============================================================";
