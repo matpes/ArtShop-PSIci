@@ -10,6 +10,7 @@ use App\Podaci;
 use App\Slikar;
 use App\ZaOcenu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class spKupac extends Controller
 {
@@ -55,9 +56,9 @@ class spKupac extends Controller
     public function store(Request $request)
     {
 
-
+        $korid = Auth::id();
         //return $request->all();
-        $podaci = Podaci::firstOrNew(['user_id'=>$request->user_id]);
+        $podaci = Podaci::firstOrNew(['user_id'=>Auth::id()]);
         //Podaci::create($request->all());
         $podaci->ime = $request->ime;
         $podaci->prezime = $request->prezime;
@@ -69,11 +70,11 @@ class spKupac extends Controller
         $podaci->metodNaplate = $request->metodNaplate;
         $podaci->save();
         //PREBACIVANJE U TABELU ZA OCENE
-        $slike = Korpa::all()->where('user_id', 1);
+        $slike = Korpa::all()->where('user_id', '=', Auth::id());
         foreach ($slike as $slika){
             $zaOcenu = new ZaOcenu;
             $zaOcenu->picture_id = $slika->picture_id;
-            $zaOcenu->korisnik_id = $slika->korisnik_id;
+            $zaOcenu->user_id = $slika->user_id;
             $zaOcenu->ocena = 0;
             $zaOcenu->save();
             $slika->delete();
@@ -127,7 +128,13 @@ class spKupac extends Controller
         //
     }
 
-
+    public function subscribe(Request $request){
+        $id = $request->slikar;
+        $korid = Auth::id();
+        $slikar = Slikar::find($id);
+        $slikar->dodajSubscribera($korid);
+        return redirect('/picture/'.$request->picture);
+    }
 
     function pocetnaBaza(){
         //Korisnik::pocetna();

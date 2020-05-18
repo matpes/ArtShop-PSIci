@@ -23,4 +23,24 @@ class Slikar extends Model
         return $this->belongsToMany('App\Kupac', 'kupac_slikar', 'slikar_id', 'kupac_id');
     }
 
+
+    public function dodajSubscribera($id){
+        $this->belongsToMany('App\Kupac', 'kupac_slikar', 'slikar_id', 'kupac_id')->attach($id);
+
+    }
+
+
+    public function getSubscribed($id){
+
+        $pretplaceni = $this->belongsToMany('App\Kupac', 'kupac_slikar', 'slikar_id', 'kupac_id')->get();
+        $ret = false;
+
+        foreach ($pretplaceni as $korisnik){
+            if($korisnik->user_id==$id){
+                $ret = true;
+            }
+        }
+        return $ret;
+    }
+
 }

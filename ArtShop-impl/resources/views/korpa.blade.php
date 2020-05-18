@@ -79,7 +79,7 @@
                 @else
                     <div class="offset-3 col-6">
                         <br><br><br>
-                        <div class="emptyCart" style="padding: 150px">
+                        <div class="emptyCart" style="padding: 50px">
 
                             Vasa korpa je prazna
 

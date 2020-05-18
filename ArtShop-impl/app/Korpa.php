@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Korpa extends Model
 {
@@ -27,7 +28,8 @@ class Korpa extends Model
     public static function dohvatiSlike(&$cena)
     {
         $cena = 0;
-        $korpa = Korpa::all()->where('user_id', 1);
+        $korid = Auth::id();
+        $korpa = Korpa::all()->where('user_id', $korid);
         //echo $korpa;
 
         $slika =[];

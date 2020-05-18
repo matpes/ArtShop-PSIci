@@ -85,7 +85,7 @@ class Picture extends Model
 
     public static function dohvatiAutora($slika){
 
-        $slikar = User::find($slika->user_id);
+        $slikar = Slikar::find($slika->user_id);
         return $slikar;
     }
 

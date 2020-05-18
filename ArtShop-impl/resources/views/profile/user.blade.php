@@ -55,14 +55,13 @@ $user
                     <div class="col-md-8 offset-md-4">{{$user->username}}</div>
                     <div class="col-md-4 text-md-right">Tip naloga: </div>
                     <div class="col-md-8 offset-md-4">
-                        <?php
-                            if($user->isSlikar && !$user->isAdmin){
+
+                        @if ($user->isSlikar && !$user->isAdmin){
                                 echo "slikar";
-                            } else if{}
-                            else{}
-                            @if($user->isSlikar && !$user->isAdmin)
-                        @else if(!$user->isSlikar && !$user->isAdmin)
+                            }
+                        @else @if(!$user->isSlikar && !$user->isAdmin)
                             echo "kupac";
+                            @endif
                         @endif
                     </div>
 
