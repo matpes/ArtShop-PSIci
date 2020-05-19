@@ -77,16 +77,21 @@ class spPicture extends Controller
         if($korid->isSlikar==0){
             $subscribed = $slikar->getSubscribed($korid->id);
         }
+        $kupac = Auth::user();
+        $path = '/images/avatar.png';
+        if($kupac->profilna_slika!=null){
+            $path = '/images/users//'.$kupac->profilna_slika;
+        }
         //dd($subscribed);
         switch ($picture->aukcijaFlag) {
             case 0:
-                return view('.pictureSimple', compact('picture', 'slikar', 'stil', 'teme', 'endTime', 'bought', 'subscribed'));
+                return view('.pictureSimple', compact('path', 'picture', 'slikar', 'stil', 'teme', 'endTime', 'bought', 'subscribed'));
                 break;
             case 1:
-                return view('.pictureOpen', compact('picture', 'slikar', 'stil', 'teme', 'endTime', 'bought', 'subscribed'));
+                return view('.pictureOpen', compact('path','picture', 'slikar', 'stil', 'teme', 'endTime', 'bought', 'subscribed'));
                 break;
             default:
-                return view('.pictureClosed', compact('picture', 'slikar', 'stil', 'teme', 'endTime', 'bought', 'subscribed'));
+                return view('.pictureClosed', compact('path','picture', 'slikar', 'stil', 'teme', 'endTime', 'bought', 'subscribed'));
                 break;
         }
     }

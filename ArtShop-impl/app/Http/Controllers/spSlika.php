@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Auction;
 use App\User;
 use App\Mail\NewPicture;
 use App\Picture;
@@ -129,7 +130,6 @@ class spSlika extends Controller
             $korid = Auth::id();
             $slikar = Slikar::where('user_id', $korid)->get()[0];
             $picture->user_id = $slikar->user_id;
-
             if(count(Picture::where('path', $picture->path)->get()) == 0){
                 $picture->save();
 
@@ -148,7 +148,7 @@ class spSlika extends Controller
 
                 Picture::where('path', $picture->path)->get()[0]->update($request->all());
             }
-
+            event(new Auction($picture));
             $picture = Picture::where('path', $picture->path)->get()[0];
 
             $teme = explode(", ", $request->get('teme'));

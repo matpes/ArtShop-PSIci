@@ -15,7 +15,9 @@
     @else
         <button disabled type="button" class="btn disabledButton gray_button"> Kupi slike</button>
     @endif
-
+    <a href="profileInfo">
+        <img src="{{$path}}" alt="" class="float-right">
+    </a>
 @endsection
 
 @section('content')

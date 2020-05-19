@@ -40,7 +40,12 @@ class spKorpa extends Controller
         };
         return;*/
         //echo count($slikeUKorpi);
-        $pogled = view('.korpa')->with('slike_u_korpi', $slikeUKorpi)->with('slikari', $autori)->with('stilovi', $stilovi);
+        $kupac = Auth::user();
+        $path = 'images\\avatar.png';
+        if($kupac->profilna_slika!=null){
+            $path = 'images\\users\\'.$kupac->profilna_slika;
+        }
+        $pogled = view('.korpa', compact('path'))->with('slike_u_korpi', $slikeUKorpi)->with('slikari', $autori)->with('stilovi', $stilovi);
         return $pogled;
 
 

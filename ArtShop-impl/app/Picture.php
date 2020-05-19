@@ -108,5 +108,10 @@ class Picture extends Model
         return $this->belongsToMany('App\User','kupac_picture', 'picture_id', 'user_id')->get();
     }
 
+    public function krajAukcije(&$pobednik, &$gubitnici){
+        $ret =  $this->belongsToMany('App\Kupac','kupac_picture', 'picture_id', 'user_id')->orderBy('cena');
+        $pobednik = $ret->limit(1)->get();
+        $gubitnici = $ret->offset(1)->get();
+    }
 
 }

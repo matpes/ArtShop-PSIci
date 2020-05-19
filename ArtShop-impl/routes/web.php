@@ -1,7 +1,12 @@
 <?php
 
 
+use App\Mail\pictureLost;
+use App\Mail\pictureWon;
+use App\User;
 use App\ZaOcenu;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Picture;
 use \App\Http\Controllers\spKupac;
@@ -102,3 +107,27 @@ Route::resource('/pretraga', 'spPretraga');
 */
 
 //END VLADANA
+
+Route::get('test', function (){
+    $pic = Picture::find(4);
+    //dd($pic);
+    $pobednik = null;
+    $gubitnici = null;
+    $pic->krajAukcije($pobednik, $gubitnici);
+    /*foreach ($pobednik as $pob){
+
+        dd(User::find($pob->user_id));
+        //Mail::to(User::find($pob->user_id)->email)->send(new pictureWon($pic));
+    }
+
+    foreach ($gubitnici as $gub){
+        dd($gub);
+        Mail::to(User::find($gub->user_id)->email)->send(new pictureLost($pic));
+    }*/
+
+    $ret = Carbon::parse($pic->danIstekaAukcije)->diffInMinutes(Carbon::now(), false);
+
+    //$ret = Carbon::parse($pic->danIstekaAukcije)->diffInMinutes(Carbon::parse('2020-05-18 23:50'), false);
+    //$ret = Carbon::parse('2020-05-19 00:00'/*$event->picture->danIstekaAukcije*/)->diffInMinutes(Carbon::now(), false);
+    echo Carbon::parse($pic->danIstekaAukcije)->diffInMinutes(Carbon::now(), false)<0;
+});
