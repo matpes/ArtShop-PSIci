@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\Array_;
 
 class GuestMiddleware
 {
@@ -22,7 +23,8 @@ class GuestMiddleware
     {
         if (Auth::check())
         {
-            return redirect('home')->with('status',"Ova stranica je dostupna samo gostima, izlogujte se i probajte ponovo!");
+            $slike = array();
+            return response()->view('profile.user', ['user'=>Auth::user(), 'slike'=>$slike, ]);
         }
         return $next($request);
     }

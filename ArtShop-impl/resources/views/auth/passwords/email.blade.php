@@ -56,7 +56,7 @@
 
                         <br>
                         <div class="form-group row mb-0">
-                            <div class="col-md-4 offset-md-3 float-md-right">
+                            <div class="col-md-6 offset-md-4 float-md-right">
                                 <button type="submit" class="btn btn-warning">
                                     {{ __('Pošalji mejl za resetovanje lozinke') }}
                                 </button>
@@ -65,7 +65,7 @@
                     </form>
                     <br> <br>
                     <div class="form-group row mb-0">
-                        <div class="col-md-4 offset-md-4 float-md-left">
+                        <div class="col-md-2 offset-md-10 float-md-left">
                             <a class="btn btn-link-btn" href="{{ route('welcome') }}">
                                 <button type="button" class="btn btn-warning">
                                     {{ __('Povratak na početnu') }}

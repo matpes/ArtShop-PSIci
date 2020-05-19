@@ -28,9 +28,9 @@ Route::resource('/pretraga', 'spPretraga');
 //END VLADANA
 
 // MATIJA
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('layouts.app');
-});
+});*/
 
 Auth::routes();
 
@@ -64,8 +64,9 @@ Route::resource('picture', 'spPicture');
 
 Route::group(['middleware' => 'GuestMiddleware'], function()
 {
-    Route::get('/welcome', 'HomeController@welcome')->name('welcome');
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'GuestController@popularPictures')->name('home');
+//    Route::get('/welcome', 'GuestController@popularPictures')->name('welcome');
+//    Route::get('/home', 'GuestController@index')->name('home');
     Route::get('/register', 'Auth\RegisterController@index')->name('register');
     Route::get('/login', 'Auth\LoginController@index')->name('login');
     Route::post('post-login', 'Auth\LoginController@login')->name('postLogin');
@@ -81,10 +82,11 @@ Route::group(['middleware' => 'GuestMiddleware'], function()
 
 Route::group(['middleware' => 'UserMiddleware'], function()
 {
-    Route::get('/profileInfo', 'UserController@profileInfo')->name('userInfo');
-    Route::get('/profile/{id}', 'UserController@userProfile')->name('userProfile');
-    Route::get('/changeProfilePicture', 'UserController@indexProfilePicture')->name('profilePicture');
-    Route::post('/changeProfilePicture', 'UserController@changeProfilePicture')->name('postProfilePicture');
+    Route::get('/profile/info/{id}', 'UserController@profileInfo')->name('profile.info');
+    Route::get('/profile/user/{id}', 'UserController@userProfile')->name('profile.user');
+    Route::get('/profile/user_new/{id}', 'UserController@popularPictures')->name('profile.user_new');
+    Route::get('/changeProfilePicture', 'UserController@indexProfilePicture')->name('profile.picture');
+    Route::post('/changeProfilePicture', 'UserController@changeProfilePicture')->name('postProfile.picture');
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
     Route::post('/password/reset/{token}', 'Auth\ResetPasswordController@resetPassword')->name('postPassword.reset');
     Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');

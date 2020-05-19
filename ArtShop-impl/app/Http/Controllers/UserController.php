@@ -62,25 +62,30 @@ class UserController extends Controller
 
     /**
      *  Author: Samardžija Sanja 17/0372
-     * Funkcija koja dohvata podatke za trenutno ulogovanog korisnika
+     * Funkcija koja dohvata slike slikara koje kupac prati
      *
      * @param
      * @return View
      */
+    public function userProfile($id) {
+        $user = DB::table('users')
+            ->where('id','=',$id);
+        $slikari = null;
+        $slike = array();
+        if(!$user->isSlikar) {
+            //dovlacenje slika slikara koji se prate u $slike
+            $slikari = DB::table('kupac_slikar')
+                ->where('kupac_id', '=', $id);
+            foreach ($slikari as $s) {
+                $sl = DB::table('pictures')
+                    ->where('pictures.user_id', '=', $s->slikar_id);
 
-    public function userProfile()
-    {
-        $user = Auth::user();
-        //dovlacenje popularnih slika u $popular
-        $popular = null;
-        if(Auth::check()){
-            $popular = DB::table('pictures')
-                ->orderBy('ocena', 'desc')
-                ->select('path')
-                ->limit(5)
-                ->get();
+                array_push($slike, $sl);
+            }
+        } else {
+            return redirect()->back()->with('succsess','Nemate pristup ovoj stranici!');
         }
-        return response()->view('profile.user', $popular);
+        return response()->view('profile.user', ['user'=>$user, 'slike'=>$slike]);
     }
 
     /**
@@ -88,12 +93,10 @@ class UserController extends Controller
      * Funkcija koja vodi na formu sa informacijama o korisniku
      *
      * @param
-     * @return \Illuminate\Http\RedirectResponse
+     * @return view
      */
-
     public function profileInfo(){
         $user = Auth::user();
-//        dd($user);
         $slikar = DB::table('slikars')
             ->where('user_id', '=', $user->id)
             ->first();
@@ -104,7 +107,29 @@ class UserController extends Controller
                 ->where('pictures.user_id','=', $slikar->user_id)
                 ->count();
         }
-        return response()->view('profile.user_info',['user'=>$user, 'slikar'=>$slikar, 'brOcena'=>$brOcena]);
+        return response()->view('profile.info',['user'=>$user, 'slikar'=>$slikar, 'brOcena'=>$brOcena]);
+    }
+
+
+    /**
+     *  Author: Samardžija Sanja 17/0372
+     * Funkcija koja dohvata 5 najnovijih slika
+     *
+     * @param
+     * @return view
+     */
+    public function popularPictures()
+    {
+        $user = Auth::user();
+        //dovlacenje najnovijih slika u $popular
+        $novo = array();
+
+        $novo = DB::table('pictures')
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
+
+        return response()->view('profile.user_new', ['slike'=>$novo, 'user'=>$user]);
     }
 }
 

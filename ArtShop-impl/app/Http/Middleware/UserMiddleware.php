@@ -16,7 +16,7 @@ class UserMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() == false)
+        if (!Auth::check())
         {
             return response()->view('auth.login');
         }

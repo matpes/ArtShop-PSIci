@@ -1,40 +1,46 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ArtShop</title>
-    <!-- Favicon -->
-    <link rel="icon" href="{{asset('images/logo.png')}}" type="image/gif" sizes="16x16">
+@extends('layouts.app')
+@section('head')
+    <script src="/js/Sanja.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/Sanja.css">
+@endsection
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
+@section('content')
+<div class="container mt-0" onload="showSlides(0)">
+    <div class="row justify-content-center">
+        <div class="col-md-2 offset-md-10 justify-content-center">
+            <div class="box">
+                Najnovije
+            @if(Auth::check())
+                <a class="box btn btn-link offset-md-4 col-md-1" href="{{  route('profile.user', [Auth::user()->id]) }}">
+                    Praćenja
+                </a>
+            @endif
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-12 justify-content-center mb-3 mt-4">
+            <div class="slideshow-container">
+                @for($i=0;$i<sizeof($novo);$i++)
+                    <div class="mySlides">
+                        <div class="numbertext"><?php $p = ($i + 1) . ' / ' . sizeof($novo); echo $p; ?></div>
+                        <img src="<?php echo $novo[$i]->path; ?>" width="100%" height="550px"
+                             {{-- link do aukcije
+                             href="{{ route('slika',  ['id'=>$novo[$i]->id]) }}" --}}
+                            alt="<?php echo $novo[$i]->opis; ?>">
+                        <div class="text">{{__($novo[$i]->naziv)}}</div>
+                    </div>
+                @endfor
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
 
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    @yield('head')
-</head>
-<body class="body">
+@section('footer')
+    <img src="/images/logo.png" alt="ArtShopLogo" class="float-right img-fluid">
+@endsection
 
-    <div>
-        @include('layouts.header')
-    </div>
-    <hr>
-    <div class="spaceFromHeader">
-        @yield('content')
-    </div>
-    <div class="spaceFromHeader">
-        @include('layouts.footer')
-    </div>
-</body>
-</html>

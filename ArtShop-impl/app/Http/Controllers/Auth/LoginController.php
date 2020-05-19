@@ -76,7 +76,8 @@ class LoginController extends Controller
                 ->with('success',"Ne postoji korisnik sa unetim korisničkim imenom!");
         } else {
             if (Auth::attempt($credentials)) {
-                return redirect('profileInfo')
+                return redirect()
+                    ->route('profile.info', ['id'=>$user->id])
                     ->with('success',"Uspešno ste ulogovani!");
             } else{
                 return redirect('login')
@@ -93,6 +94,6 @@ class LoginController extends Controller
 //        dd($this);
         Session::flush();
         Auth::logout();
-        return redirect('login')->with('success','Uspešno ste se izlogovali!');
+        return redirect('layouts.base')->with('success','Uspešno ste se izlogovali!');
     }
 }

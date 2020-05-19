@@ -54,7 +54,6 @@
                                 <button type="submit" class="btn-warning">
                                     {{ __('Uloguj se') }}
                                 </button>
-
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Zaboravljena lozinka?') }}
@@ -63,6 +62,15 @@
                             </div>
                         </div>
                     </form>
+                </div>
+                <div class="form-group row mt-5">
+                    <div class="col-md-1 offset-md-11">
+                        <form method="GET" action="{{ route('home') }}">
+                            <button type="submit" class="btn-warning">
+                                {{ __('Povratak na početnu') }}
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

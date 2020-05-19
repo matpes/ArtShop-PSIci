@@ -94,7 +94,7 @@
     </div>
 </div>
 <footer>
-    <a class="btn btn-link-btn" href="{{ route('welcome') }}">
+    <a class="btn btn-link-btn" href="{{ route('home') }}">
         <button type="button" class="btn btn-warning">
             {{ __('Povratak na početnu') }}
         </button>
