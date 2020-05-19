@@ -15,9 +15,24 @@
             <label for="mojaCena" class="cenaText">$</label>
             <input type="hidden" name="id" value="{{$picture->id}}">
             {{csrf_field()}}
-            <input type="submit" name="ubaciUKorpu" value="PONUDI" class="form-control dugmiciSlika btn-dark">
-            <br>
+            @if($bought)
+                <input disabled type="submit" name="ponudi" value="PONUDI"
+                       class="form-control  kuplenoDugmic">
+            @else
+                <input type="submit" name="ponudi" value="PONUDI"
+                       class="form-control dugmiciSlika btn-dark">
+            @endif
             <input type="button" name="komentari" value="KOMENTARI" class="form-control dugmiciSlika btn-dark">
+        </form>
+        <form action="/subscribe" method="post">
+            <input type="hidden" name="slikar" value="{{$picture->user_id}}">
+            <input type="hidden" name="picture" value="{{$picture->id}}">
+            {{csrf_field()}}
+            @if($subscribed)
+                <input disabled type="submit" name="prijava" value="SUBSCRIBE" class="form-control kuplenoDugmic">
+            @else
+                <input type="submit" name="prijava" value="SUBSCRIBE" class="form-control dugmiciSlika btn-dark">
+            @endif
             <span class="cenaText">Aukcija traje još:</span>
             <label for="" class="cenaLable" id="trajanje"></label>
         </form>

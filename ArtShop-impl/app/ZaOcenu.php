@@ -4,6 +4,12 @@ namespace App;
 
 use App\Picture;
 use Illuminate\Database\Eloquent\Model;
+
+/**
+ * ZaOcenu – model klasa za upravljanje slikama koje treba da se ocene
+ *
+ * @version 1.0
+ */
 class ZaOcenu extends Model
 {
     //
@@ -14,7 +20,11 @@ class ZaOcenu extends Model
         'picture_id', 'user_id', 'ocena'
     ];
 
-
+    /**
+     * funkcija koja dohvata slike koje je korisnik kupio, a jos nisu ocenjene
+     * @param $id - id korinsika
+     * @return array - slike za ocenu
+     */
     public static function zaOcenu($id){
         $id_slike = ZaOcenu::all()->where('user_id', $id);
         $slike = [];

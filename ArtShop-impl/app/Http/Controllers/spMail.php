@@ -7,9 +7,20 @@ use App\Picture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
+/**
+ * Class spMail
+ * @package App\Http\Controllers
+ * @deprecated
+ */
 class spMail extends Controller
 {
     //
+    /**
+     * Author: Pešić Matija 17/0428
+     * --------------------------------------
+     * spMail
+     * --------------------------------------
+     */
 
     public static function newOffer($slika, $korime){
         $picture = $slika;

@@ -8,17 +8,34 @@ use App\Mail\newOffer;
 use App\Picture;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailer;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 use PhpParser\Node\Stmt\Foreach_;
 use Symfony\Component\Console\Input\Input;
 
+/**
+ * Class spPicture
+ * @package App\Http\Controllers
+ * Klasa kontrolera za upravljanje slikama
+ */
 class spPicture extends Controller
 {
     /**
+     * Author: Pešić Matija 17/0428
+     * Author: Pavićević Vladana 17/0296
+     * --------------------------------------
+     * spPicture
+     * --------------------------------------
+     */
+
+
+    /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @deprecated
+     * @return void
      */
     public function index()
     {
@@ -29,7 +46,8 @@ class spPicture extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @deprecated
+     * @return void
      */
     public function create()
     {
@@ -39,9 +57,9 @@ class spPicture extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @deprecated
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return string
      */
     public function store(Request $request)
     {
@@ -54,29 +72,44 @@ class spPicture extends Controller
      * Prikazivanje slike sa zadatim ID-jem
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function show($id)
     {
         //
+        $korid = Auth::user();
         $picture = Picture::withTrashed()->find($id);
         $teme = $picture->teme();
         $slikar = Picture::dohvatiAutora($picture);
         $stil = Picture::dohvatiStil($picture);
         $endTime = $picture->danIstekaAukcije;
         $bought = false;
+        $subscribed = false;
         if ($picture->deleted_at != null) {
             $bought = true;
         }
+        if($korid->isSlikar==1){
+            $bought = true;
+            $subscribed = true;
+        }
+        if($korid->isSlikar==0){
+            $subscribed = $slikar->getSubscribed($korid->id);
+        }
+        $kupac = Auth::user();
+        $path = '/images/avatar.png';
+        if($kupac->profilna_slika!=null){
+            $path = '/images/users//'.$kupac->profilna_slika;
+        }
+        //dd($subscribed);
         switch ($picture->aukcijaFlag) {
             case 0:
-                return view('.pictureSimple', compact('picture', 'slikar', 'stil', 'teme', 'endTime', 'bought'));
+                return view('.pictureSimple', compact('path', 'picture', 'slikar', 'stil', 'teme', 'endTime', 'bought', 'subscribed'));
                 break;
             case 1:
-                return view('.pictureOpen', compact('picture', 'slikar', 'stil', 'teme', 'endTime'));
+                return view('.pictureOpen', compact('path','picture', 'slikar', 'stil', 'teme', 'endTime', 'bought', 'subscribed'));
                 break;
             default:
-                return view('.pictureClosed', compact('picture', 'slikar', 'stil', 'teme', 'endTime'));
+                return view('.pictureClosed', compact('path','picture', 'slikar', 'stil', 'teme', 'endTime', 'bought', 'subscribed'));
                 break;
         }
     }
@@ -85,7 +118,7 @@ class spPicture extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Redirector
      */
     public function edit($id)
     {
@@ -108,7 +141,9 @@ class spPicture extends Controller
             default:
                 $mojaCena = $_GET['mojaCena'];
                 $ucesnik = $picture->getUcesnika($korid);
-                $picture->cena = $mojaCena;
+                if($mojaCena > $picture->cena) {
+                    $picture->cena = $mojaCena;
+                }
                 $picture->save();
                 $omg = $ucesnik->get();
                 echo count($omg);
@@ -122,7 +157,7 @@ class spPicture extends Controller
                 $korisnici = $picture->getSveUcesnike();
                 foreach ($korisnici as $korisnik) {
                     if ($korisnik->id != $korid) {
-                        Mail::to($korisnik->mail)->send(new newOffer($picture));
+                        Mail::to($korisnik->email)->send(new newOffer($picture));
                     }
                 }
                 //spMail::newOffer($picture, $korid);
@@ -138,7 +173,8 @@ class spPicture extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @deprecated
+     * @return void
      */
     public function update(Request $request, $id)
     {
@@ -150,7 +186,8 @@ class spPicture extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @deprecated
+     * @return void
      */
     public function destroy($id)
     {

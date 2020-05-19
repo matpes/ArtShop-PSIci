@@ -15,7 +15,9 @@
     @else
         <button disabled type="button" class="btn disabledButton gray_button"> Kupi slike</button>
     @endif
-
+    <a href="profileInfo">
+        <img src="{{$path}}" alt="" class="float-right">
+    </a>
 @endsection
 
 @section('content')
@@ -79,7 +81,7 @@
                 @else
                     <div class="offset-3 col-6">
                         <br><br><br>
-                        <div class="emptyCart" style="padding: 150px">
+                        <div class="emptyCart" style="padding: 50px">
 
                             Vasa korpa je prazna
 

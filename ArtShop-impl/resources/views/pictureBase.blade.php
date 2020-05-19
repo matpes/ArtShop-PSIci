@@ -12,6 +12,16 @@
 
 @endsection
 
+@section('header_form')
+
+    <a href="/profileInfo" >
+        <img src="{{$path}}" alt="AAAA" class="img-fluid float-right" style="padding-left: 20px">
+    </a>
+    <a href="/korpa">
+        <img src="/images/design/cart.png" alt="BBBB" class="img-fluid float-right">
+    </a>
+@endsection
+
 @section('content')
 
 
@@ -33,7 +43,7 @@
                                     Slikar:
                                 </td>
                                 <td class="detaljiSlike">
-                                    {{$slikar->username}}
+                                    {{$picture->autor}}
                                 </td>
                             </tr>
                             <tr>

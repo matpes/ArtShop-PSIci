@@ -7,6 +7,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Class NewPicture
+ * @package App\Mail
+ *
+ * Klasa koja predstavlja slanje maila pretplacenim kupcima
+ */
 class NewPicture extends Mailable
 {
     use Queueable, SerializesModels;

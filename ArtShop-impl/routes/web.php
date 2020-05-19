@@ -1,7 +1,13 @@
 <?php
 
 
+use App\Events\Auction;
+use App\Mail\pictureLost;
+use App\Mail\pictureWon;
+use App\User;
 use App\ZaOcenu;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Picture;
 use \App\Http\Controllers\spKupac;
@@ -32,9 +38,16 @@ Route::resource('/pretraga', 'spPretraga');
     return view('layouts.app');
 });*/
 
+Route::resource('/kupac_forma', 'spKupac', ['middleware' => ['UserMiddleware', 'KupacMiddleware']]);
+
+
+Route::resource('/zaOcenu', 'spZaOcenu', ['middleware' => ['UserMiddleware', 'KupacMiddleware']]);
+
+Route::resource('picture', 'spPicture');
+
 Auth::routes();
 
-Route::get('/insertPics', function(){
+/*Route::get('/insertPics', function(){
     Picture::pocetna();
 });
 
@@ -42,22 +55,11 @@ Route::get('/insertPics', function(){
 Route::get('/forma', 'spKupac@formaZaPodatke');
 
 
-Route::get('/insertIntoTable', 'spKupac@pocetnaBaza');
+Route::get('/insertIntoTable', 'spKupac@pocetnaBaza');*/
 
 
-Route::resource('/kupac_forma', 'spKupac');
 
 
-Route::resource('/zaOcenu', 'spZaOcenu');
-
-Route::resource('picture', 'spPicture');
-
-
- Route::get('proba', function (){
-
-
-     dd(ZaOcenu::zaOcenu(1));
- });
 //  END MATIJA
 
 //SANJA
@@ -74,9 +76,7 @@ Route::group(['middleware' => 'GuestMiddleware'], function()
     Route::get('/password/request', 'Auth\ForgotPasswordController@index')->name('password.request');
     Route::post('/password/email', 'Auth\ForgotPasswordController@forgotPassword')->name('password.email');
 
-    //MATIJA
-    Route::resource('/korpa', 'spKorpa');
-    //END MATIJA
+
 });
 
 
@@ -91,5 +91,47 @@ Route::group(['middleware' => 'UserMiddleware'], function()
     Route::post('/password/reset/{token}', 'Auth\ResetPasswordController@resetPassword')->name('postPassword.reset');
     Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('/removeAccount/{id}', 'UserController@removeAccount')->name('removeAccount');
+    //MATIJA
+    Route::resource('/korpa', 'spKorpa');
+    Route::post('subscribe', 'spKupac@subscribe');
+    //END MATIJA
 });
 //END SANJA
+
+
+
+//ROUTA ZA TESTIRANJE PROIZVOLJNIH DELOVA KODA
+Route::get('test', function (){
+
+    $picture = Picture::onlyTrashed()->find(12);
+    if(Carbon::parse($picture->danIstekaAukcije)->diffInMinutes(Carbon::now(), false)>0){
+        //ZATVARANJE AUKCIJE
+        $pobednik = null;
+        $gubitnici = null;
+        $picture->krajAukcije($pobednik, $gubitnici);
+        //dd($pobednik);
+        dd($gubitnici);
+
+        /*foreach ($pobednik as $pob){
+            Mail::to(User::find($pob->user_id)->email)->send(new pictureWon($picture));
+            $zaOcenu = new ZaOcenu;
+            $zaOcenu->picture_id = $picture->id;
+            $zaOcenu->user_id = $pob->user_id;
+            $zaOcenu->ocena = 0;
+            $zaOcenu->save();
+        }
+
+        foreach ($gubitnici as $gub){
+            Mail::to(User::find($gub->user_id)->email)->send(new pictureLost($picture));
+        }*/
+
+
+
+        //$picture->delete();
+
+
+    }else{
+        event(new Auction($picture));
+        sleep(60);
+    }
+});

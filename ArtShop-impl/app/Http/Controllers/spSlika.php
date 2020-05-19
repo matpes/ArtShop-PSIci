@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Auction;
 use App\User;
 use App\Mail\NewPicture;
 use App\Picture;
@@ -11,29 +12,52 @@ use App\Tema;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailer;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 
+/**
+ * Class spSlika
+ * @package App\Http\Controllers
+ * @version 1.0
+ * Klasa kontrolera koja upravlja slikama
+ */
 class spSlika extends Controller
 {
     /**
+     * Author: Pavićević Vladana 17/0296
+     * --------------------------------------
+     * spSlika
+     * --------------------------------------
+     */
+
+
+    /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
+
+        $kupac = Auth::user();
+        $path = '/images/avatar.png';
+        if($kupac->profilna_slika!=null){
+            $path = '/images/users//'.$kupac->profilna_slika;
+        }
         $error = [];
         $picture = new Picture();
         $teme = "";
-        return view('slika_form', compact('error', 'picture', 'teme'));
+        return view('slika_form', compact('error', 'picture', 'teme', 'path'));
 
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @deprecated
+     * @return void
      */
     public function create()
     {
@@ -41,10 +65,10 @@ class spSlika extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Funkcija za objavljivanje nove slike
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Redirector
      */
     public function store(Request $request)
     {
@@ -129,7 +153,6 @@ class spSlika extends Controller
             $korid = Auth::id();
             $slikar = Slikar::where('user_id', $korid)->get()[0];
             $picture->user_id = $slikar->user_id;
-
             if(count(Picture::where('path', $picture->path)->get()) == 0){
                 $picture->save();
 
@@ -148,7 +171,7 @@ class spSlika extends Controller
 
                 Picture::where('path', $picture->path)->get()[0]->update($request->all());
             }
-
+            event(new Auction($picture));
             $picture = Picture::where('path', $picture->path)->get()[0];
 
             $teme = explode(", ", $request->get('teme'));
@@ -170,7 +193,8 @@ class spSlika extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @deprecated
+     * @return void
      */
     public function show($id)
     {
@@ -181,7 +205,7 @@ class spSlika extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function edit($id)
     {
@@ -202,7 +226,8 @@ class spSlika extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @deprecated
+     * @return void
      */
     public function update(Request $request, $id)
     {
@@ -210,10 +235,10 @@ class spSlika extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Funkcija za brisanje odredjene slike.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function destroy($id)
     {

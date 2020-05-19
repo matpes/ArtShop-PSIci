@@ -64,8 +64,7 @@ class UserController extends Controller
      *  Author: Samardžija Sanja 17/0372
      * Funkcija koja dohvata slike slikara koje kupac prati
      *
-     * @param
-     * @return View
+     * @return \Illuminate\Http\Response
      */
     public function userProfile($id) {
         $user = DB::table('users')
@@ -94,6 +93,7 @@ class UserController extends Controller
      *
      * @param
      * @return view
+
      */
     public function profileInfo(){
         $user = Auth::user();
