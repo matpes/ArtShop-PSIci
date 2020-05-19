@@ -1,9 +1,12 @@
 @extends('.layouts.app')
+
+
 @section('header_form')
 
-    <a href="/korpa">
-        <img src="/images/design/cart.png" alt="" class="img-fluid float-right">
+    <a href="/profileInfo" >
+        <img src="{{$path}}" alt="AAAA" class="img-fluid float-right" style="padding-left: 20px">
     </a>
+
 @endsection
 
 @section('content')

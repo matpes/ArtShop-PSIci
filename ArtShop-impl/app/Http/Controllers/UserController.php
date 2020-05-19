@@ -64,8 +64,7 @@ class UserController extends Controller
      *  Author: Samardžija Sanja 17/0372
      * Funkcija koja dohvata podatke za trenutno ulogovanog korisnika
      *
-     * @param
-     * @return View
+     * @return \Illuminate\Http\Response
      */
 
     public function userProfile()
@@ -87,8 +86,7 @@ class UserController extends Controller
      * Author: Samardžija Sanja 17/0372
      * Funkcija koja vodi na formu sa informacijama o korisniku
      *
-     * @param
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
 
     public function profileInfo(){

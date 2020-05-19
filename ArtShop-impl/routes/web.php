@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Events\Auction;
 use App\Mail\pictureLost;
 use App\Mail\pictureWon;
 use App\User;
@@ -37,9 +38,16 @@ Route::get('/', function () {
     return view('layouts.app');
 });
 
+Route::resource('/kupac_forma', 'spKupac', ['middleware' => ['UserMiddleware', 'KupacMiddleware']]);
+
+
+Route::resource('/zaOcenu', 'spZaOcenu', ['middleware' => ['UserMiddleware', 'KupacMiddleware']]);
+
+Route::resource('picture', 'spPicture');
+
 Auth::routes();
 
-Route::get('/insertPics', function(){
+/*Route::get('/insertPics', function(){
     Picture::pocetna();
 });
 
@@ -47,22 +55,11 @@ Route::get('/insertPics', function(){
 Route::get('/forma', 'spKupac@formaZaPodatke');
 
 
-Route::get('/insertIntoTable', 'spKupac@pocetnaBaza');
+Route::get('/insertIntoTable', 'spKupac@pocetnaBaza');*/
 
 
-Route::resource('/kupac_forma', 'spKupac');
 
 
-Route::resource('/zaOcenu', 'spZaOcenu');
-
-Route::resource('picture', 'spPicture');
-
-
- Route::get('proba', function (){
-
-
-     dd(ZaOcenu::zaOcenu(1));
- });
 //  END MATIJA
 
 //SANJA
@@ -84,6 +81,7 @@ Route::group(['middleware' => 'GuestMiddleware'], function()
 
 Route::group(['middleware' => 'UserMiddleware'], function()
 {
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/profileInfo', 'UserController@profileInfo')->name('userInfo');
     Route::get('/profile/{id}', 'UserController@userProfile')->name('userProfile');
     Route::get('/changeProfilePicture', 'UserController@indexProfilePicture')->name('profilePicture');
@@ -99,35 +97,40 @@ Route::group(['middleware' => 'UserMiddleware'], function()
 });
 //END SANJA
 
-//VLADNA
-/*
-Route::resource('/slika', 'spSlika');
 
-Route::resource('/pretraga', 'spPretraga');
-*/
 
-//END VLADANA
-
+//ROUTA ZA TESTIRANJE PROIZVOLJNIH DELOVA KODA
 Route::get('test', function (){
-    $pic = Picture::find(4);
-    //dd($pic);
-    $pobednik = null;
-    $gubitnici = null;
-    $pic->krajAukcije($pobednik, $gubitnici);
-    /*foreach ($pobednik as $pob){
 
-        dd(User::find($pob->user_id));
-        //Mail::to(User::find($pob->user_id)->email)->send(new pictureWon($pic));
+    $picture = Picture::onlyTrashed()->find(12);
+    if(Carbon::parse($picture->danIstekaAukcije)->diffInMinutes(Carbon::now(), false)>0){
+        //ZATVARANJE AUKCIJE
+        $pobednik = null;
+        $gubitnici = null;
+        $picture->krajAukcije($pobednik, $gubitnici);
+        //dd($pobednik);
+        dd($gubitnici);
+
+        /*foreach ($pobednik as $pob){
+            Mail::to(User::find($pob->user_id)->email)->send(new pictureWon($picture));
+            $zaOcenu = new ZaOcenu;
+            $zaOcenu->picture_id = $picture->id;
+            $zaOcenu->user_id = $pob->user_id;
+            $zaOcenu->ocena = 0;
+            $zaOcenu->save();
+        }
+
+        foreach ($gubitnici as $gub){
+            Mail::to(User::find($gub->user_id)->email)->send(new pictureLost($picture));
+        }*/
+
+
+
+        //$picture->delete();
+
+
+    }else{
+        event(new Auction($picture));
+        sleep(60);
     }
-
-    foreach ($gubitnici as $gub){
-        dd($gub);
-        Mail::to(User::find($gub->user_id)->email)->send(new pictureLost($pic));
-    }*/
-
-    $ret = Carbon::parse($pic->danIstekaAukcije)->diffInMinutes(Carbon::now(), false);
-
-    //$ret = Carbon::parse($pic->danIstekaAukcije)->diffInMinutes(Carbon::parse('2020-05-18 23:50'), false);
-    //$ret = Carbon::parse('2020-05-19 00:00'/*$event->picture->danIstekaAukcije*/)->diffInMinutes(Carbon::now(), false);
-    echo Carbon::parse($pic->danIstekaAukcije)->diffInMinutes(Carbon::now(), false)<0;
 });

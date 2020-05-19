@@ -8,6 +8,11 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Class pictureLost
+ * @package App\Mail
+ * Klasa koja predstavlja slanje maila koji se salje ucesnicima aukcije koji nusu kupili sliku
+ */
 class pictureLost extends Mailable
 {
 

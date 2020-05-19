@@ -4,17 +4,23 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+/**
+ * Korpa – model klasa za upravljanje korpom
+ *
+ * @version 1.0
+ */
 
 class Korpa extends Model
 {
     //
-
+    //inherited variable
     protected $primaryKey = 'picture_id';
 
-    protected $fillable = [
-        'picture_id', 'user_id'
-    ];
-
+    /**
+     * funkcija koja popunjava korpu u bazi za korisnika sa id=1
+     *
+     * @return void
+     */
     public static function pocetna()
     {
         $kupovina = new Korpa(['picture_id'=>2, 'user_id'=>1]);
@@ -25,6 +31,16 @@ class Korpa extends Model
         $kupovina->save();
     }
 
+    protected $fillable = [
+        'picture_id', 'user_id'
+    ];
+
+    /**
+     * funkcija koja dohvata slike iz korpe, za trenutno ulogovanoh korisnika, a u $cenu smesta sumu cena kupljenih slika
+     * Povratna vrednost je niz slika koje se nalaze u korpi korisnika
+     *
+     * @return array
+     */
     public static function dohvatiSlike(&$cena)
     {
         $cena = 0;
@@ -41,7 +57,16 @@ class Korpa extends Model
         }
         return $slika;
     }
-
+    /**
+     * funkcija koja dohvata slike iz korpe, za trenutno ulogovanoh korisnika, a u $cenu smesta sumu cena kupljenih slika
+     * Povratna vrednost je niz slika koje se nalaze u korpi korisnika
+     *
+     * @param int $id - id korisnika za koga se dohvataju slike iz kopre
+     * @return array
+     *
+     * @deprecated
+     *
+     */
     public static function dohvatiSlikeUKorpi($id)
     {
         $korpa = Korpa::all()->where('user_id', $id);

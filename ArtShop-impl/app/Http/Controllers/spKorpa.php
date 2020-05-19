@@ -6,16 +6,30 @@ use App\Korpa;
 use App\Picture;
 use App\Podaci;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
+/**
+ * Class spKorpa
+ * @package App\Http\Controllers
+ * @version 1.0
+ *
+ * Kontroler za prikaz sadrzaja korpe
+ */
 class spKorpa extends Controller
 {
-
+    /**
+     * Author: Pešić Matija 17/0428
+     * --------------------------------------
+     * spZKorpa
+     * --------------------------------------
+     */
 
     /**
-     * Display a listing of the resource.
+     * Prikazuje sadrzaj korpe
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -52,9 +66,9 @@ class spKorpa extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * unused
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function create()
     {
@@ -63,9 +77,9 @@ class spKorpa extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @deprecated
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function store(Request $request)
     {
@@ -82,6 +96,7 @@ class spKorpa extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * @deprecated
      */
     public function show($id)
     {
@@ -93,7 +108,8 @@ class spKorpa extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return void
+     * @deprecated
      */
     public function edit($id)
     {
@@ -103,9 +119,10 @@ class spKorpa extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @deprecated
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function update(Request $request, $id)
     {
@@ -113,10 +130,10 @@ class spKorpa extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Funckija koja uklanja sliku zadatog id-ja iz korpe
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Redirector
      */
     public function destroy($id)
     {

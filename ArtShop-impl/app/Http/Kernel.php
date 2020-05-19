@@ -79,5 +79,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'SlikarMiddleware' => \App\Http\Middleware\SlikarMiddleware::class,
+        'KupacMiddleware' => \App\Http\Middleware\KupacMiddleware::class,
     ];
 }

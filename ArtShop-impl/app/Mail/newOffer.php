@@ -8,6 +8,12 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
+/**
+ * Class newOffer
+ * @package App\Mail
+ *
+ * klasa koja predstavlja slanje maila ostalim ucesnicima kada neki korisnik da ponudu na aukciju
+ */
 class newOffer extends Mailable
 {
     use Queueable, SerializesModels;

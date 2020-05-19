@@ -6,6 +6,7 @@ use App\Events\Auction;
 use App\Mail\pictureLost;
 use App\Picture;
 use App\User;
+use App\ZaOcenu;
 use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -15,13 +16,17 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\pictureWon;
 
 
-
+/**
+ * Class CloseAuction
+ * @package App\Listeners
+ * Listener za zatvaranje aukcija.
+ */
 class CloseAuction implements ShouldQueue
 {
 
     /**
      * Handle the event.
-     *
+     *  Ako je aukcija istekla, event se obradjuje, a ako nije, event se vraca u bazu, za kasniju obradu
      * @param  Auction  $event
      * @return void
      */
@@ -38,15 +43,26 @@ class CloseAuction implements ShouldQueue
 
             foreach ($pobednik as $pob){
                 Mail::to(User::find($pob->user_id)->email)->send(new pictureWon($event->picture));
+                $zaOcenu = new ZaOcenu;
+                $zaOcenu->picture_id = $picture->id;
+                $zaOcenu->user_id = $pob->user_id;
+                $zaOcenu->ocena = 0;
+                $zaOcenu->save();
+                sleep(1);
             }
 
             foreach ($gubitnici as $gub){
                 Mail::to(User::find($gub->user_id)->email)->send(new pictureLost($event->picture));
+                sleep(1);
             }
+
+            $picture->delete();
+
 
         }else{
             event(new Auction($picture));
-            //sleep(10);
         }
+
+        sleep(60);
     }
 }

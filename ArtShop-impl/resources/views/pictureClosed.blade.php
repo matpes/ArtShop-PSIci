@@ -35,8 +35,7 @@
             <span class="cenaText">Aukcija traje još:</span>
             <label for="" class="cenaLable" id="trajanje"></label>
         </form>
-            <span class="cenaText">Aukcija traje još:</span>
-            <label for="" class="cenaLable" id="trajanje"></label>
+
 
 
     </div>

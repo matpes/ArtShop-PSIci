@@ -10,27 +10,46 @@ use App\Podaci;
 use App\Slikar;
 use App\ZaOcenu;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
+/**
+ * Class spKupac
+ * @package App\Http\Controllers
+ * @version 1.0
+ *
+ * Klasa za kupca, ali se uglavnom koristi za prikaz forme sa podacima
+ */
 class spKupac extends Controller
 {
-    //
+    /**
+     * Author: Pešić Matija 17/0428
+     * --------------------------------------
+     * spKupac
+     * --------------------------------------
+     */
 
     /**
-     * Display a listing of the resource.
+     * Prikazuje formu koju treba popuniti.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
         //
 
+        $kupac=Auth::user();
+        $path = '/images/avatar.png';
+        if($kupac->profilna_slika!=null){
+            $path = '/images/users//'.$kupac->profilna_slika;
+        }
         $cena = 0;
         $slikeUKorpi = Korpa::dohvatiSlike($cena);
         /*foreach ($slikeUKorpi as $slika){
             echo $slika. "<br>";
         };*/
-        $pogled = view('.podaci_form')->with('slike', $slikeUKorpi)->with('cena', $cena);
+        $pogled = view('.podaci_form')->with('slike', $slikeUKorpi)->with('cena', $cena)->with('path', $path);
         return $pogled;
 
 
@@ -38,8 +57,8 @@ class spKupac extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @deprecated
+     * @return string
      */
     public function create()
     {
@@ -48,10 +67,10 @@ class spKupac extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Funkcija za preuzimanje podataka iz baze i njihovo pamcenje.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Redirector
      */
     public function store(Request $request)
     {
@@ -84,9 +103,9 @@ class spKupac extends Controller
 
     /**
      * Display the specified resource.
-     *
+     * @deprecated
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return string
      */
     public function show($id)
     {
@@ -96,9 +115,9 @@ class spKupac extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
+     * @deprecated
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function edit($id)
     {
@@ -107,10 +126,10 @@ class spKupac extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
+     * @deprecated
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function update(Request $request, $id)
     {
@@ -121,13 +140,19 @@ class spKupac extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @deprecated
+     * @return void
      */
     public function destroy($id)
     {
         //
     }
 
+    /**
+     * Funckija koja iz forme preuzima podatke o korisniku koji zeli da se pretplati na slikara cija je slika
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|Redirector
+     */
     public function subscribe(Request $request){
         $id = $request->slikar;
         $korid = Auth::id();
@@ -136,6 +161,10 @@ class spKupac extends Controller
         return redirect('/picture/'.$request->picture);
     }
 
+    /**
+     * @deprecated
+     * @return void
+     */
     function pocetnaBaza(){
         //Korisnik::pocetna();
         //Kupac::pocetna();

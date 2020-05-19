@@ -13,7 +13,7 @@
 <p>
     NE CESTITAMO!
     Nazalost, pobedili niste na aukciji za sliku.
-    Vasa ponuda je iznosila {{$picture->cena}}, ali nazalost to nije bilo dovoljno.
+    Vasa ponuda nije bila dovoljna.
     Pogledajte sta niste osvojili na: artshop.test/picture/{{$picture->id}}
 </p>
 
