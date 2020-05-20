@@ -47,7 +47,7 @@
                             @if(!Auth::user()->isAdmin)
                                 @if(Auth::user()->isSlikar)
                                 {{--objavi sliku za slikare--}}
-                                    <a class="btn btn-link" href="{{ route('login') }}">
+                                    <a class="btn btn-link" href="/slika">
                                         {{ __('Objavi sliku') }}
                                     </a>
                                 @else
@@ -59,8 +59,8 @@
                             @endif
                             <img  class = "img-fluid img-rounded ml-5"  alt="profilna_slika" style=""  href="{{ route('login') }}"
                                   width="60px" height="60px"
-                                  src=<?php if(is_null($user->picture_path)){ echo'images/avatar.png';}
-                            else {$path = 'images/users/'.$user->picture_path; echo $path; } ?>>
+                                  src=<?php if(is_null(Auth::user()->picture_path)){ echo'images/avatar.png';}
+                            else {$path = 'images/users/'.Auth::user()->picture_path; echo $path; } ?>>
                         @else
                             <a class="btn btn-link" href="{{ route('login') }}">
                                 {{ __('Uloguj se') }}
