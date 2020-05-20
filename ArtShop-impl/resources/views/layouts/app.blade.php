@@ -1,3 +1,4 @@
+{{-- heder sa pretragom i prikazom login/register linkova ili profilne itd. --}}
 <!doctype html>
 <html lang="en">
 <head>
@@ -30,7 +31,7 @@
         <div class="row-fluid">
             <div class="col-sm-12">
                 <div class="form-group noMargin">
-                    <form method="get" action="/pretraga">
+                    <a method="get" action="/pretraga">
                         <input type="text" name="autor" id="1" class="form-control header_input_text"
                                placeholder="Slikar">
                         <input type="text" name="tema" id="2" class="form-control header_input_text"
@@ -57,10 +58,11 @@
                                     </a>
                                 @endif
                             @endif
-                            <img  class = "img-fluid img-rounded ml-5"  alt="profilna_slika" style=""  href="{{ route('login') }}"
-                                  width="60px" height="60px"
-                                  src=<?php if(is_null($user->picture_path)){ echo'images/avatar.png';}
-                            else {$path = 'images/users/'.$user->picture_path; echo $path; } ?>>
+                            <a class="btn btn-link" href="{{route('profile.info', ['id'=>Auth::user()->id])}}">
+                                <img  class = "img-fluid img-rounded ml-5"  alt="profilna_slika" width="60px" height="60px"
+                                      src=<?php if(is_null($user->picture_path)){ echo'\images\avatar.png';}
+                                else {$path = '\images\users\\'.$user->picture_path; echo $path; } ?>>
+                            </a>
                         @else
                             <a class="btn btn-link" href="{{ route('login') }}">
                                 {{ __('Uloguj se') }}
@@ -79,7 +81,7 @@
 <div class="spaceFromHeader">
     @yield('content')
 </div>
-<div class="spaceFromHeader">
+<div class="spaceFromHeader mb-1">
     @yield('footer')
 </div>
 </body>

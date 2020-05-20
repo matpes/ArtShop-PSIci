@@ -14,7 +14,7 @@ class GuestMiddleware
      |      Preusmeravanje zahteva koji su dostupni samo gostu                                 |
      |-----------------------------------------------------------------------------------------|
      |      U slučaju da korisnik koji nije gost pokuša da pristupi nekoj ruti preusmerava se  |
-     |      na početnu stranicu.                                                               |
+     |      na početnu stranicu svog naloga.                                                               |
      |                                                                                         |
      |-----------------------------------------------------------------------------------------|
      */
@@ -24,7 +24,7 @@ class GuestMiddleware
         if (Auth::check())
         {
             $slike = array();
-            return response()->view('profile.user', ['user'=>Auth::user(), 'slike'=>$slike, ]);
+            return response()->redirectToRoute('profile.user', ['id'=>Auth::user()->id]);
         }
         return $next($request);
     }

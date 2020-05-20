@@ -13,18 +13,19 @@ use App\Http\Controllers\Controller;
 use  Illuminate\Support\Facades\Input;
 use  Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Auth\Auth;
 
 class ForgotPasswordController extends Controller
 {
 
     /*
-     * Author: Samardžija Sanja 17/0372
-    |--------------------------------------------------------------------------
-    | Forgot Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | Kontroler zadužen za resetovanje lozinki koje su zaboravljene
-    |
+    | Author: Samardžija Sanja 17/0372                                         |
+    |--------------------------------------------------------------------------|
+    | Forgot Password Reset Controller                                         |
+    |--------------------------------------------------------------------------|
+    |                                                                          |
+    | Kontroler zadužen za resetovanje lozinki koje su zaboravljene            |
+    |                                                                          |
     */
 
     use ResetsPasswords;
@@ -37,7 +38,7 @@ class ForgotPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('GuestMiddleware');
     }
 
     /*

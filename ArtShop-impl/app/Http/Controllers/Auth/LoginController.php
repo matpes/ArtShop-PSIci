@@ -13,17 +13,18 @@ use Session;
 class LoginController extends Controller
 {
     //use AuthenticatesUsers;
-
-    /* Author: Samardžija Sanja 17/0372
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | Ovaj kontroler pravi autentifikaciju za jednog korisnika (ukoliko su kredencijali koje je uneo  |
-    | u redu) i preusmerava ga na profil.Autentifikacija je globalno dostupna, u svakom trenutnku     |
-    | može da se proveri da li postoji trenutno registrovan korisnik i da se dohvati (njegov model).  |
-    |
-    |
+    /*
+    |Author: Samardžija Sanja 17/0372                                              |
+    |------------------------------------------------------------------------------|
+    | Login Controller                                                             |
+    |------------------------------------------------------------------------------|
+    |                                                                              |
+    | Ovaj kontroler pravi autentifikaciju za jednog korisnika (ukoliko su         |
+    | kredencijali koje je uneo u redu) i preusmerava ga na profil.Autentifikacija |
+    | je globalno dostupna, u svakom trenutnku može da se proveri da li postoji    |
+    | trenutno registrovan korisnik i da se dohvati (njegov model).                |
+    |                                                                              |
+    |                                                                              |
     */
 
     use AuthenticatesUsers;
@@ -77,11 +78,11 @@ class LoginController extends Controller
         } else {
             if (Auth::attempt($credentials)) {
                 return redirect()
-                    ->route('profile.info', ['id'=>$user->id])
+                    ->route('profile.user', ['id'=>$user->id])
                     ->with('success',"Uspešno ste ulogovani!");
             } else{
                 return redirect('login')
-                    ->with('success',"Nemate pristup ovoj stranici!");
+                    ->with('success',"Pogrešna lozinka!");
             }
         }
     }
@@ -94,6 +95,6 @@ class LoginController extends Controller
 //        dd($this);
         Session::flush();
         Auth::logout();
-        return redirect('layouts.base')->with('success','Uspešno ste se izlogovali!');
+        return redirect('login')->with('success','Uspešno ste se izlogovali!');
     }
 }

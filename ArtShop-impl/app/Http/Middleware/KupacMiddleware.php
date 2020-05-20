@@ -20,7 +20,7 @@ class KupacMiddleware
     {
         $korid = Auth::id();
         if(Kupac::find($korid) == null) {
-            return redirect('/');
+            return redirect('home');
         }
         return $next($request);
     }

@@ -30,7 +30,7 @@ class GuestController extends Controller
 
 
     /**
-     * Author: Sanja Samardžija 17/0372
+     *
      * Show the application welcome.
      *
      * @return \Illuminate\Contracts\Support\Renderable
@@ -38,17 +38,6 @@ class GuestController extends Controller
     public function welcome()
     {
         return view('welcome');
-    }
-
-    /**
-     * Author: Sanja Samardžija 17/0372
-     * Show the application startpage.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function app()
-    {
-        return view('layouts.app');
     }
 
     /**
@@ -69,6 +58,6 @@ class GuestController extends Controller
             ->limit(5)
             ->get();
 
-        return response()->view('layouts.base', ['novo'=>$popular]);
+        return response()->view('layouts.base', ['$user'=>$user, 'novo'=>$popular]);
     }
 }

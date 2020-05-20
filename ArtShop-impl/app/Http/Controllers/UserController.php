@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Concerns\InteractsWithInput;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use phpDocumentor\Reflection\File;
+
 
 /** UserController - kontroler za standardne funkcionalnosti koje mogu da koriste svi registrovani korisnici.
  *
@@ -68,21 +74,24 @@ class UserController extends Controller
      */
     public function userProfile($id) {
         $user = DB::table('users')
-            ->where('id','=',$id);
+            ->where('id','=',$id)
+        ->first();
         $slikari = null;
         $slike = array();
         if(!$user->isSlikar) {
             //dovlacenje slika slikara koji se prate u $slike
             $slikari = DB::table('kupac_slikar')
-                ->where('kupac_id', '=', $id);
+                ->where('kupac_id', '=', $id)
+                ->select('slikar_id')
+                ->get();
             foreach ($slikari as $s) {
                 $sl = DB::table('pictures')
-                    ->where('pictures.user_id', '=', $s->slikar_id);
+                    ->where('pictures.user_id', '=', $s);
 
                 array_push($slike, $sl);
             }
         } else {
-            return redirect()->back()->with('succsess','Nemate pristup ovoj stranici!');
+            return redirect()->route('profile.user_new',['id'=>$id]);
         }
         return response()->view('profile.user', ['user'=>$user, 'slike'=>$slike]);
     }
@@ -121,6 +130,7 @@ class UserController extends Controller
     public function popularPictures()
     {
         $user = Auth::user();
+//        dd($user);
         //dovlacenje najnovijih slika u $popular
         $novo = array();
 
@@ -129,7 +139,67 @@ class UserController extends Controller
             ->limit(5)
             ->get();
 
-        return response()->view('profile.user_new', ['slike'=>$novo, 'user'=>$user]);
+        return response()->view('profile.user_new', ['novo'=>$novo, 'user'=>$user]);
+    }
+
+    /**
+     *  Author: Samardžija Sanja 17/0372
+     * Funkcija koja vraća formu za promenu profilne slike
+     *
+     * @param
+     * @return view
+     */
+    public function indexProfilePicture(){
+        return response()->view('profile.picture');
+    }
+
+    /**
+     *  Author: Samardžija Sanja 17/0372
+     * Funkcija koja menja profilnu sliku
+     *
+     * @param
+     * @return view
+     */
+    public function changeProfilePicture(Request $request){
+
+//        dd($request->path);
+        $rules = [
+            'path' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+        ];
+        $messages = [
+            'path.required'=> 'Morate prvo izabrati fajl!',
+            'path.image'=>' Ovo polje je obavezno',
+            'path.mimes' => 'Format slike nije podržan! Podržani formati su: jpeg,png,jpg,svg.',
+            'path.max'=>'Fajl ne sme biti veći od :max B',
+        ];
+//        dd($data);
+        $validate = Validator::make($request->all(), $rules, $messages);
+        if($validate->fails()){
+//            dd("failed");
+            return redirect()->back()
+                ->withErrors($validate)
+                ->withInput();
+        }
+
+//        dd($request->path);
+        $user = Auth::user();
+        if(!is_null($user->picture_path)) {
+            Storage::delete('images/users/' . $user->picture_path);
+        }
+//        dd($user);
+        $filename = $user->id . '.' . $request->path->getClientOriginalExtension();
+//        dd($filename);
+//        $path = Storage::putFile('images/users/' . $filename, $request->file('path'));
+//        $file = $request->file('path')->storeAs('images\users', $filename);
+        $file = $request->file('path')->move('images\users', $filename);
+//        dd($file);
+        DB::table('users')
+            ->where('id', '=', $user->id)
+            ->limit(1)
+            ->update(['picture_path' => $filename]);
+
+        return redirect()->route('profile.info', [$user->id])
+            ->with('success',"Uspešno promenjena profilna slika!");
     }
 }
 

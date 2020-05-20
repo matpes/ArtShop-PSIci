@@ -19,12 +19,12 @@ use function GuzzleHttp\Promise\exception_for;
 class RegisterController extends Controller
 {
     /*
-    | Author: Samardžija Sanja 17/0372
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |   Registracija, validacija i kreiranje novih korisnika
-    |
+    | Author: Samardžija Sanja 17/0372                                         |
+    |--------------------------------------------------------------------------|
+    | Register Controller                                                      |
+    |--------------------------------------------------------------------------|
+    |   Registracija, validacija i kreiranje novih korisnika                   |
+    |                                                                          |
     */
 
     use RegistersUsers;

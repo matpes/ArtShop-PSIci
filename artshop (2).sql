@@ -378,7 +378,8 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mail` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `picture_path` varchar(191) COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `profilna_slika` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -391,16 +392,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_username_unique` (`username`),
-  UNIQUE KEY `users_mail_unique` (`mail`)
+  UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `mail`, `email_verified_at`, `password`, `profilna_slika`, `brPrijava`, `brUspesnihPrijava`, `isSlikar`, `isAdmin`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'tasha', 'tasha@gmail.com', NULL, '$2y$10$19wemgF4yfIec.mdXTNW3uj/q88.npd1pGTv9Ngo24Gze.K4Om49i', NULL, 0, 0, 1, 0, NULL, '2020-05-16 20:34:20', '2020-05-16 20:34:20'),
-(2, 'matpes', 'pavicevicvladana@gmail.com', NULL, '$2y$10$VMyy2qDs.EveD3CCStpLl.b6JcDXKvHnny0DAxQbIKHb81idxaXcm', NULL, 0, 0, 0, 0, NULL, '2020-05-16 20:35:52', '2020-05-16 20:35:52');
+INSERT INTO `users` (`id`, `username`, `email`, `picture_path`,`email_verified_at`, `password`, `profilna_slika`, `brPrijava`, `brUspesnihPrijava`, `isSlikar`, `isAdmin`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'tasha', 'tasha@gmail.com', NULL, NULL, '$2y$10$19wemgF4yfIec.mdXTNW3uj/q88.npd1pGTv9Ngo24Gze.K4Om49i', NULL, 0, 0, 1, 0, NULL, '2020-05-16 20:34:20', '2020-05-16 20:34:20'),
+(2, 'matpes', 'pavicevicvladana@gmail.com', NULL, NULL, '$2y$10$VMyy2qDs.EveD3CCStpLl.b6JcDXKvHnny0DAxQbIKHb81idxaXcm', NULL, 0, 0, 0, 0, NULL, '2020-05-16 20:35:52', '2020-05-16 20:35:52');
 
 -- --------------------------------------------------------
 
