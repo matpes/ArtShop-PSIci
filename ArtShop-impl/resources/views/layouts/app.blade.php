@@ -48,7 +48,7 @@
                             @if(!Auth::user()->isAdmin)
                                 @if(Auth::user()->isSlikar)
                                 {{--objavi sliku za slikare--}}
-                                    <a class="btn btn-link" href="{{ route('login') }}">
+                                    <a class="btn btn-link" href="/slika">
                                         {{ __('Objavi sliku') }}
                                     </a>
                                 @else
