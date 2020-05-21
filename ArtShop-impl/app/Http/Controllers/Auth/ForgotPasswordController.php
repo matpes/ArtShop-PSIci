@@ -59,21 +59,24 @@ class ForgotPasswordController extends Controller
      */
     public function forgotPassword(Request $request)
     {
-        $user = DB::table('users')->where('mail', '=',$request->email)->first();
+        $user = DB::table('users')->where('email', '=',$request->email)->first();
         if (is_null($user)) {
-            return redirect('password/request')
-                ->withErrors(['email' => "Korisnik sa unesenom email adresom ne postoji u bazi!"])
+            return redirect()->back()
+                ->withErrors(['email' => "Korisnik sa unetom email adresom ne postoji u bazi!"])
                 ->withInput();
         } else {
             $random = Str::random(8);
-            $user = User::where('username', '=', $user->username)->first();
-            $user->password = Hash::make($random);
-            $user->update();
+            $password = Hash::make($random);
+            DB::table('users')
+                ->where('id', '=', $user->id)
+                ->limit(1)
+                ->update(['password' => $password]);
 
-            Mail::send('reauth/passwords/mailers', array('name'=>$user->name, 'new_password' => $random ), function($message)
+            Mail::send('mails.passwordReset', array('title'=>'Zatražili ste resetovanje loznike',
+                'username'=>$user->username, 'password' => $random, 'link'=> '127.0.0.1:8000/login'), function($message)
             {
                 $email = Request::getCurrentRequest()->email;
-                $message->to($email, $email->subject('ArtShop'));
+                $message->to($email, $email->subject('ArtShop password reset'));
             });
             return redirect('login')
                 ->with('success', "Email za resetovanje lozinke poslat na datu adresu!");

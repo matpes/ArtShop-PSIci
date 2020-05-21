@@ -48,21 +48,28 @@
                             @if(!Auth::user()->isAdmin)
                                 @if(Auth::user()->isSlikar)
                                 {{--objavi sliku za slikare--}}
-                                    <a class="btn btn-link" href="/slika">
-                                        {{ __('Objavi sliku') }}
+                                    <a class="btn btn-link-btn" href="{{ route('login') }} class="float-md-right">
+                                        <button type="button" class="mr-0 btn-dark gray_button" style="width: fit-content;">{{ __('Objavi sliku') }}</button>
+                                    </a>
+                                    {{--profilna slika --}}
+                                    <a class="btn btn-link" href="{{route('profile.info', ['id'=>Auth::id()])}}">
+                                        <img  class = "img-fluid img-rounded float-right ml-4 mr-0"  alt="profilna_slika" width="60px" height="60px"
+                                              src=<?php if(is_null(Auth::user()->picture_path)){ echo'\images\avatar.png';}
+                                        else {$path = '\images\users\\'.Auth::user()->picture_path; echo $path; } ?>>
                                     </a>
                                 @else
-                                {{--korpa za korisnike --}}
-                                    <a href="/korpa">
-                                        <img src="/images/design/cart.png" alt="korpa" class="img-fluid float-right">
+                                    {{--profilna slika --}}
+                                    <a class="btn btn-link float-md-right" href="{{route('profile.info', ['id'=>Auth::id()])}}">
+                                        <img  class = "img-fluid img-rounded float-right"  alt="profilna_slika" width="60px" height="60px"
+                                              src=<?php if(is_null(Auth::user()->picture_path)){ echo'\images\avatar.png';}
+                                        else {$path = '\images\users\\'.Auth::user()->picture_path; echo $path; } ?>>
+                                    </a>
+                                    {{--korpa za korisnike --}}
+                                    <a href="/korpa" class="float-md-right mt-2 mr-4">
+                                        <img src="/images/design/cart.png" alt="korpa" class="img-fluid" href="/korpa">
                                     </a>
                                 @endif
                             @endif
-                            <a class="btn btn-link" href="{{route('profile.info', ['id'=>Auth::user()->id])}}">
-                                <img  class = "img-fluid img-rounded ml-5"  alt="profilna_slika" width="60px" height="60px"
-                                      src=<?php if(is_null($user->picture_path)){ echo'\images\avatar.png';}
-                                else {$path = '\images\users\\'.$user->picture_path; echo $path; } ?>>
-                            </a>
                         @else
                             <a class="btn btn-link" href="{{ route('login') }}">
                                 {{ __('Uloguj se') }}
@@ -81,8 +88,10 @@
 <div class="spaceFromHeader">
     @yield('content')
 </div>
-<div class="spaceFromHeader mb-1">
+<div class="spaceFromHeader">
+{{--    <footer>--}}
     @yield('footer')
+{{--    </footer>--}}
 </div>
 </body>
 </html>

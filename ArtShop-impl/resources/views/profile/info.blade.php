@@ -1,4 +1,9 @@
 {{-- prikaz informacija o korisniku sa mogućnošću promene određenih informacija --}}
+{{--    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!     --}}
+{{--!!!!DODATI: 1)IZGLED INFORMACIJA ZA ADMINA  !!!!--}}
+{{--!!!!        2)LINK ZA OBJAVI SLIKU          !!!!--}}
+{{--!!!!        3)LINK ZA OBJAVI IZLOŽBU        !!!!--}}
+{{--    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!--}}
 <!doctype html>
 <html lang="en">
 <head>
@@ -51,24 +56,13 @@
     </script>
 </head>
 <body class="body">
-<div class="row justify-content-end">
-    <div class="col-md-4 offset-md-8 float-md-right">
-        <img   class = "img-fluid img-rounded offset-md-10"  alt="profilna_slika" style=""  width="60px" height="60px"
-               src=<?php if(is_null($user->picture_path)){ echo'\images\avatar.png';}
-        else {$path = '\images\users\\'.$user->picture_path; echo $path; } ?>>
-    </div>
-</div>
-<hr>
 <div class="container-fluid">
     <div class="row justify-content-center noPadding">
         {{-- 1. kolona--}}
         <div class="col-md-4 mb-0 ml-0 text-md-left noPadding">
             {{--     profilna     --}}
-            @if(!$user->isSlikar)
-
-            @endif
             <div class="col-md-12 text-md-left mt-3">Profilna slika: &emsp;
-                <img id='profilna' class = "img-fluid " style="" width="180px" height="180px" alt="profilna_slika"
+                <img id='profilna' class = "img-fluid " style="" width="140px" height="140px" alt="profilna_slika"
                      src= <?php if(is_null($user->picture_path)){ echo'\images/avatar.png';}
                 else {$path = '\images\users\\'.$user->picture_path; echo $path; } ?>>
             </div>
@@ -111,7 +105,7 @@
             <br>
         </div>
         {{-- 2. kolona--}}
-        <div class="col-md-3 mb-0 text-md-left noPadding">
+        <div class="col-md-3 mb-0" style="vertical-align: middle;">
             <br>
             @if(session('success'))
                 <div class="alert alert-success" role="alert">
@@ -119,14 +113,31 @@
                 </div>
                 <br>
             @else
-                <br> <br> <br> <br>
+                <br> <br>
             @endif
             <form method="GET" action="{{ route('profile.picture', ['id'=> Auth::user()->id])}}">
                 <button type="submit" class="btn btn-warning">
                     {{ __('Promeni profilnu sliku') }}
                 </button>
             </form>
-            <br> <br> <br> <br>
+            <br> <br> <br> <br> <br>
+            @if($user->isSlikar)
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    {{--     odjavi se     --}}
+                    <form method="POST" action="{{ route('logout') }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        @csrf
+                        <button type="submit" class="btn-warning">
+                            {{ __('Izloguj se') }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <br> <br> <br>
+            @else
+                <br> <br> <br>
+            @endif
             <div class="row justify-content-center">
                 <div class="col-md-12 float-md-left">
                     {{-- UGASI NALOG--}}
@@ -139,29 +150,41 @@
         <div class="col-md-3 mb-0">
             <div class="row justify-content-center">
                 <div class="col-md-12">
-                    <br> <br>
+                    <br> <br> <br>
                     @if(Auth::check())
                         @if($user->isSlikar)
                             {{--     profil slikara     --}}
-                            <form method="GET" action="{{ route('profile.user', ['id'=>$user->id]) }}">
+                            <form method="GET" action="{{ route('profile.user_slikar', ['id'=>$user->id]) }}">
                                 <button type="submit" class="btn btn-warning" >
                                     {{ __('Moj profil') }}
                                 </button>
                             </form>
-                            <br>
+                            <br> <br>
                             {{--     objavi sliku   !!!!PROMENITI RUTU!!!!  --}}
                             <form method="GET" action="{{ route('profile.user', ['id'=>$user->id]) }}">
                                 <button type="submit" class="btn btn-warning" >
                                     {{ __('Objavi sliku') }}
                                 </button>
                             </form>
-                            <br>
+                            <br> <br>
                             {{--     objavi izložbu   !!!!PROMENITI RUTU!!!!  --}}
                             <form method="GET" action="{{ route('profile.user', ['id'=>$user->id]) }}">
                                 <button type="submit" class="btn btn-warning" >
                                     {{ __('Objavi izložbu') }}
                                 </button>
                             </form>
+                            <br> <br>
+                            {{--     povratak na početnu     --}}
+                            <form method="GET" action="{{ route('profile.user_new', ['id'=>$user->id]) }}">
+                                <button type="submit" class="btn btn-warning" >
+                                    {{ __('Povratak na početnu') }}
+                                </button>
+                            </form>
+                            <br> <br>
+                        @elseif($user->isAdmin)
+                            <div class="col-md-8 offset-md-4"> admin </div>
+{{--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!NEMAM POJMA ŠTA RADI ADMIN BEM LI GA...--}}
+                        @else
                             <br>
                             {{--     povratak na početnu     --}}
                             <form method="GET" action="{{ route('profile.user_new', ['id'=>$user->id]) }}">
@@ -170,33 +193,30 @@
                                 </button>
                             </form>
                             <br>
-                        @elseif($user->isAdmin)
-{{--                            NEMAM POJMA ŠTA RADI ADMIN BEM LI GA...--}}
-                            <div class="col-md-8 offset-md-4"> admin </div>
-                        @else
-                            {{--     povratak na početnu     --}}
-                            <form method="GET" action="{{ route('profile.user_new', ['id'=>$user->id]) }}">
+                            <form method="GET" action="/zaOcenu">
                                 <button type="submit" class="btn btn-warning" >
-                                    {{ __('Povratak na početnu') }}
+                                    {{ __('Oceni slike') }}
+                                </button>
+                            </form>
+                            <br>
+                            {{--     odjavi se     --}}
+                            <form method="POST" action="{{ route('logout') }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                @csrf
+                                <button type="submit" class="btn-warning">
+                                    {{ __('Izloguj se') }}
                                 </button>
                             </form>
                             <br>
                         @endif
-                        {{--     odjavi se     --}}
-                        <form method="POST" action="{{ route('logout') }}">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            @csrf
-                            <button type="submit" class="btn-warning">
-                                {{ __('Izloguj se') }}
-                            </button>
-                        </form>
-                        <br>
                     @endif
                 </div>
             </div>
         </div>
     </div>
+    <footer>
     <img src="/images/logo.png" alt="ArtShopLogo" class="float-right img-fluid">
+    </footer>
 </div>
 </body>
 </html>

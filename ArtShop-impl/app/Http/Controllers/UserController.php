@@ -31,6 +31,8 @@ class UserController extends Controller
     |--------------------------------------------------------------------------
     |
     */
+    protected  $br;
+    protected  $cnt;
 
     public function __construct()
     {
@@ -47,17 +49,21 @@ class UserController extends Controller
 
     public function removeAccount($id)
     {
-        $user = User::where('id','=',$id);
-        $user = $user->first();
+        $user = User::where('id','=',$id)->first();
+        if(!is_null($user->picture_path)) {
+            Storage::delete('images/users/' . $user->picture_path);
+        }
         DB::beginTransaction();
         DB::table('komentars')->where('user_id', '=', $id)->delete();
         DB::table('korpas')->where('user_id', '=', $id)->delete();
         if($user->isSlikar) {
             DB::table('slikars')->where('user_id', '=', $id)->delete();
-       /* } elseif($user->isAdmin){
-            DB::table('admins')->where('user_id', '=', $id)->delete();*/
+            DB::table('kupac_slikar')->where('slikar_id', '=', $id)->delete();
+        } elseif($user->isAdmin){
+            DB::table('admins')->where('user_id', '=', $id)->delete();
         } else{
             DB::table('kupacs')->where('user_id', '=', $id)->delete();
+            DB::table('kupac_slikar')->where('kupac_id', '=', $id)->delete();
         }
         DB::commit();
         Session::flush();
@@ -70,6 +76,7 @@ class UserController extends Controller
      *  Author: Samardžija Sanja 17/0372
      * Funkcija koja dohvata slike slikara koje kupac prati
      *
+     * @param integer $id
      * @return \Illuminate\Http\Response
      */
     public function userProfile($id) {
@@ -157,7 +164,7 @@ class UserController extends Controller
      *  Author: Samardžija Sanja 17/0372
      * Funkcija koja menja profilnu sliku
      *
-     * @param
+     * @param Request $request
      * @return view
      */
     public function changeProfilePicture(Request $request){
@@ -201,5 +208,185 @@ class UserController extends Controller
         return redirect()->route('profile.info', [$user->id])
             ->with('success',"Uspešno promenjena profilna slika!");
     }
+
+    /**
+     *  Author: Samardžija Sanja 17/0372
+     * Funkcija koja vraća tekuću sliku za slikara
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ajaxSlikarProfile(Request $request)
+    {
+        $id = Auth::id();
+        $cnt = $request->cnt;
+        $br = $request->br;
+
+        //dovlacenje slika slikara
+        $slike = DB::table('pictures')
+              ->where('user_id', '=', $id)
+              ->get()->toArray();
+        $slika = $slike[$cnt];
+        if(is_null($slika->cena)){
+            $cena = DB::table('kupac_picture')
+                ->where('picture_id','=', $slika->id)
+                ->orderBy('cena', 'desc')
+                ->select('cena')
+                ->first();
+            if(is_null($cena))
+                $cena = '0';
+            else
+                $cena = $cena->cena;
+        } else{
+            $cena = $slika->cena;
+        }
+        //dovlacenje teme prve slike
+        $tema = DB::table('picture_tema')
+              ->where('picture_tema.picture_id', '=', $slika->id)
+              ->join('temas', function ($join) {
+                  $join->on('temas.id', '=', 'picture_tema.tema_id');
+              })
+              ->select('temas.tema')
+              ->get()->toArray();
+
+          //            dd($tema);
+        $teme = '';
+        foreach ($tema as $t){
+            $teme = $teme . '   ' . $t->tema;
+        }
+        $stil = DB::table('stils')
+              ->where('id', '=', $slika->stil_id)
+              ->select('naziv')
+              ->get()->first();
+        $num = $cnt+1 . ' / ' . $br;
+        if($slika->aukcijaFlag)
+            $nacin = 'aukcija';
+        else
+            $nacin = 'prvom kupcu';
+//*/
+        /*
+          $GLOBALS['cnt'] =  $GLOBALS['cnt'] + (int) $request->n;
+
+          if($GLOBALS['cnt'] >= $GLOBALS['br']){
+              $GLOBALS['cnt'] = 0;
+          } else if($GLOBALS['cnt'] < 0){
+              $GLOBALS['cnt'] = $GLOBALS['br'] - 1;
+          }
+/*
+    //            dd($this->br);
+          //dovlacenje slika slikara
+          $slike = DB::table('pictures')
+              ->where('user_id', '=', $id)
+              ->get()->toArray();
+
+          //dovlacenje teme prve slike
+          $tema = DB::table('picture_tema')
+              ->where('picture_tema.picture_id', '=', $slike[$GLOBALS['cnt']]->id)
+              ->join('temas', function ($join) {
+                  $join->on('temas.id', '=', 'picture_tema.tema_id');
+              })
+              ->select('temas.tema')
+              ->get()->toArray();
+    //            dd($tema);
+          $teme = '';
+          foreach ($tema as $t){
+              $teme = $teme . '   ' . $t->tema;
+          }
+          $stil = DB::table('stils')
+              ->where('id', '=', $slike[$GLOBALS['cnt']]->stil_id)
+              ->select('naziv')
+              ->get()->first();
+          $num = $GLOBALS['cnt']+1 . ' / ' . $GLOBALS['br'];
+          if($slike[$GLOBALS['cnt']]->aukcijaFlag)
+              $nacin = 'aukcija';
+          else
+              $nacin = 'prvom kupcu';//*/
+
+        //return response()->json(array('n'=>$request->n), 200);
+
+        return response()->json(array('path'=> $slike[$cnt]->path, 'num'=>$num,
+            'cena'=>$cena, 'opis'=>$slike[$cnt]->opis,
+            'nacin'=>$nacin, 'stil'=>$stil->naziv, 'naziv'=>$slike[$cnt]->naziv,
+            'tema'=>$teme, 'cnt'=>$cnt, 'b'=>$br,), 200);
+    }
+
+    /**
+     *  Author: Samardžija Sanja 17/0372
+     * Funkcija koja vraća početni profil slikara
+     *
+     * @param integer $id
+     * @return view
+     */
+    public function indexSlikarProfile($id)
+    {
+      /*  $user = DB::table('users')
+            ->where('id', '=', $id)
+            ->first();
+        $tema = array();
+        $aukcija = array();
+        $stil = array();
+        //dovlacenje slika slikara
+        $slike = DB::table('pictures')
+            ->where('user_id', '=', $id)
+            ->get()->toArray();
+
+        foreach ($slike as $s) {
+            $teme = DB::table('picture_tema')
+                ->where('picture_tema.picture_id', '=', $s->id)
+                ->join('temas', function ($join) {
+                    $join->on('temas.id', '=', 'picture_tema.tema_id');
+                })
+                ->select('temas.tema')
+                ->get()->toArray();
+//            dd($teme);
+            array_push($tema, $teme);
+//            dd($tema);
+            array_push($aukcija, $s->aukcijaFlag);
+
+            $st = DB::table('stils')
+                ->where('id', '=', $s->stil_id)
+                ->select('naziv')
+                ->get()->first();
+            array_push($stil, $st);
+        }
+//dd($aukcija);
+        return response()->view('profile.user_slikar',['novo'=>$slike,
+            'user'=>$user, 'auk'=>$aukcija, 'tema'=>$tema, 'stil'=>$stil]);*/
+        $cnt = 0;
+        $br = 0;
+        $user = DB::table('users')
+            ->where('id', '=', $id)
+            ->first();
+
+        //dovlacenje prve slike slikara
+        $slika = DB::table('pictures')
+            ->where('user_id', '=', $id);
+        $tema = '';
+        $stil = '';
+
+        if(!is_null($slika)) {
+            $br = $slika->count();
+//            dd($br);
+            $slika = $slika->first();
+            //dovlacenje teme prve slike
+            $tema = DB::table('picture_tema')
+                ->where('picture_tema.picture_id', '=', $slika->id)
+                ->join('temas', function ($join) {
+                    $join->on('temas.id', '=', 'picture_tema.tema_id');
+                })
+                ->select('temas.tema')
+                ->get()->toArray();
+//            dd($tema);
+
+            $stil = DB::table('stils')
+                ->where('id', '=', $slika->stil_id)
+                ->select('naziv')
+                ->get()->first();
+        }
+        return response()->view('profile.user_slikar',['novo'=>$slika, 'user'=>$user,
+            'tema'=>$tema, 'stil'=>$stil, 'cnt'=>$cnt, 'br'=>$br]);
+    }
+
+
 }
 

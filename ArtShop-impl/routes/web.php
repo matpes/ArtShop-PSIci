@@ -86,6 +86,8 @@ Route::group(['middleware' => 'UserMiddleware'], function()
 {
     Route::get('/profile/info/{id}', 'UserController@profileInfo')->name('profile.info');
     Route::get('/profile/user_new/{id}', 'UserController@popularPictures')->name('profile.user_new');
+    Route::get('/profile/user_slikar/{id}', 'UserController@indexSlikarProfile')->name('profile.user_slikar');
+    Route::post('/profile/user_slikar', 'UserController@ajaxSlikarProfile');
     Route::get('/profile/picture/{id}', 'UserController@indexProfilePicture')->name('profile.picture');
     Route::post('/profile/picture/{id}', 'UserController@changeProfilePicture')->name('postProfile.picture');
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');

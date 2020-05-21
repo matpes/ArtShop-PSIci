@@ -1,13 +1,13 @@
 @extends('.layouts.app')
 
-
+{{--
 @section('header_form')
 
     <a href="/profileInfo" >
         <img src="{{$path}}" alt="AAAA" class="img-fluid float-right" style="padding-left: 20px">
     </a>
 
-@endsection
+@endsection--}}
 
 @section('content')
 
