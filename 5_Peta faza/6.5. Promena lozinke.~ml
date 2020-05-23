@@ -4581,7 +4581,7 @@
 <XPD:OBJ name="StereotypeLabel" type="EdgeLabelView" guid="44p+6GtCZE604ZDWGtpjKQAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">25</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">&lt;&lt;redirect&gt;&gt;</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">&lt;&lt;build&gt;&gt;</XPD:ATTR>
 <XPD:REF name="Model">sYboCLpO6U+cu+dH1F6jVwAA</XPD:REF>
 <XPD:REF name="HostEdge">pKGv8ElxjUCcMiLDGRBPzwAA</XPD:REF>
 </XPD:OBJ>
@@ -4795,7 +4795,7 @@
 <XPD:REF name="Views[3]">GYkwUZ+rZUGPc/Rh+tzYXAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingStimuli[11]" type="UMLStimulus" guid="sYboCLpO6U+cu+dH1F6jVwAA">
-<XPD:ATTR name="StereotypeName" type="string">redirect</XPD:ATTR>
+<XPD:ATTR name="StereotypeName" type="string">build</XPD:ATTR>
 <XPD:REF name="Sender">4k8zcWcPOE2h0SzlV1mjiAAA</XPD:REF>
 <XPD:REF name="Receiver">tvmMXQL0MUa8K6SDg+tnMgAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLSendAction" guid="C7l4WlPVNU+WqE2cJfw+qAAA">
