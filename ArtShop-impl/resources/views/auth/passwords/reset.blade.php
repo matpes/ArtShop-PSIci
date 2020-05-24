@@ -22,14 +22,6 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body class="body">
-<div class="row justify-content-end">
-    <div class="col-md-4 offset-md-8 float-md-right">
-        <img   class = "img-fluid img-rounded offset-md-10"  alt="profilna_slika" style=""  width="60px" height="60px"
-               src=<?php if(is_null(Auth::user()->picture_path)){ echo'images/avatar.png';}
-        else {$path = 'images/users/'.Auth::user()->picture_path; echo $path; } ?>>
-    </div>
-</div>
-<hr>
 <div class="container spaceFromHeader">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -105,9 +97,7 @@
         </div>
     </div>
 </div>
-<footer>
     <img src="/images/logo.png" alt="ArtShopLogo" class="float-right img-fluid">
-</footer>
 </body>
 </html>
 

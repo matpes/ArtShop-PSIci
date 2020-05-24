@@ -14,6 +14,7 @@ use  Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 //use App\Http\Controllers\Auth\Auth;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class ResetPasswordController extends Controller
 {
@@ -70,8 +71,8 @@ class ResetPasswordController extends Controller
             'password.required' => 'Ovo polje je obavezno',
             'new_password.required' => 'Ovo polje je obavezno',
             'password_confirm.required_with' => 'Ovo polje je obavezno',
-            'password.min' => 'Lozinka ne sme biti manja od :min',
-            'new_password.min' => 'Lozinka ne sme biti manja od :min',
+            'password.min' => 'Lozinka ne sme biti manja od :min karaktera',
+            'new_password.min' => 'Lozinka ne sme biti manja od :min karaktera',
             'password.alpha_dash' => 'Lozinka može sadržati samo alpa_dash karaktere',
             'new_password.alpha_dash' => 'Lozinka može sadržati samo alpa_dash karaktere',
             'password_confirm.same' => 'Lozinke moraju biti iste'
@@ -97,11 +98,17 @@ class ResetPasswordController extends Controller
                 ->withErrors(['password_confirm'=>"Lozinke se ne poklapaju!"])
                 ->withInput($data);
         }
+        if($request->new_password == $request->password){
+            return redirect()->back()
+                ->withErrors(['password_confirm'=>"Molimo unesite novu lozinku!"])
+                ->withInput($data);
+        }
         $password = Hash::make($request->new_password);
         DB::table('users')
             ->where('id', '=', $user->id)
             ->limit(1)
             ->update(['password' => $password]);
+//        dd($user);
       /*  $user = DB::table('users')
             ->where('id', '=', $user->id)
             ->first();
@@ -109,7 +116,10 @@ class ResetPasswordController extends Controller
         $user->password = Hash::make($request->password);
         $user->update();*/
 //        dd($user);
-        return redirect()->route('profile.info', [$user->id])
-            ->with('success',"Uspešno promenjena lozinka!");
+        Session::flush();
+        Auth::logout();
+        return redirect()-> route('login')
+            ->with('success',"Uspešno promenjena lozinka! Molimo ponovo se ulogujte sa novom lozinkom.");
+        //*/
     }
 }
