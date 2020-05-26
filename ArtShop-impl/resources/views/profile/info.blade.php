@@ -140,29 +140,7 @@
                     </form>
                 </div>
                 <br>
-                {{--     tip naloga     --}}
-                <div class="col-md-12 text-md-left">Tip naloga: &emsp;
-                <?php if($user->isSlikar){ echo'SLIKAR';}
-                        else if($user->isAdmin){echo 'ADMIN';}
-                        else {echo 'KUPAC';}?>
-                </div>
-                @if($user->isSlikar)
-                    {{--     prosečna ocena     --}}
-                    <div class="text-md-left">Prosečna ocena: &emsp;
-                        <?php if($slikar->sumaOcena == 0){
-                                $ocena = "Nemate još nijednu ocenu/sliku";
-                            } else{
-                                $ocena = $slikar->sumaOcena / $slikar->brOcenjenihSlika;
-                            }
-                            echo $ocena; ?>
-                    </div>
-                    <br>
-                    {{--     broj ocena     --}}
-                    <div class="text-md-left">Broj ocena: &emsp;
-                        <?php echo $slikar->brOcenjenihSlika; ?>
-                    </div>
-                @endif
-                <br>
+                
             </div>
 
 
