@@ -72,7 +72,7 @@ class ForgotPasswordController extends Controller
                 ->limit(1)
                 ->update(['password' => $password]);
 
-            Mail::send('auth/passwords/mailer', array('name'=>$user->name, 'new_password' => $random ), function($message) use ($request) {
+            Mail::send('auth/passwords/mailer', array('name'=>$user->username, 'new_password' => $random ), function($message) use ($request) {
                 $email = $request->email;
                 $message->to($email/*, $email->subject('ArtShop')*/)->subject("NOVA SIFRA");
             });
