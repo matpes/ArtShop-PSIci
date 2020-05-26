@@ -101,7 +101,14 @@ Route::group(['middleware' => 'UserMiddleware'], function()
 });
 //END SANJA
 
+//ANA
 
+Route::get('comments', 'KomentariController@showAllComments');
+Route::get('commentsOfPictureId/{id}', 'KomentariController@showAllCommentsOfPicture');
+Route::get('postComment', 'KomentariController@store');
+Route::get('comment/delete', 'KomentariController@delete');
+Route::get('comment/middle', 'KomentariController@medjuFunkcija');
+//END ANA
 
 //ROUTA ZA TESTIRANJE PROIZVOLJNIH DELOVA KODA
 Route::get('test', function (){
