@@ -73,21 +73,25 @@ Route::group(['middleware' => 'GuestMiddleware'], function()
     Route::get('/login', 'Auth\LoginController@index')->name('login');
     Route::post('post-login', 'Auth\LoginController@login')->name('postLogin');
     Route::post('post-register', 'Auth\RegisterController@register')->name('postRegister');
-    Route::get('/password/request', 'Auth\ForgotPasswordController@index')->name('password.request');
+    Route::get('/password/email', 'Auth\ForgotPasswordController@index')->name('password.request');
     Route::post('/password/email', 'Auth\ForgotPasswordController@forgotPassword')->name('password.email');
 
 
 });
 
+Route::get('/profile/user/{id}', 'UserController@userProfile',
+    ['middleware' => ['UserMiddleware', 'KupacMiddleware']])->name('profile.user');
 
 Route::group(['middleware' => 'UserMiddleware'], function()
 {
     Route::get('/profile/info/{id}', 'UserController@profileInfo')->name('profile.info');
-    Route::get('/profile/user/{id}', 'UserController@userProfile')->name('profile.user');
     Route::get('/profile/user_new/{id}', 'UserController@popularPictures')->name('profile.user_new');
-    Route::get('/changeProfilePicture', 'UserController@indexProfilePicture')->name('profile.picture');
-    Route::post('/changeProfilePicture', 'UserController@changeProfilePicture')->name('postProfile.picture');
+    Route::get('/profile/user_slikar/{id}', 'UserController@indexSlikarProfile')->name('profile.user_slikar');
+    Route::post('/profile/user_slikar', 'UserController@ajaxSlikarProfile');
+    Route::get('/profile/picture/{id}', 'UserController@indexProfilePicture')->name('profile.picture');
+    Route::post('/profile/picture/{id}', 'UserController@changeProfilePicture')->name('postProfile.picture');
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+    //Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@index')->name('password.reset');
     Route::post('/password/reset/{token}', 'Auth\ResetPasswordController@resetPassword')->name('postPassword.reset');
     Route::get('/password/reset', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('/removeAccount/{id}', 'UserController@removeAccount')->name('removeAccount');

@@ -19,7 +19,7 @@ class SlikarMiddleware
     {
         $korid = Auth::id();
         if(User::find($korid)->isSlikar != 1) {
-            return redirect('/');
+            return redirect('home');
         }
         return $next($request);
     }

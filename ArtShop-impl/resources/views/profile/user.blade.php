@@ -1,11 +1,25 @@
+{{-- prikaz slideshow-a slika slikara koje kupac prati sa mogućnošću promene
+    trenutne slike za jednu napred/nazadslika slikara koje kupac prati --}}
+{{--!!!!!!!!!NEMA ŠTA ZA DOADTI!!!!!!!!!--}}
 @extends('layouts.app')
 @section('head')
-
     <script src="/js/Sanja.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/Sanja.css">
 @endsection
 @section('content')
 <div class="container">
+    @if($user->isSlikar)
+        <div class="alert alert-success" role="alert">
+            {{ __('Nemate pravo pristupa ovoj stranici!') }}
+        </div>
+        <br> <br> <br>
+        {{--     povratak na početnu     --}}
+        <form method="GET" action="{{ route('profile.user_new', ['id'=>$user->id]) }}">
+            <button type="submit" class="btn btn-warning" >
+                {{ __('Povratak na početnu') }}
+            </button>
+        </form>
+    @else
     <div class="row justify-content-center">
         <div class="col-md-12 justify-content-center">
             <a class="btn btn-link offset-md-4" style="font-size: 25px; white-space: nowrap;"
@@ -22,7 +36,7 @@
         <div class="col-md-12">
             @if(sizeof($slike) == 0)
                 <div class="alert alert-success" role="alert">
-                    {{ __('Istražite galeriju i zapratite nekog slikara!') }}
+                    {{ __('Istražite galeriju najnovijih slika i zapratite nekog slikara!') }}
                 </div>
             @else
                 <div class="slideshow-container">
@@ -40,9 +54,12 @@
             @endif
          </div>
     </div>
+    @endif
 </div>
 </div>
 @endsection
 @section('footer')
-    <img src="/images/logo.png" alt="ArtShopLogo" class="float-right img-fluid">
-@endsection()
+    @if(sizeof($slike) == 0)<footer>@endif
+    <img src="/images/logo.png" alt="ArtShopLogo" class="float-right img-fluid mb-1">
+    @if(sizeof($slike) == 0)</footer>@endif
+@endsection

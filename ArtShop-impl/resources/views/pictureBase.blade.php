@@ -11,16 +11,16 @@
     <script src="/js/timer.js"></script>
 
 @endsection
-
+{{--
 @section('header_form')
 
-    <a href="/profileInfo" >
+    <a href="{{route('profile.info','id'=>Auth::id())}}" >
         <img src="{{$path}}" alt="AAAA" class="img-fluid float-right" style="padding-left: 20px">
     </a>
     <a href="/korpa">
         <img src="/images/design/cart.png" alt="BBBB" class="img-fluid float-right">
     </a>
-@endsection
+@endsection--}}
 
 @section('content')
 

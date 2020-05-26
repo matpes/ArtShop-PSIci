@@ -1,3 +1,9 @@
+{{-- prikaz informacija o korisniku sa mogućnošću promene određenih informacija --}}
+{{--    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!     --}}
+{{--!!!!DODATI: 1)IZGLED INFORMACIJA ZA ADMINA  !!!!--}}
+{{--!!!!        2)LINK ZA OBJAVI SLIKU          !!!!--}}
+{{--!!!!        3)LINK ZA OBJAVI IZLOŽBU        !!!!--}}
+{{--    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!--}}
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,67 +29,113 @@
 
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script type="javascript">
-           var modal = document.getElementById("myModal");
+        var modal = document.getElementById("myModal");
 
-           // Get the button that opens the modal
-           var btn = document.getElementById("myBtn");
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
 
-           // Get the <span> element that closes the modal
-           var span = document.getElementsByClassName("close")[0];
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
 
-           // When the user clicks on the button, open the modal
-           btn.onclick = function () {
-               modal.style.display = "block";
-           }
+        // When the user clicks on the button, open the modal
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
 
-           // When the user clicks on <span> (x), close the modal
-           span.onclick = function () {
-               modal.style.display = "none";
-           }
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
 
-           // When the user clicks anywhere outside of the modal, close it
-           window.onclick = function (event) {
-               if (event.target == modal) {
-                   modal.style.display = "none";
-               }
-           }
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 </head>
 <body class="body">
-    <div class="row justify-content-end">
-        <div class="col-md-4 offset-md-8 float-md-right">
-            <img   class = "img-fluid img-rounded offset-md-10"  alt="profilna_slika" style=""  width="60px" height="60px"
-                   src=<?php if(is_null($user->picture_path)){ echo'images/avatar.png';}
-                   else {$path = 'images/users/'.$user->picture_path; echo $path; } ?>>
-        </div>
-    </div>
-    <hr>
-    <div class="container-fluid">
-        <div class="row justify-content-center noPadding">
-            {{-- 1. kolona--}}
-            <div class="col-md-4 mb-0 ml-0 text-md-left noPadding">
-                {{--     profilna     --}}
-                @if(!$user->isSlikar)
-
-                @endif
-                <div class="col-md-12 text-md-left mt-3">Profilna slika: &emsp;
-                    <img id='profilna' class = "img-fluid " style="" width="180px" height="180px" alt="profilna_slika"
-                         src= <?php if(is_null($user->picture_path)){ echo'images/avatar.png';}
-                    else {$path = 'images/users/'.$user->picture_path; echo $path; } ?>>
+<div class="container-fluid">
+    <div class="row justify-content-center noPadding">
+        {{-- 1. kolona--}}
+        <div class="col-md-4 mb-0 ml-0 text-md-left noPadding">
+            {{--     profilna     --}}
+            <div class="col-md-12 text-md-left mt-3">Profilna slika: &emsp;
+                <img id='profilna' class = "img-fluid " style="" width="140px" height="140px" alt="profilna_slika"
+                     src= <?php if(is_null($user->picture_path)){ echo'\images/avatar.png';}
+                else {$path = '\images\users\\'.$user->picture_path; echo $path; } ?>>
+            </div>
+            <br>
+            {{--     email     --}}
+            <div class="col-md-12 text-md-left">E-mail: &emsp; {{__($user->email)}}</div>
+            <br>
+            {{--     username     --}}
+            <div class="col-md-12 text-md-left">Korisničko ime: &emsp; {{__($user->username)}}</div>
+            <br>
+            {{--     password     --}}
+            <form method="GET" action="{{ route('password.reset', ['token'=>csrf_token()]) }}">
+                <button type="submit" class="btn-warning">
+                    {{ __('Promeni lozinku') }}
+                </button>
+            </form>
+            <br>
+            {{--     tip naloga     --}}
+            <div class="col-md-12 text-md-left">Tip naloga: &emsp;
+                <?php if($user->isSlikar){ echo'SLIKAR';}
+                else if($user->isAdmin){echo 'ADMIN';}
+                else {echo 'KUPAC';}?>
+            </div>
+            @if($user->isSlikar)
+                {{--     prosečna ocena     --}}
+                <div class="text-md-left">Prosečna ocena: &emsp;
+                    <?php if($slikar->sumaOcena == 0){
+                        $ocena = "Nemate još nijednu ocenu/sliku";
+                    } else{
+                        $ocena = $slikar->sumaOcena / $slikar->brOcenjenihSlika;
+                    }
+                    echo $ocena; ?>
                 </div>
                 <br>
-                {{--     email     --}}
-                <div class="col-md-12 text-md-left">E-mail: &emsp; {{__($user->email)}}</div>
-                <br>
-                {{--     username     --}}
-                <div class="col-md-12 text-md-left">Korisničko ime: &emsp; {{__($user->username)}}</div>
+                {{--     broj ocena     --}}
+                <div class="text-md-left">Broj ocena: &emsp;
+                    <?php echo $slikar->brOcenjenihSlika; ?>
+                </div>
+            @endif
+            <br>
+        </div>
+        {{-- 2. kolona--}}
+        <div class="col-md-3 mb-0" style="vertical-align: middle;">
+            <br>
+            @if(session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
                 <br>
                 {{--     password     --}}
                 <div class="col-md-12 text-md-left">Lozinka: &nbsp;
                     <form method="GET" action="/password/reset/">
                         <input type="hidden" name="token" value="{{csrf_token()}}">
+                    </form>
+                </div>
+            @else
+                <br> <br>
+            @endif
+            <form method="GET" action="{{ route('profile.picture', ['id'=> Auth::user()->id])}}">
+                <button type="submit" class="btn btn-warning">
+                    {{ __('Promeni profilnu sliku') }}
+                </button>
+            </form>
+            <br> <br> <br> <br> <br>
+            @if($user->isSlikar)
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    {{--     odjavi se     --}}
+                    <form method="POST" action="{{ route('logout') }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        @csrf
                         <button type="submit" class="btn-warning">
-                            {{ __('Promeni lozinku') }}
+                            {{ __('Izloguj se') }}
                         </button>
                     </form>
                 </div>
@@ -112,98 +164,89 @@
                 @endif
                 <br>
             </div>
-            {{-- 2. kolona--}}
-            <div class="col-md-3 mb-0 text-md-left noPadding">
-                <br> <br> <br> <br> <br>
-                <form method="GET" action="{{ route('profile.picture') }}">
-                    <button type="submit" class="btn btn-warning">
-                        {{ __('Promeni profilnu sliku') }}
-                    </button>
-                </form>
-                <br> <br> <br> <br>
-                <div class="row justify-content-center">
-                    <div class="col-md-12 float-md-left">
-                        {{-- UGASI NALOG--}}
-                        <button type="button" id="myBtn" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
-                            Ugasi nalog</button>
-                    </div>
+
+
+            <br> <br> <br>
+            @else
+                <br> <br> <br>
+            @endif
+            <div class="row justify-content-center">
+                <div class="col-md-12 float-md-left">
+                    {{-- UGASI NALOG--}}
+                    <button type="button" id="myBtn" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+                        Ugasi nalog</button>
                 </div>
             </div>
-            {{-- 3. kolona--}}
-            <div class="col-md-3 mb-0">
-                <div class="row justify-content-center">
-                    <div class="col-md-12">
-                        @if(Auth::check())
-                            @if($user->isSlikar)
-                                {{--     profil slikara     --}}
-                                    <form method="GET" action="{{ route('profile.user', ['id'=>$user->id]) }}">
-                                        <button type="submit" class="btn btn-warning" >
-                                            {{ __('Moj profil') }}
-                                        </button>
-                                    </form>
-                                <br>
-                                {{--     objavi sliku   !!!!PROMENITI RUTU!!!!  --}}
-                                <form method="GET" action="/slika">
-                                    <button type="submit" class="btn btn-warning" >
-                                        {{ __('Objavi sliku') }}
-                                    </button>
-                                </form>
-                                <br>
-                                {{--     objavi izložbu   !!!!PROMENITI RUTU!!!!  --}}
-                                <form method="GET" action="{{ route('profile.user', ['id'=>$user->id]) }}">
-                                    <button type="submit" class="btn btn-warning" >
-                                        {{ __('Objavi izložbu') }}
-                                    </button>
-                                </form>
-                                {{--     povratak na početnu     --}}
-                                <div class="col-md-8 offset-md-4">
-                                    <a class="btn btn-link" href="{{ route('home') }}">
-                                        <button type="button" class="btn btn-warning" >
-                                            {{ __('Povratak na početnu') }}
-                                        </button>
-                                    </a>
-                                </div>
-                                <br>
-                            @elseif($user->isAdmin)
-                                <div class="col-md-8 offset-md-4"> admin </div>
-                            @else
-                                {{--     povratak na početnu     --}}
-                                <div class="col-md-8 offset-md-4">
-                                    <form method="GET" action="{{ route('home') }}">
-                                        <button type="submit" class="btn btn-warning" >
-                                            {{ __('Povratak na početnu') }}
-                                        </button>
-                                    </form>
-                                </div>
-                                <br>
-                                <div class="col-md-8 offset-md-4">
-                                    <form method="GET" action="/zaOcenu">
-                                        <button type="submit" class="btn btn-warning" >
-                                            {{ __('Slike za ocenu') }}
-                                        </button>
-                                    </form>
-                                </div>
-                                <br>
-                            @endif
+        </div>
+        {{-- 3. kolona--}}
+        <div class="col-md-3 mb-0">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <br> <br> <br>
+                    @if(Auth::check())
+                        @if($user->isSlikar)
+                            {{--     profil slikara     --}}
+                            <form method="GET" action="{{ route('profile.user_slikar', ['id'=>$user->id]) }}">
+                                <button type="submit" class="btn btn-warning" >
+                                    {{ __('Moj profil') }}
+                                </button>
+                            </form>
+                            <br> <br>
+                            {{--     objavi sliku   !!!!PROMENITI RUTU!!!!  --}}
+                            <form method="GET" action="{{ route('profile.user', ['id'=>$user->id]) }}">
+                                <button type="submit" class="btn btn-warning" >
+                                    {{ __('Objavi sliku') }}
+                                </button>
+                            </form>
+                            <br> <br>
+                            {{--     objavi izložbu   !!!!PROMENITI RUTU!!!!  --}}
+                            <form method="GET" action="{{ route('profile.user', ['id'=>$user->id]) }}">
+                                <button type="submit" class="btn btn-warning" >
+                                    {{ __('Objavi izložbu') }}
+                                </button>
+                            </form>
+                            <br> <br>
+                            {{--     povratak na početnu     --}}
+                            <form method="GET" action="{{ route('profile.user_new', ['id'=>$user->id]) }}">
+                                <button type="submit" class="btn btn-warning" >
+                                    {{ __('Povratak na početnu') }}
+                                </button>
+                            </form>
+                            <br> <br>
+                        @elseif($user->isAdmin)
+                            <div class="col-md-8 offset-md-4"> admin </div>
+{{--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!NEMAM POJMA ŠTA RADI ADMIN BEM LI GA...--}}
+                        @else
+                            <br>
+                            {{--     povratak na početnu     --}}
+                            <form method="GET" action="{{ route('profile.user_new', ['id'=>$user->id]) }}">
+                                <button type="submit" class="btn btn-warning" >
+                                    {{ __('Povratak na početnu') }}
+                                </button>
+                            </form>
+                            <br>
+                            <form method="GET" action="/zaOcenu">
+                                <button type="submit" class="btn btn-warning" >
+                                    {{ __('Oceni slike') }}
+                                </button>
+                            </form>
+                            <br>
                             {{--     odjavi se     --}}
-                            <div class="col-md-8 offset-md-4 float-md-left">
-                                <form method="POST" action="{{ route('logout') }}">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    @csrf
-                                    <button type="submit" class="btn-warning">
-                                        {{ __('Izloguj se') }}
-                                    </button>
-                                </form>
-                            </div>
+                            <form method="POST" action="{{ route('logout') }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                @csrf
+                                <button type="submit" class="btn-warning">
+                                    {{ __('Izloguj se') }}
+                                </button>
+                            </form>
                             <br>
                         @endif
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-
-{{--        @include('layouts.footer')--}}
+</div>
 </body>
 </html>
 <div class="container-fluid">

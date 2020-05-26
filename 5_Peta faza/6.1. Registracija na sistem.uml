@@ -671,14 +671,14 @@
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">700</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">464</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">169</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">188</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">45</XPD:ATTR>
 <XPD:ATTR name="StereotypeDisplay" type="UMLStereotypeDisplayKind">sdkNone</XPD:ATTR>
 <XPD:REF name="Model">B94xzT1bnUuNKSvsE48JkgAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="YE77I41XKk+AqzA6d2SlBgAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="SeeHAHa5y0WomexIo4x7FwAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">spProveraUnosa.php</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">spRegistracijaKontroler.php</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="4joES511OUGMBN+II1VFRgAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -696,7 +696,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">796,464;905,262</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">804,464;906,262</XPD:ATTR>
 <XPD:REF name="Model">ydXykSCts0WFD4dqVQCuuQAA</XPD:REF>
 <XPD:REF name="Head">i/ChlaOL0kGyCbj9m+SuSQAA</XPD:REF>
 <XPD:REF name="Tail">Hq7N2kubhUWnmsXS+KAzUAAA</XPD:REF>
@@ -780,7 +780,7 @@
 <XPD:OBJ name="OwnedViews[6]" type="UMLDependencyView" guid="uO5LZY9ZGku1LT+4SrIK9gAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">681,402;757,464</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">681,399;765,464</XPD:ATTR>
 <XPD:REF name="Model">MtrRmq8hokqsupPfFw40SQAA</XPD:REF>
 <XPD:REF name="Head">Hq7N2kubhUWnmsXS+KAzUAAA</XPD:REF>
 <XPD:REF name="Tail">Gs0doYhJ3ESaCiJCSUFdEQAA</XPD:REF>
@@ -1232,7 +1232,7 @@
 <XPD:OBJ name="OwnedViews[16]" type="UMLAssociationView" guid="xcZdqF6iC0qrRp4Zg1E7ZAAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">792,508;856,672</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">801,508;857,672</XPD:ATTR>
 <XPD:REF name="Model">AlYVQpQEpUyhnq9rXmaZsgAA</XPD:REF>
 <XPD:REF name="Head">6IZCMbc8Tk+dr9bygXphDAAA</XPD:REF>
 <XPD:REF name="Tail">Hq7N2kubhUWnmsXS+KAzUAAA</XPD:REF>
@@ -1317,7 +1317,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">818,508;1100,688</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">827,508;1101,688</XPD:ATTR>
 <XPD:REF name="Model">4A7Atq9c6EO/YiO9DxX7iwAA</XPD:REF>
 <XPD:REF name="Head">RhIh6Ql++0mxFqM4gZd7sAAA</XPD:REF>
 <XPD:REF name="Tail">Hq7N2kubhUWnmsXS+KAzUAAA</XPD:REF>
@@ -1402,7 +1402,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">719,464;189,286</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">727,464;189,285</XPD:ATTR>
 <XPD:REF name="Model">iwj8DKZVeUKvlLlpMdraMgAA</XPD:REF>
 <XPD:REF name="Head">mMLnHj1zfUqS427t4GoSxAAA</XPD:REF>
 <XPD:REF name="Tail">Hq7N2kubhUWnmsXS+KAzUAAA</XPD:REF>
@@ -1626,7 +1626,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[4]" type="UMLComponent" guid="B94xzT1bnUuNKSvsE48JkgAA">
-<XPD:ATTR name="Name" type="string">spProveraUnosa.php</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">spRegistracijaKontroler.php</XPD:ATTR>
 <XPD:ATTR name="StereotypeProfile" type="string">WAE</XPD:ATTR>
 <XPD:ATTR name="StereotypeName" type="string">ASP page(stereotype)</XPD:ATTR>
 <XPD:REF name="Namespace">o7YA/FnS3USxVbu0OtU0KQAA</XPD:REF>
@@ -2085,13 +2085,13 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">888</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">56</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">121</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">153</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">461</XPD:ATTR>
 <XPD:REF name="Model">4k8zcWcPOE2h0SzlV1mjiAAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="k6jnv5cV7EWojbRPRLZEkAAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="5Ad4OO5E00maM5aiEvS3zAAA">
 <XPD:ATTR name="FontStyle" type="integer">4</XPD:ATTR>
-<XPD:ATTR name="Text" type="string"> : spProveraUnosa.php</XPD:ATTR>
+<XPD:ATTR name="Text" type="string"> : spRegistracijaKontroler.php</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="BEu2q1c9fU2dzYSCQS+MpgAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -2568,7 +2568,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">802,316;941,316</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">802,316;957,316</XPD:ATTR>
 <XPD:REF name="Model">ap3PfsAndEmdeqNVwbkR4AAA</XPD:REF>
 <XPD:REF name="Head">UVV3d/VZY0Wiqxoi9m5TpgAA</XPD:REF>
 <XPD:REF name="Tail">eYxFZdFfv0qZjOfad72HqwAA</XPD:REF>
@@ -2594,7 +2594,7 @@
 <XPD:REF name="HostEdge">11DXtRBwx0+ykY9jPV3g9gAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Activation" type="UMLActivationView" guid="wgCXSxb2wEeN8iN7x1MOzgAA">
-<XPD:ATTR name="Left" type="integer">941</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">957</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">316</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">14</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">45</XPD:ATTR>
@@ -2604,7 +2604,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">954,316;1092,316</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">970,316;1092,316</XPD:ATTR>
 <XPD:REF name="Model">1I+55SVfpUWgwjAMYoIS0wAA</XPD:REF>
 <XPD:REF name="Head">2HQI20Ajg0el2/FD3ut4AwAA</XPD:REF>
 <XPD:REF name="Tail">UVV3d/VZY0Wiqxoi9m5TpgAA</XPD:REF>
@@ -2640,7 +2640,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">1092,330;954,330</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">1092,330;970,330</XPD:ATTR>
 <XPD:REF name="Model">zuplDaKu+06XvP+vT8uZ2AAA</XPD:REF>
 <XPD:REF name="Head">UVV3d/VZY0Wiqxoi9m5TpgAA</XPD:REF>
 <XPD:REF name="Tail">2HQI20Ajg0el2/FD3ut4AwAA</XPD:REF>
@@ -2667,7 +2667,7 @@
 </XPD:OBJ>
 <XPD:OBJ name="Activation" type="UMLActivationView" guid="ZKUjX1PTa0iv+FwV4By5wgAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
-<XPD:ATTR name="Left" type="integer">941</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">957</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">330</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">14</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">29</XPD:ATTR>
@@ -2677,7 +2677,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">954,345;1228,345</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">970,345;1228,345</XPD:ATTR>
 <XPD:REF name="Model">YyA84lefCEKmCEGPpW8x/wAA</XPD:REF>
 <XPD:REF name="Head">nDQH8ReFZk2h0A2IeEQjXQAA</XPD:REF>
 <XPD:REF name="Tail">UVV3d/VZY0Wiqxoi9m5TpgAA</XPD:REF>
@@ -2714,7 +2714,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">941,352;802,352</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">957,352;802,352</XPD:ATTR>
 <XPD:REF name="Model">o4lzkhk3sE6XXpekXds8ZwAA</XPD:REF>
 <XPD:REF name="Head">eYxFZdFfv0qZjOfad72HqwAA</XPD:REF>
 <XPD:REF name="Tail">UVV3d/VZY0Wiqxoi9m5TpgAA</XPD:REF>

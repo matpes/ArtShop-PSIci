@@ -1,5 +1,5 @@
+{{-- register forma za pravljenje slikar/kupac naloga --}}
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

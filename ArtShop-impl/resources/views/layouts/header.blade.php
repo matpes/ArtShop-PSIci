@@ -24,8 +24,8 @@
                 <form method="GET" action="{{'userInfo'}}">
                     <img  class = "img-fluid img-rounded "  alt="profilna_slika" style="" type="submit"
                           width="60px" height="60px"
-                          src=<?php if(is_null($user->picture_path)){ echo'images/avatar.png';}
-                    else {$path = 'images/users/'.$user->picture_path; echo $path; } ?>>
+                          src=<?php if(is_null($user->picture_path)){ echo'\images\avatar.png';}
+                    else {$path = '\images\users\\'.$user->picture_path; echo $path; } ?>>
                 </form>
 
             @else

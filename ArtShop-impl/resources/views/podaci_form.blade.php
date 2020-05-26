@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/css/Matija.css">
     <script src="/js/Matija.js"></script>
 @endsection
-
+{{--
 @section('header_form')
 
     <a href="/profileInfo" >
@@ -14,7 +14,7 @@
     <a href="/korpa">
         <img src="/images/design/cart.png" alt="BBBB" class="img-fluid float-right">
     </a>
-@endsection
+@endsection--}}
 
 @section('content')
 

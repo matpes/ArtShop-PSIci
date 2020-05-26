@@ -1,3 +1,4 @@
+{{-- heder sa pretragom i prikazom login/register linkova ili profilne itd. --}}
 <!doctype html>
 <html lang="en">
 <head>
@@ -62,17 +63,23 @@
                                 @if(Auth::user()->isSlikar)
                                 {{--objavi sliku za slikare--}}
                                     <a class="btn btn-link" href="/slika">
-                                        {{ __('Objavi sliku') }}
+                                        <!-- {{ __('Objavi sliku') }}
+                                    <a class="btn btn-link-btn" href="{{ route('login') }} class="float-md-right"> -->
+                                        <button type="button" class="mr-0 btn-dark gray_button" style="width: fit-content;">{{ __('Objavi sliku') }}</button>
                                     </a>
+
                                 @else
-                                {{--korpa za korisnike --}}
-                                    <a href="/korpa">
-                                        <img src="/images/design/cart.png" alt="korpa" class="img-fluid float-right">
+
+                                    {{--korpa za korisnike --}}
+                                    <a href="/korpa" class="float-md-right mr-4">
+                                        <img src="/images/design/cart.png" alt="korpa" class="img-fluid mt-1" href="/korpa" height="56px">
                                     </a>
                                 @endif
                             @endif
+
+                                {{--profilna slika --}}
                                 <a href="/profile/info/{{Auth::id()}}" >
-                            <img  class = "img-fluid img-rounded ml-5"  alt="profilna_slika" style=""  href="{{ route('login') }}"
+                            <img  class = "img-fluid img-rounded"  alt="profilna_slika" style=""  href="{{ route('login') }}"
                                   width="60px" height="60px"
                                   src=<?php if(is_null(Auth::user()->picture_path)){ echo'images/avatar.png';}
                             else {$path = 'images/users/'.Auth::user()->picture_path; echo $path; } ?>>

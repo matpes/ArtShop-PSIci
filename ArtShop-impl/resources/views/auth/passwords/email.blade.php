@@ -1,3 +1,4 @@
+{{-- forma za promenu lozinke kada ju je korisnik zaobravio --}}
 <!doctype html>
 <html lang="en">
 <head>
@@ -66,7 +67,7 @@
                     <br> <br>
                     <div class="form-group row mb-0">
                         <div class="col-md-2 offset-md-10 float-md-left">
-                            <a class="btn btn-link-btn" href="{{ route('welcome') }}">
+                            <a class="btn btn-link-btn" href="{{ route('home') }}">
                                 <button type="button" class="btn btn-warning">
                                     {{ __('Povratak na početnu') }}
                                 </button>

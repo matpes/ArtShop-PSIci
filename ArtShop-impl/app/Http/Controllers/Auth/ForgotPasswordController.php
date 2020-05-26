@@ -13,18 +13,19 @@ use App\Http\Controllers\Controller;
 use  Illuminate\Support\Facades\Input;
 use  Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Auth\Auth;
 
 class ForgotPasswordController extends Controller
 {
 
     /*
-     * Author: Samardžija Sanja 17/0372
-    |--------------------------------------------------------------------------
-    | Forgot Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | Kontroler zadužen za resetovanje lozinki koje su zaboravljene
-    |
+    | Author: Samardžija Sanja 17/0372                                         |
+    |--------------------------------------------------------------------------|
+    | Forgot Password Reset Controller                                         |
+    |--------------------------------------------------------------------------|
+    |                                                                          |
+    | Kontroler zadužen za resetovanje lozinki koje su zaboravljene            |
+    |                                                                          |
     */
 
     use ResetsPasswords;
@@ -37,7 +38,7 @@ class ForgotPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('GuestMiddleware');
     }
 
     /*
@@ -60,14 +61,16 @@ class ForgotPasswordController extends Controller
     {
         $user = DB::table('users')->where('email', '=',$request->email)->first();
         if (is_null($user)) {
-            return redirect('password/request')
-                ->withErrors(['email' => "Korisnik sa unesenom email adresom ne postoji u bazi!"])
+            return redirect()->back()
+                ->withErrors(['email' => "Korisnik sa unetom email adresom ne postoji u bazi!"])
                 ->withInput();
         } else {
             $random = Str::random(8);
-            $user = User::where('username', '=', $user->username)->first();
-            $user->password = Hash::make($random);
-            $user->update();
+            $password = Hash::make($random);
+            DB::table('users')
+                ->where('id', '=', $user->id)
+                ->limit(1)
+                ->update(['password' => $password]);
 
             Mail::send('auth/passwords/mailer', array('name'=>$user->name, 'new_password' => $random ), function($message) use ($request) {
                 $email = $request->email;

@@ -1,5 +1,5 @@
+{{-- ogin forma za prijavu na sistem --}}
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -8,7 +8,7 @@
                     <div class="alert alert-success" role="alert">
                         {{ session('success') }}
                     </div>
-                    @else
+                @else
                     <br><br><br>
                 @endif
             </div>
