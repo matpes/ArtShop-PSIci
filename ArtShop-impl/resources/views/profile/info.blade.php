@@ -80,7 +80,8 @@
                 <br>
                 {{--     password     --}}
                 <div class="col-md-12 text-md-left">Lozinka: &nbsp;
-                    <form method="GET" action="{{ route('password.reset', ['token'=>csrf_token()]) }}">
+                    <form method="GET" action="/password/reset/">
+                        <input type="hidden" name="token" value="{{csrf_token()}}">
                         <button type="submit" class="btn-warning">
                             {{ __('Promeni lozinku') }}
                         </button>
@@ -106,7 +107,7 @@
                     <br>
                     {{--     broj ocena     --}}
                     <div class="text-md-left">Broj ocena: &emsp;
-                        <?php echo $brOcena; ?>
+                        <?php echo $slikar->brOcenjenihSlika; ?>
                     </div>
                 @endif
                 <br>
@@ -114,7 +115,7 @@
             {{-- 2. kolona--}}
             <div class="col-md-3 mb-0 text-md-left noPadding">
                 <br> <br> <br> <br> <br>
-                <form method="GET" action="{{ route('profilePicture') }}">
+                <form method="GET" action="{{ route('profile.picture') }}">
                     <button type="submit" class="btn btn-warning">
                         {{ __('Promeni profilnu sliku') }}
                     </button>
@@ -142,7 +143,7 @@
                                     </form>
                                 <br>
                                 {{--     objavi sliku   !!!!PROMENITI RUTU!!!!  --}}
-                                <form method="GET" action="{{ route('profile.user', ['id'=>$user->id]) }}">
+                                <form method="GET" action="/slika">
                                     <button type="submit" class="btn btn-warning" >
                                         {{ __('Objavi sliku') }}
                                     </button>
@@ -156,7 +157,7 @@
                                 </form>
                                 {{--     povratak na početnu     --}}
                                 <div class="col-md-8 offset-md-4">
-                                    <a class="btn btn-link" href="{{ route('/') }}">
+                                    <a class="btn btn-link" href="{{ route('home') }}">
                                         <button type="button" class="btn btn-warning" >
                                             {{ __('Povratak na početnu') }}
                                         </button>
@@ -168,9 +169,17 @@
                             @else
                                 {{--     povratak na početnu     --}}
                                 <div class="col-md-8 offset-md-4">
-                                    <form method="GET" action="{{ route('/') }}">
+                                    <form method="GET" action="{{ route('home') }}">
                                         <button type="submit" class="btn btn-warning" >
                                             {{ __('Povratak na početnu') }}
+                                        </button>
+                                    </form>
+                                </div>
+                                <br>
+                                <div class="col-md-8 offset-md-4">
+                                    <form method="GET" action="/zaOcenu">
+                                        <button type="submit" class="btn btn-warning" >
+                                            {{ __('Slike za ocenu') }}
                                         </button>
                                     </form>
                                 </div>

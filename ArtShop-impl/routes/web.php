@@ -67,7 +67,7 @@ Route::get('/insertIntoTable', 'spKupac@pocetnaBaza');*/
 Route::group(['middleware' => 'GuestMiddleware'], function()
 {
     Route::get('/', 'GuestController@popularPictures')->name('home');
-//    Route::get('/welcome', 'GuestController@popularPictures')->name('welcome');
+    Route::get('/welcome', 'GuestController@popularPictures')->name('welcome');
 //    Route::get('/home', 'GuestController@index')->name('home');
     Route::get('/register', 'Auth\RegisterController@index')->name('register');
     Route::get('/login', 'Auth\LoginController@index')->name('login');
@@ -89,7 +89,7 @@ Route::group(['middleware' => 'UserMiddleware'], function()
     Route::post('/changeProfilePicture', 'UserController@changeProfilePicture')->name('postProfile.picture');
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
     Route::post('/password/reset/{token}', 'Auth\ResetPasswordController@resetPassword')->name('postPassword.reset');
-    Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::get('/password/reset', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('/removeAccount/{id}', 'UserController@removeAccount')->name('removeAccount');
     //MATIJA
     Route::resource('/korpa', 'spKorpa');

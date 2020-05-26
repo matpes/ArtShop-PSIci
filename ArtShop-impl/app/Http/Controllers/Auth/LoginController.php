@@ -94,6 +94,7 @@ class LoginController extends Controller
 //        dd($this);
         Session::flush();
         Auth::logout();
-        return redirect('layouts.base')->with('success','Uspešno ste se izlogovali!');
+        return redirect('login')
+            ->with('success',"Uspesno ste se izlogovali!");
     }
 }

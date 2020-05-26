@@ -6,7 +6,9 @@ use App\User;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -40,10 +42,12 @@ class ResetPasswordController extends Controller
      *      Prikazuje stranicu za resetovanje lozinke
      * @return view
      */
-    public function index()
+    public function showResetForm()
     {
+        dd("Ovde udje u index");
         return view('auth.passwords.reset');
     }
+
 
     /*
      *  Author: Samardžija Sanja 17/0372
@@ -53,6 +57,7 @@ class ResetPasswordController extends Controller
      */
     public function resetPassword(Request $request)
     {
+        //dd("Ovde ulazi");
         $rules = [
             'old_password' => 'required|min:6|alpha_dash',
             'password' => 'required|min:6|alpha_dash',
@@ -83,7 +88,8 @@ class ResetPasswordController extends Controller
                 ->withErrors(['old_password' => "Neispravna stara lozinka!"])
                 ->withInput($data);
         }
-        $user = DB::table('users')->where('username', '=', Auth::user()->username)->first();
+        //$user = DB::table('users')->where('username', '=', Auth::user()->username)->first();
+        $user = Auth::user();
         $user->password = Hash::make($request->password);
         $user->update();
         return  redirect('korisnickiProfil')
