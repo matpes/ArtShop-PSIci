@@ -1,13 +1,13 @@
 @extends('.layouts.app')
 
-{{--
-@section('header_form')
 
-    <a href="/profileInfo" >
-        <img src="{{$path}}" alt="AAAA" class="img-fluid float-right" style="padding-left: 20px">
-    </a>
+{{--@section('header_form')--}}
 
-@endsection--}}
+{{--    <a href="/profile/info/{{Auth::id()}}" >--}}
+{{--        <img src="{{$path}}" alt="AAAA" class="img-fluid float-right" style="padding-left: 20px">--}}
+{{--    </a>--}}
+
+{{--@endsection--}}
 
 @section('content')
 
@@ -65,10 +65,21 @@
                             </div>
                             <div class="col-sm-7">
                                 <select name="stil_id" id="stil" class="form-control form_input_text">
-                                    <option value="klasicizam" @if(isset($picture->stil_id) && $picture->stil_id == 1) selected = "selected" @endif>Klasicizam</option>
-                                    <option value="romantizam" @if(isset($picture->stil_id) && $picture->stil_id == 2) selected = "selected" @endif>Romantizam</option>
-                                    <option value="kubizam" @if(isset($picture->stil_id) && $picture->stil_id == 3) selected = "selected" @endif>Kubizam</option>
-                                    <option value="barok" @if(isset($picture->stil_id) && $picture->stil_id == 4) selected = "selected" @endif>Barok</option>
+                                    <option value="renesansa" @if(isset($picture->stil_id) && $picture->stil_id == 1) selected = "selected" @endif>Renesansa</option>
+                                    <option value="barok" @if(isset($picture->stil_id) && $picture->stil_id == 2) selected = "selected" @endif>Barok</option>
+                                    <option value="klasicizam" @if(isset($picture->stil_id) && $picture->stil_id == 3) selected = "selected" @endif>Klasicizam</option>
+                                    <option value="neoklasicizam" @if(isset($picture->stil_id) && $picture->stil_id == 4) selected = "selected" @endif>Neoklasicizam</option>
+                                    <option value="romantizam" @if(isset($picture->stil_id) && $picture->stil_id == 5) selected = "selected" @endif>Romantizam</option>
+                                    <option value="impresionizam" @if(isset($picture->stil_id) && $picture->stil_id == 6) selected = "selected" @endif>Impresionizam</option>
+                                    <option value="simbolizam" @if(isset($picture->stil_id) && $picture->stil_id == 7) selected = "selected" @endif>Simbolizam</option>
+                                    <option value="ekspresionizam" @if(isset($picture->stil_id) && $picture->stil_id == 8) selected = "selected" @endif>Ekspresionizam</option>
+                                    <option value="kubizam" @if(isset($picture->stil_id) && $picture->stil_id == 9) selected = "selected" @endif>Kubizam</option>
+                                    <option value="futurizam" @if(isset($picture->stil_id) && $picture->stil_id == 10) selected = "selected" @endif>Futurizam</option>
+                                    <option value="dadaizam" @if(isset($picture->stil_id) && $picture->stil_id == 11) selected = "selected" @endif>Dadaizam</option>
+                                    <option value="nadrealizam" @if(isset($picture->stil_id) && $picture->stil_id == 12) selected = "selected" @endif>Nadrealizam</option>
+                                    <option value="popart" @if(isset($picture->stil_id) && $picture->stil_id == 13) selected = "selected" @endif>Pop art</option>
+                                    <option value="postmodernizam" @if(isset($picture->stil_id) && $picture->stil_id == 14) selected = "selected" @endif>Postmodernizam</option>
+                                    <option value="savremenaUmetnost" @if(isset($picture->stil_id) && $picture->stil_id == 15) selected = "selected" @endif>Savremena umetnost</option>
                                 </select>
                                 <small></small>
                             </div>

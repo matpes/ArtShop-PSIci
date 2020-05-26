@@ -6,14 +6,15 @@ use App\User;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Input;
 use  Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Hash;
 //use App\Http\Controllers\Auth\Auth;
-use Illuminate\Support\Facades\Auth;
+use Session;
 
 class ResetPasswordController extends Controller
 {
@@ -47,10 +48,12 @@ class ResetPasswordController extends Controller
      *      Prikazuje stranicu za resetovanje lozinke
      * @return view
      */
-    public function index()
+    public function showResetForm()
     {
+        //dd("Ovde udje u index");
         return view('auth.passwords.reset');
     }
+
 
     /*
      *  Author: Samardžija Sanja 17/0372
@@ -60,6 +63,7 @@ class ResetPasswordController extends Controller
      */
     public function resetPassword(Request $request)
     {
+        //dd("Ovde ulazi");
         $rules = [
             'password' => 'required|min:6|alpha_dash',
             'new_password' => 'required|min:6|alpha_dash',
@@ -70,8 +74,8 @@ class ResetPasswordController extends Controller
             'password.required' => 'Ovo polje je obavezno',
             'new_password.required' => 'Ovo polje je obavezno',
             'password_confirm.required_with' => 'Ovo polje je obavezno',
-            'password.min' => 'Lozinka ne sme biti manja od :min',
-            'new_password.min' => 'Lozinka ne sme biti manja od :min',
+            'password.min' => 'Lozinka ne sme biti manja od :min karaktera',
+            'new_password.min' => 'Lozinka ne sme biti manja od :min karaktera',
             'password.alpha_dash' => 'Lozinka može sadržati samo alpa_dash karaktere',
             'new_password.alpha_dash' => 'Lozinka može sadržati samo alpa_dash karaktere',
             'password_confirm.same' => 'Lozinke moraju biti iste'
@@ -92,9 +96,16 @@ class ResetPasswordController extends Controller
                 ->withErrors(['password' => "Neispravna stara lozinka!"])
                 ->withInput($data);
         }
+        //$user = DB::table('users')->where('username', '=', Auth::user()->username)->first();
+        $user = Auth::user();
         if($request->new_password != $request->password_confirm){
             return redirect()->back()
                 ->withErrors(['password_confirm'=>"Lozinke se ne poklapaju!"])
+                ->withInput($data);
+        }
+        if($request->new_password == $request->password){
+            return redirect()->back()
+                ->withErrors(['password_confirm'=>"Molimo unesite novu lozinku!"])
                 ->withInput($data);
         }
         $password = Hash::make($request->new_password);
@@ -102,6 +113,7 @@ class ResetPasswordController extends Controller
             ->where('id', '=', $user->id)
             ->limit(1)
             ->update(['password' => $password]);
+//        dd($user);
       /*  $user = DB::table('users')
             ->where('id', '=', $user->id)
             ->first();
@@ -109,7 +121,10 @@ class ResetPasswordController extends Controller
         $user->password = Hash::make($request->password);
         $user->update();*/
 //        dd($user);
-        return redirect()->route('profile.info', [$user->id])
-            ->with('success',"Uspešno promenjena lozinka!");
+        Session::flush();
+        Auth::logout();
+        return redirect()-> route('login')
+            ->with('success',"Uspešno promenjena lozinka! Molimo ponovo se ulogujte sa novom lozinkom.");
+        //*/
     }
 }

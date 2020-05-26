@@ -80,11 +80,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function userProfile($id) {
-        $user = DB::table('users')
-            ->where('id','=',$id)
-        ->first();
+        $user = User::find($id);
         $slikari = null;
         $slike = array();
+        //dd($user);
         if(!$user->isSlikar) {
             //dovlacenje slika slikara koji se prate u $slike
             $slikari = DB::table('kupac_slikar')

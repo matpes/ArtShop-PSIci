@@ -99,7 +99,7 @@
                 <br>
                 {{--     broj ocena     --}}
                 <div class="text-md-left">Broj ocena: &emsp;
-                    <?php echo $brOcena; ?>
+                    <?php echo $slikar->brOcenjenihSlika; ?>
                 </div>
             @endif
             <br>
@@ -112,6 +112,12 @@
                     {{ session('success') }}
                 </div>
                 <br>
+                {{--     password     --}}
+                <div class="col-md-12 text-md-left">Lozinka: &nbsp;
+                    <form method="GET" action="/password/reset/">
+                        <input type="hidden" name="token" value="{{csrf_token()}}">
+                    </form>
+                </div>
             @else
                 <br> <br>
             @endif
@@ -133,7 +139,11 @@
                         </button>
                     </form>
                 </div>
+                <br>
+                
             </div>
+
+
             <br> <br> <br>
             @else
                 <br> <br> <br>
@@ -214,9 +224,6 @@
             </div>
         </div>
     </div>
-    <footer>
-    <img src="/images/logo.png" alt="ArtShopLogo" class="float-right img-fluid">
-    </footer>
 </div>
 </body>
 </html>

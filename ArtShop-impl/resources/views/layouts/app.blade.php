@@ -26,50 +26,64 @@
 @yield('head')
 </head>
 <body class="body">
+<section>
 <div class="container-fluid noPadding">
     <div class="myHeader">
         <div class="row-fluid">
             <div class="col-sm-12">
                 <div class="form-group noMargin">
-                    <a method="get" action="/pretraga">
+                    <form method="get" action="/pretraga">
                         <input type="text" name="autor" id="1" class="form-control header_input_text"
                                placeholder="Slikar">
                         <input type="text" name="tema" id="2" class="form-control header_input_text"
                                placeholder="Tematika">
                         <select name="stil" id="3" class="form-control header_input_text">
                             <option value="stil">Stil</option>
-                            <option value="klasicizam">Klasicizam</option>
-                            <option value="romantizam">Romantizam</option>
-                            <option value="kubizam">Kubizam</option>
+                            <option value="renesansa">Renesansa</option>
                             <option value="barok">Barok</option>
+                            <option value="klasicizam">Klasicizam</option>
+                            <option value="neoklasicizam">Neoklasicizam</option>
+                            <option value="romantizam">Romantizam</option>
+                            <option value="impresionizam">Impresionizam</option>
+                            <option value="simbolizam">Simbolizam</option>
+                            <option value="ekspresionizam">Ekspresionizam</option>
+                            <option value="kubizam">Kubizam</option>
+                            <option value="futurizam">Futurizam</option>
+                            <option value="dadaizam">Dadaizam</option>
+                            <option value="nadrealizam">Nadrealizam</option>
+                            <option value="popart">Pop art</option>
+                            <option value="postmodernizam">Postmodernizam</option>
+                            <option value="savremenaUmetnost">Savremena umetnost</option>
                         </select>
                         <button type="submit" class="btn-dark gray_button" name="submit"> Pretraži</button>
+
+                        @yield('header_form_2')
                         @if(Auth::check())
                             @if(!Auth::user()->isAdmin)
                                 @if(Auth::user()->isSlikar)
                                 {{--objavi sliku za slikare--}}
-                                    <a class="btn btn-link-btn" href="{{ route('login') }} class="float-md-right">
+                                    <a class="btn btn-link" href="/slika">
+                                        <!-- {{ __('Objavi sliku') }}
+                                    <a class="btn btn-link-btn" href="{{ route('login') }} class="float-md-right"> -->
                                         <button type="button" class="mr-0 btn-dark gray_button" style="width: fit-content;">{{ __('Objavi sliku') }}</button>
                                     </a>
-                                    {{--profilna slika --}}
-                                    <a class="btn btn-link" href="{{route('profile.info', ['id'=>Auth::id()])}}">
-                                        <img  class = "img-fluid img-rounded float-right ml-4 mr-0"  alt="profilna_slika" width="60px" height="60px"
-                                              src=<?php if(is_null(Auth::user()->picture_path)){ echo'\images\avatar.png';}
-                                        else {$path = '\images\users\\'.Auth::user()->picture_path; echo $path; } ?>>
-                                    </a>
+
                                 @else
-                                    {{--profilna slika --}}
-                                    <a class="btn btn-link float-md-right" href="{{route('profile.info', ['id'=>Auth::id()])}}">
-                                        <img  class = "img-fluid img-rounded float-right"  alt="profilna_slika" width="60px" height="60px"
-                                              src=<?php if(is_null(Auth::user()->picture_path)){ echo'\images\avatar.png';}
-                                        else {$path = '\images\users\\'.Auth::user()->picture_path; echo $path; } ?>>
-                                    </a>
+
                                     {{--korpa za korisnike --}}
-                                    <a href="/korpa" class="float-md-right mt-2 mr-4">
-                                        <img src="/images/design/cart.png" alt="korpa" class="img-fluid" href="/korpa">
+                                    <a href="/korpa" class="float-md-right mr-4">
+                                        <img src="/images/design/cart.png" alt="korpa" class="img-fluid mt-1" href="/korpa" height="56px">
                                     </a>
                                 @endif
                             @endif
+
+                                {{--profilna slika --}}
+                                <a href="/profile/info/{{Auth::id()}}" >
+                            <img  class = "img-fluid img-rounded"  alt="profilna_slika" style=""  href="{{ route('login') }}"
+                                  width="60px" height="60px"
+                                  src=<?php if(is_null(Auth::user()->picture_path)){ echo'images/avatar.png';}
+                            else {$path = 'images/users/'.Auth::user()->picture_path; echo $path; } ?>>
+                                </a>
                         @else
                             <a class="btn btn-link" href="{{ route('login') }}">
                                 {{ __('Uloguj se') }}
@@ -88,11 +102,13 @@
 <div class="spaceFromHeader">
     @yield('content')
 </div>
-<div class="spaceFromHeader">
-{{--    <footer>--}}
-    @yield('footer')
-{{--    </footer>--}}
-</div>
+
+    <footer>
+        <img src="/images/logo.png" alt="ArtShopLogo" class="float-right img-fluid">
+    </footer>
+</section>
+{{--    @yield('footer')--}}
+
 </body>
 </html>
 

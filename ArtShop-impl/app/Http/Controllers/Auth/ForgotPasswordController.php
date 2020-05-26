@@ -72,11 +72,9 @@ class ForgotPasswordController extends Controller
                 ->limit(1)
                 ->update(['password' => $password]);
 
-            Mail::send('mails.passwordReset', array('title'=>'Zatražili ste resetovanje loznike',
-                'username'=>$user->username, 'password' => $random, 'link'=> '127.0.0.1:8000/login'), function($message)
-            {
-                $email = Request::getCurrentRequest()->email;
-                $message->to($email, $email->subject('ArtShop password reset'));
+            Mail::send('auth/passwords/mailer', array('name'=>$user->username, 'new_password' => $random ), function($message) use ($request) {
+                $email = $request->email;
+                $message->to($email/*, $email->subject('ArtShop')*/)->subject("NOVA SIFRA");
             });
             return redirect('login')
                 ->with('success', "Email za resetovanje lozinke poslat na datu adresu!");

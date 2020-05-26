@@ -6,7 +6,7 @@
 @endsection
 
 
-@section('header_form')
+@section('header_form_2')
     @if(count($slike_u_korpi)>0)
 
         <a href="kupac_forma">
@@ -15,9 +15,7 @@
     @else
         <button disabled type="button" class="btn disabledButton gray_button"> Kupi slike</button>
     @endif
-    <a href="profileInfo">
-        <img src="{{$path}}" alt="" class="float-right">
-    </a>
+
 @endsection
 
 @section('content')

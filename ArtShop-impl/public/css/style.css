@@ -56,7 +56,6 @@ article,
 aside,
 figcaption,
 figure,
-footer,
 header,
 hgroup,
 main,
@@ -10993,9 +10992,9 @@ hr{
 }
 
 footer{
-    position: absolute;
-    right: 5px;
-    bottom: 15px;
+    position: absolute !important;
+    right: 5px !important;
+    bottom: 15px !important;
 }
 
 .dark_background{
