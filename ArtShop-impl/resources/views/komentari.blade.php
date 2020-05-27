@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="/css/Ana.css">
     <!--<link rel="stylesheet" type="text/css" href="/css/style.css">-->
-    <script type="javascript">
+    <script type="text/javascript">
 
         //var myJavascriptVar
       /*  $(document).ready(function() {
@@ -32,6 +32,14 @@
               newF();
 
         }*/
+
+        function simulirajKlik() {
+
+            document.getElementById('btnDelete').click();
+
+            //simulateClick(document.getElementById('btnDelete'));
+
+        }
     </script>
 
 
@@ -47,10 +55,9 @@
     <?php
 
 
-    if(isset($_POST['submit']))
+    if(isset($_GET['submit']))
     {
-        $komentarToDelete_id = $_POST['name'];
-
+        $komentarToDelete_id = $_GET['name'];
     }
 
 
@@ -68,11 +75,12 @@
         $autor=$autori[$i];
 
         echo '<h6 class="user_name">'.$autor->username.'</h6>';
-        echo '<h6><div class="komentar-box">'.$komentar->tekst.'</div></h6><form method="get" action="/comment/middle">
+        echo '<h6><div class="komentar-box">'.$komentar->tekst.'</div></h6><form method="get" action="'. $_SERVER['PHP_SELF'].'">
 
-                                          <input type="hidden" name="picture_id" value="'.$picture_id.'">
-                                              <input type="hidden" name="komentar_id" value="'.$komentar->id.'">
-                                              <input type="submit" name="submit" value="Obrisi">
+                                          <!--<input type="hidden" name="picture_id" value="'.$picture_id.'">
+                                              <input type="hidden" name="komentar_id" value="'.$komentar->id.'">-->
+                                              <input type="hidden" name="name" value="'.$komentar->id.'">
+                                              <input type="submit" name="submit" id="submitDugme" onclick="simulirajKlik()" value="Obrisi">
 
 
                                               <button type="button" id ="btnDelete" name="isSubmit" data-toggle="modal" data-target="#myModal">OBRISI</button>
@@ -130,7 +138,7 @@
         <input type="submit" name="submit"  value="Objavi komentar" onclick="return confirm('Sure?')">
     </form>
 
-    <!--Povratak na stranivu sa slikama-->
+    <!--Povratak na stranicu sa slikama-->
 
     <form method="get" action="/picture/{{$picture_id}}">
 
