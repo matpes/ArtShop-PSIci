@@ -158,13 +158,46 @@ $i=-1;
 
 <h1>Please type your comment:</h1>
 
-<form method="get" action="/postComment">
+<!--<form method="get" action="/postComment">
     <textarea name="tekst" placeholder="Enter your comment..."></textarea>
     {{ csrf_field() }}
 
     <input type="hidden" name="picture_id" value="{{$picture_id}}">
     <input type="submit" name="submit"  value="Objavi komentar" onclick="return confirm('Sure?')">
-</form>
+</form>-->
+
+
+
+<!--modal za unos komentara-->
+
+<button type="button" id ="btnUnosKomentara" name="isSubmit" data-toggle="modal" data-target="#unosKomentara">Napisi komentar</button>
+
+<!--Sanjin modal-->
+<div class="container-fluid">
+    <div class="modal" id="unosKomentara" style="margin-top:15%;color:black;">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background-color:rgb(64,64,64);color:#7FF000">
+                <div class="modal-header">
+                    <h5 style="font-size:20px">Brisanje komentara</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Unesite komentar</p>
+                </div>
+                <div class="modal-footer">
+                    <form method="get" action="/postComment">
+                        <textarea name="tekst" placeholder="Enter your comment..."></textarea>
+                        <input type="hidden" name="_token" value="'. csrf_token() .'">
+                        <input type="hidden" name="picture_id" value="{{$picture_id}}">
+                        <button type="submit" id="potvrdiBrisanjeKomentara" class="btn btn-warning">Potvrdi</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Odustani</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!--Povratak na stranicu sa slikama-->
 
@@ -175,5 +208,6 @@ $i=-1;
 
     <input type="submit" name="submit" value="Nazad na sliku" onclick="return confirm('Sure?')">
 </form>
+
 
 @endsection
