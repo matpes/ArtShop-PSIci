@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Komentar;
+use App\Picture;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 class KomentariController extends Controller
 {
     //
@@ -87,4 +91,50 @@ class KomentariController extends Controller
         $komentar->delete();
         return redirect('commentsOfPictureId/'.$request->picture_id);
     }
+
+
+    public function prijava(Request $request){
+
+        //DOHVATITI ID KORINSIKA KOJI PRIJAVLJUJE KOMENTAR, OVDE JE HARDKODOVANO 2
+
+        $korisnik=Auth::user();
+        $komentar=Komentar::find($request->komentar_id);
+        $k = DB::table('komentar_korisnik')->where([['komentar_id', $request->komentar_id], ['user_id', $korisnik->id]])->first();
+        if($k==null) {
+            DB::table('komentar_korisnik')->insert(['user_id' =>  $korisnik->id, "komentar_id" => $request->komentar_id]);
+
+        }
+        return redirect('commentsOfPictureId/'.$request->picture_id);
+
+
+
+
+    }
+
+
+
+    public function prikaziPrijave(){
+
+        $prijave=DB::table('komentar_korisnik')->get();
+
+        $imenaAutora=collect([]);
+        foreach($prijave as $prijava){
+            $autor=User::getUserById($prijava->user_id);
+            $imenaAutora->push($autor);
+
+        }
+
+        $pictures=collect([]);
+        foreach($prijave as $prijava){
+            $komentar=Komentar::find($prijava->komentar_id);
+
+            $picture = Picture::withTrashed()->find($komentar->picture_id);
+            $pictures->push($picture);
+        }
+
+
+        return view('.Prijave',compact('prijave', 'imenaAutora', 'pictures'));
+
+    }
+
 }

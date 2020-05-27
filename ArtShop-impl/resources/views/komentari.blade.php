@@ -84,6 +84,13 @@
 
 
                                               <button type="button" id ="btnDelete" name="isSubmit" data-toggle="modal" data-target="#myModal">OBRISI</button>
+                                           </form>
+
+                                           <form method="get" action="/prijave">
+
+                                              <input type="hidden" name="picture_id" value="'.$picture_id.'">
+                                              <input type="hidden" name="komentar_id" value="'.$komentar->id.'">
+                                              <input type="submit" name="submit" value="Prijavi">
                                            </form>';
 
     }

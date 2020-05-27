@@ -40,4 +40,9 @@ class User extends Authenticatable
         $slikar->save();
 
     }
+
+    public static function getUserById($id){
+        $user=User::find($id);
+        return $user;
+    }
 }

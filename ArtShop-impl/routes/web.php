@@ -106,9 +106,14 @@ Route::group(['middleware' => 'UserMiddleware'], function()
 
 Route::get('comments', 'KomentariController@showAllComments');
 Route::get('commentsOfPictureId/{id}', 'KomentariController@showAllCommentsOfPicture');
+Route::get('commentsOfPictureId/Admin/{id}', 'AdminController@showAllCommentsOfPicture');
 Route::get('postComment', 'KomentariController@store');
 Route::get('comment/delete', 'KomentariController@delete');
 Route::get('comment/middle', 'KomentariController@medjuFunkcija');
+Route::get('prijave', 'KomentariController@prijava');
+Route::get('prijave/show', 'KomentariController@prikaziPrijave');
+Route::get('prijave/Admin/delete', 'AdminController@delete');
+Route::get('prijavljenKomentar', 'AdminController@komentarSlika');
 //END ANA
 
 //ROUTA ZA TESTIRANJE PROIZVOLJNIH DELOVA KODA
