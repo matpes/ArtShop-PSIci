@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Komentar;
 use App\Picture;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -46,7 +47,8 @@ class KomentariController extends Controller
 
         //compact--> every name from the record which is arguments transforms into variable :)
         $komentarToDelete_id=10; //nebitna vrednost
-        return view ('komentari', compact('picture_id', 'autori', 'sviKomentari', 'komentarToDelete_id'));
+        $user=Auth::user();
+        return view ('newKomentari', compact('picture_id', 'autori', 'sviKomentari', 'komentarToDelete_id', 'user'));
     }
 
 
@@ -54,7 +56,9 @@ class KomentariController extends Controller
 
         $korisnik=Auth::user();
         $korisnik_id=$korisnik->id;
-        Komentar::insertujKomentar($korisnik_id, $request->picture_id, $request->tekst, $request->vreme);
+        $vreme=Carbon::now();
+       // return $vreme;
+        Komentar::insertujKomentar($korisnik_id, $request->picture_id, $request->tekst, $vreme);
 
         //return redirect('/comment');
 
@@ -89,6 +93,8 @@ class KomentariController extends Controller
         //brisanje komentara
         $komentar=Komentar::findOrFail($request->komentar_id);
         $komentar->delete();
+        //obrisati sve prijave koje se odnose na ovaj komentar
+        DB::table('komentar_korisnik')->where('komentar_id',$request->komentar_id)->delete();
         return redirect('commentsOfPictureId/'.$request->picture_id);
     }
 
