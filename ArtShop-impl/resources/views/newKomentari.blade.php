@@ -178,14 +178,14 @@ $i=-1;
         <div class="modal-dialog">
             <div class="modal-content" style="background-color:rgb(64,64,64);color:#7FF000">
                 <div class="modal-header">
-                    <h5 style="font-size:20px">Brisanje komentara</h5>
+                    <h5 style="font-size:20px">Unos komentara</h5>
                 </div>
                 <div class="modal-body">
                     <p>Unesite komentar</p>
                 </div>
                 <div class="modal-footer">
                     <form method="get" action="/postComment">
-                        <textarea name="tekst" placeholder="Enter your comment..."></textarea>
+                      <textarea rows="4" cols="35"  name="tekst" placeholder="Enter your comment..."></textarea>
                         <input type="hidden" name="_token" value="'. csrf_token() .'">
                         <input type="hidden" name="picture_id" value="{{$picture_id}}">
                         <button type="submit" id="potvrdiBrisanjeKomentara" class="btn btn-warning">Potvrdi</button>

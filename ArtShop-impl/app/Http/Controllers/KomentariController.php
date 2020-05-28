@@ -133,23 +133,28 @@ class KomentariController extends Controller
 
         $prijave=DB::table('komentar_korisnik')->get();
 
-        $imenaAutora=collect([]);
+        $imenaAutora=collect([]); //autori prijave, ne autori komentara
         foreach($prijave as $prijava){
             $autor=User::getUserById($prijava->user_id);
             $imenaAutora->push($autor);
 
         }
 
+
+
         $pictures=collect([]);
+        $autoriKomentara=collect([]);
         foreach($prijave as $prijava){
             $komentar=Komentar::find($prijava->komentar_id);
 
             $picture = Picture::withTrashed()->find($komentar->picture_id);
+            $autorKomentara=User::withTrashed()->find($komentar->user_id);
             $pictures->push($picture);
+            $autoriKomentara->push($autorKomentara);
         }
 
 
-        return view('.Prijave',compact('prijave', 'imenaAutora', 'pictures'));
+        return view('.Prijave',compact('prijave', 'imenaAutora', 'pictures', 'autoriKomentara'));
 
     }
 

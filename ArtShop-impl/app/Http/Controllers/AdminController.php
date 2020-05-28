@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    //
+    public function index(){
+        //vraca privremenu stranicu za admina, bas lose
+        return view('profile/admin_temp');
+    }
+
+
+
     public function showAllComments(Request $request){ //iz requesta se dobija picture_id, a user_id dobijam preko AUTH
 
 

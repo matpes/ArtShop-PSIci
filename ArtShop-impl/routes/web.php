@@ -118,6 +118,7 @@ Route::get('nalozi/show', 'AdminController@sviKorisnickiNalozi');
 Route::get('profile/info/fromAdmin/{id}', 'AdminController@profileInfo');
 Route::get('nalozi/block/{id}', 'AdminController@blokirajNalog');
 Route::get('nalozi/unblock/{id}', 'AdminController@odblokirajNalog');
+Route::get('admin', 'AdminController@index');
 //END ANA
 
 //ROUTA ZA TESTIRANJE PROIZVOLJNIH DELOVA KODA
