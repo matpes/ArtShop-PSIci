@@ -114,6 +114,9 @@ Route::get('prijave', 'KomentariController@prijava');
 Route::get('prijave/show', 'KomentariController@prikaziPrijave');
 Route::get('prijave/Admin/delete', 'AdminController@delete');
 Route::get('prijavljenKomentar', 'AdminController@komentarSlika');
+Route::get('nalozi/show', 'AdminController@sviKorisnickiNalozi');
+Route::get('profile/info/fromAdmin/{id}', 'AdminController@profileInfo');
+Route::get('nalozi/block/{id}', 'AdminController@blokirajNalog');
 //END ANA
 
 //ROUTA ZA TESTIRANJE PROIZVOLJNIH DELOVA KODA

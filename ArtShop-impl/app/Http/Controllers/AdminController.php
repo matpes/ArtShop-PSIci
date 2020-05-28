@@ -88,16 +88,40 @@ class AdminController extends Controller
     }
 
 
+    public function sviKorisnickiNalozi(){
 
 
+        $users=User::get();
+
+        return view ('korisnickiNalozi', compact('users'));
+    }
 
 
+    public function profileInfo($user_id){
+       $user=User::find($user_id);
+
+        $slikar = DB::table('slikars')
+            ->where('user_id', '=', $user_id)
+            ->first();
+        $brOcena = 0;
+        if(!is_null($slikar)){
+            $brOcena = DB::table('pictures')
+                ->join('za_ocenus','za_ocenus.picture_id','=','pictures.id')
+                ->where('pictures.user_id','=', $slikar->user_id)
+                ->count();
+        }
+        return response()->view('profile.info',['user'=>$user, 'slikar'=>$slikar, 'brOcena'=>$brOcena]);
+    }
 
 
+    public function blokirajNalog($user_id){
 
+       $user=User::find($user_id);
+       $user->delete();
+       //to do: brisati sve sto se odnosi na njega???
 
-
-
+      return redirect('nalozi/show');
+    }
 
 
 

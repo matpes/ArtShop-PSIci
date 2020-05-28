@@ -156,7 +156,7 @@ $i=-1;
 
 
 
-<h1>Please type your comment:</h1>
+
 
 <!--<form method="get" action="/postComment">
     <textarea name="tekst" placeholder="Enter your comment..."></textarea>
