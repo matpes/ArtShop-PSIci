@@ -90,6 +90,7 @@ class KomentariController extends Controller
 
     public function delete(Request $request){
 
+
         //brisanje komentara
         $komentar=Komentar::findOrFail($request->komentar_id);
         $komentar->delete();
@@ -101,7 +102,7 @@ class KomentariController extends Controller
 
     public function prijava(Request $request){
 
-        //DOHVATITI ID KORINSIKA KOJI PRIJAVLJUJE KOMENTAR, OVDE JE HARDKODOVANO 2
+
 
         $korisnik=Auth::user();
         $komentar=Komentar::find($request->komentar_id);
@@ -109,7 +110,16 @@ class KomentariController extends Controller
         if($k==null) {
             DB::table('komentar_korisnik')->insert(['user_id' =>  $korisnik->id, "komentar_id" => $request->komentar_id]);
 
+            //azuriranje brojaPrijava
+
+            $user=User::find($korisnik->id);
+
+            $user->brPrijava=$user->brPrijava+1;
+            $user->save();
         }
+
+
+
         return redirect('commentsOfPictureId/'.$request->picture_id);
 
 

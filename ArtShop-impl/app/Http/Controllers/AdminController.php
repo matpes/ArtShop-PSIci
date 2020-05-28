@@ -72,6 +72,18 @@ class AdminController extends Controller
 
 
     public function delete(Request $request){
+        //povecavanje broja uspesnih prijava svima koji su prijavili taj komentar
+
+        $prijave=DB::table('komentar_korisnik')->where('komentar_id', $request->komentar_id)->get();
+
+        foreach($prijave as $prijava){
+
+            $user=User::find($prijava->user_id);
+            $user->brUspesnihPrijava= $user->brUspesnihPrijava+1;
+            $user->save();
+
+        }
+
 
         //brisanje komentara
         $komentar=Komentar::findOrFail($request->komentar_id);
@@ -91,7 +103,7 @@ class AdminController extends Controller
     public function sviKorisnickiNalozi(){
 
 
-        $users=User::get();
+        $users=User::withTrashed()->get();
 
         return view ('korisnickiNalozi', compact('users'));
     }
@@ -117,12 +129,17 @@ class AdminController extends Controller
     public function blokirajNalog($user_id){
 
        $user=User::find($user_id);
-       $user->delete();
+       $user->delete(); //soft delete
        //to do: brisati sve sto se odnosi na njega???
 
       return redirect('nalozi/show');
     }
 
+    public function odblokirajNalog($user_id){
+        User::withTrashed()->find($user_id)->restore();
+        //to do: restorovat sve sto se odnosi na njega
+        return redirect('nalozi/show');
+    }
 
 
 

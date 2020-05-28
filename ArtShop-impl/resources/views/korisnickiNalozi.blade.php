@@ -17,14 +17,15 @@
         <table>
             <tr>
                 <td rowspan="3">
-                    <img width="80px" height="80px" src=<?php if(is_null($user->picture_path)) {
-                        echo 'images/avatar.png';
+                    <?php
+
+                    $path = '/images/avatar.png';
+                    if($user->profilna_slika!=null){
+                        $path = '/images/users//'.$user->profilna_slika;
                     }
-                    else{
-                        $path='images/users/'.$user->picture_path;
-                        echo $path;
-                    }
-                        ?>>
+
+                    ?>
+                    <img width="100px" height="100px" src="{{$path}}">
                 </td>
                 <td colspan="2">
                   {{$user->username}}
@@ -55,9 +56,21 @@
                     </form>
                 </td>
                 <td>
-                    <form method="get" action="/nalozi/block/{{$user->id}}">
+                    <?php
+
+                    if($user->deleted_at==null)
+                        echo '
+                    <form method="get" action="/nalozi/block/'.$user->id.'">
                         <button type="submit">Blokiraj nalog</button>
-                    </form>
+                    </form>';
+                    else
+                        echo '
+                    <form method="get" action="/nalozi/unblock/'.$user->id.'">
+                        <button type="submit">Odblokiraj nalog</button>
+                    </form>';
+
+
+                    ?>
                 </td>
             </tr>
         </table>

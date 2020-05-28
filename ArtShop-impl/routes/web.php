@@ -117,6 +117,7 @@ Route::get('prijavljenKomentar', 'AdminController@komentarSlika');
 Route::get('nalozi/show', 'AdminController@sviKorisnickiNalozi');
 Route::get('profile/info/fromAdmin/{id}', 'AdminController@profileInfo');
 Route::get('nalozi/block/{id}', 'AdminController@blokirajNalog');
+Route::get('nalozi/unblock/{id}', 'AdminController@odblokirajNalog');
 //END ANA
 
 //ROUTA ZA TESTIRANJE PROIZVOLJNIH DELOVA KODA

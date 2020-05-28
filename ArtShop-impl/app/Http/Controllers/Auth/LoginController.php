@@ -70,7 +70,17 @@ class LoginController extends Controller
         $credentials = $request->only('username', 'password');
 
         // proveri da li postoji user
-        $user = DB::table('users')->where('username', '=', $request->username)->first();
+        //Ana: zakomentarisala sam 74. red i dodala sve do endAna komentara
+        //$user = DB::table('users')->where('username', '=', $request->username)->first();
+        $user=User::where('username','=', $request->username)->first();
+        $userBlocked=User::withTrashed()->where('username','=', $request->username)->first();
+
+        if($user==null && $userBlocked!=null){
+            return redirect('login')
+                ->with('success',"Vaš nalog je blokiran!");
+        }
+
+        //endAna
 //        dd($user);
         if (is_null($user)) {
             return redirect('login')
