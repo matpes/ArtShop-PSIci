@@ -4,6 +4,7 @@
     <script src="http://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 
 
+
     <link rel="stylesheet" href="/css/Ana.css">
     <!--<link rel="stylesheet" type="text/css" href="/css/style.css">-->
     <script type="text/javascript">
@@ -84,6 +85,13 @@
 
 
                                               <button type="button" id ="btnDelete" name="isSubmit" data-toggle="modal" data-target="#myModal">OBRISI</button>
+                                           </form>
+
+                                           <form method="get" action="/prijave">
+
+                                              <input type="hidden" name="picture_id" value="'.$picture_id.'">
+                                              <input type="hidden" name="komentar_id" value="'.$komentar->id.'">
+                                              <input type="submit" name="submit" value="Prijavi">
                                            </form>';
 
     }
@@ -134,7 +142,6 @@
         {{ csrf_field() }}
 
         <input type="hidden" name="picture_id" value="{{$picture_id}}">
-        <input type="text" name="vreme" placeholder="vreme...">
         <input type="submit" name="submit"  value="Objavi komentar" onclick="return confirm('Sure?')">
     </form>
 

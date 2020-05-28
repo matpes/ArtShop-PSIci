@@ -1,17 +1,34 @@
 .light-grey-background {
 
-    background: white;
+    background-color: #5a6268;
+    width:50%;
 
 }
+.probaClass{
+    background-color: #1d68a7;
+}
+
 
 .user_name{
-    color:black;
+    color:gray;
     font-weight: bold;
+    font-style: italic;
+    height: 25px;
+    width:60px;
 }
 
 .komentar-box{
-    background: darkgreen;
+    background: yellow;
 }
+
+.tekst_komentara{
+    background-color: #123c24;
+    opacity: 50%;
+    width:340px;
+    border-color: #123c24;
+    color:white;
+}
+
 
 
 
