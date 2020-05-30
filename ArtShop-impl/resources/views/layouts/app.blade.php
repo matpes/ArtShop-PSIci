@@ -54,6 +54,7 @@
                             <option value="popart">Pop art</option>
                             <option value="postmodernizam">Postmodernizam</option>
                             <option value="savremenaUmetnost">Savremena umetnost</option>
+                            <option value="savremenaUmetnost">Realizam</option>
                         </select>
                         <button type="submit" class="btn-dark gray_button" name="submit"> Pretraži</button>
 
@@ -62,7 +63,7 @@
                             @if(!Auth::user()->isAdmin)
                                 @if(Auth::user()->isSlikar)
                                 {{--objavi sliku za slikare--}}
-                                    <a class="btn btn-link" href="/slika">
+                                    <a class="btn btn-link-btn" href="/slika">
                                         <!-- {{ __('Objavi sliku') }}
                                     <a class="btn btn-link-btn" href="{{ route('login') }} class="float-md-right"> -->
                                         <button type="button" class="mr-0 btn-dark gray_button" style="width: fit-content;">{{ __('Objavi sliku') }}</button>
@@ -81,8 +82,8 @@
                                 <a href="/profile/info/{{Auth::id()}}" >
                             <img  class = "img-fluid img-rounded"  alt="profilna_slika" style=""  href="{{ route('login') }}"
                                   width="60px" height="60px"
-                                  src=<?php if(is_null(Auth::user()->picture_path)){ echo'images/avatar.png';}
-                            else {$path = 'images/users/'.Auth::user()->picture_path; echo $path; } ?>>
+                                  src=<?php if(is_null(Auth::user()->picture_path)){ echo'/images/avatar.png';}
+                            else {$path = '/images/users/'.Auth::user()->picture_path; echo $path; } ?>>
                                 </a>
                         @else
                             <a class="btn btn-link" href="{{ route('login') }}">
