@@ -21,7 +21,43 @@
             <form method="get" action="/prijave/Admin/delete">
                 <input type="hidden" name="komentar_id" value="{{$komentar->id}}">
                 <input type="hidden" name="picture_id" value="{{$picture->id}}">
-                <input type="submit" name="submit"  value="ObrisiKomentarKaoAdmin">
+               <!-- <input type="submit" name="submit"  value="ObrisiKomentarKaoAdmin">-->
+
+
+
+
+
+                <button type="button"   data-toggle="modal" data-target="#myModal">Obrisi komentar</button>
+
+                <!--Sanjin modal-->
+                <div class="container-fluid">
+                    <div class="modal" id="myModal" style="margin-top:15%;color:black;">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="background-color:rgb(64,64,64);color:#7FF000">
+                                <div class="modal-header">
+                                    <h5 style="font-size:20px">Brisanje komentara</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Da li ste sigurni da želite da obrisete ovaj komentar?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <form method="get" action="/prijave/Admin/delete">
+                                        <input type="hidden" name="_token" value="'. csrf_token() .'">
+                                        <input type="hidden" name="komentar_id" value="{{$komentar->id}}">
+                                        <input type="hidden" name="picture_id" value="{{$picture->id}}">
+
+                                        <button type="submit" id="potvrdiBrisanjeKomentara" class="btn btn-warning">Potvrdi</button>
+                                        <button type="button" class="btn btn-warning" data-dismiss="modal">Odustani</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end Sanjin modal-->
+
+
+
             </form>
         </div>
         <div class="col-5">

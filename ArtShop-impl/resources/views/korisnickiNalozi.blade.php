@@ -62,7 +62,8 @@
                         echo '
                     <form method="get" action="/nalozi/block/'.$user->id.'">
                         <button type="submit">Blokiraj nalog</button>
-                    </form>';
+                    </form>
+';
                     else
                         echo '
                     <form method="get" action="/nalozi/unblock/'.$user->id.'">
