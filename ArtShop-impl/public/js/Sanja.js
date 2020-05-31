@@ -38,13 +38,13 @@ function showSlide() {
             slides[i].style.display = "none";
     }
     slides[slideIndex].style.display = "block";
-    // callSlideChange();
+    callSlideChange();
     // setTimeout(showSlides(), 10000); // Change image every 10 seconds
 }
-/*
+
 function callSlideChange(){
     setTimeout(showSlides(++slideIndex), 100000); // Change image every 10 seconds
-}*/
+}//*/
 window.onload = function() {
     if(document.getElementsByClassName("mySlides").length > 0) {
         showSlides(0);
