@@ -206,7 +206,7 @@ $i=-1;
 
     <input type="hidden" name="picture_id" value="{{$picture_id}}">
 
-    <input type="submit" name="submit" value="Nazad na sliku" onclick="return confirm('Sure?')">
+    <input type="submit" name="submit" value="Nazad na sliku">
 </form>
 
 

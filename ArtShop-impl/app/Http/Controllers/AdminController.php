@@ -135,10 +135,22 @@ class AdminController extends Controller
     public function blokirajNalog($user_id){
 
        $user=User::find($user_id);
+
        $user->delete(); //soft delete
        //to do: brisati sve sto se odnosi na njega???
 
       return redirect('nalozi/show');
+    }
+
+    public function blokirajNalog1(Request $request){
+
+        $user_id=$request->user_id;
+        $user=User::find($user_id);
+
+        $user->delete(); //soft delete
+        //to do: brisati sve sto se odnosi na njega???
+
+        return redirect('nalozi/show');
     }
 
     public function odblokirajNalog($user_id){
