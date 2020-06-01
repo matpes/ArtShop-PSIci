@@ -180,3 +180,9 @@
     vertical-align: middle;
     horiz-align: center;
 }
+
+.bottom-obajvi-sliku{
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+}

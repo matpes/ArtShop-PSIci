@@ -25,7 +25,7 @@
                 data:{cnt:cnt, br:br},
                 success:function(data) {
                     $("#pic").attr("src",data.path);
-                    $("#pic").attr("alt",data.naziv);;
+                    $("#pic").attr("alt",data.naziv);
                     $("#naziv").html(data.naziv);
                     $("#stil").html(data.stil);
                     $("#tema").html(data.tema);

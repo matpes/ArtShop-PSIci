@@ -10,12 +10,16 @@ use App\Slikar;
 use App\Stil;
 use App\Tema;
 use DateTime;
+use Faker\Provider\File;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailer;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File as StorageFile;
 
 /**
  * Class spSlika
@@ -244,5 +248,85 @@ class spSlika extends Controller
     {
         $picture = Picture::findOrFail($id);
         $picture->delete();
+    }
+
+    /**
+     * Author: 17/0372 Sanja Samardžija
+     * Funkcija za čuvanje slike
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postSlika(Request $request){
+        $rules = [
+            'file_path' => 'required|image',
+        ];
+        $messages = [
+            'file_path.required'=> 'Morate prvo izabrati fajl!',
+            'file_path.image'=>'Izaberite sliku.Format slike nije podržan.',
+        ];
+//        dd($data);
+        $validate = Validator::make($request->all(), $rules, $messages);
+        if($validate->fails()){
+//            dd("failed");
+            return redirect()->back()
+                ->withErrors($validate)
+                ->withInput();
+        }
+
+        $path = '\images\\' . Auth::user()->username . '\\' . $_FILES['file_path']['name'];
+        preg_match('/[^\.]+/',$_FILES['file_path']['name'], $naziv);
+        $directories = Storage::directories('\images\\');
+        $b = true;;
+
+        foreach ($directories as $d){
+            if(basename($d) == Auth::user()->username)
+                $b = false;
+        }
+        if($b) {
+            Storage::makeDirectory(public_path() . '\images\\' . Auth::user()->username);
+
+        } else {
+            $files = StorageFile::allFiles(public_path() . '\images\\'. Auth::user()->username);
+            $b = false;
+            foreach ($files as $d){
+                if($d->getFilename() == $_FILES['file_path']['name']) {
+                    $b = true;
+                }
+            }
+            if($b) {
+                $error = "<b>Ova slika već postoji na vašem profilu.</b>";
+                return response()
+                    ->json(array('path' => "error", 'naziv' => $error), 200);
+            }
+        }
+
+        if($request->path != 'a') {
+            $ret = StorageFile::delete(public_path() . $request->path);
+           /* return response()
+                ->json(array('path' => "error", 'naziv' => $ret . ' ' . $request->path), 200);*/
+        }
+
+        $file = $request->file('file_path')
+            ->move( public_path() . '\images\\' . Auth::user()->username, $request->file('file_path')->getClientOriginalName());
+
+        return response()->json(array('path'=> $path, 'naziv'=>$naziv[0]), 200);
+    }
+
+    /**
+     * Author: 17/0372 Sanja Samardžija
+     * Funkcija za brisanje slike
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function unsaveSlika(Request $request){
+        if(StorageFile::isFile($request->path)) {
+            Storage::delete($request->path);
+            return response()
+                ->json(array('path' => "success", 'naziv'=>$request->path), 200);
+        }
+        return response()
+            ->json(array('path'=> "error", 'naziv'=>$request->path), 200);
     }
 }

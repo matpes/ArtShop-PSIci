@@ -1,13 +1,88 @@
 @extends('.layouts.app')
 
 
-{{--@section('header_form')--}}
+@section('head')
 
-{{--    <a href="/profile/info/{{Auth::id()}}" >--}}
-{{--        <img src="{{$path}}" alt="AAAA" class="img-fluid float-right" style="padding-left: 20px">--}}
-{{--    </a>--}}
+    <link rel="stylesheet" type="text/css" href="/css/Sanja.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script>
+        var b = false;
 
-{{--@endsection--}}
+        window.onbeforeunload = function (){
+            if(b) {
+                var path_el = document.getElementById("path").value;
+                if (path_el != null) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/slika/unsave',
+                        async:false,
+                        processData: false,
+                        contentType: false,
+                        data: {path: path_el},
+                        success: function (data) {
+                            $("#err").html(data.naziv);
+                            $("#err").attr("style",'display:block;');
+                        },
+                        error: function (data) {
+                        }
+                    });
+                }
+            }
+        }
+        window.onload = function() {
+            b = false;
+        }
+
+        function go() {
+
+            var file = $('#file_path')[0].files[0];
+            var fd = new FormData();
+            fd.append('file_path', file);
+            var path_el = document.getElementById("path").value;
+            if(path_el == "")
+                path_el = 'a';
+            fd.append('path', path_el);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type:'POST',
+                url:'/slika/save',
+                processData: false,
+                contentType: false,
+                data: fd,
+                success: function (data) {
+                    if(data.path == "error"){
+                        $("#err").html(data.naziv);
+                        $("#err").attr("style",'display:block;');
+                    } else {
+                        $("#uploaded_image").attr("src", data.path);
+                        $("#uploaded_image").attr("alt", data.naziv);
+                        $("#path").attr("value", data.path);
+                        b = true;
+                        $("#err").attr("style",'display:none;')
+                    }
+                    //success code
+                },
+                error: function (data) {
+                    $("#err").html(data);
+                    $("#err").attr("style",'display:block;');
+                    //error code
+                }
+            });
+        }
+    </script>
+@endsection
 
 @section('content')
 
@@ -21,15 +96,22 @@
 
 
                     <div class="col-sm-5 col-xs-12 padding_form_picture">
-                        <img src="@if(isset($picture->path)){{$picture->path}} @else {{'\images\design\images-empty.png'}} @endif" id="uploaded_image" width="100%">
-                        <div class="bottom">
+                        <img src="\images\design\images-empty.png" id="uploaded_image" width="100%" alt="empty_image">
+                        <div class="bottom-obajvi-sliku">
                             <label for="file_path" class="load_file">
-                                Ucitaj sliku
+                                Učitaj sliku
                             </label>
-                            @php($user = \App\User::find(Auth::id()))
-                            <input type="hidden" id="path" name="path" value="@if(isset($picture->path)){{$picture->path}} @endif">
-                            <input id="file_path" type="file" name="file_path" class="form-control form_input_text" style="width: 100%" oninput="document.getElementById('uploaded_image').setAttribute('src','\\images\\{{$user->username}}' + value.substr(value.lastIndexOf('\\'))); document.getElementById('path').value='\\images\\{{$user->username}}' + value.substr(value.lastIndexOf('\\'));"/>
-                            <small>@if(isset($error['path'])){{$error['path']}} @endif</small>
+                            @php($user = Auth::user())
+                            <input type="hidden" id="path" name="path" value="">
+                            @error('path')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                            <div class="invalid-feedback" style="display:none;" id="err" role="alert"></div>
+
+                            <input id="file_path"class="form-control form_input_text  @error('username') is-invalid @enderror"
+                                   type="file" name="file_path"  style="width: 100%" onchange="go()"/>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-7 paddingTopAndBot text-center">
@@ -178,7 +260,7 @@
                                 <input type="hidden" value="{{csrf_token()}}">
                             </div>
                             <div class="col-sm-6">
-                                <button type="button" class="btn-success form-control form_gray_button">
+                                <button type="button" class="btn-success form-control form_gray_button" onclick="giveUp()">
                                     Odustani
                                 </button>
                             </div>

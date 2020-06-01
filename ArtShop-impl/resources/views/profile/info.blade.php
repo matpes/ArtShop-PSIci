@@ -140,7 +140,7 @@
                     </form>
                 </div>
                 <br>
-                
+
             </div>
 
 
@@ -171,18 +171,18 @@
                             </form>
                             <br> <br>
                             {{--     objavi sliku   !!!!PROMENITI RUTU!!!!  --}}
-                            <form method="GET" action="{{ route('profile.user', ['id'=>$user->id]) }}">
+                            <form method="GET" action="/slika">
                                 <button type="submit" class="btn btn-warning" >
                                     {{ __('Objavi sliku') }}
                                 </button>
                             </form>
                             <br> <br>
-                            {{--     objavi izložbu   !!!!PROMENITI RUTU!!!!  --}}
+                            {{--     objavi izložbu   !!!!PROMENITI RUTU!!!!  --}}{{--
                             <form method="GET" action="{{ route('profile.user', ['id'=>$user->id]) }}">
                                 <button type="submit" class="btn btn-warning" >
                                     {{ __('Objavi izložbu') }}
                                 </button>
-                            </form>
+                            </form>--}}
                             <br> <br>
                             {{--     povratak na početnu     --}}
                             <form method="GET" action="{{ route('profile.user_new', ['id'=>$user->id]) }}">

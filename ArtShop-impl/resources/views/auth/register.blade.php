@@ -80,6 +80,8 @@
                                         class="text-md-left float-md-left" checked>Slikar</label>
                                 <label><input type="radio" name="optradio" value="kupac"
                                         class="text-md-left float-md-left">Kupac</label>
+                                <label><input type="radio" name="optradio" value="admin"
+                                          class="text-md-left float-md-left">Administrator</label>
                         </div>
                         <div class="col-md-6 offset-md-6 float-md-right">
                             <button type="submit" class="btn btn-warning">

@@ -82,6 +82,13 @@ Route::group(['middleware' => 'GuestMiddleware'], function()
 Route::get('/profile/user/{id}', 'UserController@userProfile',
     ['middleware' => ['UserMiddleware', 'KupacMiddleware']])->name('profile.user');
 
+//VLADANA
+Route::post('/slika/save', 'spSlika@postSlika',
+    ['middleware' => ['UserMiddleware', 'SlikarMiddleware']])->name('slika.save');
+Route::post('/slika/unsave', 'spSlika@unsaveSlika',
+    ['middleware' => ['UserMiddleware', 'SlikarMiddleware']])->name('slika.save');
+//END VLADANA
+
 Route::group(['middleware' => 'UserMiddleware'], function()
 {
     Route::get('/profile/info/{id}', 'UserController@profileInfo')->name('profile.info');

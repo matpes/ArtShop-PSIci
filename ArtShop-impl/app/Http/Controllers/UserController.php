@@ -170,13 +170,12 @@ class UserController extends Controller
 
 //        dd($request->path);
         $rules = [
-            'path' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'path' => 'required|image|mimes:jpeg,png,jpg,svg',
         ];
         $messages = [
             'path.required'=> 'Morate prvo izabrati fajl!',
             'path.image'=>' Ovo polje je obavezno',
             'path.mimes' => 'Format slike nije podržan! Podržani formati su: jpeg,png,jpg,svg.',
-            'path.max'=>'Fajl ne sme biti veći od :max B',
         ];
 //        dd($data);
         $validate = Validator::make($request->all(), $rules, $messages);

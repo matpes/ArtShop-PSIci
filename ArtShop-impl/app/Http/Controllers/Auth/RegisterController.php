@@ -120,25 +120,25 @@ class RegisterController extends Controller
         $user->password = Hash::make($data['password']);
         if($data['optradio'] == "slikar") {
             $user->isSlikar = true;
+            $user->isAdmin = false;
             $user->save();
             $slikar = new Slikar(['user_id'=>$user->id, 'sumaOcena'=>0, 'brOcenjenihSlika'=>0]);
             $slikar->save();
         }
-        else{
+        else if($data['optradio'] == "admin") {
             $user->isSlikar = false;
+            $user->isAdmin = true;
             $user->save();
+            $slikar = new Slikar(['user_id'=>$user->id, 'sumaOcena'=>0, 'brOcenjenihSlika'=>0]);
+            $slikar->save();
+        } else {
+                $user->isSlikar = false;
+                $user->isAdmin = false;
+                $user->save();
 //            dd($kupac->user_id);
-            $kupac = new Kupac();
-            $kupac->user_id = $user->id;
-            $kupac->save();
-        }
-        /*
-        $file = $data['picture'];
-        if ($data->hasFile('picture')) {
-
-            $filename = $data->username . '.jpg';
-            $file = $file->storeAs('img\users', $filename);
-            $user->picture_path = $filename;
-        }*/
+                $kupac = new Kupac();
+                $kupac->user_id = $user->id;
+                $kupac->save();
+            }
     }
 }
