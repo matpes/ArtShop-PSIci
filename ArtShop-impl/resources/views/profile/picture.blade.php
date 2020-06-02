@@ -20,65 +20,64 @@
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script>
+
+        function go() {
+            var file = $('#path')[0].files[0];
+            var path = URL.createObjectURL(file);
+            $("#uploaded_image").attr("src", path);
+            console.log(path);
+            $("#uploaded_image").attr("alt", file.name);
+        }
+
+    </script>
 </head>
 <body class="body">
 <div>
+    <img src="/images/logo.png" alt="ArtShopLogo" class="float-right img-fluid">
     <br><br><br>
     <hr>
 </div>
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">{{--
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @else--}}
-                <br> <br> <br>
-{{--            @endif--}}
-            <br>
-            <form method="POST" action="{{ route('profile.picture', ['id'=>Auth::id()]) }}" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group row">
-
-                    <label for="path" class="col-md-4 offset-md-4 col-form-label text-md-right form_label_text box
-                           @error('path') is-invalid @enderror" name="path">{{ __('Kliknite ovde kako biste odabrali fajl') }}</label>
-                    <div class="col-md-6">
-                        <input aria-describedby="fileHelp" id="path" type="file" name="path" class="custom-file-input"/>
-{{--                        <small id="fileHelp" class="form-text text-muted">Fajl ne sme biti veći od 2MB.</small>--}}
-
-                        @error('path')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-
-                <br>
-                <div class="form-group row mb-0">
-                    <div class="col-md-6 offset-md-4 float-md-right">
-                        <button type="submit" class="btn btn-warning">
-                            {{ __('Promeni profilnu sliku') }}
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <br> <br>
-            <div class="form-group row mb-0">
-                <div class="col-md-2 offset-md-10 float-md-left">
-                    <a class="btn btn-link-btn" href="{{ route('home') }}">
-                        <button type="button" class="btn btn-warning">
-                            {{ __('Povratak na početnu') }}
-                        </button>
-                    </a>
-                </div>
-            </div>
+    <div class="form-group row mt-0">
+        <div class="col-md-2 ml-0 float-md-left" style="left: -50px;">
+            <a class="btn btn-link-btn" href="{{ route('home') }}">
+                <button type="button" class="btn btn-warning">
+                    {{ __('Povratak na početnu') }}
+                </button>
+            </a>
         </div>
     </div>
+    <form method="POST" action="{{ route('profile.picture', ['id'=>Auth::id()]) }}" enctype="multipart/form-data">
+        @csrf
+        <div class="form-group row justify-content-center">
+            <div class="col-md-6 mt-0 offset-md-2">
+                <img alt="profilna_slika" style="" width="300px" height="300px" src="\images\design\images-empty.png"
+                     id="uploaded_image" alt="empty_image">
+            </div>
+        </div>
+        <div class="form-group row justify-content-center">
+            <div class="col-md-6 justify-content-center">
+                <label for="path" class="load_file btn btn-warning @error('path') is-invalid @enderror">
+                    {{ __('Učitaj sliku') }}
+                </label>
+                <input id="path" class="form-control form_input_text  @error('path') is-invalid @enderror"
+                       type="file" name="path"  style="width: 100%" onchange="go()"/>
+
+                @error('path')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="col-md-6 justify-content-center">
+                <button type="submit" class="load_file btn btn-warning" onclick="go()">
+                    {{ __('Promeni profilnu sliku') }}
+                </button>
+            </div>
+        </div>
+    </form>
+
 </div>
-<footer>
-    <img src="/images/logo.png" alt="ArtShopLogo" class="float-right img-fluid">
-</footer>
-</body>>
+</body>
 </html>

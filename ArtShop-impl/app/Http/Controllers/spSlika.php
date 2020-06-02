@@ -11,6 +11,7 @@ use App\Stil;
 use App\Tema;
 use DateTime;
 use Faker\Provider\File;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailer;
 use Illuminate\Routing\Redirector;
@@ -35,7 +36,7 @@ class spSlika extends Controller
      * spSlika
      * --------------------------------------
      */
-
+    protected $path = "";
 
     /**
      * Display a listing of the resource.
@@ -71,7 +72,7 @@ class spSlika extends Controller
     /**
      * Funkcija za objavljivanje nove slike
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return Redirector
      */
     public function store(Request $request)
@@ -228,10 +229,10 @@ class spSlika extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
-     * @deprecated
      * @return void
+     *@deprecated
      */
     public function update(Request $request, $id)
     {
@@ -255,7 +256,7 @@ class spSlika extends Controller
      * Funkcija za čuvanje slike
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function postSlika(Request $request){
         $rules = [
@@ -310,23 +311,55 @@ class spSlika extends Controller
         $file = $request->file('file_path')
             ->move( public_path() . '\images\\' . Auth::user()->username, $request->file('file_path')->getClientOriginalName());
 
-        return response()->json(array('path'=> $path, 'naziv'=>$naziv[0]), 200);
+        $p = config_path('global.php');
+        preg_match('/(["](.*)["])/', file_get_contents(config_path('global.php')), $matches);
+        $oldValue = $matches[2];
+//        config(['global.path' => $path]);
+        // rewrite file content with changed data
+        if (file_exists($p)) {
+            // replace current value with new value
+            file_put_contents(
+                $p, str_replace(
+                    '\'path\' => "' . $oldValue . '"',
+                    '\'path\' => "' . $path . '"',
+                    file_get_contents($p)
+                )
+            );
+        }
+
+        preg_match('/(["](.*)["])/', file_get_contents(config_path('global.php')), $matches);
+        return response()->json(array('path'=> $path, 'naziv'=>$naziv[0], 'ini'=>$matches[2]), 200);
     }
 
     /**
      * Author: 17/0372 Sanja Samardžija
      * Funkcija za brisanje slike
      *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param void
+     * @return JsonResponse
      */
-    public function unsaveSlika(Request $request){
-        if(StorageFile::isFile($request->path)) {
-            Storage::delete($request->path);
-            return response()
-                ->json(array('path' => "success", 'naziv'=>$request->path), 200);
+    public function unsaveSlika(){
+        $p = config_path('global.php');
+        preg_match('/(["](.*)["])/', file_get_contents($p), $matches);
+//        return response()->json(array('path'=> $matches[2], 'ret'=>"skks/ksksks"), 200);
+        if(file_exists(public_path() . $matches[2]))
+            $ret = StorageFile::delete(public_path() . $matches[2]);
+
+//        config(['global.path' => ""]);
+//        preg_match('/(["](.*)["])/', file_get_contents(config_path('global.php')), $matches);
+//        config(['global.path' => $path]);
+        // rewrite file content with changed data
+        if (file_exists($p)) {
+            // replace current value with new value
+            file_put_contents(
+                $p, str_replace(
+                    '\'path\' => "' . $matches[2] . '"',
+                    '\'path\' => ""',
+                    file_get_contents($p)
+                )
+            );
         }
-        return response()
-            ->json(array('path'=> "error", 'naziv'=>$request->path), 200);
+
+        return response()->json(array('path'=>config('global.path'), 'ret'=>$ret), 200);
     }
 }

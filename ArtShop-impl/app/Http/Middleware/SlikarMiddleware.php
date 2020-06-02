@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\User;
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SlikarMiddleware
@@ -11,16 +12,18 @@ class SlikarMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  Request  $request
+     * @param Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        $korid = Auth::id();
-        if(User::find($korid)->isSlikar != 1) {
-            return redirect('home');
-        }
+        if(Auth::check()) {
+            if (!Auth::user()->isSlikar)
+                return response()->redirectToRoute('profile.user', ['id'=>Auth::id()]);
+        } else
+            return response()->redirectToRoute('home');
+
         return $next($request);
     }
 }

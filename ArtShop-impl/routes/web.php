@@ -86,7 +86,7 @@ Route::get('/profile/user/{id}', 'UserController@userProfile',
 Route::post('/slika/save', 'spSlika@postSlika',
     ['middleware' => ['UserMiddleware', 'SlikarMiddleware']])->name('slika.save');
 Route::post('/slika/unsave', 'spSlika@unsaveSlika',
-    ['middleware' => ['UserMiddleware', 'SlikarMiddleware']])->name('slika.save');
+    ['middleware' => ['UserMiddleware', 'SlikarMiddleware']])->name('slika.unsave');
 //END VLADANA
 
 Route::group(['middleware' => 'UserMiddleware'], function()
@@ -124,7 +124,6 @@ Route::get('prijavljenKomentar', 'AdminController@komentarSlika');
 Route::get('nalozi/show', 'AdminController@sviKorisnickiNalozi');
 Route::get('profile/info/fromAdmin/{id}', 'AdminController@profileInfo');
 Route::get('nalozi/block/{id}', 'AdminController@blokirajNalog');
-Route::get('nalozi/block', 'AdminController@blokirajNalog1');
 Route::get('nalozi/unblock/{id}', 'AdminController@odblokirajNalog');
 Route::get('admin', 'AdminController@index');
 //END ANA

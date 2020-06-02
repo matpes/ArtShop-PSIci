@@ -7,37 +7,32 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script>
-        var b = false;
 
-        window.onbeforeunload = function (){
-            if(b) {
-                var path_el = document.getElementById("path").value;
-                if (path_el != null) {
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
+        window.onbeforeunload = exit().then( response => console.log(response));
+        function exit(){
+            console.log("enter onbeforeunload...");
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }/*,
+                async: false*/
+            });
 
-                    $.ajax({
-                        type: 'POST',
-                        url: '/slika/unsave',
-                        async:false,
-                        processData: false,
-                        contentType: false,
-                        data: {path: path_el},
-                        success: function (data) {
-                            $("#err").html(data.naziv);
-                            $("#err").attr("style",'display:block;');
-                        },
-                        error: function (data) {
-                        }
-                    });
+            return $.ajax({
+                url: '/slika/unsave',
+                type: "POST",
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                global:false,
+                async: true,
+                dataType: "json",
+                success: function (data) {
+                    console.log("Uspeh!");
+                },
+                error: function (data) {
+                    console.log(data);
                 }
-            }
-        }
-        window.onload = function() {
-            b = false;
+            });
         }
 
         function go() {
@@ -69,8 +64,8 @@
                         $("#uploaded_image").attr("src", data.path);
                         $("#uploaded_image").attr("alt", data.naziv);
                         $("#path").attr("value", data.path);
-                        b = true;
-                        $("#err").attr("style",'display:none;')
+                        $("#err").attr("style",'display:none;');
+                        console.log(data.ini);
                     }
                     //success code
                 },
@@ -81,6 +76,7 @@
                 }
             });
         }
+
     </script>
 @endsection
 
@@ -93,8 +89,6 @@
         <div class="col-10">
             <form action="/slika" method="post" class="form-group">
                 <div class="row">
-
-
                     <div class="col-sm-5 col-xs-12 padding_form_picture">
                         <img src="\images\design\images-empty.png" id="uploaded_image" width="100%" alt="empty_image">
                         <div class="bottom-obajvi-sliku">
@@ -110,7 +104,7 @@
                             @enderror
                             <div class="invalid-feedback" style="display:none;" id="err" role="alert"></div>
 
-                            <input id="file_path"class="form-control form_input_text  @error('username') is-invalid @enderror"
+                            <input id="file_path"class="form-control form_input_text  @error('path') is-invalid @enderror"
                                    type="file" name="file_path"  style="width: 100%" onchange="go()"/>
                         </div>
                     </div>
@@ -251,18 +245,20 @@
                                 {{csrf_field()}}
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6">
+                        <div class="row" >
+                            <div class="col-sm-6" style="padding-top: 25px;">
                                 <input type="hidden" name="user_id" value="{{$user->id}}">
                                 <button type="submit" name="potvrdi" class="btn-success form-control form_gray_button">
-                                    Potvrdi
+                                    {{ __('Potvrdi') }}
                                 </button>
                                 <input type="hidden" value="{{csrf_token()}}">
                             </div>
-                            <div class="col-sm-6">
-                                <button type="button" class="btn-success form-control form_gray_button" onclick="giveUp()">
-                                    Odustani
-                                </button>
+                            <div class="col-sm-6" style="padding-bottom: 5px;">
+                                <a class="btn btn-link-btn" href="{{ route('profile.user_new', ['id'=>Auth::id()]) }}">
+                                    <button type="button"  class="btn-success form-control form_gray_button" onclick="exit()" >
+                                        {{ __('Odustani') }}
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>

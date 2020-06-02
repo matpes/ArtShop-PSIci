@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Concerns\InteractsWithInput;
 use Illuminate\Support\Facades\Input;
@@ -212,7 +213,7 @@ class UserController extends Controller
      * Funkcija koja vraća tekuću sliku za slikara
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function ajaxSlikarProfile(Request $request)
     {
@@ -262,43 +263,6 @@ class UserController extends Controller
         else
             $nacin = 'prvom kupcu';
 //*/
-        /*
-          $GLOBALS['cnt'] =  $GLOBALS['cnt'] + (int) $request->n;
-
-          if($GLOBALS['cnt'] >= $GLOBALS['br']){
-              $GLOBALS['cnt'] = 0;
-          } else if($GLOBALS['cnt'] < 0){
-              $GLOBALS['cnt'] = $GLOBALS['br'] - 1;
-          }
-/*
-    //            dd($this->br);
-          //dovlacenje slika slikara
-          $slike = DB::table('pictures')
-              ->where('user_id', '=', $id)
-              ->get()->toArray();
-
-          //dovlacenje teme prve slike
-          $tema = DB::table('picture_tema')
-              ->where('picture_tema.picture_id', '=', $slike[$GLOBALS['cnt']]->id)
-              ->join('temas', function ($join) {
-                  $join->on('temas.id', '=', 'picture_tema.tema_id');
-              })
-              ->select('temas.tema')
-              ->get()->toArray();
-    //            dd($tema);
-          $teme = '';
-          foreach ($tema as $t){
-              $teme = $teme . '   ' . $t->tema;
-          }
-          $stil = DB::table('stils')
-              ->where('id', '=', $slike[$GLOBALS['cnt']]->stil_id)
-              ->select('naziv')
-              ->get()->first();
-          $num = $GLOBALS['cnt']+1 . ' / ' . $GLOBALS['br'];
-          if($slike[$GLOBALS['cnt']]->aukcijaFlag)
-              $nacin = 'aukcija';
-          else
-              $nacin = 'prvom kupcu';//*/
 
         //return response()->json(array('n'=>$request->n), 200);
 

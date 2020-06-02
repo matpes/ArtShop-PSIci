@@ -19,9 +19,7 @@ class UserMiddleware
     public function handle($request, Closure $next)
     {
         if (!Auth::check())
-        {
             response()->view('auth.login');
-        }
 
         return $next($request);
     }

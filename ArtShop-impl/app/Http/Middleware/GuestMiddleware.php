@@ -22,10 +22,7 @@ class GuestMiddleware
     public function handle($request, Closure $next)
     {
         if (Auth::check())
-        {
-            $slike = array();
-            return response()->redirectToRoute('profile.user', ['id'=>Auth::user()->id]);
-        }
+            return response()->redirectToRoute('profile.user', ['id'=>Auth::id()]);
         return $next($request);
     }
 }
