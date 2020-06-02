@@ -80,7 +80,7 @@
 
                                 {{--profilna slika --}}
                                 <a href="/profile/info/{{Auth::id()}}" >
-                            <img  class = "img-fluid img-rounded"  alt="profilna_slika" style=""  href="{{ route('login') }}"
+                            <img  class = "img-fluid img-rounded"  alt="profilna_slika" style=""
                                   width="60px" height="60px"
                                   src=<?php if(is_null(Auth::user()->picture_path)){ echo'/images/avatar.png';}
                             else {$path = '/images/users/'.Auth::user()->picture_path; echo $path; } ?>>

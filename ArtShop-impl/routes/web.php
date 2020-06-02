@@ -106,19 +106,23 @@ Route::group(['middleware' => 'UserMiddleware'], function()
     Route::resource('/korpa', 'spKorpa');
     Route::post('subscribe', 'spKupac@subscribe');
     //END MATIJA
+
+
+    //ANA
+    Route::get('comments', 'KomentariController@showAllComments');
+    Route::get('commentsOfPictureId/{id}', 'KomentariController@showAllCommentsOfPicture');
+    Route::post('postComment', 'KomentariController@store')->name('comment.post');
+    Route::post('comment/delete/', 'KomentariController@delete')->name('comment.delete');
+    Route::get('comment/middle', 'KomentariController@medjuFunkcija');
+    Route::post('prijave', 'KomentariController@prijava')->name('comment.report');
+    Route::get('prijave/show', 'KomentariController@prikaziPrijave');
+    //END ANA
 });
 //END SANJA
 
 //ANA
 
-Route::get('comments', 'KomentariController@showAllComments');
-Route::get('commentsOfPictureId/{id}', 'KomentariController@showAllCommentsOfPicture');
 Route::get('commentsOfPictureId/Admin/{id}', 'AdminController@showAllCommentsOfPicture');
-Route::get('postComment', 'KomentariController@store');
-Route::get('comment/delete', 'KomentariController@delete');
-Route::get('comment/middle', 'KomentariController@medjuFunkcija');
-Route::get('prijave', 'KomentariController@prijava');
-Route::get('prijave/show', 'KomentariController@prikaziPrijave');
 Route::get('prijave/Admin/delete', 'AdminController@delete');
 Route::get('prijavljenKomentar', 'AdminController@komentarSlika');
 Route::get('nalozi/show', 'AdminController@sviKorisnickiNalozi');

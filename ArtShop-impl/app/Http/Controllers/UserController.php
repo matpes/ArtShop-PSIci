@@ -56,15 +56,20 @@ class UserController extends Controller
         }
         DB::beginTransaction();
         DB::table('komentars')->where('user_id', '=', $id)->delete();
+        DB::table('komentar_korisnik')->where('user_id', '=', $id)->delete();
         DB::table('korpas')->where('user_id', '=', $id)->delete();
+        DB::table('podacis')->where('user_id', '=', $id)->delete();
+        DB::table('za_ocenus')->where('user_id', '=', $id)->delete();
         if($user->isSlikar) {
             DB::table('slikars')->where('user_id', '=', $id)->delete();
             DB::table('kupac_slikar')->where('slikar_id', '=', $id)->delete();
+            DB::table('pictures')->where('user_id', '=', $id)->delete();
         } elseif($user->isAdmin){
             DB::table('admins')->where('user_id', '=', $id)->delete();
         } else{
             DB::table('kupacs')->where('user_id', '=', $id)->delete();
             DB::table('kupac_slikar')->where('kupac_id', '=', $id)->delete();
+            DB::table('kupac_picture')->where('user_id', '=', $id)->delete();
         }
         DB::commit();
         Session::flush();
