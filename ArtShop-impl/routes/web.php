@@ -109,27 +109,48 @@ Route::group(['middleware' => 'UserMiddleware'], function()
 
 
     //ANA
-    Route::get('comments', 'KomentariController@showAllComments');
+   /* Route::get('comments', 'KomentariController@showAllComments');
     Route::get('commentsOfPictureId/{id}', 'KomentariController@showAllCommentsOfPicture');
     Route::post('postComment', 'KomentariController@store')->name('comment.post');
     Route::post('comment/delete/', 'KomentariController@delete')->name('comment.delete');
     Route::get('comment/middle', 'KomentariController@medjuFunkcija');
     Route::post('prijave', 'KomentariController@prijava')->name('comment.report');
-    Route::get('prijave/show', 'KomentariController@prikaziPrijave');
+    Route::get('prijave/show', 'KomentariController@prikaziPrijave');*/
     //END ANA
 });
 //END SANJA
 
 //ANA
 
-Route::get('commentsOfPictureId/Admin/{id}', 'AdminController@showAllCommentsOfPicture');
+/*Route::get('commentsOfPictureId/Admin/{id}', 'AdminController@showAllCommentsOfPicture');
 Route::get('prijave/Admin/delete', 'AdminController@delete');
 Route::get('prijavljenKomentar', 'AdminController@komentarSlika');
 Route::get('nalozi/show', 'AdminController@sviKorisnickiNalozi');
 Route::get('profile/info/fromAdmin/{id}', 'AdminController@profileInfo');
 Route::get('nalozi/block/{id}', 'AdminController@blokirajNalog');
 Route::get('nalozi/unblock/{id}', 'AdminController@odblokirajNalog');
+Route::get('admin', 'AdminController@index');*/
+
+//moje stare rute
+
+Route::get('comments', 'KomentariController@showAllComments');
+Route::get('commentsOfPictureId/{id}', 'KomentariController@showAllCommentsOfPicture');
+Route::get('commentsOfPictureId/Admin/{id}', 'AdminController@showAllCommentsOfPicture');
+Route::get('postComment', 'KomentariController@store');
+Route::get('comment/delete', 'KomentariController@delete');
+Route::get('comment/middle', 'KomentariController@medjuFunkcija');
+Route::get('prijave', 'KomentariController@prijava');
+Route::get('prijave/show', 'KomentariController@prikaziPrijave');
+Route::get('prijave/Admin/delete', 'AdminController@delete');
+Route::get('prijavljenKomentar', 'AdminController@komentarSlika');
+Route::get('nalozi/show', 'AdminController@sviKorisnickiNalozi');
+Route::get('profile/info/fromAdmin/{id}', 'AdminController@profileInfo');
+Route::get('nalozi/block/{id}', 'AdminController@blokirajNalog');
+Route::get('nalozi/block', 'AdminController@blokirajNalog1');
+Route::get('nalozi/unblock/{id}', 'AdminController@odblokirajNalog');
 Route::get('admin', 'AdminController@index');
+
+
 //END ANA
 
 //ROUTA ZA TESTIRANJE PROIZVOLJNIH DELOVA KODA
