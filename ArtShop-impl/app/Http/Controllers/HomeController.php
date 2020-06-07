@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -56,7 +57,7 @@ class HomeController extends Controller
      * Funkcija koja dohvata 5 najpopularnijih slika
      *
      * @param
-     * @return view
+     * @return \Illuminate\Http\Response
      */
     public function popularPictures()
     {

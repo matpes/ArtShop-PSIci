@@ -1,7 +1,7 @@
 <?php
 return [
 
-    'path' => "",
+    'path' => "\images\GemmaGene\wrapped-scarab_gemma-gene.jpg",
 
 ]
 

@@ -248,7 +248,9 @@
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            <input type="submit" value="Potvrdi" name="potvrdi" class="btn-dark gray_button_100">
+                                            <a href="/korpa">
+                                            <input type="button" value="Potvrdi" name="potvrdi" class="btn-dark gray_button_100">
+                                            </a>
                                             {{csrf_field()}}
                                         </td>
                                         <td>

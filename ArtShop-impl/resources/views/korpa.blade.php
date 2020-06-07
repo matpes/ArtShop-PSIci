@@ -66,7 +66,7 @@
                                 <tr>
                                     <td>
                                         <input type="text" value="{{$slike_u_korpi[$i]->cena}}$" disabled
-                                               class="form_input_text cenaPadding">
+                                               class="form_input_text cenaPadding" style="background-color: white">
                                     </td>
                                     <td> &nbsp;</td>
                                 </tr>
