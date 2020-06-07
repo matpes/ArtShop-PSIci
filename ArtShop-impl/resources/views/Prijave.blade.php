@@ -1,7 +1,9 @@
 
 
 @extends('layouts.app')
-
+@section('head')
+    <link rel="stylesheet" href="/css/Ana.css">
+@endsection
 @section('content')
 
     <?php
@@ -27,7 +29,7 @@
         echo '<h6><div clas="">Korisnik   '.$autor->username.'</div> je prijavio komentar korisnika <div class="">'.$autorKomentara->username.'</h6><form method="get" action="/prijavljenKomentar">
                                               <input type="hidden" name="prijava_id" value="'.$prijava->id.'">
 
-                                              <input type="submit" name="submit" value="Pogledaj Komentar">
+                                              <input type="submit" class="dugme" name="submit" value="Pogledaj Komentar">
                                            </form>';
 
 

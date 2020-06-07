@@ -19,10 +19,12 @@
                        class="form-control dugmiciSlika btn-dark">
             @endif
         </form>
-        <form action="">
-            <input type="button" name="komentari" value="KOMENTARI" class="form-control dugmiciSlika btn-dark">
-            {{csrf_field()}}
+
+        <form action="/comments" method="get">
+            <input type="hidden" name="picture_id" value="{{$picture->id}}">
+            <input type="submit" name="komentari" value="KOMENTARI" class="form-control dugmiciSlika btn-dark">
         </form>
+
         <form action="/subscribe" method="post">
             <input type="hidden" name="slikar" value="{{$picture->user_id}}">
             <input type="hidden" name="picture" value="{{$picture->id}}">
