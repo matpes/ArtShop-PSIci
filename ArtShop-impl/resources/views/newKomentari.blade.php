@@ -73,7 +73,7 @@
                               <input type="submit" name="submit" value="Obrisi1">
                               </form>-->
 
-                            <button type="button" data-toggle="modal" data-target="#obrisiKomentar">OBRISI</button>
+                            <button type="button" class="dugme" data-toggle="modal" data-target="#obrisiKomentar">OBRISI</button>
 
                                 <!--Sanjin modal-->
                                 <div class="container-fluid">
@@ -111,7 +111,7 @@
 
                                               <input type="hidden" name="picture_id" value="'.$picture_id.'">
                                               <input type="hidden" name="komentar_id" value="'.$komentar->id.'">
-                                              <input type="submit" name="submit" value="Prijavi">
+                                              <input type="submit" class="dugme" name="submit" value="Prijavi">
                                            </form>';
 
 
@@ -178,7 +178,7 @@
 
     <!--modal za unos komentara-->
 
-    <button type="button" id ="btnUnosKomentara" name="isSubmit" data-toggle="modal" data-target="#unosKomentara">Napisi komentar</button>
+    <button type="button" class="dugme" id ="btnUnosKomentara" name="isSubmit" data-toggle="modal" data-target="#unosKomentara">Napisi komentar</button>
 
     <!--Sanjin modal-->
     <div class="container-fluid">
@@ -214,7 +214,7 @@
 
         <input type="hidden" name="picture_id" value="{{$picture_id}}">
 
-        <input type="submit" name="submit" value="Nazad na sliku">
+        <input type="submit" class="dugme" name="submit" value="Nazad na sliku">
     </form>
 
 

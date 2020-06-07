@@ -4,6 +4,9 @@
 @extends('.layouts.app')
 
 
+@section('head')
+    <link rel="stylesheet" href="/css/Ana.css">
+@endsection
 
 @section('content')
 
@@ -27,7 +30,7 @@
 
 
 
-                <button type="button"   data-toggle="modal" data-target="#myModal">Obrisi komentar</button>
+                <button type="button" class="dugme"  data-toggle="modal" data-target="#myModal">Obrisi komentar</button>
 
                 <!--Sanjin modal-->
                 <div class="container-fluid">
