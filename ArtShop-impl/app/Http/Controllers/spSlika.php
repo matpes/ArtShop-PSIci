@@ -173,7 +173,7 @@ class spSlika extends Controller
 
             }
             else{
-
+                Picture::where('path', $picture->path)->get()[0]->temas()->detach();
                 Picture::where('path', $picture->path)->get()[0]->update($request->all());
             }
             event(new Auction($picture));
