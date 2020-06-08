@@ -76,6 +76,13 @@ class AdminController extends Controller
 
     }
 
+    public function brisanjePrijave(Request $request){
+        $prijava_id=$request->prijava_id;
+        DB::table('komentar_korisnik')->where('id', $prijava_id )->delete();
+        return redirect('prijave/show');
+    }
+
+
 
     public function delete(Request $request){
         //povecavanje broja uspesnih prijava svima koji su prijavili taj komentar

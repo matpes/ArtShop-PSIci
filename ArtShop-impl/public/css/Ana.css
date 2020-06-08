@@ -30,10 +30,17 @@
 }
 
 
-.dugme{
+.dugme {
 
     border-radius: 3rem;
     color: #84deb4;
-    background-color:#123c24;
+    background-color: #123c24;
+
+}
+.dugmeAdminNalog{
+
+    border-radius: 3rem;
+    color:white;
+    background-color:#02150f;
 }
 

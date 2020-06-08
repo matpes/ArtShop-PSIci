@@ -149,6 +149,7 @@ Route::get('nalozi/block/{id}', 'AdminController@blokirajNalog');
 Route::get('nalozi/block', 'AdminController@blokirajNalog1');
 Route::get('nalozi/unblock/{id}', 'AdminController@odblokirajNalog');
 Route::get('admin', 'AdminController@index');
+Route::get('brisanjePrijave', 'AdminController@brisanjePrijave');
 
 
 //END ANA
