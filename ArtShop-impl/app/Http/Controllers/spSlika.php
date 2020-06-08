@@ -49,8 +49,8 @@ class spSlika extends Controller
 
         $kupac = Auth::user();
         $path = '/images/avatar.png';
-        if($kupac->profilna_slika!=null){
-            $path = '/images/users//'.$kupac->profilna_slika;
+        if ($kupac->profilna_slika != null) {
+            $path = '/images/users//' . $kupac->profilna_slika;
         }
         $error = [];
         $picture = new Picture();
@@ -62,8 +62,8 @@ class spSlika extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @deprecated
      * @return void
+     * @deprecated
      */
     public function create()
     {
@@ -74,28 +74,28 @@ class spSlika extends Controller
      * Funkcija za objavljivanje nove slike
      *
      * @param Request $request
-     * @return Redirector
+     *
      */
     public function store(Request $request)
     {
         $rules = [
             'file_path' => 'required|image',
-            'naziv'=>'required',
-            'autor'=>'required',
-            'opis'=>'required|min:10',
+            'naziv' => 'required',
+            'autor' => 'required',
+            'opis' => 'required|min:10',
 //            'aukcijaFlag'=>'required',
-            'danIstekaAukcije'=>'required_with:aukcijaFlag',
+            'danIstekaAukcije' => 'required_with:aukcijaFlag',
 
         ];
         $messages = [
-            'file_path.required'=> 'Morate prvo izabrati fajl!',
-            'file_path.image'=>'Izaberite sliku.Format slike nije podržan.',
-            'naziv.required'=>'Ovo polje je obavezno!',
-            'autor.required'=>'Ovo polje je obavezno!',
-            'opis.required'=>'Ovo polje je obavezno!',
-            'opis.min'=>'Opis mora imati najmanje :min karaktera!',
+            'file_path.required' => 'Morate prvo izabrati fajl!',
+            'file_path.image' => 'Izaberite sliku.Format slike nije podržan.',
+            'naziv.required' => 'Ovo polje je obavezno!',
+            'autor.required' => 'Ovo polje je obavezno!',
+            'opis.required' => 'Ovo polje je obavezno!',
+            'opis.min' => 'Opis mora imati najmanje :min karaktera!',
 //            'aukcijaFlag.required'=>'Ovo polje je obavezno!',
-            'danIstekaAukcije.required_with'=>'Ovo polje je obavezno uz aukcija flag!',
+            'danIstekaAukcije.required_with' => 'Ovo polje je obavezno uz aukcija flag!',
 
         ];
         $error = [];
@@ -103,7 +103,7 @@ class spSlika extends Controller
         $picture = new Picture();
 //        dd($request->all());
         $validate = Validator::make($request->all(), $rules, $messages);
-        if($validate->fails()){
+        if ($validate->fails()) {
 //        dd($request->all());
             return redirect()->back()
                 ->withErrors($validate)
@@ -138,29 +138,29 @@ class spSlika extends Controller
             }
         }
 //        dd($request->stil_id);
-        $picture->stil_id = DB::table('stils')->where('naziv', '=' ,$request->stil_id)->first()->id;
+        $picture->stil_id = DB::table('stils')->where('naziv', '=', $request->stil_id)->first()->id;
         $request->merge(['stil_id' => $picture->stil_id]);
         $picture->smer = $request->get('smer');
 
 //            dd($request->file('file_path'));
         $file = $request->file('file_path')
-            ->move( public_path() . '\images\\' . Auth::user()->username, $request->file('file_path')->getClientOriginalName());
+            ->move(public_path() . '\images\\' . Auth::user()->username, $request->file('file_path')->getClientOriginalName());
 
         $picture->path = $path;
 
 //        dd($flag);
-            $picture->naziv = $request->get('naziv');
+        $picture->naziv = $request->get('naziv');
 
-            $picture->autor = $request->get('autor');
+        $picture->autor = $request->get('autor');
 
-            $picture->opis = $request->get('opis');
+        $picture->opis = $request->get('opis');
 
-        if($request->get('aukcijaFlag') != null){
+        if ($request->get('aukcijaFlag') != null) {
             $picture->danIstekaAukcije = new DateTime($request->get('danIstekaAukcije'));
             $request->merge(['danIstekaAukcije' => $picture->danIstekaAukcije]);
 
             $aukcija = 2;
-            if($request->get('aukcijaFlag') == 'javnaAukcija') {
+            if ($request->get('aukcijaFlag') == 'javnaAukcija') {
                 $aukcija = 1;
                 if ($request->get('cena') == null) {
                     return redirect()->back()
@@ -168,15 +168,15 @@ class spSlika extends Controller
                         ->withInput();
                 }
             } else {
-                $cena = preg_replace('/[^0-9]/i', '',$request->get('cena'));
+                $cena = preg_replace('/[^0-9]/i', '', $request->get('cena'));
                 $picture->cena = $cena;
             }
-        } else if($request->get('cena') == null) {
+        } else if ($request->get('cena') == null) {
             return redirect()->back()
                 ->withErrors(['cena' => "Morate postaviti cenu!"])
                 ->withInput();
         } else {
-            $cena = preg_replace('/[^0-9]/i', '',$request->get('cena'));
+            $cena = preg_replace('/[^0-9]/i', '', $request->get('cena'));
             $picture->cena = $cena;
         }
 
@@ -186,18 +186,19 @@ class spSlika extends Controller
         $korid = Auth::id();
         $slikar = Slikar::where('user_id', $korid)->get()[0];
         $picture->user_id = $korid;
-        if(count(Picture::where('path', $picture->path)->get()) == 0){
+        if (count(Picture::where('path', $picture->path)->get()) == 0) {
             $picture->save();
 
             $users = $slikar->subscribed;
-            foreach ($users as $user){
+            foreach ($users as $user) {
                 $korisnik = User::find($user->user_id);
                 $data = ['username' => $korisnik->username, 'id' => $picture->id];
                 Mail::send('email.NewPictureNotification', $data, function ($message) use ($korisnik) {
                     $message->to($korisnik->email)->subject('Nova slika');
                 });
             }
-            else{
+        }
+        else{
                 Picture::where('path', $picture->path)->get()[0]->temas()->detach();
                 Picture::where('path', $picture->path)->get()[0]->update($request->all());
             }
@@ -205,163 +206,167 @@ class spSlika extends Controller
             $picture = Picture::where('path', $picture->path)->get()[0];
 
             $teme = explode(", ", $request->get('teme'));
-            foreach ($teme as $naziv){
+            foreach ($teme as $naziv) {
                 $temas = Tema::where('tema', $naziv)->get();
-                if(count($temas) == 0){
+                if (count($temas) == 0) {
                     $tema = new Tema();
                     $tema->tema = $naziv;
                     $tema->save();
                 }
                 $tema = Tema::where('tema', $naziv)->get()[0];
                 $picture->temas()->attach($tema->id);
-        }
-        return redirect('/picture/'.$picture->id);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @deprecated
-     * @return void
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return View
-     */
-    public function edit($id)
-    {
-        $error = [];
-        $picture = Picture::findOrFail($id);
-        $picture->danIstekaAukcije = new DateTime($picture->danIstekaAukcije);
-        $t = $picture->temas;
-        $nazivi = [];
-        foreach ($t as $tema){
-            array_push($nazivi, $tema->tema);
-        }
-        $teme = implode(', ', $nazivi);
-        return view('slika_form', compact('error', 'picture', 'teme'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param  int  $id
-     * @return void
-     *@deprecated
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Funkcija za brisanje odredjene slike.
-     *
-     * @param  int  $id
-     * @return void
-     */
-    public function destroy($id)
-    {
-        $picture = Picture::findOrFail($id);
-        if(!is_null($picture)){
-            StorageFile::delete(public_path() . $picture->path);
-        }
-        $picture->delete();
-    }
-    /**
-     * Author: 17/0372 Sanja Samardžija
-     * Funkcija za čuvanje slike
-     *
-     * @param Request $request
-     * @return JsonResponse
-     */
-    /*
-        public function postSlika(Request $request){
-            $rules = [
-                'file_path' => 'required|image',
-            ];
-            $messages = [
-                'file_path.required'=> 'Morate prvo izabrati fajl!',
-                'file_path.image'=>'Izaberite sliku.Format slike nije podržan.',
-            ];
-    //        dd($request->all());
-            $validate = Validator::make($request->all(), $rules, $messages);
-            if($validate->fails()){
-    //            dd("failed");
-                return redirect()->back()
-                    ->withErrors($validate)
-                    ->withInput();
             }
+            return redirect('/picture/' . $picture->id);
+        }
 
-            $path = '\images\\' . Auth::user()->username . '\\' . $_FILES['file_path']['name'];
-            preg_match('/[^\.]+/',$_FILES['file_path']['name'], $naziv);
-            $directories = Storage::directories('\images\\');
-            $b = true;;
+        /**
+         * Display the specified resource.
+         *
+         * @param int $id
+         * @return void
+         * @deprecated
+         */
+        public function show($id)
+        {
+            //
+        }
 
-            foreach ($directories as $d){
-                if(basename($d) == Auth::user()->username)
-                    $b = false;
+        /**
+         * Show the form for editing the specified resource.
+         *
+         * @param int $id
+         * @return View
+         */
+        public
+        function edit($id)
+        {
+            $error = [];
+            $picture = Picture::findOrFail($id);
+            $picture->danIstekaAukcije = new DateTime($picture->danIstekaAukcije);
+            $t = $picture->temas;
+            $nazivi = [];
+            foreach ($t as $tema) {
+                array_push($nazivi, $tema->tema);
             }
-            if($b) {
-                Storage::makeDirectory(public_path() . '\images\\' . Auth::user()->username);
+            $teme = implode(', ', $nazivi);
+            return view('slika_form', compact('error', 'picture', 'teme'));
+        }
 
-            } else {
-                $files = StorageFile::allFiles(public_path() . '\images\\'. Auth::user()->username);
-                $b = false;
-                foreach ($files as $d){
-                    if($d->getFilename() == $_FILES['file_path']['name']) {
-                        $b = true;
-                    }
+        /**
+         * Update the specified resource in storage.
+         *
+         * @param Request $request
+         * @param int $id
+         * @return void
+         * @deprecated
+         */
+        public
+        function update(Request $request, $id)
+        {
+            //
+        }
+
+        /**
+         * Funkcija za brisanje odredjene slike.
+         *
+         * @param int $id
+         * @return void
+         */
+        public
+        function destroy($id)
+        {
+            $picture = Picture::findOrFail($id);
+            if (!is_null($picture)) {
+                StorageFile::delete(public_path() . $picture->path);
+            }
+            $picture->delete();
+        }
+
+        /**
+         * Author: 17/0372 Sanja Samardžija
+         * Funkcija za čuvanje slike
+         *
+         * @param Request $request
+         * @return JsonResponse
+         */
+        /*
+            public function postSlika(Request $request){
+                $rules = [
+                    'file_path' => 'required|image',
+                ];
+                $messages = [
+                    'file_path.required'=> 'Morate prvo izabrati fajl!',
+                    'file_path.image'=>'Izaberite sliku.Format slike nije podržan.',
+                ];
+        //        dd($request->all());
+                $validate = Validator::make($request->all(), $rules, $messages);
+                if($validate->fails()){
+        //            dd("failed");
+                    return redirect()->back()
+                        ->withErrors($validate)
+                        ->withInput();
+                }
+
+                $path = '\images\\' . Auth::user()->username . '\\' . $_FILES['file_path']['name'];
+                preg_match('/[^\.]+/',$_FILES['file_path']['name'], $naziv);
+                $directories = Storage::directories('\images\\');
+                $b = true;;
+
+                foreach ($directories as $d){
+                    if(basename($d) == Auth::user()->username)
+                        $b = false;
                 }
                 if($b) {
-                    $error = "<b>Ova slika već postoji na vašem profilu.</b>";
-                    return response()
-                        ->json(array('path' => "error", 'naziv' => $error), 200);
+                    Storage::makeDirectory(public_path() . '\images\\' . Auth::user()->username);
+
+                } else {
+                    $files = StorageFile::allFiles(public_path() . '\images\\'. Auth::user()->username);
+                    $b = false;
+                    foreach ($files as $d){
+                        if($d->getFilename() == $_FILES['file_path']['name']) {
+                            $b = true;
+                        }
+                    }
+                    if($b) {
+                        $error = "<b>Ova slika već postoji na vašem profilu.</b>";
+                        return response()
+                            ->json(array('path' => "error", 'naziv' => $error), 200);
+                    }
                 }
-            }
-    //        dd($request->file_path);
-            return response()->json(array('path'=> $path, 'naziv'=>$naziv[0], 'ini'=>"ok"), 200);
-           /* $p = config_path('global.php');
-            preg_match('/(["](.*)["])/', file_get_contents(config_path('global.php')), $matches);
-            $oldValue = $matches[2];
-            if($oldValue != '') {
-    //            dd($request->path);
-    //            $ret = StorageFile::delete(public_path() . $oldValue);
-                $this->unsaveSlika();
-               /* return response()
-                    ->json(array('path' => "error", 'naziv' => $ret . ' ' . $request->path), 200);
-            }
+        //        dd($request->file_path);
+                return response()->json(array('path'=> $path, 'naziv'=>$naziv[0], 'ini'=>"ok"), 200);
+               /* $p = config_path('global.php');
+                preg_match('/(["](.*)["])/', file_get_contents(config_path('global.php')), $matches);
+                $oldValue = $matches[2];
+                if($oldValue != '') {
+        //            dd($request->path);
+        //            $ret = StorageFile::delete(public_path() . $oldValue);
+                    $this->unsaveSlika();
+                   /* return response()
+                        ->json(array('path' => "error", 'naziv' => $ret . ' ' . $request->path), 200);
+                }
 
-            $file = $request->file('file_path')
-                ->move( public_path() . '\images\\' . Auth::user()->username, $request->file('file_path')->getClientOriginalName());
+                $file = $request->file('file_path')
+                    ->move( public_path() . '\images\\' . Auth::user()->username, $request->file('file_path')->getClientOriginalName());
 
-            $p = config_path('global.php');
-            preg_match('/(["](.*)["])/', file_get_contents(config_path('global.php')), $matches);
-            $oldValue = $matches[2];
-    //        config(['global.path' => $path]);
-            // rewrite file content with changed data
-            if (file_exists($p)) {
-                // replace current value with new value
-                file_put_contents(
-                    $p, str_replace(
-                        '\'path\' => "' . $oldValue . '"',
-                        '\'path\' => "' . $path . '"',
-                        file_get_contents($p)
-                    )
-                );
-            }
+                $p = config_path('global.php');
+                preg_match('/(["](.*)["])/', file_get_contents(config_path('global.php')), $matches);
+                $oldValue = $matches[2];
+        //        config(['global.path' => $path]);
+                // rewrite file content with changed data
+                if (file_exists($p)) {
+                    // replace current value with new value
+                    file_put_contents(
+                        $p, str_replace(
+                            '\'path\' => "' . $oldValue . '"',
+                            '\'path\' => "' . $path . '"',
+                            file_get_contents($p)
+                        )
+                    );
+                }
 
-            preg_match('/(["](.*)["])/', file_get_contents(config_path('global.php')), $matches);
-            return response()->json(array('path'=> $path, 'naziv'=>$naziv[0], 'ini'=>$matches[2]), 200);*/
+                preg_match('/(["](.*)["])/', file_get_contents(config_path('global.php')), $matches);
+                return response()->json(array('path'=> $path, 'naziv'=>$naziv[0], 'ini'=>$matches[2]), 200);*/
     }
 
     /**

@@ -94,7 +94,7 @@
             <form action="/slika" method="post" class="form-group" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-sm-5 col-xs-12 padding_form_picture">
-                        <img src="\images\design\images-empty.png" id="uploaded_image" width="100%" alt="empty_image">
+                        <img src=@if(isset($picture->path)){{$picture->path}} @else "\images\design\images-empty.png" @endif id="uploaded_image" width="100%" alt="empty_image" class="img-fluid">
                         <div class="bottom-obajvi-sliku">
                             <label for="file_path" class="load_file">
                                 Učitaj sliku

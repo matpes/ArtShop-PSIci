@@ -33,6 +33,7 @@
                     $("#opis").html(data.opis);
                     $("#cena").html(data.cena);
                     $("#num").html(data.num);
+                    $("#izmeni").attr("href", "/slika/" + data.id + "/edit");
                 }
             });
         }
@@ -87,6 +88,12 @@
                         style="width: fit-content;">
                     {{ __('Napred') }}
                 </button>
+                <a href="/slika/{{$novo->id}}/edit" style="text-decoration: none;" id="izmeni">
+                    <button type="button" class="btn-dark gray_button mb-5"
+                            style="width: fit-content;">
+                        {{ __('Izmeni') }}
+                    </button>
+                </a>
                 <br>
                 <div>
                     <div class="custom-control-inline">

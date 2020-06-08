@@ -284,7 +284,7 @@ class UserController extends Controller
 
         //return response()->json(array('n'=>$request->n), 200);
 
-        return response()->json(array('path'=> $slike[$cnt]->path, 'num'=>$num,
+        return response()->json(array('id'=>$slike[$cnt]->id, 'path'=> $slike[$cnt]->path, 'num'=>$num,
             'cena'=>$cena, 'opis'=>$slike[$cnt]->opis,
             'nacin'=>$nacin, 'stil'=>$stil->naziv, 'naziv'=>$slike[$cnt]->naziv,
             'tema'=>$teme, 'cnt'=>$cnt, 'b'=>$br,), 200);
