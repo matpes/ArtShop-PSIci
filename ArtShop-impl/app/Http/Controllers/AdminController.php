@@ -89,13 +89,34 @@ class AdminController extends Controller
 
         $prijave=DB::table('komentar_korisnik')->where('komentar_id', $request->komentar_id)->get();
 
-        foreach($prijave as $prijava){
+        /*foreach($prijave as $prijava){
 
             $user=User::find($prijava->user_id);
             $user->brUspesnihPrijava= $user->brUspesnihPrijava+1;
             $user->save();
 
+        }*/  //8.6.2020.
+
+        //8.6.2020
+
+        //kada se obrise komentar, prebroji se koliko je prijava bilo za taj komentar i za taj broj se uveca broj uspesnih prijava
+        //za onog batu koji je napisao taj komentar
+
+        $kom=Komentar::findOrFail($request->komentar_id);
+        $autorKomentara=User::find($kom->user_id);
+
+
+        foreach($prijave as $prijava){
+
+            $autorKomentara->brUspesnihPrijava= $autorKomentara->brUspesnihPrijava+1;
+
         }
+        $autorKomentara->save();
+
+
+
+
+        //8.6.2020. end
 
 
         //brisanje komentara
