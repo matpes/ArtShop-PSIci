@@ -104,7 +104,7 @@ class KomentariController extends Controller
 
 
 
-        $korisnik=Auth::user();
+        $korisnik=Auth::user();//ko prijavljuje
         $komentar=Komentar::find($request->komentar_id);
         $k = DB::table('komentar_korisnik')->where([['komentar_id', $request->komentar_id], ['user_id', $korisnik->id]])->first();
         if($k==null) {
@@ -112,7 +112,8 @@ class KomentariController extends Controller
 
             //azuriranje brojaPrijava
 
-            $user=User::find($korisnik->id);
+            //$user=User::find($korisnik->id); //8.6.2020.
+            $user=User::find($komentar->user_id); //ciji je komentar, njemu se povecava broj prijava
 
             $user->brPrijava=$user->brPrijava+1;
             $user->save();
