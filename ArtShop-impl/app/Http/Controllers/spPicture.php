@@ -55,11 +55,16 @@ class spPicture extends Controller
         echo 'CREATED';
     }
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Store a newly created resource in storage.
-     * @deprecated
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return string
+     *@deprecated
      */
     public function store(Request $request)
     {
@@ -172,10 +177,10 @@ class spPicture extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id
-     * @deprecated
      * @return void
+     *@deprecated
      */
     public function update(Request $request, $id)
     {

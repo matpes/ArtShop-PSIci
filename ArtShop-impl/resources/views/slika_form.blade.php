@@ -8,14 +8,14 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script>
 
-        window.onbeforeunload = exit().then( response => console.log(response));
+       /* window.onbeforeunload = exit().then( response => console.log(response));
         function exit(){
             console.log("enter onbeforeunload...");
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }/*,
-                async: false*/
+                }/!*,
+                async: false*!/
             });
 
             return $.ajax({
@@ -34,17 +34,21 @@
                 }
             });
         }
-
+*/
         function go() {
 
             var file = $('#file_path')[0].files[0];
             var fd = new FormData();
-            fd.append('file_path', file);
             var path_el = document.getElementById("path").value;
-            if(path_el == "")
-                path_el = 'a';
-            fd.append('path', path_el);
-            $.ajaxSetup({
+            /*if(path_el == "")
+                path_el = 'a';*/
+            var path = URL.createObjectURL(file);
+            $("#uploaded_image").attr("src", path);
+            console.log(path);
+            $("#uploaded_image").attr("alt", file.name);
+
+
+            /*$.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
@@ -61,8 +65,8 @@
                         $("#err").html(data.naziv);
                         $("#err").attr("style",'display:block;');
                     } else {
-                        $("#uploaded_image").attr("src", data.path);
-                        $("#uploaded_image").attr("alt", data.naziv);
+                        // $("#uploaded_image").attr("src", data.path);
+                        // $("#uploaded_image").attr("alt", data.naziv);
                         $("#path").attr("value", data.path);
                         $("#err").attr("style",'display:none;');
                         console.log(data.ini);
@@ -74,7 +78,7 @@
                     $("#err").attr("style",'display:block;');
                     //error code
                 }
-            });
+            });*/
         }
 
     </script>
@@ -87,7 +91,7 @@
 
         </div>
         <div class="col-10">
-            <form action="/slika" method="post" class="form-group">
+            <form action="/slika" method="post" class="form-group" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-sm-5 col-xs-12 padding_form_picture">
                         <img src="\images\design\images-empty.png" id="uploaded_image" width="100%" alt="empty_image">
@@ -97,14 +101,14 @@
                             </label>
                             @php($user = Auth::user())
                             <input type="hidden" id="path" name="path" value="">
-                            @error('path')
+                            @error('file_path')
                             <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                             <div class="invalid-feedback" style="display:none;" id="err" role="alert"></div>
 
-                            <input id="file_path"class="form-control form_input_text  @error('path') is-invalid @enderror"
+                            <input id="file_path"class="form-control form_input_text  @error('file_path') is-invalid @enderror"
                                    type="file" name="file_path"  style="width: 100%" onchange="go()"/>
                         </div>
                     </div>
@@ -116,8 +120,12 @@
                                 </label>
                             </div>
                             <div class="col-sm-7">
-                                <input type="text" name="naziv" id="naziv" class="form-control form_input_text" value="@if(isset($picture->naziv)){{$picture->naziv}} @endif">
-                                <small>@if(isset($error['naziv'])){{$error['naziv']}} @endif</small>
+                                <input type="text" name="naziv" id="naziv" class="form-control form_input_text  @error('naziv') is-invalid @enderror" value="@if(isset($picture->naziv)){{$picture->naziv}} @endif">
+                                @error('naziv')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                                 {{csrf_field()}}
                             </div>
                         </div>
@@ -128,8 +136,12 @@
                                 </label>
                             </div>
                             <div class="col-sm-7">
-                                <input type="text" name="autor" id="autor" class="form-control form_input_text" value="@if(isset($picture->autor)){{$picture->autor}} @endif">
-                                <small>@if(isset($error['autor'])){{$error['autor']}} @endif</small>
+                                <input type="text" name="autor" id="autor" class="form-control form_input_text  @error('autor') is-invalid @enderror" value="@if(isset($picture->autor)){{$picture->autor}} @endif">
+                                @error('autor')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                                 {{csrf_field()}}
                             </div>
                         </div>
@@ -179,8 +191,12 @@
                                 </label>
                             </div>
                             <div class="col-sm-7">
-                                <textarea name="opis" id="opis" class="form-control form_input_text"> @if(isset($picture->opis)){{$picture->opis}} @endif </textarea>
-                                <small>@if(isset($error['opis'])){{$error['opis']}} @endif</small>
+                                <textarea name="opis" id="opis" class="form-control form_input_text  @error('opis') is-invalid @enderror"> @if(isset($picture->opis)){{$picture->opis}} @endif </textarea>
+                                @error('opis')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                                 {{csrf_field()}}
                             </div>
                         </div>
@@ -227,9 +243,13 @@
                                 </label>
                             </div>
                             <div class="col-sm-7">
-                                <input type="date" name="danIstekaAukcije" id="danIstekaAukcije" class="form-control form_input_text" value=@if(isset($picture->danIstekaAukcije)) {{date($picture->danIstekaAukcije->format('Y-m-d'))}} @endif>
+                                <input type="date" name="danIstekaAukcije" id="danIstekaAukcije" class="form-control form_input_text  @error('danIstekaAukcije') is-invalid @enderror" value=@if(isset($picture->danIstekaAukcije)) {{date($picture->danIstekaAukcije->format('Y-m-d'))}} @endif>
                                 @if(isset($picture->danIstekaAukcije)) {{date($picture->danIstekaAukcije->format('Y-m-d'))}} @endif
-                                <small>@if(isset($error['danIstekaAukcije'])){{$error['danIstekaAukcije']}} @endif</small>
+                                @error('danIstekaAukcije')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                                 {{csrf_field()}}
                             </div>
                         </div>
@@ -240,8 +260,12 @@
                                 </label>
                             </div>
                             <div class="col-sm-7">
-                                <input type="text" name="cena" id="cena" class="form-control form_input_text" value="@if(isset($picture->cena)){{$picture->cena}} @endif">
-                                <small>@if(isset($error['cena'])){{$error['cena']}} @endif</small>
+                                <input type="text" name="cena" id="cena" class="form-control form_input_text @error('cena') is-invalid @enderror" value="@if(isset($picture->cena)){{$picture->cena}} @endif">
+                                @error('cena')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                                 {{csrf_field()}}
                             </div>
                         </div>
