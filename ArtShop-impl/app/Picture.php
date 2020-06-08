@@ -144,6 +144,18 @@ class Picture extends Model
         return $this->belongsToMany('App\Tema')->get();
     }
 
+
+    public static function sveTeme($pictures){
+        $ret = [];
+        foreach ($pictures as $picture){
+            //$vari = $picture->belongsToMany('App\Tema');
+            //dd($vari);
+            array_push($ret, $picture->teme());
+        }
+        return $ret;
+    }
+
+
     /**
      * funkcija koja dohvata teme slike i vraca ih kao objekat baze
      *

@@ -316,7 +316,7 @@ class spSlika extends Controller
         $oldValue = $matches[2];
 //        config(['global.path' => $path]);
         // rewrite file content with changed data
-        if (file_exists($p)) {
+        /*if (file_exists($p)) {
             // replace current value with new value
             file_put_contents(
                 $p, str_replace(
@@ -325,7 +325,7 @@ class spSlika extends Controller
                     file_get_contents($p)
                 )
             );
-        }
+        }*/
 
         preg_match('/(["](.*)["])/', file_get_contents(config_path('global.php')), $matches);
         return response()->json(array('path'=> $path, 'naziv'=>$naziv[0], 'ini'=>$matches[2]), 200);
