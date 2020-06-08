@@ -59,9 +59,11 @@ class spKorpa extends Controller
         if($kupac->profilna_slika!=null){
             $path = 'images\\users\\'.$kupac->profilna_slika;
         }
-        $pogled = view('.korpa', compact('path'))->with('slike_u_korpi', $slikeUKorpi)->with('slikari', $autori)->with('stilovi', $stilovi);
+        //dd($slikeUKorpi);
+        $teme = Picture::sveTeme($slikeUKorpi);
+        //dd($teme);
+        $pogled = view('.korpa', compact('path'))->with('slike_u_korpi', $slikeUKorpi)->with('slikari', $autori)->with('stilovi', $stilovi)->with('teme', $teme);
         return $pogled;
-
 
     }
 

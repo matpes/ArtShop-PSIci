@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
 @section('head')
-
     <link rel="stylesheet" href="/css/Ana.css">
-
-
-
 @endsection
 
 
@@ -28,13 +24,14 @@
                     <img width="100px" height="100px" src="{{$path}}">
                 </td>
                 <td colspan="2">
-                  {{$user->username}}
+                   <?php echo "<h3>".$user->username."</h3>"?>
                 </td>
 
             </tr>
             <tr>
 
                 <td colspan="2">
+                    Tip naloga: &nbsp;
                   <?php
                     $uloga;
                      if($user->isSlikar){

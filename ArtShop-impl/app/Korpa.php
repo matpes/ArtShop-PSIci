@@ -58,13 +58,11 @@ class Korpa extends Model
         return $slika;
     }
     /**
-     * funkcija koja dohvata slike iz korpe, za trenutno ulogovanoh korisnika, a u $cenu smesta sumu cena kupljenih slika
+     * funkcija koja dohvata slike iz korpe za korisnika ciji id je proseldjen
      * Povratna vrednost je niz slika koje se nalaze u korpi korisnika
      *
      * @param int $id - id korisnika za koga se dohvataju slike iz kopre
      * @return array
-     *
-     * @deprecated
      *
      */
     public static function dohvatiSlikeUKorpi($id)

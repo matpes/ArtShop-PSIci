@@ -76,19 +76,47 @@ class AdminController extends Controller
 
     }
 
+    public function brisanjePrijave(Request $request){
+        $prijava_id=$request->prijava_id;
+        DB::table('komentar_korisnik')->where('id', $prijava_id )->delete();
+        return redirect('prijave/show');
+    }
+
+
 
     public function delete(Request $request){
         //povecavanje broja uspesnih prijava svima koji su prijavili taj komentar
 
         $prijave=DB::table('komentar_korisnik')->where('komentar_id', $request->komentar_id)->get();
 
-        foreach($prijave as $prijava){
+        /*foreach($prijave as $prijava){
 
             $user=User::find($prijava->user_id);
             $user->brUspesnihPrijava= $user->brUspesnihPrijava+1;
             $user->save();
 
+        }*/  //8.6.2020.
+
+        //8.6.2020
+
+        //kada se obrise komentar, prebroji se koliko je prijava bilo za taj komentar i za taj broj se uveca broj uspesnih prijava
+        //za onog batu koji je napisao taj komentar
+
+        $kom=Komentar::findOrFail($request->komentar_id);
+        $autorKomentara=User::find($kom->user_id);
+
+
+        foreach($prijave as $prijava){
+
+            $autorKomentara->brUspesnihPrijava= $autorKomentara->brUspesnihPrijava+1;
+
         }
+        $autorKomentara->save();
+
+
+
+
+        //8.6.2020. end
 
 
         //brisanje komentara

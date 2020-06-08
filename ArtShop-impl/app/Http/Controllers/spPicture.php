@@ -93,17 +93,18 @@ class spPicture extends Controller
         if ($picture->deleted_at != null) {
             $bought = true;
         }
-        if($korid->isSlikar==1){
-            $bought = true;
-            $subscribed = true;
-        }
-        if($korid->isSlikar==0){
-            $subscribed = $slikar->getSubscribed($korid->id);
-        }
-        $kupac = Auth::user();
         $path = '/images/avatar.png';
-        if($kupac->profilna_slika!=null){
-            $path = '/images/users//'.$kupac->profilna_slika;
+        if($korid != null) {
+            if ($korid->isSlikar == 1) {
+                $bought = true;
+                $subscribed = true;
+            }
+            if ($korid->isSlikar == 0) {
+                $subscribed = $slikar->getSubscribed($korid->id);
+            }
+            if($korid->profilna_slika!=null){
+                $path = '/images/users//'.$korid->profilna_slika;
+            }
         }
         //dd($subscribed);
         switch ($picture->aukcijaFlag) {

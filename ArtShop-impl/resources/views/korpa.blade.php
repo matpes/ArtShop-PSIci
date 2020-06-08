@@ -129,7 +129,10 @@
                                 Tema:
                             </td>
                             <td>
-                                OVDE IDE TEMA
+                                @foreach($teme[$i] as $tema)
+                                    {{'#'.$tema->tema.' '}}
+
+                                @endforeach
                             </td>
                         </tr>
 

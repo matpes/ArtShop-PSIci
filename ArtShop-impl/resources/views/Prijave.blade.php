@@ -30,7 +30,15 @@
                                               <input type="hidden" name="prijava_id" value="'.$prijava->id.'">
 
                                               <input type="submit" class="dugme" name="submit" value="Pogledaj Komentar">
-                                           </form>';
+                                           </form>
+
+<!--dodatak nrisanje prijave-->
+                                              <form method="get" action="/brisanjePrijave">
+                                              <input type="hidden" name="prijava_id" value="'.$prijava->id.'">
+                                              <input type="submit" class="dugme" name="submit" value="Obrisi prijavu">
+                                           </form>
+<!--brisanje prijave kraj-->
+';
 
 
     }
