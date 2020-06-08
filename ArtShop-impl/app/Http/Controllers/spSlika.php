@@ -120,7 +120,6 @@ class spSlika extends Controller
         }
         if ($b) {
             Storage::makeDirectory(public_path() . '\images\\' . Auth::user()->username);
-
         } else {
             // check if picture already on painter profile
             $files = StorageFile::allFiles(public_path() . '\images\\' . Auth::user()->username);
@@ -143,9 +142,10 @@ class spSlika extends Controller
         $picture->smer = $request->get('smer');
 
 //            dd($request->file('file_path'));
+
         $file = $request->file('file_path')
             ->move(public_path() . '\images\\' . Auth::user()->username, $request->file('file_path')->getClientOriginalName());
-
+        
         $picture->path = $path;
 
 //        dd($flag);

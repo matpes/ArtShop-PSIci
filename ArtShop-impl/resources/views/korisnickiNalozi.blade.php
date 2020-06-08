@@ -7,77 +7,94 @@
 
 
 @section('content')
+    <div class="row">
 
-    @foreach($users as $user)
+        <div class="col-sm-1">
 
-        <table>
-            <tr>
-                <td rowspan="3">
-                    <?php
+        </div>
+        <div class="col-sm-10">
+            <div class="row">
+                @foreach($users as $user)
+                    <div class="col-sm-6">
 
-                    $path = '/images/avatar.png';
-                    if($user->profilna_slika!=null){
-                        $path = '/images/users//'.$user->profilna_slika;
-                    }
+                        <table class="table table-borderless">
+                            <tr>
+                                <td rowspan="3">
+                                    <?php
 
-                    ?>
-                    <img width="100px" height="100px" src="{{$path}}">
-                </td>
-                <td colspan="2">
-                   <?php echo "<h3>".$user->username."</h3>"?>
-                </td>
+                                    $path = '/images/avatar.png';
+                                    if ($user->picture_path != null) {
+                                        $path = '/images/users//' . $user->picture_path;
+                                    }
 
-            </tr>
-            <tr>
+                                    ?>
+                                    <img width="100px" height="100px" src="{{$path}}" class="img-fluid">
+                                </td>
+                                <td colspan="2">
+                                    <?php echo "<h3>" . $user->username . "</h3>"?>
+                                </td>
 
-                <td colspan="2">
-                    Tip naloga: &nbsp;
-                  <?php
-                    $uloga;
-                     if($user->isSlikar){
-                         $uloga="slikar";
-                     }
-                     else{
-                         $uloga="kupac";
-                     }
-                      echo $uloga;
-                    ?>
-                </td>
+                            </tr>
+                            <tr>
 
-            </tr>
-            <tr>
+                                <td colspan="2">
+                                    Tip naloga: &nbsp;
+                                    <?php
+                                    $uloga;
+                                    if ($user->isSlikar) {
+                                        $uloga = "slikar";
+                                    } else {
+                                        $uloga = "kupac";
+                                    }
+                                    echo $uloga;
+                                    ?>
+                                </td>
 
-                <td>
-                    <form method="get" action="/profile/user/{{$user->id}}">
-                    <button class="dugme" type="submit">Vidi profil</button>
-                    </form>
-                </td>
-                <td>
-                    <?php
+                            </tr>
+                            <tr>
 
-                    if($user->deleted_at==null)
-                        echo '
-                    <form method="get" action="/nalozi/block/'.$user->id.'">
-                        <button class="dugme"  type="submit">Blokiraj nalog</button>
+                                <td>
+                                    <form method="get" action="/admin/profile/info/{{$user->id}}">
+                                        <button class="dugme" type="submit" style="width: 100%">Vidi profil</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <?php
+
+                                    if ($user->deleted_at == null)
+                                        echo '
+                    <form method="get" action="/nalozi/block/' . $user->id . '">
+                        <button class="dugme"  type="submit" style="width: 100%">Blokiraj nalog</button>
                     </form>';
-                    else
-                        echo '
-                    <form method="get" action="/nalozi/unblock/'.$user->id.'">
-                        <button class="dugme"  type="submit">Odblokiraj nalog</button>
+                                    else
+                                        echo '
+                    <form method="get" action="/nalozi/unblock/' . $user->id . '">
+                        <button class="dugme"  type="submit" style="width: 100%">Odblokiraj nalog</button>
                     </form>';
 
 
-                    ?>
-                </td>
-            </tr>
-        </table>
+                                    ?>
+                                </td>
+                            </tr>
+                        </table>
 
 
+                    </div>
 
-      <br><br>
-        <!--uloga-->
-        <!--vidi nalog-->
-        <!--blokiraj nalog-->
-    @endforeach
+                    <!--uloga-->
+                    <!--vidi nalog-->
+                    <!--blokiraj nalog-->
+                @endforeach
+            </div>
+        </div>
+
+
+        <div class="col-sm-1">
+
+        </div>
+
+
+    </div>
+
 
 @endsection

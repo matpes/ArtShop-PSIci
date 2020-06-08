@@ -137,7 +137,7 @@ class AdminController extends Controller
     public function sviKorisnickiNalozi(){
 
 
-        $users=User::withTrashed()->get();
+        $users=User::withTrashed()->get()->where('isAdmin', 0);
 
         return view ('korisnickiNalozi', compact('users'));
     }

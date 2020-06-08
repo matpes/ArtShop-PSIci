@@ -163,6 +163,8 @@ Route::get('nalozi/block', 'AdminController@blokirajNalog1');
 Route::get('nalozi/unblock/{id}', 'AdminController@odblokirajNalog');
 Route::get('admin', 'AdminController@index');
 Route::get('brisanjePrijave', 'AdminController@brisanjePrijave');
+//MATIJA
+Route::get('/admin/profile/info/{id}', 'UserController@adminProfileInfo');
 
 
 //END ANA

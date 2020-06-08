@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Picture;
+use App\Slikar;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Concerns\InteractsWithInput;
@@ -47,7 +48,7 @@ class UserController extends Controller
      * Funkcija koja uklanja korisnikov nalog iz baze
      *
      * @param integer $id
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
 
     public function removeAccount($id)
@@ -128,9 +129,8 @@ class UserController extends Controller
      * Funkcija koja vodi na formu sa informacijama o korisniku
      *
      * @param
-     * @return view
-
-     */
+     * @return \Illuminate\Http\Response
+ */
     public function profileInfo(){
         $user = Auth::user();
         $slikar = DB::table('slikars')
@@ -145,6 +145,26 @@ class UserController extends Controller
         }
         return response()->view('profile.info',['user'=>$user, 'slikar'=>$slikar, 'brOcena'=>$brOcena]);
     }
+
+    /**
+     * Author: Pesic Matija 17/0428
+     * Funkcija koja vodi na formu sa informacijama o korisniku, koju vidi admin
+     *
+     * @param
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+ */
+    public function adminProfileInfo($id){
+        $user = User::find($id);
+        if($user->isSlikar == 1){
+            $slikar = Slikar::find($id);
+            return view('profile.admin_slikar_info', compact('user', 'slikar'));
+        }else{
+            return view('profile.admin_kupac_info', compact('user'));
+        }
+
+    }
+
+
 
 
     /**
@@ -339,12 +359,11 @@ class UserController extends Controller
             ->first();
 
         //dovlacenje prve slike slikara
-        $slika = DB::table('pictures')
-            ->where('user_id', '=', $id);
+        $slika = Picture::all()->where('user_id', $id);
         $tema = '';
         $stil = '';
-
-        if(!is_null($slika)) {
+        //dd($slika);
+        if(sizeof($slika)!=0) {
             $br = $slika->count();
 //            dd($br);
             $slika = $slika->first();
@@ -362,6 +381,8 @@ class UserController extends Controller
                 ->where('id', '=', $slika->stil_id)
                 ->select('naziv')
                 ->get()->first();
+        }else{
+            $slika=null;
         }
         return response()->view('profile.user_slikar',['novo'=>$slika, 'user'=>$user,
             'tema'=>$tema, 'stil'=>$stil, 'cnt'=>$cnt, 'br'=>$br]);
