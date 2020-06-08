@@ -2,7 +2,6 @@
 {{--    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!     --}}
 {{--!!!!DODATI: 1)IZGLED INFORMACIJA ZA ADMINA  !!!!--}}
 {{--!!!!        2)LINK ZA OBJAVI SLIKU          !!!!--}}
-{{--!!!!        3)LINK ZA OBJAVI IZLOŽBU        !!!!--}}
 {{--    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!--}}
 <!doctype html>
 <html lang="en">
@@ -84,7 +83,7 @@
             <div class="col-md-12 text-md-left">Tip naloga: &emsp;
                 <?php if($user->isSlikar){ echo'SLIKAR';}
                 else if($user->isAdmin){echo 'ADMIN';}
-                else {echo 'KUPAC';}?>
+                else { echo 'KUPAC'; }?>
             </div>
             @if($user->isSlikar)
                 {{--     prosečna ocena     --}}
@@ -127,7 +126,7 @@
                 </button>
             </form>
             <br> <br> <br> <br> <br>
-            @if($user->isSlikar)
+            @if($user->isSlikar || $user->isAdmin)
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     {{--     odjavi se     --}}
@@ -140,7 +139,6 @@
                     </form>
                 </div>
                 <br>
-
             </div>
 
 
@@ -191,10 +189,7 @@
                                 </button>
                             </form>
                             <br> <br>
-                        @elseif($user->isAdmin)
-                            <div class="col-md-8 offset-md-4"> admin </div>
-{{--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!NEMAM POJMA ŠTA RADI ADMIN BEM LI GA...--}}
-                        @else
+                        @elseif(!$user->isSlikar && !$user->isAdmin)
                             <br>
                             {{--     povratak na početnu     --}}
                             <form method="GET" action="{{ route('profile.user_new', ['id'=>$user->id]) }}">
