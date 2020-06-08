@@ -43,7 +43,7 @@ Route::resource('/kupac_forma', 'spKupac', ['middleware' => ['UserMiddleware', '
 
 Route::resource('/zaOcenu', 'spZaOcenu', ['middleware' => ['UserMiddleware', 'KupacMiddleware']]);
 
-Route::resource('picture', 'spPicture');
+Route::resource('picture', 'spPicture', ['middleware' => ['UserMiddleware']]);
 
 Auth::routes();
 
