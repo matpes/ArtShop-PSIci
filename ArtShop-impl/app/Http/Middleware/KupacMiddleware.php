@@ -23,7 +23,7 @@ class KupacMiddleware
             if (Auth::user()->isSlikar)
                 return response()->redirectToRoute('profile.user_slikar', ['id'=>Auth::id()]);
         } else
-            return response()->redirectToRoute('home');
+            return response()->redirectToRoute('login');
         return $next($request);
     }
 }

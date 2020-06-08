@@ -43,7 +43,7 @@ Route::resource('/kupac_forma', 'spKupac', ['middleware' => ['UserMiddleware', '
 
 Route::resource('/zaOcenu', 'spZaOcenu', ['middleware' => ['UserMiddleware', 'KupacMiddleware']]);
 
-Route::resource('picture', 'spPicture');
+Route::get('picture/{id}', 'spPicture@show');
 
 Auth::routes();
 
@@ -79,15 +79,30 @@ Route::group(['middleware' => 'GuestMiddleware'], function()
 
 });
 
-Route::get('/profile/user/{id}', 'UserController@userProfile',
-    ['middleware' => ['UserMiddleware', 'KupacMiddleware']])->name('profile.user');
 
 //VLADANA
-Route::post('/slika/save', 'spSlika@postSlika',
-    ['middleware' => ['UserMiddleware', 'SlikarMiddleware']])->name('slika.save');
-Route::post('/slika/unsave', 'spSlika@unsaveSlika',
-    ['middleware' => ['UserMiddleware', 'SlikarMiddleware']])->name('slika.unsave');
+Route::group(['middleware' => 'SlikarMiddleware'], function() {
+    Route::post('/slika/save', 'spSlika@postSlika')->name('slika.save');
+    Route::post('/slika/unsave', 'spSlika@unsaveSlika')->name('slika.unsave');
+});
 //END VLADANA
+
+
+
+
+
+
+Route::group(['middleware' => 'KupacMiddleware'], function(){
+
+    Route::get('picture/{id}/edit', 'spPicture@edit');
+
+    Route::get('/profile/user/{id}', 'UserController@userProfile')->name('profile.user');
+
+    //MATIJA
+    Route::resource('/korpa', 'spKorpa');
+    //END MATIJA
+    Route::post('subscribe', 'spKupac@subscribe');
+});
 
 Route::group(['middleware' => 'UserMiddleware'], function()
 {
@@ -102,10 +117,7 @@ Route::group(['middleware' => 'UserMiddleware'], function()
     Route::post('/password/reset/{token}', 'Auth\ResetPasswordController@resetPassword')->name('postPassword.reset');
     Route::get('/password/reset', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('/removeAccount/{id}', 'UserController@removeAccount')->name('removeAccount');
-    //MATIJA
-    Route::resource('/korpa', 'spKorpa');
-    Route::post('subscribe', 'spKupac@subscribe');
-    //END MATIJA
+
 
 
     //ANA
