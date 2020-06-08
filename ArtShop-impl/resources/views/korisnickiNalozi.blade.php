@@ -2,7 +2,7 @@
 
 @section('head')
 
-
+    <link rel="stylesheet" href="/css/Ana.css">
 
 
 
@@ -52,7 +52,7 @@
 
                 <td>
                     <form method="get" action="/profile/user/{{$user->id}}">
-                    <button type="submit">Vidi profil</button>
+                    <button class="dugme" type="submit">Vidi profil</button>
                     </form>
                 </td>
                 <td>
@@ -61,12 +61,12 @@
                     if($user->deleted_at==null)
                         echo '
                     <form method="get" action="/nalozi/block/'.$user->id.'">
-                        <button type="submit">Blokiraj nalog</button>
+                        <button class="dugme"  type="submit">Blokiraj nalog</button>
                     </form>';
                     else
                         echo '
                     <form method="get" action="/nalozi/unblock/'.$user->id.'">
-                        <button type="submit">Odblokiraj nalog</button>
+                        <button class="dugme"  type="submit">Odblokiraj nalog</button>
                     </form>';
 
 

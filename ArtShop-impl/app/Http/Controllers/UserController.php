@@ -90,6 +90,13 @@ class UserController extends Controller
         $slikari = null;
         $slike = array();
         //dd($user);
+        
+        //*******dodato*******
+        //ana
+        if($user->isAdmin){
+            return redirect('admin');
+        }
+        //andAna
         if(!$user->isSlikar) {
             //dovlacenje slika slikara koji se prate u $slike
             $slikari = DB::table('kupac_slikar')
