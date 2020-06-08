@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Picture;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -45,7 +47,7 @@ class GuestController extends Controller
      * Funkcija koja dohvata 5 njanovijih slika
      *
      * @param
-     * @return view
+     * @return Response
      */
     public function popularPictures()
     {
@@ -53,10 +55,7 @@ class GuestController extends Controller
         //dovlacenje popularnih slika u $popular
         $popular = null;
 
-        $popular = DB::table('pictures')
-            ->orderBy('created_at', 'desc')
-            ->limit(5)
-            ->get();
+        $popular = Picture::all()->sortByDesc('created_at')->take(5);
 
         return response()->view('layouts.base', ['$user'=>$user, 'novo'=>$popular]);
     }

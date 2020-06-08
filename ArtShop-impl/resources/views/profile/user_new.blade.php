@@ -32,16 +32,22 @@
                 </div>
             @else
             <div class="slideshow-container">
-                @for($i=0;$i<sizeof($novo);$i++)
-                    <div class="mySlides">
-                        <div class="numbertext"><?php $p = ($i + 1) . ' / ' . sizeof($novo); echo $p; ?></div>
-                        <img src="<?php echo $novo[$i]->path; ?>" class="slide-image"
+{{--                @for($i=0;$i<sizeof($novo);$i++)--}}
+                    @php($i=1)
+                    @foreach($novo as $nov)
+                    <div class="mySlides" style="height: 400px !important;">
+                        <div class="numbertext"><?php $p = ($i) . ' / ' . sizeof($novo); echo $p; ?></div>
+                        <a href="/picture/{{$nov->id}}">
+                        <img src="<?php echo $nov->path; ?>" class="slide-image"
                              {{-- link do aukcije
                              href="{{ route('slika',  ['id'=>$novo[$i]->id]) }}" --}}
-                             alt="<?php echo $novo[$i]->opis; ?>">
-                        <div class="text">{{__($novo[$i]->naziv)}}</div>
+                             alt="<?php echo $nov->opis; ?>">
+                        </a>
+                        <div class="text">{{__($nov->naziv)}}</div>
                     </div>
-                @endfor
+                        @php($i++)
+                    @endforeach
+{{--                @endfor--}}
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <a class="next" onclick="plusSlides(1)">&#10095;</a>
             </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Picture;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -56,7 +58,7 @@ class HomeController extends Controller
      * Funkcija koja dohvata 5 najpopularnijih slika
      *
      * @param
-     * @return view
+     * @return \Illuminate\Http\Response
      */
     public function popularPictures()
     {
@@ -64,11 +66,7 @@ class HomeController extends Controller
         //dovlacenje popularnih slika u $popular
         $popular = null;
 
-        $popular = DB::table('pictures')
-            ->orderBy('ocena', 'desc')
-            ->select('path')
-            ->limit(5)
-            ->get();
+        $popular = Picture::all()->sortByDesc('created_at')->take(5)->get();
 
         return response()->view('layouts.base', ['popular'=>$popular]);
     }
