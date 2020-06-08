@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Picture;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Concerns\InteractsWithInput;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -88,7 +90,8 @@ class UserController extends Controller
     public function userProfile($id) {
         $user = User::find($id);
         $slikari = null;
-        $slike = array();
+        $slike = [];
+        $slikariUsername = [];
         //dd($user);
         if(!$user->isSlikar) {
             //dovlacenje slika slikara koji se prate u $slike
@@ -96,16 +99,21 @@ class UserController extends Controller
                 ->where('kupac_id', '=', $id)
                 ->select('slikar_id')
                 ->get();
+            //dd($slikari);
             foreach ($slikari as $s) {
-                $sl = DB::table('pictures')
-                    ->where('pictures.user_id', '=', $s);
-
+                $sl = Picture::all()->where('user_id', $s->slikar_id);
                 array_push($slike, $sl);
+                $usernam = User::find($s->slikar_id);
+                array_push($slikariUsername, $usernam);
             }
+
+            //dd($slikariUsername);
+            //dd($slike);
+            //dd($slike[0]);
         } else {
             return redirect()->route('profile.user_new',['id'=>$id]);
         }
-        return response()->view('profile.user', ['user'=>$user, 'slike'=>$slike]);
+        return response()->view('profile.user', ['user'=>$user, 'slike'=>$slike, 'slikariUsername' => $slikariUsername]);
     }
 
     /**
@@ -146,10 +154,8 @@ class UserController extends Controller
         //dovlacenje najnovijih slika u $popular
         $novo = array();
 
-        $novo = DB::table('pictures')
-            ->orderBy('created_at', 'desc')
-            ->limit(5)
-            ->get();
+        $novo = Picture::all()->sortByDesc('created_at')->take(5);
+        //dd($novo);
 
         return response()->view('profile.user_new', ['novo'=>$novo, 'user'=>$user]);
     }
