@@ -55,6 +55,8 @@ class AdminController extends Controller
         $komentarToDelete_id=10; //nebitna vrednost
         return view ('komentariAdmin', compact('picture_id', 'autori', 'sviKomentari', 'komentarToDelete_id'));
     }
+
+
     public function komentarSlika(Request $request){
 
         $prijava_id=$request->prijava_id;

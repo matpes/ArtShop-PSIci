@@ -172,7 +172,7 @@ class UserController extends Controller
      * Funkcija koja dohvata 5 najnovijih slika
      *
      * @param
-     * @return view
+     * @return \Illuminate\Http\Response
      */
     public function popularPictures()
     {

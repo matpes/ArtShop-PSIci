@@ -51,12 +51,11 @@ class GuestController extends Controller
      */
     public function popularPictures()
     {
-        $user = Auth::user();
         //dovlacenje popularnih slika u $popular
         $popular = null;
 
         $popular = Picture::all()->sortByDesc('created_at')->take(5);
 
-        return response()->view('layouts.base', ['$user'=>$user, 'novo'=>$popular]);
+        return response()->view('layouts.base', ['novo'=>$popular]);
     }
 }

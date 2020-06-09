@@ -1,10 +1,11 @@
-
 <!--komentar_id, picture_id-->
 
 @extends('.layouts.app')
 
 
 @section('head')
+
+    <link rel="stylesheet" href="/css/Matija.css">
     <link rel="stylesheet" href="/css/Ana.css">
 @endsection
 
@@ -12,25 +13,26 @@
 
 
     <div class="row">
-        <div class="col-6">
-          <div class="prijavljenkomentar">
-              Prijavljeno od:: {{$user->username}}
-              <br>
-              Autor:: {{$autor->username}}
-              <br>
-              Komentar:: {{$komentar->tekst}}
-              <br>
-          </div>
+        <div class="offset-1 col-5">
+            <div class="prijavljenkomentar">
+                Prijavljeno od:: <b>{{$user->username}}</b>
+                <br>
+                Autor:: <b>{{$autor->username}}</b>
+                <br>
+                Komentar::
+                <br>
+                <span style="font-size: 25px; font-weight: 800">{{$komentar->tekst}}
+                </span>
+
+                <br>
+            </div>
             <form method="get" action="/prijave/Admin/delete">
                 <input type="hidden" name="komentar_id" value="{{$komentar->id}}">
                 <input type="hidden" name="picture_id" value="{{$picture->id}}">
-               <!-- <input type="submit" name="submit"  value="ObrisiKomentarKaoAdmin">-->
+                <!-- <input type="submit" name="submit"  value="ObrisiKomentarKaoAdmin">-->
 
 
-
-
-
-                <button type="button" class="dugme"  data-toggle="modal" data-target="#myModal">Obrisi komentar</button>
+                <button type="button" class="dugme" data-toggle="modal" data-target="#myModal">Obrisi komentar</button>
 
                 <!--Sanjin modal-->
                 <div class="container-fluid">
@@ -38,10 +40,10 @@
                         <div class="modal-dialog">
                             <div class="modal-content" style="background-color:rgb(64,64,64);color:#7FF000">
                                 <div class="modal-header">
-                                    <h5 style="font-size:20px">Brisanje komentara</h5>
+                                    <h5 style="font-size:20px; color: #84deb4">Brisanje komentara</h5>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Da li ste sigurni da želite da obrisete ovaj komentar?</p>
+                                    <p style="color: #84deb4">Da li ste sigurni da želite da obrisete ovaj komentar?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <form method="get" action="/prijave/Admin/delete">
@@ -49,8 +51,11 @@
                                         <input type="hidden" name="komentar_id" value="{{$komentar->id}}">
                                         <input type="hidden" name="picture_id" value="{{$picture->id}}">
 
-                                        <button type="submit" id="potvrdiBrisanjeKomentara" class="btn btn-warning">Potvrdi</button>
-                                        <button type="button" class="btn btn-warning" data-dismiss="modal">Odustani</button>
+                                        <button type="submit" id="potvrdiBrisanjeKomentara" class="btn btn-warning">
+                                            Potvrdi
+                                        </button>
+                                        <button type="button" class="btn btn-warning" data-dismiss="modal">Odustani
+                                        </button>
                                     </form>
                                 </div>
                             </div>
@@ -60,12 +65,11 @@
                 <!-- end Sanjin modal-->
 
 
-
             </form>
         </div>
         <div class="col-5">
             <div class="row">
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-md-7">
                     <div class="nazivSlike">
                         {{$picture->naziv}}
                     </div>
@@ -80,14 +84,12 @@
                                     {{$picture->autor}}
                                 </td>
                             </tr>
-
-
                         </table>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-6">
+                <div class="col-xs-12 col-md-5">
                     <br><br><br>
-                    <div class="opisSlike">
+                    <div class="opisSlikeAna">
                         {{$picture->opis}}
                     </div>
                     <br><br><br>

@@ -26,10 +26,10 @@
                             <div class="mySlides" style="height: 400px !important;">
                                 <div class="numbertext"><?php $p = ($i) . ' / ' . sizeof($novo); echo $p; ?></div>
                                 <a href="/picture/{{$nov->id}}">
-                                    <img src="<?php echo $nov->path; ?>" class="slide-image"
+                                    <img src="{{$nov->path}}" class="slide-image"
                                          {{-- link do aukcije
                                          href="{{ route('slika',  ['id'=>$novo[$i]->id]) }}" --}}
-                                         alt="<?php echo $nov->opis; ?>">
+                                         alt="{{$nov->opis}}">
                                 </a>
                                 <div class="text">{{__($nov->naziv)}}</div>
                             </div>

@@ -213,6 +213,14 @@
                                 </button>
                             </form>
                             <br>
+                            @else
+                            <form method="GET" action="/admin">
+                                <button type="submit" class="btn btn-warning" >
+                                    {{ __('Povratak na početnu') }}
+                                </button>
+                            </form>
+
+
                         @endif
                     @endif
                 </div>
@@ -227,10 +235,10 @@
         <div class="modal-dialog">
             <div class="modal-content" style="background-color:rgb(64,64,64);color:#7FF000">
                 <div class="modal-header">
-                    <h5 style="font-size:20px">Uklanjanje naloga</h5>
+                    <h5 style="font-size:20px; color: #84deb4">Uklanjanje naloga</h5>
                 </div>
                 <div class="modal-body">
-                    <p>Da li ste sigurni da želite da uklonite svoj nalog?</p>
+                    <p style="color: #84deb4">Da li ste sigurni da želite da uklonite svoj nalog?</p>
                 </div>
                 <div class="modal-footer">
                     <form method="POST" action="{{ route('removeAccount',['id'=>Auth::user()->id]) }}">

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\UserMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -80,5 +81,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'SlikarMiddleware' => \App\Http\Middleware\SlikarMiddleware::class,
         'KupacMiddleware' => \App\Http\Middleware\KupacMiddleware::class,
+        'UserMiddleware' => \App\Http\Middleware\UserMiddleware::class,
+        'GuestMiddleware' => \App\Http\Middleware\GuestMiddleware::class
     ];
 }

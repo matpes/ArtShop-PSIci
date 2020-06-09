@@ -34,13 +34,18 @@
 
     border-radius: 3rem;
     color: #84deb4;
-    background-color: #123c24;
+    background-color: #343a40;
 
 }
 .dugmeAdminNalog{
 
     border-radius: 3rem;
-    color:white;
-    background-color:#02150f;
+    color: #84deb4;
+    background-color: #343a40;
 }
 
+.opisSlikeAna{
+    font-weight: 700;
+    font-size: 25px;
+    overflow-x: auto;
+}

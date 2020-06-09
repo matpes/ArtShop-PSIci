@@ -7,6 +7,7 @@ use App\Mail\pictureWon;
 use App\User;
 use App\ZaOcenu;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Picture;
@@ -43,8 +44,7 @@ Route::resource('/kupac_forma', 'spKupac', ['middleware' => ['UserMiddleware', '
 
 Route::resource('/zaOcenu', 'spZaOcenu', ['middleware' => ['UserMiddleware', 'KupacMiddleware']]);
 
-Route::resource('picture', 'spPicture', ['middleware' => ['UserMiddleware']]);
-Route::get('picture/{id}', 'spPicture@show');
+//Route::resource('picture', 'spPicture', ['middleware' => ['UserMiddleware']]);
 
 Auth::routes();
 
@@ -78,6 +78,8 @@ Route::group(['middleware' => 'GuestMiddleware'], function()
     Route::post('/password/email', 'Auth\ForgotPasswordController@forgotPassword')->name('password.email');
 
 
+    Route::get('picture/{id}', 'spPicture@show');
+
 });
 
 
@@ -94,15 +96,16 @@ Route::group(['middleware' => 'SlikarMiddleware'], function() {
 
 
 Route::group(['middleware' => 'KupacMiddleware'], function(){
-
+    //MATIJA
     Route::get('picture/{id}/edit', 'spPicture@edit');
 
     Route::get('/profile/user/{id}', 'UserController@userProfile')->name('profile.user');
 
-    //MATIJA
+
     Route::resource('/korpa', 'spKorpa');
-    //END MATIJA
+
     Route::post('subscribe', 'spKupac@subscribe');
+    //END MATIJA
 });
 
 Route::group(['middleware' => 'UserMiddleware'], function()
@@ -119,7 +122,7 @@ Route::group(['middleware' => 'UserMiddleware'], function()
     Route::get('/password/reset', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('/removeAccount/{id}', 'UserController@removeAccount')->name('removeAccount');
 
-
+    Route::get('picture/{id}', 'spPicture@show');
 
     //ANA
    /* Route::get('comments', 'KomentariController@showAllComments');
@@ -163,44 +166,17 @@ Route::get('nalozi/block', 'AdminController@blokirajNalog1');
 Route::get('nalozi/unblock/{id}', 'AdminController@odblokirajNalog');
 Route::get('admin', 'AdminController@index');
 Route::get('brisanjePrijave', 'AdminController@brisanjePrijave');
+//END ANA
+
 //MATIJA
 Route::get('/admin/profile/info/{id}', 'UserController@adminProfileInfo');
+//END MATIJA
 
 
-//END ANA
 
 //ROUTA ZA TESTIRANJE PROIZVOLJNIH DELOVA KODA
 Route::get('test', function (){
 
-    $picture = Picture::onlyTrashed()->find(12);
-    if(Carbon::parse($picture->danIstekaAukcije)->diffInMinutes(Carbon::now(), false)>0){
-        //ZATVARANJE AUKCIJE
-        $pobednik = null;
-        $gubitnici = null;
-        $picture->krajAukcije($pobednik, $gubitnici);
-        //dd($pobednik);
-        dd($gubitnici);
-
-        /*foreach ($pobednik as $pob){
-            Mail::to(User::find($pob->user_id)->email)->send(new pictureWon($picture));
-            $zaOcenu = new ZaOcenu;
-            $zaOcenu->picture_id = $picture->id;
-            $zaOcenu->user_id = $pob->user_id;
-            $zaOcenu->ocena = 0;
-            $zaOcenu->save();
-        }
-
-        foreach ($gubitnici as $gub){
-            Mail::to(User::find($gub->user_id)->email)->send(new pictureLost($picture));
-        }*/
 
 
-
-        //$picture->delete();
-
-
-    }else{
-        event(new Auction($picture));
-        sleep(60);
-    }
 });
