@@ -144,7 +144,7 @@
     margin: 12px 30px;
     padding: 10px;
     display: inline;
-    width: fit-content;
+    /*width: fit-content;*/
     height: calc(2em + 1.75rem + 4px);
     border-radius: 3rem;
     font-weight: 700;

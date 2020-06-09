@@ -28,7 +28,7 @@ class Komentar extends Model
     public static function allComments($picture_id){
         //$komentari=Komentar::all();
         //$komentari=$this->belongsToMany('App\Picture');
-        $komentari = DB::table('komentars')->where('picture_id', $picture_id)->get();
+        $komentari = DB::table('komentars')->where('picture_id', $picture_id)->orderBy('id')->get();
         $autori= collect([]);
         $both=collect([]);
         foreach($komentari as $komentar){

@@ -100,7 +100,7 @@
                                 Učitaj sliku
                             </label>
                             @php($user = Auth::user())
-                            <input type="hidden" id="path" name="path" value="">
+                            <input type="hidden" id="path" name="path" value=@if(isset($picture->path)){{$picture->path}}@endif>
                             @error('file_path')
                             <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -109,7 +109,7 @@
                             <div class="invalid-feedback" style="display:none;" id="err" role="alert"></div>
 
                             <input id="file_path"class="form-control form_input_text  @error('file_path') is-invalid @enderror"
-                                   type="file" name="file_path"  style="width: 100%" onchange="go()"/>
+                                   type="file" name="file_path"  style="width: 100%" onchange="document.getElementById('path').value = value; go()"/>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-7 paddingTopAndBot text-center">

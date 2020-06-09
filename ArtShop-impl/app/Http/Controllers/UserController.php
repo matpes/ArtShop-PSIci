@@ -315,7 +315,7 @@ class UserController extends Controller
      * Funkcija koja vraća početni profil slikara
      *
      * @param integer $id
-     * @return view
+     * @return \Illuminate\Http\Response
      */
     public function indexSlikarProfile($id)
     {

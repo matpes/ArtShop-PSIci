@@ -1,5 +1,4 @@
 {{--prikazuje profil slikara sa svi slikama koje je objavio--}}
-{{--!!!!!!!!!!!!!!!!!!!DODATI PUTANJU DO OBJAVI SLIKU!!!!!!!!!!!!!!--}}
 @extends('layouts.app')
 @section('head')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -58,9 +57,9 @@
                 </div>
             @else
             {{-- 1. kolona--}}
-            <div class="col-md-6 justify-content-center">
-                <div class="gray_title" id="naziv"> {{__($novo->naziv)}} </div>
-                <br>
+            <div class="col-md-6 ">
+                <div class="gray_title text-center" id="naziv" style="width: 100% !important; display: inherit; height: auto; margin: 0;"> {{$novo->naziv}} </div>
+
                 <div class="slideshow-container mt-2">
                     <div class="myPics" style="display: block;">
                         <div class="numbertext" id="num"><?php echo $cnt + 1;?> / <?php echo $br;?></div>

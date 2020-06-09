@@ -246,3 +246,12 @@ a:hover{
 .prevM:hover, .nextM:hover {
     background-color: rgba(0,0,0,0.8);
 }
+
+
+.fixed-picture-komentar{
+    position: relative;
+    top: 20%;
+    left: 15%;
+
+
+}

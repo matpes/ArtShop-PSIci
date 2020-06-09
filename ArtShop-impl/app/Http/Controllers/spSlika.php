@@ -79,7 +79,7 @@ class spSlika extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'file_path' => 'required|image',
+            'path' => 'required',
             'naziv' => 'required',
             'autor' => 'required',
             'opis' => 'required|min:10',
@@ -110,9 +110,8 @@ class spSlika extends Controller
                 ->withInput();
         }
 
-        $path = '\images\\' . Auth::user()->username . '\\' . $_FILES['file_path']['name'];
         // check if painter has a directory
-        $directories = Storage::directories('\images\\');
+        $directories = Storage::directories( public_path() . '\images\\');
         $b = true;
         foreach ($directories as $d) {
             if (basename($d) == Auth::user()->username)
@@ -120,33 +119,41 @@ class spSlika extends Controller
         }
         if ($b) {
             Storage::makeDirectory(public_path() . '\images\\' . Auth::user()->username);
-        } else {
-            // check if picture already on painter profile
-            $files = StorageFile::allFiles(public_path() . '\images\\' . Auth::user()->username);
-            $b = false;
-            foreach ($files as $d) {
-                if ($d->getFilename() == $_FILES['file_path']['name']) {
-                    $b = true;
-                }
-            }
-            if ($b) {
-                $error['file_path'] = "***Ova slika već postoji na vašem profilu!***";
-                return redirect()->back()
-                    ->withErrors(['file_path' => "***Ova slika već postoji na vašem profilu!***"])
-                    ->withInput();
-            }
+
         }
+
+
+        $path = public_path() . '\images\\' . Auth::user()->username . '\\' . substr($request->path, strrpos($request->path, '\\') + 1);
+
+        $picture->path = '\images\\' . Auth::user()->username . '\\' . substr($request->path, strrpos($request->path, '\\') + 1);
+
+        // check if picture already on painter profile
+//        $files = StorageFile::allFiles(public_path() . '\images\\' . Auth::user()->username);
+//        $b = false;
+//        foreach ($files as $d) {
+//            if ($d == $path) {
+//                $b = true;
+//            }
+//        }
+//        if ($b) {
+//
+////            $error['file_path'] = "***Ova slika već postoji na vašem profilu!***";
+////            return redirect()->back()
+////                ->withErrors(['file_path' => "***Ova slika već postoji na vašem profilu!***"])
+////                ->withInput();
+//        }
+        if(count(Picture::where('path', $picture->path)->get()) == 0){
+            $file = $request->file('file_path')
+                ->move(public_path() . '\images\\' . Auth::user()->username, $request->file('file_path')->getClientOriginalName());
+
+        }
+
 //        dd($request->stil_id);
         $picture->stil_id = DB::table('stils')->where('naziv', '=', $request->stil_id)->first()->id;
         $request->merge(['stil_id' => $picture->stil_id]);
         $picture->smer = $request->get('smer');
 
 //            dd($request->file('file_path'));
-
-        $file = $request->file('file_path')
-            ->move(public_path() . '\images\\' . Auth::user()->username, $request->file('file_path')->getClientOriginalName());
-        
-        $picture->path = $path;
 
 //        dd($flag);
         $picture->naziv = $request->get('naziv');
