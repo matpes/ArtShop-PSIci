@@ -76,7 +76,7 @@
                 <br>
                 <div class="custom-control-inline">
                     <label class="text-md-left" for="cena"> Cena: &nbsp; </label>
-                    <div class="text-md-left" id="cena"><?php echo $novo->cena;?></div> <div>&nbsp; RSD</div>
+                    <div class="text-md-left" id="cena"><?php echo $novo->cena;?></div> <div>&nbsp; $</div>
                 </div>
                 <br> <br>
                 <button type="button" class="btn-dark gray_button mb-5" onclick="go(-1, <?php echo $br;?>)"

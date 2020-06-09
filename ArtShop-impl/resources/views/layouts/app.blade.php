@@ -54,7 +54,7 @@
                             <option value="popart">Pop art</option>
                             <option value="postmodernizam">Postmodernizam</option>
                             <option value="savremenaUmetnost">Savremena umetnost</option>
-                            <option value="savremenaUmetnost">Realizam</option>
+                            <option value="realizam">Realizam</option>
                         </select>
                         <button type="submit" class="btn-dark gray_button" name="submit"> Pretraži</button>
 

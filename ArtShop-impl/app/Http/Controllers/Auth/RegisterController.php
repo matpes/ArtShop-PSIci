@@ -61,7 +61,7 @@ class RegisterController extends Controller
     protected function register(Request $request)
     {
         $rules = [
-            'username' => 'unique:users|max:20',
+            'username' => 'unique:users|max:20|alpha_dash',
             'email' => 'email|unique:users|max:40',
             'password' => 'min:6|alpha_dash',
             'password_confirm' => 'required_with:password|same:password',
@@ -79,6 +79,7 @@ class RegisterController extends Controller
             'password.min' => 'Lozinka ne može biti manja od :min',
             'password.alpha_dash' => 'Lozinka može sadržati samo alpa_dash karaktere',
             'password_confirm.same' => 'Lozinke moraju biti iste',
+            'username.alpha_dash' => 'Korisničko ime može sadržati samo alpa_dash karaktere',
 
         ];
 
