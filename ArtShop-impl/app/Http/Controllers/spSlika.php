@@ -121,30 +121,30 @@ class spSlika extends Controller
             Storage::makeDirectory(public_path() . '\images\\' . Auth::user()->username);
 
         }
+        $picName = preg_replace('/[ ]/', '%', $request->file('file_path')->getClientOriginalName());
+        $path = '\images\\' . Auth::user()->username . '\\' . $picName;
+        $picture->path = $path;
+//        $picture->path = '\images\\' . Auth::user()->username . '\\' . substr($request->path, strrpos($request->path, '\\') + 1);
 
+        /*// check if picture already on painter profile
+        $files = StorageFile::allFiles(public_path() . '\images\\' . Auth::user()->username);
+        $b = false;
+        foreach ($files as $d) {
+            if ($d == $path) {
+                $b = true;
+            }
+        }
+        if ($b) {
 
-        $path = public_path() . '\images\\' . Auth::user()->username . '\\' . substr($request->path, strrpos($request->path, '\\') + 1);
+            $error['file_path'] = "***Ova slika već postoji na vašem profilu!***";
+            return redirect()->back()
+                ->withErrors(['file_path' => "***Ova slika već postoji na vašem profilu!***"])
+                ->withInput();
+        }*/
 
-        $picture->path = '\images\\' . Auth::user()->username . '\\' . substr($request->path, strrpos($request->path, '\\') + 1);
-
-        // check if picture already on painter profile
-//        $files = StorageFile::allFiles(public_path() . '\images\\' . Auth::user()->username);
-//        $b = false;
-//        foreach ($files as $d) {
-//            if ($d == $path) {
-//                $b = true;
-//            }
-//        }
-//        if ($b) {
-//
-////            $error['file_path'] = "***Ova slika već postoji na vašem profilu!***";
-////            return redirect()->back()
-////                ->withErrors(['file_path' => "***Ova slika već postoji na vašem profilu!***"])
-////                ->withInput();
-//        }
         if(count(Picture::where('path', $picture->path)->get()) == 0){
             $file = $request->file('file_path')
-                ->move(public_path() . '\images\\' . Auth::user()->username, $request->file('file_path')->getClientOriginalName());
+                ->move(public_path() . '\images\\' . Auth::user()->username, $picName);
 
         }
 
@@ -206,25 +206,27 @@ class spSlika extends Controller
             }
         }
         else{
-                Picture::where('path', $picture->path)->get()[0]->temas()->detach();
-                Picture::where('path', $picture->path)->get()[0]->update($request->all());
-            }
-            event(new Auction($picture));
-            $picture = Picture::where('path', $picture->path)->get()[0];
-
-            $teme = explode(", ", $request->get('teme'));
-            foreach ($teme as $naziv) {
-                $temas = Tema::where('tema', $naziv)->get();
-                if (count($temas) == 0) {
-                    $tema = new Tema();
-                    $tema->tema = $naziv;
-                    $tema->save();
-                }
-                $tema = Tema::where('tema', $naziv)->get()[0];
-                $picture->temas()->attach($tema->id);
-            }
-            return redirect('/picture/' . $picture->id);
+            Picture::where('path', $picture->path)->get()[0]->temas()->detach();
+            Picture::where('path', $picture->path)->get()[0]->update($request->all());
         }
+
+        event(new Auction($picture));
+        $picture = Picture::where('path', $picture->path)->get()[0];
+
+        $teme = explode(", ", $request->get('teme'));
+        foreach ($teme as $naziv) {
+            $temas = Tema::where('tema', $naziv)->get();
+            if (count($temas) == 0) {
+                $tema = new Tema();
+                $tema->tema = $naziv;
+                $tema->save();
+            }
+            $tema = Tema::where('tema', $naziv)->get()[0];
+            $picture->temas()->attach($tema->id);
+        }
+
+        return redirect('/picture/' . $picture->id);
+    }
 
         /**
          * Display the specified resource.

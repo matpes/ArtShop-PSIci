@@ -168,6 +168,7 @@
                                     <option value="popart" @if(isset($picture->stil_id) && $picture->stil_id == 13) selected = "selected" @endif>Pop art</option>
                                     <option value="postmodernizam" @if(isset($picture->stil_id) && $picture->stil_id == 14) selected = "selected" @endif>Postmodernizam</option>
                                     <option value="savremenaUmetnost" @if(isset($picture->stil_id) && $picture->stil_id == 15) selected = "selected" @endif>Savremena umetnost</option>
+                                    <option value="realizam" @if(isset($picture->stil_id) && $picture->stil_id == 16) selected = "selected" @endif>Realizam</option>
                                 </select>
                                 <small></small>
                             </div>
