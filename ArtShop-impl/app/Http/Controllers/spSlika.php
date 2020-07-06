@@ -121,7 +121,8 @@ class spSlika extends Controller
             Storage::makeDirectory(public_path() . '\images\\' . Auth::user()->username);
 
         }
-        $picName = preg_replace('/[ ]/', '%', $request->file('file_path')->getClientOriginalName());
+        $picName = preg_replace('/[ ]/', '%', substr($request->path, strrpos($request->path, '\\') + 1));
+        // $picName = preg_replace('/[ ]/', '%', $request->file('file_path')->getClientOriginalName());
         $path = '\images\\' . Auth::user()->username . '\\' . $picName;
         $picture->path = $path;
 //        $picture->path = '\images\\' . Auth::user()->username . '\\' . substr($request->path, strrpos($request->path, '\\') + 1);
